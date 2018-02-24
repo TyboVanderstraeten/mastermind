@@ -1,24 +1,30 @@
 
 package domein;
 
-import java.util.ArrayList;
-import java.util.List;
 import persistentie.SpelerMapper;
 
 
-public class SpelerRepository {
-    private List<Speler> spelerslijst;   //spelerslijst moet uiteindelijk in SpelerMapper worden opgeslagen, List zal dan verdwijnen
-    //private SpelerMapper mapper;
+public class SpelerRepository {      
+    private SpelerMapper mapper;
 
+    
+    //constructors
     public SpelerRepository() {
-        //mapper = new SpelerMapper();      
-        spelerslijst = new ArrayList<>();
+        mapper = new SpelerMapper();              
+    }   
+    
+    
+    
+    
+    
+    //operaties
+    public Speler geefSpeler(String spelersnaam, String wachtwoord){
+        return mapper.geefSpeler();   //er moeten nog argumenten meegegeven worden aan geefSpeler()          
     }
+                                                                        //aanpassingen in mapperklasse nodig voor geefSpeler(..) en voegSpelerToe(..)
     
     
-
-    public String voegSpelerToe(Speler speler) {
-        this.spelerslijst.add(speler);
-        return speler.getSpelersnaam();
+    public void voegSpelerToe(Speler speler) {
+        this.mapper.voegSpelerToe(speler);                     
     }
 }
