@@ -4,7 +4,7 @@ import persistentie.SpelerMapper;
 
 public class SpelerRepository {
 
-    private SpelerMapper mapper;
+    private final SpelerMapper mapper;
 
     //constructors
     public SpelerRepository() {
