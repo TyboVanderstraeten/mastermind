@@ -26,7 +26,7 @@ public class DomeinController {
         }
     }
 
-    public String geefSpelersnaam() {                    //apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
+    public String geefSpelersnaam() {                    //***apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
         return deSpeler.getSpelersnaam();
     }
 
@@ -34,5 +34,7 @@ public class DomeinController {
     public void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe
         this.deSpeler = deSpeler;
     }
+    
+    //***Tybo = Ik denk dat het private methode wordt die vanuit meldAan wordt aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
 }
