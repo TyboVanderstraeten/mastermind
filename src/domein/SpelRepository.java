@@ -1,22 +1,17 @@
-
 package domein;
 
 import persistentie.SpelMapper;
 
-
 public class SpelRepository {
+
     private final SpelMapper mapper;
-    
-    
-    public SpelRepository(){
+
+    public SpelRepository() {
         mapper = new SpelMapper();
-    } 
-    
-    
-    public String[][] startMasterMind(){
-        
     }
-    
-    
-    
+
+    public String[][] startMasterMind() {
+
+    }
+
 }

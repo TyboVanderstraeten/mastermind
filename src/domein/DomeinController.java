@@ -31,28 +31,26 @@ public class DomeinController {
         return deSpeler.getSpelersnaam();
     }
 
-    
-    public void kiesMoeilijkheidsgraad(String moeilijkheidsgraad){
+    public void kiesMoeilijkheidsgraad(String moeilijkheidsgraad) {
         spel = new Spel(moeilijkheidsgraad);
     }
-    
-    public String startMasterMind(){
-        
+
+    public String startMasterMind() {
+
     }
-    
-    public Spelbord geefSpelbord(){
+
+    public Spelbord geefSpelbord() {
         return spel.getSpelbord();
     }
-    
+
     //setters
     public void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe
         this.deSpeler = deSpeler;
     }
-    
-    private void setSpel(Spel spel){
+
+    private void setSpel(Spel spel) {
         this.spel = spel;
     }
-    
-    //***Tybo = Ik denk dat het private methode wordt die vanuit meldAan wordt aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
+    //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 }

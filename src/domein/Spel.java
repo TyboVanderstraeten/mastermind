@@ -1,15 +1,14 @@
-
-
 package domein;
 
 public class Spel {
+
     private final Spelbord spelbord;
     private String moeilijkheidsgraad;
     private String willekeurigeCode;
-    
-    public Spel(String moeilijkheidsgraad){
-        spelbord = new Spelbord();            
-        
+
+    public Spel(String moeilijkheidsgraad) {
+        spelbord = new Spelbord();
+
     }
 
     public Spelbord getSpelbord() {
@@ -19,6 +18,5 @@ public class Spel {
     public void setMoeilijkheidsgraad(String moeilijkheidsgraad) {
         this.moeilijkheidsgraad = moeilijkheidsgraad;
     }
-    
-    
+
 }
