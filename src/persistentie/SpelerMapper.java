@@ -17,7 +17,7 @@ public class SpelerMapper {
 
     }
 
-    public Speler geefSpeler() {   //nog argumenten nodig    //moet nog aangepast worden
+    public Speler geefSpeler(String spelersnaam) {   //nog argumenten nodig    //moet nog aangepast worden
 
     }
 

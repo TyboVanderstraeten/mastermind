@@ -13,11 +13,16 @@ public class SpelerRepository {
 
     //operaties
     public Speler geefSpeler(String spelersnaam, String wachtwoord) {
-        return mapper.geefSpeler();   //er moeten nog argumenten meegegeven worden aan geefSpeler()          
+        Speler speler = mapper.geefSpeler(spelersnaam);
+        if(speler.getWachtwoord().equals(wachtwoord)){
+            return speler;
+        }
+        return null;
     }
     //aanpassingen in mapperklasse nodig voor geefSpeler(..) en voegSpelerToe(..)
 
     public void voegSpelerToe(Speler speler) {
         this.mapper.voegSpelerToe(speler);
     }
+    
 }

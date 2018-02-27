@@ -16,6 +16,10 @@ public class Speler {
         return spelersnaam;
     }
 
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
     //setters
     private void setSpelersnaam(String spelersnaam) {
         this.spelersnaam = spelersnaam;
