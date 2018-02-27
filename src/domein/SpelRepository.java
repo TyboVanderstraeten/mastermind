@@ -11,7 +11,7 @@ public class SpelRepository {
     }
 
     public String[][] startMasterMind() {
-
+        for()
     }
 
 }
