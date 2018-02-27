@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
-import java.util.List;
-
-/**
- *
- * @author bramd
- */
 public class Rij {
 
-    private List<Pin> pinnen;
+    private final Pin[] pinnen;
 
-    public Rij() {
-
+    public Rij(String moeilijkheidsgraad) {
+        if (moeilijkheidsgraad.equals("moeilijk")) {
+            pinnen = new Pin[5];
+        } else {
+            pinnen = new Pin[4];
+        }
     }
 }

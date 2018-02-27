@@ -8,14 +8,14 @@ public class Spel {
 
     public Spel(String moeilijkheidsgraad) {
         spelbord = new Spelbord();
-
+        setMoeilijkheidsgraad(moeilijkheidsgraad);
     }
 
     public Spelbord getSpelbord() {
         return spelbord;
     }
 
-    public void setMoeilijkheidsgraad(String moeilijkheidsgraad) {
+    private void setMoeilijkheidsgraad(String moeilijkheidsgraad) {
         this.moeilijkheidsgraad = moeilijkheidsgraad;
     }
 
