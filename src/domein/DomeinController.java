@@ -35,8 +35,8 @@ public class DomeinController {
         spel = new Spel(moeilijkheidsgraad);
     }
 
-    public String startMasterMind() {
-
+    public String[][] startMasterMind() {
+        spelerRepository.
     }
 
     public Spelbord geefSpelbord() {
