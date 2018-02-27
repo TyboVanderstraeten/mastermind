@@ -4,7 +4,7 @@ public class Spelbord {
 
     private final Rij[] rijen;
 
-    Spelbord() {
+    public Spelbord() {
         rijen = new Rij[12];
     }
 }
