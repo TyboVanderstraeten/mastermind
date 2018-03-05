@@ -11,6 +11,7 @@ public class SpelerRepository {
         mapper = new SpelerMapper();
     }
 
+    
     //operaties
     public Speler geefSpeler(String spelersnaam, String wachtwoord) {
         Speler speler = mapper.geefSpeler(spelersnaam);
@@ -23,6 +24,6 @@ public class SpelerRepository {
 
     public void voegSpelerToe(Speler speler) {
         this.mapper.voegSpelerToe(speler);
-    }
+    }  
     
 }

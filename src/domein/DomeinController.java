@@ -3,12 +3,14 @@ package domein;
 public class DomeinController {
 
     private final SpelerRepository spelerRepository;
+    private final SpelRepository spelRepository;
     private Speler deSpeler;
     private Spel spel;
 
     //constructors
     public DomeinController() {
         spelerRepository = new SpelerRepository();
+        spelRepository = new SpelRepository();
     }
 
     //operaties
@@ -36,7 +38,7 @@ public class DomeinController {
     }
 
     public String[][] startMasterMind() {
-        
+        return spelRepository.startMasterMind();
     }
 
     public String[][] geefSpelbord() {

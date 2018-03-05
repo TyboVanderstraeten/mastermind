@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.List;
 import persistentie.SpelMapper;
 
 public class SpelRepository {
@@ -11,7 +12,12 @@ public class SpelRepository {
     }
 
     public String[][] startMasterMind() {
-        for()
+        List<Spel> spellen = mapper.geefSpellen();
+        String[][] overzicht = new String[2][];
+        
+        
+        
+
     }
 
 }

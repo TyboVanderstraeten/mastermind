@@ -5,6 +5,7 @@ public class Spel {
     private final Spelbord spelbord;
     private String moeilijkheidsgraad;
     private String willekeurigeCode;
+    private boolean isGewonnen;
 
     public Spel(String moeilijkheidsgraad) {
         spelbord = new Spelbord();
@@ -19,4 +20,15 @@ public class Spel {
         this.moeilijkheidsgraad = moeilijkheidsgraad;
     }
 
+    public boolean getIsGewonnen() {
+        return isGewonnen;
+    }
+
+    public String getMoeilijkheidsgraad() {
+        return moeilijkheidsgraad;
+    }
+    
+    
+
+    
 }
