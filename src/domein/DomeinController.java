@@ -36,11 +36,12 @@ public class DomeinController {
     }
 
     public String[][] startMasterMind() {
-        spelerRepository.
+        
     }
 
-    public Spelbord geefSpelbord() {
-        return spel.getSpelbord();
+    public String[][] geefSpelbord() {
+        Spelbord spelbord = spel.getSpelbord();
+        return spelbord.geefOverzichtMetPinnen();
     }
 
     //setters

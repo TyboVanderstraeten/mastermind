@@ -6,7 +6,7 @@ public class Pin {
 
     public Pin(String kleur) {
         setKleur(kleur);
-    }
+    }    
 
     public String getKleur() {
         return kleur;
