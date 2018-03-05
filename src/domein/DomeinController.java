@@ -32,6 +32,8 @@ public class DomeinController {
     public String geefSpelersnaam() {                    //***apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
         return deSpeler.getSpelersnaam();
     }
+    //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt 
+    //aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
     public void kiesMoeilijkheidsgraad(String moeilijkheidsgraad) {
         spel = new Spel(moeilijkheidsgraad);
@@ -55,5 +57,5 @@ public class DomeinController {
         this.spel = spel;
     }
 
-    //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
+    
 }
