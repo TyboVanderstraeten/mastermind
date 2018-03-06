@@ -1,6 +1,6 @@
 package domein;
 
-public class Pin {
+public abstract class Pin {
 
     private String kleur;
 

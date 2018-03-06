@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package domein;
 
-/**
- *
- * @author bramd
- */
+
 public class MakkelijkSpel extends Spel{
-    private static int aantalGewonnen;
+    private static int aantalGewonnen =0;
     
     public MakkelijkSpel(int moeilijkheidsgraad){
         super(moeilijkheidsgraad);
@@ -18,5 +11,13 @@ public class MakkelijkSpel extends Spel{
     public MakkelijkSpel(String spelnaam, String code){
         super(spelnaam, code);
     }
+
+    public static int getAantalGewonnen() {
+        return aantalGewonnen;
+    }
+    
+    
+    
+    
     
 }

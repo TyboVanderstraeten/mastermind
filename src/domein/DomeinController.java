@@ -12,12 +12,8 @@ public class DomeinController {
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
     }
-    
-    
-    
+
     //UC1   
-    
-    
     //operaties
     public void meldAan(String spelersnaam, String wachtwoord) {
         Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);       //zal sws spelerobject teruggeven dus alleen de gevonden speler die niet gelijk is aan null wordt doorgegeven als deSpeler
@@ -40,24 +36,34 @@ public class DomeinController {
     //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt 
     //aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
-    
-    
-    
     //UC2
-    
     public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
-        switch(moeilijkheidsgraad){
-            case 1: spel = new MakkelijkSpel(moeilijkheidsgraad);
-            break;
-            case 2: spel = new NormaalSpel(moeilijkheidsgraad);
-            break;
-            case 3: spel = new MoeilijkSpel(moeilijkheidsgraad);
-            break;            
+        switch (moeilijkheidsgraad) {
+            case 1:
+                spel = new MakkelijkSpel(moeilijkheidsgraad);
+                break;
+            case 2:
+                spel = new NormaalSpel(moeilijkheidsgraad);
+                break;
+            case 3:
+                spel = new MoeilijkSpel(moeilijkheidsgraad);
+                break;
         }
     }
 
     public String[][] startMasterMind() {
-        return spelRepository.startMasterMind();
+        String[][] overzicht = new String[2][];
+        overzicht[0][0] = "gemakkelijk";
+        overzicht[1][0] = String.format("   %d WINS   ", MakkelijkSpel.getAantalGewonnen());
+        if (MakkelijkSpel.getAantalGewonnen() >= 20) {
+            overzicht[0][1] = "normaal";
+            overzicht[1][1] = String.format(" %d WINS ", NormaalSpel.getAantalGewonnen());
+            if (MakkelijkSpel.getAantalGewonnen() >= 20) {
+                overzicht[0][2] = "moeilijk";
+                overzicht[1][2] = String.format(" %d WINS ", MoeilijkSpel.getAantalGewonnen());
+            }
+        }
+        return overzicht;        
     }
 
     public String[][] geefSpelbord() {
@@ -65,10 +71,8 @@ public class DomeinController {
         return spelbord.geefOverzichtMetPinnen();
     }
 
-    
-    
     //setters
-    public void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
+    private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
         this.deSpeler = deSpeler;
     }
 
@@ -76,5 +80,4 @@ public class DomeinController {
         this.spel = spel;
     }
 
-    
 }

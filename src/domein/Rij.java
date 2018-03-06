@@ -2,20 +2,21 @@ package domein;
 
 public class Rij {
 
-    private final Pin[] pinnen;
-
+    private final Pin[] codepinnen;
+    private final Pin[] evaluatiepinnen;
     public Rij() {
-        pinnen = new Pin[5];
+        codepinnen = new CodePin[5];
+        evaluatiepinnen = new EvaluatiePin[4];
         for (int i = 0; i < 5; i++) {
-            pinnen[i] = new Pin();
+            codepinnen[i] = new CodePin();
         }
     }
 
     public String[] geefPinkleuren() {
-        String[] pinkleuren = new String[pinnen.length];
+        String[] pinkleuren = new String[codepinnen.length];
 
-        for (int i = 0; i < pinnen.length; i++) {
-            pinkleuren[i] = pinnen[i].getKleur();
+        for (int i = 0; i < codepinnen.length; i++) {
+            pinkleuren[i] = codepinnen[i].getKleur();
         }
         return pinkleuren;
     }
