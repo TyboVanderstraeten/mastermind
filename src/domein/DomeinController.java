@@ -12,7 +12,12 @@ public class DomeinController {
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
     }
-
+    
+    
+    
+    //UC1   
+    
+    
     //operaties
     public void meldAan(String spelersnaam, String wachtwoord) {
         Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);       //zal sws spelerobject teruggeven dus alleen de gevonden speler die niet gelijk is aan null wordt doorgegeven als deSpeler
@@ -35,13 +40,18 @@ public class DomeinController {
     //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt 
     //aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
+    
+    
+    
+    //UC2
+    
     public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
         switch(moeilijkheidsgraad){
-            case 1: spel = new MakkelijkSpel();
+            case 1: spel = new MakkelijkSpel(moeilijkheidsgraad);
             break;
-            case 2: spel = new NormaalSpel();
+            case 2: spel = new NormaalSpel(moeilijkheidsgraad);
             break;
-            case 3: spel = new MoeilijkSpel();
+            case 3: spel = new MoeilijkSpel(moeilijkheidsgraad);
             break;            
         }
     }
@@ -55,6 +65,8 @@ public class DomeinController {
         return spelbord.geefOverzichtMetPinnen();
     }
 
+    
+    
     //setters
     public void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
         this.deSpeler = deSpeler;

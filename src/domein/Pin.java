@@ -4,6 +4,9 @@ public class Pin {
 
     private String kleur;
 
+    public Pin(){
+        this("X");
+    }
     public Pin(String kleur) {
         setKleur(kleur);
     }    

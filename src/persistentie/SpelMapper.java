@@ -1,5 +1,8 @@
 package persistentie;
 
+import domein.MakkelijkSpel;
+import domein.NormaalSpel;
+import domein.MoeilijkSpel;
 import domein.Spel;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +23,7 @@ public class SpelMapper {
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
                     String willekeurigeCode = rs.getString("willekeurigeCode");
-                    spel = new Spel(spelnaam, willekeurigeCode);
+                    spel = new MakkelijkSpel(spelnaam, willekeurigeCode);
                 }
             }
         } catch (SQLException ex) {
@@ -41,7 +44,7 @@ public class SpelMapper {
                 String spelersnaam = rs.getString("spelersnaam");
                 String willekeurigeCode = rs.getString("willekeurigeCode");                
 
-                spellen.add(new Spel(spelersnaam, willekeurigeCode));   
+                spellen.add(new MakkelijkSpel(spelersnaam, willekeurigeCode));   
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

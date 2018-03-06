@@ -12,8 +12,11 @@ package domein;
 public class MakkelijkSpel extends Spel{
     private static int aantalGewonnen;
     
-    public MakkelijkSpel(){
-        super();
+    public MakkelijkSpel(int moeilijkheidsgraad){
+        super(moeilijkheidsgraad);
     }  
+    public MakkelijkSpel(String spelnaam, String code){
+        super(spelnaam, code);
+    }
     
 }

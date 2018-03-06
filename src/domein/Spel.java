@@ -9,7 +9,7 @@ public abstract class Spel {
     private String spelnaam;
 
     
-    public Spel(){
+    public Spel(int moeilijkheidsgraad){
         this(null, null);
     }
     public Spel(String spelnaam, String willekeurigeCode) {
@@ -22,10 +22,11 @@ public abstract class Spel {
             SecureRandom random = new SecureRandom();
             int guard = 0;
             String code = "";
+            
             String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs"};      //willekeurige kleuren? of staat dit ergens??
-            if (Spel.class.getSimpleName().equals("MakkelijkSpel") || Spel.class.getSimpleName().equals("normaal")) {   //this.moeilijkheidsgraad met dan eerst de controle in setter of gwn moeilijkheidsgraad?
+            if (this.getClass().getSimpleName().equals("MakkelijkSpel") || this.getClass().getSimpleName().equals("NormaalSpel")) {   //this.moeilijkheidsgraad met dan eerst de controle in setter of gwn moeilijkheidsgraad?
                 guard = 4;
-            } else if (Spel.class.getSimpleName().equals("moeilijk")) {
+            } else if (this.getClass().getSimpleName().equals("MoeilijkSpel")) {
                 guard = 5;
             }
             for (int i = 0; i < guard; i++) {                               //NOG AANPASSING NODIG IN VERBAND MET MOEILIJKHEIDSGRAAD (UNIEKE KLEUREN OF NIET / LEEG OF NIET)

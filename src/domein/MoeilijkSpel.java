@@ -12,7 +12,7 @@ package domein;
 public class MoeilijkSpel extends Spel{
     private static int aantalGewonnen;
     
-    public MoeilijkSpel(){
-        super();
+    public MoeilijkSpel(int moeilijkheidsgraad){
+        super(moeilijkheidsgraad);
     }
 }
