@@ -2,24 +2,20 @@ package domein;
 
 import java.security.SecureRandom;
 
-public class Spel {
+public abstract class Spel {
 
-    private final Spelbord spelbord;
-    private final String moeilijkheidsgraad;
-    private final String willekeurigeCode;
-    private boolean isGewonnen;
+    private final Spelbord spelbord;    
+    private final String willekeurigeCode;    
     private String spelnaam;
 
-    public Spel(String moeilijkheidsgraad) {
-        this(null, moeilijkheidsgraad, null, false); //aanpassing nodig voor random code generation        
-
+    
+    public Spel(){
+        this(null, null);
     }
-
-    public Spel(String spelnaam, String moeilijkheidsgraad, String willekeurigeCode, boolean isGewonnen) {
+    public Spel(String spelnaam, String willekeurigeCode) {
         spelbord = new Spelbord();
         setSpelnaam(spelnaam);
-        this.moeilijkheidsgraad = moeilijkheidsgraad;
-        setIsGewonnen(isGewonnen);
+         
         if (willekeurigeCode != null) {
             this.willekeurigeCode = willekeurigeCode;
         } else {                                            //genereert de random code via een random int (als index) die dan telkens in de kleurenArray een kleur kiest
@@ -27,9 +23,9 @@ public class Spel {
             int guard = 0;
             String code = "";
             String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs"};      //willekeurige kleuren? of staat dit ergens??
-            if (this.moeilijkheidsgraad.equals("gemakkelijk") || this.moeilijkheidsgraad.equals("normaal")) {   //this.moeilijkheidsgraad met dan eerst de controle in setter of gwn moeilijkheidsgraad?
+            if (Spel.class.getSimpleName().equals("MakkelijkSpel") || Spel.class.getSimpleName().equals("normaal")) {   //this.moeilijkheidsgraad met dan eerst de controle in setter of gwn moeilijkheidsgraad?
                 guard = 4;
-            } else if (this.moeilijkheidsgraad.equals("moeilijk")) {
+            } else if (Spel.class.getSimpleName().equals("moeilijk")) {
                 guard = 5;
             }
             for (int i = 0; i < guard; i++) {                               //NOG AANPASSING NODIG IN VERBAND MET MOEILIJKHEIDSGRAAD (UNIEKE KLEUREN OF NIET / LEEG OF NIET)
@@ -44,21 +40,14 @@ public class Spel {
     public Spelbord getSpelbord() {
         return spelbord;
     }
-
-    public boolean getIsGewonnen() {
-        return isGewonnen;
-    }
-
-    public String getMoeilijkheidsgraad() {
-        return moeilijkheidsgraad;
-    }
-
-    private void setIsGewonnen(boolean isGewonnen) {
-        this.isGewonnen = isGewonnen;
-    }
+        
 
     private void setSpelnaam(String spelnaam) {
         this.spelnaam = spelnaam;
     }
 
 }
+
+
+//ATTRIBUTEN ISGEWONNEN EN MOEILIJKHEIDSGRAAD VERWIJDERT, ISGEWONNEN NIET NODIG, OOK NIET IN DATABANK, AANTAL GEWONNEN SPELLEN PER MOEILIJKHEIDSGRAAD WORDT GWN ZO OPGESLAGEN IN DE RESPECTIEVELIJKE KLASSE
+//MOEILIJKHEIDSGRAAD HOEFT NIET ALS ATTRIBUUT WANT ER ZIJN SUBKLASSES DIE DE MOEILIJKHEIDSGRAAD REPRESENTEREN.

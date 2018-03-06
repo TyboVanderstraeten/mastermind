@@ -35,8 +35,15 @@ public class DomeinController {
     //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt 
     //aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
-    public void kiesMoeilijkheidsgraad(String moeilijkheidsgraad) {
-        spel = new Spel(moeilijkheidsgraad);
+    public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
+        switch(moeilijkheidsgraad){
+            case 1: spel = new MakkelijkSpel();
+            break;
+            case 2: spel = new NormaalSpel();
+            break;
+            case 3: spel = new MoeilijkSpel();
+            break;            
+        }
     }
 
     public String[][] startMasterMind() {
