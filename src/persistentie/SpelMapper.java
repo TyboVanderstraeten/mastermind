@@ -20,10 +20,7 @@ public class SpelMapper {
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
                     String willekeurigeCode = rs.getString("willekeurigeCode");
-                    String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-                    boolean isGewonnen = rs.getBoolean("isGewonnen");
-
-                    spel = new Spel(spelnaam, moeilijkheidsgraad, willekeurigeCode, isGewonnen);
+                    spel = new Spel(spelnaam, willekeurigeCode);
                 }
             }
         } catch (SQLException ex) {
@@ -42,11 +39,9 @@ public class SpelMapper {
 
             while (rs.next()) {
                 String spelersnaam = rs.getString("spelersnaam");
-                String willekeurigeCode = rs.getString("willekeurigeCode");
-                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-                boolean isGewonnen = rs.getBoolean("isGewonnen");
+                String willekeurigeCode = rs.getString("willekeurigeCode");                
 
-                spellen.add(new Spel(spelersnaam, moeilijkheidsgraad, willekeurigeCode, isGewonnen));
+                spellen.add(new Spel(spelersnaam, willekeurigeCode));   
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -55,3 +50,5 @@ public class SpelMapper {
         return spellen;
     }
 }
+
+//SUBKLASSES IN DATABASE NODIG
