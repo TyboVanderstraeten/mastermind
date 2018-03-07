@@ -24,13 +24,21 @@ public class MastermindApplicatie {
     public void startApplicatie() {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
         
-        
+        //  SPELBORD TERUGGEVEN
         domeinController.kiesMoeilijkheidsgraad(1);
         String[][] spelbord = domeinController.geefSpelbord();
         for(String[] x: spelbord){
             System.out.println(Arrays.toString(x));
         }
         
+        //  OVERZICHT TERUGGEVEN
+        String[][] overzicht = domeinController.startMasterMind();
+        for(String[] a: overzicht){
+        System.out.println(Arrays.toString(a));
+        }
+        
+        
+        //  AANMELDEN/REGISTREREN
         System.out.println("Wenst u zich aan te melden, of te registreren?\n1: MELD AAN\n2: REGISTREER");
         switch (input.nextInt()) {
 

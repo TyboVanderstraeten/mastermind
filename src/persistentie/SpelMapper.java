@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SpelMapper {
 
-    public Spel geefSpel(String spelnaam) {  
+    /**public Spel geefSpel(String spelnaam) {  
         Spel spel = null;
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -51,7 +51,7 @@ public class SpelMapper {
         }
 
         return spellen;
-    }
+    }**/ //voorlopig niet nodig
 }
 
 //SUBKLASSES IN DATABASE NODIG

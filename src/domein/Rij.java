@@ -4,10 +4,16 @@ public class Rij {
 
     private final Pin[] codepinnen;
     private final Pin[] evaluatiepinnen;
-    public Rij() {
-        codepinnen = new CodePin[5];
+
+    public Rij(int moeilijkheidsgraad) {
         evaluatiepinnen = new EvaluatiePin[4];
-        for (int i = 0; i < 5; i++) {
+        if (moeilijkheidsgraad == 1 || moeilijkheidsgraad == 2) {
+            codepinnen = new CodePin[4];
+        } else {
+            codepinnen = new CodePin[5];
+        }
+
+        for (int i = 0; i < codepinnen.length; i++) {
             codepinnen[i] = new CodePin();
         }
     }

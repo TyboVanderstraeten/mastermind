@@ -26,8 +26,9 @@ public class DomeinController {
         Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord);
         //wachtwoord moet gelijk zijn aan bevestiging
         if (wachtwoord.equals(bevestiging)) {
-            spelerRepository.voegSpelerToe(nieuweSpeler);
+            spelerRepository.voegSpelerToe(nieuweSpeler);           //nog exception nodig
         }
+        deSpeler = nieuweSpeler;
     }
 
     public String geefSpelersnaam() {                    //***apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
@@ -52,18 +53,26 @@ public class DomeinController {
     }
 
     public String[][] startMasterMind() {
-        String[][] overzicht = new String[2][];
-        overzicht[0][0] = "gemakkelijk";
-        overzicht[1][0] = String.format("   %d WINS   ", MakkelijkSpel.getAantalGewonnen());
-        if (MakkelijkSpel.getAantalGewonnen() >= 20) {
-            overzicht[0][1] = "normaal";
-            overzicht[1][1] = String.format(" %d WINS ", NormaalSpel.getAantalGewonnen());
-            if (MakkelijkSpel.getAantalGewonnen() >= 20) {
-                overzicht[0][2] = "moeilijk";
-                overzicht[1][2] = String.format(" %d WINS ", MoeilijkSpel.getAantalGewonnen());
-            }
+        String[][] overzicht;
+        String[] moeilijkheidsgraden = {"makkelijk", "normaal", "moeilijk"};
+        String x = String.format("%d %d %d", MakkelijkSpel.getAantalGewonnen(), NormaalSpel.getAantalGewonnen(), MoeilijkSpel.getAantalGewonnen());
+        String[] aantal = x.split(" ");
+        int guard;
+        if (Integer.parseInt(aantal[0]) < 20) {
+            overzicht = new String[1][2];
+
+        } else if (Integer.parseInt(aantal[1]) < 20) {
+            overzicht = new String[2][2];
+
+        } else {
+            overzicht = new String[3][2];
+
         }
-        return overzicht;        
+        for (int i = 0; i < overzicht.length; i++) {
+            overzicht[i][0] = moeilijkheidsgraden[i];
+            overzicht[i][1] = String.format("%s WINS", aantal[i]);
+        }
+        return overzicht;
     }
 
     public String[][] geefSpelbord() {

@@ -2,13 +2,10 @@ package domein;
 
 public abstract class Pin {
 
-    private String kleur;
+    private String kleur = "X";
 
     public Pin(){
-        this("X");
-    }
-    public Pin(String kleur) {
-        setKleur(kleur);
+        
     }    
 
     public String getKleur() {

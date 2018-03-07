@@ -4,10 +4,10 @@ public class Spelbord {
 
     private final Rij[] rijen;
     
-    public Spelbord() {
+    public Spelbord(int moeilijkheidsgraad) {
         rijen = new Rij[12];
         for(int i =0; i<12; i++){
-            rijen[i]=new Rij();
+            rijen[i]=new Rij(moeilijkheidsgraad);
         }
     }
     

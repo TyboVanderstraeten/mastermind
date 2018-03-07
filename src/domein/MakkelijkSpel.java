@@ -7,10 +7,7 @@ public class MakkelijkSpel extends Spel{
     
     public MakkelijkSpel(int moeilijkheidsgraad){
         super(moeilijkheidsgraad);
-    }  
-    public MakkelijkSpel(String spelnaam, String code){
-        super(spelnaam, code);
-    }
+    }      
 
     public static int getAantalGewonnen() {
         return aantalGewonnen;
