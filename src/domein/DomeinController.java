@@ -69,8 +69,8 @@ public class DomeinController {
 
         }
         for (int i = 0; i < overzicht.length; i++) {
-            overzicht[i][0] = moeilijkheidsgraden[i];
-            overzicht[i][1] = String.format("%s WINS", aantal[i]);
+            overzicht[i][0] = String.format("%-10s",moeilijkheidsgraden[i]);
+            overzicht[i][1] = String.format("%5s %5s", aantal[i], "WINS");
         }
         return overzicht;
     }

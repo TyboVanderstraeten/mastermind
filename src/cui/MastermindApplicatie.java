@@ -23,9 +23,10 @@ public class MastermindApplicatie {
 
     public void startApplicatie() {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
-        
+                                                        //NIET IN VOLGORDE ETC.
         //  SPELBORD TERUGGEVEN
-        domeinController.kiesMoeilijkheidsgraad(1);
+        System.out.println("Welke moeilijkheidsgraad wenst u te spelen? (geef het nummer)\n1: makkelijk\n2: normaal\n3: moeilijk");
+        domeinController.kiesMoeilijkheidsgraad(input.nextInt());
         String[][] spelbord = domeinController.geefSpelbord();
         for(String[] x: spelbord){
             System.out.println(Arrays.toString(x));
