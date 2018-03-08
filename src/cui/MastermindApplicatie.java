@@ -36,8 +36,8 @@ public class MastermindApplicatie {
         String[][] overzicht = domeinController.startMasterMind();
         for(String[] a: overzicht){
         System.out.println(Arrays.toString(a));
-        }
-        
+        }        
+       
         
         //  AANMELDEN/REGISTREREN
         System.out.println("Wenst u zich aan te melden, of te registreren?\n1: MELD AAN\n2: REGISTREER");

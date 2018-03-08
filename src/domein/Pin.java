@@ -15,4 +15,8 @@ public abstract class Pin {
     private void setKleur(String kleur) {
         this.kleur = kleur;
     }
+    
+    public void veranderKleur(String kleur){
+        setKleur(kleur);
+    }
 }

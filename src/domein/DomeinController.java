@@ -79,6 +79,13 @@ public class DomeinController {
         Spelbord spelbord = spel.getSpelbord();
         return spelbord.geefOverzichtMetPinnen();
     }
+    
+    
+    //UC3
+    
+    public void geefPoging (String[] poging){
+        spel.geefVolgendePoging(poging);
+    }
 
     //setters
     private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final

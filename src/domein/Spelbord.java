@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.Arrays;
+
 public class Spelbord {
 
     private final Rij[] rijen;
@@ -20,5 +22,9 @@ public class Spelbord {
            overzicht[i] = rijen[i].geefPinkleuren();
         }
         return overzicht;
+    }
+    
+    public void geefVolgendePoging(String[] poging, int aantalPogingen){
+       rijen[aantalPogingen].geefVolgendePoging()
     }
 }

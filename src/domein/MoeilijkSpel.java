@@ -9,7 +9,5 @@ public class MoeilijkSpel extends Spel{
 
     public static int getAantalGewonnen() {
         return aantalGewonnen;
-    }
-    
-    
+    }       
 }

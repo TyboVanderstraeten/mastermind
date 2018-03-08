@@ -51,7 +51,7 @@ public class SpelMapper {
         }
 
         return spellen;
-    }**/ //voorlopig niet nodig
+    }**/
 }
 
 //SUBKLASSES IN DATABASE NODIG

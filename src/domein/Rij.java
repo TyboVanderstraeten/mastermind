@@ -25,5 +25,11 @@ public class Rij {
             pinkleuren[i] = codepinnen[i].getKleur();
         }
         return pinkleuren;
+    }   
+    
+    public void geefVolgendePoging(String[] poging){
+        for(int i=0; i<codepinnen.length; i++){
+            codepinnen[i].veranderKleur(poging[i]);
+        }
     }
 }
