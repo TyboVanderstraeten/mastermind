@@ -10,7 +10,7 @@ public class Spelbord {
     public Spelbord(int moeilijkheidsgraad, String[] willekeurigeCode) {
         rijen = new Rij[12];
         for(int i =0; i<12; i++){
-            rijen[i]=new Rij(moeilijkheidsgraad);
+            rijen[i]=new Rij();
         }
         
         this.willekeurigeCode = willekeurigeCode;
@@ -22,9 +22,6 @@ public class Spelbord {
            overzicht[i] = rijen[i].geefPinkleuren();
         }
         return overzicht;
-    }
+    }    
     
-    public void geefVolgendePoging(String[] poging, int aantalPogingen){
-       rijen[aantalPogingen].geefVolgendePoging()
-    }
 }

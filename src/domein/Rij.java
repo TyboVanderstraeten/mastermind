@@ -5,30 +5,27 @@ public class Rij {
     private final Pin[] codepinnen;
     private final Pin[] evaluatiepinnen;
 
-    public Rij(int moeilijkheidsgraad) {
+    public Rij() {
         evaluatiepinnen = new EvaluatiePin[4];
-        if (moeilijkheidsgraad == 1 || moeilijkheidsgraad == 2) {
-            codepinnen = new CodePin[4];
-        } else {
-            codepinnen = new CodePin[5];
-        }
-
-        for (int i = 0; i < codepinnen.length; i++) {
-            codepinnen[i] = new CodePin();
-        }
+        codepinnen = new CodePin[4];
     }
 
     public String[] geefPinkleuren() {
         String[] pinkleuren = new String[codepinnen.length];
 
         for (int i = 0; i < codepinnen.length; i++) {
-            pinkleuren[i] = codepinnen[i].getKleur();
+            try {
+                pinkleuren[i] = codepinnen[i].getKleur();
+
+            } catch (NullPointerException e) {
+                pinkleuren[i] = "X";
+            }
         }
         return pinkleuren;
-    }   
-    
-    public void geefVolgendePoging(String[] poging){
-        for(int i=0; i<codepinnen.length; i++){
+    }
+
+    public void geefVolgendePoging(String[] poging) {
+        for (int i = 0; i < codepinnen.length; i++) {
             codepinnen[i].veranderKleur(poging[i]);
         }
     }

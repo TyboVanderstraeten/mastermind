@@ -48,12 +48,7 @@ public abstract class Spel {
         spelbord = new Spelbord(moeilijkheidsgraad, willekeurigeCode);
     }
 
-    public void geefVolgendePoging(String[] poging) {
-        spelbord.geefVolgendePoging(poging);
-        setPoging(poging);
-        aantalPogingen++;
-    }
-
+    
     public Spelbord getSpelbord() {
         return spelbord;
     }    
