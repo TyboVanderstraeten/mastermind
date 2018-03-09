@@ -10,7 +10,7 @@ public abstract class Spel {
     private int aantalPogingen;
     private String[] poging;
 
-    public Spel(int moeilijkheidsgraad) {
+    public Spel() {
         //genereert de random code via een random int (als index) die dan telkens in de kleurenArray een kleur kiest
         //RANDOMCODE GENERATOR
         SecureRandom random = new SecureRandom();
@@ -45,7 +45,7 @@ public abstract class Spel {
                 }
             }
         }
-        spelbord = new Spelbord(moeilijkheidsgraad, willekeurigeCode);
+        spelbord = new Spelbord(willekeurigeCode);
     }
 
     

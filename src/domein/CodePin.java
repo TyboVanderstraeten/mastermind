@@ -1,9 +1,8 @@
 package domein;
 
-public class CodePin extends Pin{
-    private String kleur;
+public class CodePin extends Pin{  
     
-    public CodePin(){
-        super();
+    public CodePin(String kleur){
+        super(kleur);
     }
 }

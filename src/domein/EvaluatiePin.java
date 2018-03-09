@@ -1,9 +1,8 @@
 package domein;
 
-public class EvaluatiePin extends Pin{
-    private String kleur;
+public class EvaluatiePin extends Pin{    
     
-    public EvaluatiePin(){
-        
+    public EvaluatiePin(String kleur){
+        super(kleur);
     }
 }

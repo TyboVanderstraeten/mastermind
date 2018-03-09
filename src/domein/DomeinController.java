@@ -31,23 +31,25 @@ public class DomeinController {
         deSpeler = nieuweSpeler;
     }
 
+    
     public String geefSpelersnaam() {                    //***apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
         return deSpeler.getSpelersnaam();
     }
     //***Tybo = Ik denk dat het private (?public?) methode wordt die vanuit meldAan wordt 
     //aangeroepen want meldAan is (tot nu toe) enige klasse die spelersnaam retourneert!
 
+    
     //UC2
     public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
         switch (moeilijkheidsgraad) {
             case 1:
-                spel = new MakkelijkSpel(moeilijkheidsgraad);
+                spel = new MakkelijkSpel();
                 break;
             case 2:
-                spel = new NormaalSpel(moeilijkheidsgraad);
+                spel = new NormaalSpel();
                 break;
             case 3:
-                spel = new MoeilijkSpel(moeilijkheidsgraad);
+                spel = new MoeilijkSpel();
                 break;
         }
     }
@@ -55,9 +57,8 @@ public class DomeinController {
     public String[][] startMasterMind() {
         String[][] overzicht;
         String[] moeilijkheidsgraden = {"makkelijk", "normaal", "moeilijk"};
-        String x = String.format("%d %d %d", MakkelijkSpel.getAantalGewonnen(), NormaalSpel.getAantalGewonnen(), MoeilijkSpel.getAantalGewonnen());
-        String[] aantal = x.split(" ");
-        int guard;
+        String x = String.format("%d %d %d", deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
+        String[] aantal = x.split(" ");        
         if (Integer.parseInt(aantal[0]) < 20) {
             overzicht = new String[1][2];
 

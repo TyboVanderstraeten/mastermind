@@ -26,7 +26,7 @@ public class Rij {
 
     public void geefVolgendePoging(String[] poging) {
         for (int i = 0; i < codepinnen.length; i++) {
-            codepinnen[i].veranderKleur(poging[i]);
+            codepinnen[i] = new CodePin(poging[i]);
         }
     }
 }

@@ -1,13 +1,12 @@
 package domein;
 
-import java.util.Arrays;
 
 public class Spelbord {
 
     private final Rij[] rijen;
     private final String[] willekeurigeCode;
     
-    public Spelbord(int moeilijkheidsgraad, String[] willekeurigeCode) {
+    public Spelbord(String[] willekeurigeCode) {
         rijen = new Rij[12];
         for(int i =0; i<12; i++){
             rijen[i]=new Rij();
