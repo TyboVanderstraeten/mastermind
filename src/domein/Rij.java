@@ -1,13 +1,19 @@
 package domein;
 
-public class Rij {
+public abstract class Rij {
 
     private final Pin[] codepinnen;
     private final Pin[] evaluatiepinnen;
 
-    public Rij() {
-        evaluatiepinnen = new EvaluatiePin[4];
-        codepinnen = new CodePin[4];
+    public Rij() {        
+        if (this.getClass().getSimpleName().equals("MakkelijkeNormaleRij")){
+            codepinnen = new CodePin[4];
+        }
+        else{
+            codepinnen = new CodePin[5];
+        }
+        evaluatiepinnen = new EvaluatiePin[codepinnen.length];
+        
     }
 
     public String[] geefPinkleuren() {
@@ -15,7 +21,7 @@ public class Rij {
 
         for (int i = 0; i < codepinnen.length; i++) {
             try {
-                pinkleuren[i] = codepinnen[i].getKleur();
+                pinkleuren[i] = String.format("%6s",codepinnen[i].getKleur());
 
             } catch (NullPointerException e) {
                 pinkleuren[i] = "X";
