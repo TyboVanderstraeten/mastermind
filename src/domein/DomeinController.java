@@ -83,7 +83,9 @@ public class DomeinController {
     
     
     //UC3
+    public void geefVolgendePoging(){
         
+    }
     
     //setters
     private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
