@@ -7,9 +7,9 @@ public class Spelbord {
 
     public Spelbord(String[] willekeurigeCode) {
         this.willekeurigeCode = willekeurigeCode;
-        rijen = new Rij[12];
+        rijen = new Rij[13];
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 13; i++) {
             if (willekeurigeCode.length == 4) {
                 rijen[i] = new MakkelijkeNormaleRij();
             } else {

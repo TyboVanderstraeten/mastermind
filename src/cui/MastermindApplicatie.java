@@ -36,6 +36,7 @@ public class MastermindApplicatie {
         String[][] overzicht = domeinController.startMasterMind();
         for(String[] a: overzicht){
         System.out.println(Arrays.toString(a));
+            System.out.println("");
         }        
        
         

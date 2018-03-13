@@ -18,13 +18,17 @@ public abstract class Rij {
 
     public String[] geefPinkleuren() {
         String[] pinkleuren = new String[codepinnen.length];
-
+        String[] evaluatiekleuren = new String[evaluatiepinnen.length];
         for (int i = 0; i < codepinnen.length; i++) {
-            try {
-                pinkleuren[i] = String.format("%6s",codepinnen[i].getKleur());
-
-            } catch (NullPointerException e) {
-                pinkleuren[i] = "X";
+            if(codepinnen[i]==null)
+                pinkleuren[i]="X";
+            else{            
+                pinkleuren[i] = String.format("%6s",codepinnen[i].getKleur());            
+            }
+            if(evaluatiepinnen[i]==null)
+                evaluatiekleuren[i]="X";
+            else{
+                evaluatiekleuren[i]= String.format("%5s", evaluatiepinnen[i].getKleur());
             }
         }
         return pinkleuren;
