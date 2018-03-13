@@ -9,10 +9,17 @@ import cui.MastermindApplicatie;
 import domein.DomeinController;
 
 /**
- *
- * @author bramd
+ *  Bevat de main. 
+ * 
+ * 
  */
 public class startUp {
+    /**
+     * maakt een object van de DomeinController en geeft deze mee aan de applicatie.
+     * de applicatie wordt dan gestart.
+     * 
+     * @param args  standaard parameter van de main methode
+     */
     public static void main(String[] args) {
         DomeinController domeinController = new DomeinController();
         MastermindApplicatie mastermindApplicatie = new MastermindApplicatie(domeinController);

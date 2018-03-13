@@ -7,11 +7,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * Zorgt voor de connectie met de Spelerobjecten van de databank.
+ * 
+ */
 public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSTERT INTO ID222177_g68.speler (spelersnaam, wachtwoord)" + "VALUES (?,?)";
 
+    /**
+     * voegt het spelerobject dat meegegeven is als parameter toe aan de databank.
+     * 
+     * @param speler een object van Speler.
+     * @see domein.Speler
+     */
     public void voegSpelerToe(Speler speler) {               //moet nog aangepast worden
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -24,6 +33,12 @@ public class SpelerMapper {
         }
     }
 
+    /**
+     * geeft een spelerobject terug dat overeenkomt met de spelernaam.
+     * 
+     * @param spelersnaam de spelersnaam van de gebruiker
+     * @return 
+     */
     public Speler geefSpeler(String spelersnaam) {
 //        Speler speler = null;
 //        

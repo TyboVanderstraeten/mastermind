@@ -2,6 +2,10 @@ package domein;
 
 import java.security.SecureRandom;
 
+/**
+ * Abstracte superklasse van MakkelijkSpel, NormaalSpel en MoeilijkSpel.
+ * 
+ */
 public abstract class Spel {
 
     private final Spelbord spelbord;
@@ -10,8 +14,13 @@ public abstract class Spel {
     private int aantalPogingen;
     private String[] poging;
 
+    /**
+     * Class constructor.
+     * Genereert de random code (de oplossing) en roept dan de constructor van Spelbord aan die de code meekrijgt als parameter.
+     * De code wordt ook in spel opgeslagen.
+     */
     public Spel() {
-        //genereert de random code via een random int (als index) die dan telkens in de kleurenArray een kleur kiest
+        //genereert de random code via een random int (als index) die dan telkens in de kleurenArray een kleur kiest        
         //RANDOMCODE GENERATOR
         SecureRandom random = new SecureRandom();
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs", "X"};      //willekeurige kleuren? of staat dit ergens??
@@ -48,7 +57,12 @@ public abstract class Spel {
         spelbord = new Spelbord(willekeurigeCode);
     }
 
-    
+    /**
+     * Getter
+     * geeft het attribuut spelbord terug.
+     * 
+     * @return 
+     */
     public Spelbord getSpelbord() {
         return spelbord;
     }    
@@ -56,6 +70,12 @@ public abstract class Spel {
     //private void setSpelnaam(String spelnaam) {
     //    this.spelnaam = spelnaam;                 //nog niet nodig
     //}
+    /**
+     * Setter
+     * Zorgt ervoor dat het attribuut poging de waarde krijgt van de parameter.
+     * 
+     * @param poging 
+     */
     public void setPoging(String[] poging) {
         this.poging = poging;
     }

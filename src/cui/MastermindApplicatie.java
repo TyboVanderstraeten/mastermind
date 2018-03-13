@@ -5,15 +5,32 @@ import domein.DomeinController;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
+/**
+ * De applicatie zelf,de verschillende handelingen worden in de juiste volgorde uitgevoerd.
+ * 
+ */
 public class MastermindApplicatie {
 
     private final DomeinController domeinController;
 
+    /**
+     * Class constructor.
+     * geeft het attribuut domeinController de waarde van de parameter.
+     * 
+     * @param domeinController object van DomeinController, deze klasse bevat alle methodes die in deze klasse moeten worden aangeroepen.
+     */
     public MastermindApplicatie(DomeinController domeinController) {
         this.domeinController = domeinController;
     }
 
+    /**
+     * Bevat alle handelingen.
+     * <ul>
+     * <li> aanmelden/registreren
+     * <li> een overzicht van de mogelijke moeilijkheidsgraden en het respectievelijke aantal wins
+     * <li> teruggeven van het spelbord
+     * </ul>
+     */
     public void startApplicatie() {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
         //NIET IN VOLGORDE ETC.
