@@ -25,5 +25,6 @@ public abstract class Pin {
     public String getKleur() {
         return kleur;
     }
-
+    
+    
 }
