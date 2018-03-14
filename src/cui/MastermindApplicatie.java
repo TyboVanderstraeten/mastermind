@@ -2,6 +2,7 @@ package cui;
 
 import domein.DomeinController;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -36,27 +37,39 @@ public class MastermindApplicatie {
     public void startApplicatie() {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
         //NIET IN VOLGORDE ETC.
+        boolean geldig = false;
 
         //  AANMELDEN/REGISTREREN
-        System.out.println("Wenst u zich aan te melden, of te registreren?\n1: MELD AAN\n2: REGISTREER");
-        switch (input.nextInt()) {
+        do {
+            try {
+                System.out.println("Wenst u zich aan te melden, of te registreren?\n1: MELD AAN\n2: REGISTREER");
+                switch (input.nextInt()) {
 
-            case 1:
-                System.out.print("Geef uw spelernaam: ");
-                String spelersnaam = input.next();
-                System.out.print("Geef uw wachtwoord: ");
-                domeinController.meldAan(spelersnaam, input.next());
-                break;
-            case 2:
-                System.out.print("geef een geldige spelernaam: ");
-                String spelernaam = input.next();
-                System.out.print("Geef een wachtwoord: ");
-                String wachtwoord = input.next();
-                System.out.print("Geef uw wachtwoord nogmaals ter bevestiging: ");
-                System.out.println("");
-                domeinController.registreer(spelernaam, wachtwoord, input.next());
-                break;
-        }
+                    case 1:
+                        System.out.print("Geef uw spelernaam: ");
+                        String spelersnaam = input.next();
+                        System.out.print("Geef uw wachtwoord: ");
+                        domeinController.meldAan(spelersnaam, input.next());
+                        break;
+                    case 2:
+                        System.out.print("Geef een geldige spelernaam: ");
+                        String spelernaam = input.next();
+                        System.out.print("Geef een wachtwoord: ");
+                        String wachtwoord = input.next();
+                        System.out.print("Geef uw wachtwoord nogmaals ter bevestiging: ");
+                        System.out.println("");
+                        domeinController.registreer(spelernaam, wachtwoord, input.next());
+                        break;
+                }
+                geldig = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Ongeldige invoer!");
+                input.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                input.nextLine();
+            }
+        } while (!geldig);
         System.out.println(domeinController.geefSpelersnaam());
 
         //  SPELBORD TERUGGEVEN
