@@ -61,8 +61,8 @@ public class Speler {
      * @param spelersnaam spelersnaam van de gebruiker
      */
     private void setSpelersnaam(String spelersnaam) {
-        if (spelersnaam.length() > 15 || spelersnaam == null) {
-            throw new IllegalArgumentException("Spelersnaam mag max. 15 karakters bevatten en mag niet leeg zijn!");
+        if (spelersnaam.length() > 40 || spelersnaam == null) {
+            throw new IllegalArgumentException("Spelersnaam mag max. 40 karakters bevatten en mag niet leeg zijn!");
         }
         this.spelersnaam = spelersnaam;
     }
@@ -74,8 +74,8 @@ public class Speler {
      * @param wachtwoord wachtwoord van de gebruiker
      */
     private void setWachtwoord(String wachtwoord) {
-        if (wachtwoord.length() < 8 || wachtwoord.length() > 16) {
-            throw new IllegalArgumentException("Wachtwoord moet 8-16 karakters bevatten (grenzen inbegrepen)!");
+        if (wachtwoord.length() < 8 || wachtwoord.length() > 25) {
+            throw new IllegalArgumentException("Wachtwoord moet 8-25 karakters bevatten (grenzen inbegrepen)!");
         }
         this.wachtwoord = wachtwoord;
     }
