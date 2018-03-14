@@ -1,4 +1,3 @@
-
 package cui;
 
 import domein.DomeinController;
@@ -6,18 +5,20 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * De applicatie zelf,de verschillende handelingen worden in de juiste volgorde uitgevoerd.
- * 
+ * De applicatie zelf,de verschillende handelingen worden in de juiste volgorde
+ * uitgevoerd.
+ *
  */
 public class MastermindApplicatie {
 
     private final DomeinController domeinController;
 
     /**
-     * Class constructor.
-     * geeft het attribuut domeinController de waarde van de parameter.
-     * 
-     * @param domeinController object van DomeinController, deze klasse bevat alle methodes die in deze klasse moeten worden aangeroepen.
+     * Class constructor. geeft het attribuut domeinController de waarde van de
+     * parameter.
+     *
+     * @param domeinController object van DomeinController, deze klasse bevat
+     * alle methodes die in deze klasse moeten worden aangeroepen.
      */
     public MastermindApplicatie(DomeinController domeinController) {
         this.domeinController = domeinController;
@@ -27,7 +28,8 @@ public class MastermindApplicatie {
      * Bevat alle handelingen.
      * <ul>
      * <li> aanmelden/registreren
-     * <li> een overzicht van de mogelijke moeilijkheidsgraden en het respectievelijke aantal wins
+     * <li> een overzicht van de mogelijke moeilijkheidsgraden en het
+     * respectievelijke aantal wins
      * <li> teruggeven van het spelbord
      * </ul>
      */
@@ -39,7 +41,7 @@ public class MastermindApplicatie {
         System.out.println("Wenst u zich aan te melden, of te registreren?\n1: MELD AAN\n2: REGISTREER");
         switch (input.nextInt()) {
 
-            case 1:                
+            case 1:
                 System.out.print("Geef uw spelernaam: ");
                 String spelersnaam = input.next();
                 System.out.print("Geef uw wachtwoord: ");
@@ -68,7 +70,7 @@ public class MastermindApplicatie {
         //  OVERZICHT TERUGGEVEN
         String[][] overzicht = domeinController.startMasterMind();
         for (String[] a : overzicht) {
-            System.out.println(Arrays.toString(a));            
+            System.out.println(Arrays.toString(a));
         }
 
     }

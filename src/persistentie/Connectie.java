@@ -2,7 +2,7 @@ package persistentie;
 
 /**
  * Zorgt voor de connectie met SQL
- * 
+ *
  */
 public class Connectie {
 

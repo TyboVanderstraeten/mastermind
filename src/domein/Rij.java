@@ -2,7 +2,7 @@ package domein;
 
 /**
  * Abstracte superklasse van MakkelijkeNormaleRij en MoeilijkeRij.
- * 
+ *
  */
 public abstract class Rij {
 
@@ -26,7 +26,7 @@ public abstract class Rij {
 
     /**
      * Geeft de pinkleuren van deze rij terug in de vorm van een array.
-     *  
+     *
      * @return
      */
     public String[] geefPinkleuren() {
@@ -53,9 +53,10 @@ public abstract class Rij {
 
     //UC3
     /**
-     * Roept de constructor van codePin aan die de juiste kleur meekrijgt als parameter.
-     * 
-     * @param poging    de kleuren die de speler heeft ingegeven als poging.
+     * Roept de constructor van codePin aan die de juiste kleur meekrijgt als
+     * parameter.
+     *
+     * @param poging de kleuren die de speler heeft ingegeven als poging.
      */
     public void geefVolgendePoging(String[] poging) {
         for (int i = 0; i < codepinnen.length; i++) {
@@ -64,10 +65,9 @@ public abstract class Rij {
     }
 
     /**
-     * Getter
-     * geeft het attribuut codepinnen terug.
-     * 
-     * @return 
+     * Getter geeft het attribuut codepinnen terug.
+     *
+     * @return
      */
     public Pin[] getCodepinnen() {
         return codepinnen;

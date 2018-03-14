@@ -1,7 +1,7 @@
 package domein;
 
 /**
- * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. * 
+ * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. *
  */
 public class DomeinController {
 
@@ -23,7 +23,8 @@ public class DomeinController {
     //UC1   
     //operaties
     /**
-     * Meld de speler (krijgt het spelerobjectje van spelerRepository) aan indien spelersnaam en wachtwoord correct zijn.
+     * Meld de speler (krijgt het spelerobjectje van spelerRepository) aan
+     * indien spelersnaam en wachtwoord correct zijn.
      *
      * @param spelersnaam de spelersnaam van de gebruiker
      * @param wachtwoord het wachtwoord van de gebruiker
@@ -36,12 +37,14 @@ public class DomeinController {
     }
 
     /**
-     * Maakt een nieuw object van Speler aan met de spelersnaam en wachtwoord als parameter.
-     * Daarna voegt men dit spelerobjectje toe aan de spelerRepository
-     * 
-     * @param spelersnaam   spelersnaam die de gebruiker wil gebruiken
-     * @param wachtwoord    wachtwoord van de speler
-     * @param bevestiging   bevestiging van het wachtwoord (moet identiek zijn aan wachtwoord)
+     * Maakt een nieuw object van Speler aan met de spelersnaam en wachtwoord
+     * als parameter. Daarna voegt men dit spelerobjectje toe aan de
+     * spelerRepository
+     *
+     * @param spelersnaam spelersnaam die de gebruiker wil gebruiken
+     * @param wachtwoord wachtwoord van de speler
+     * @param bevestiging bevestiging van het wachtwoord (moet identiek zijn aan
+     * wachtwoord)
      */
     public void registreer(String spelersnaam, String wachtwoord, String bevestiging) {
         Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord);
@@ -54,8 +57,8 @@ public class DomeinController {
 
     /**
      * Geeft de spelersnaam van de aangemelde speler terug.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String geefSpelersnaam() {                    //***apparte public methode die in applicatie wordt opgeroepen OF private methode die vanuit meldAan wordt opgeroepen?
         return deSpeler.getSpelersnaam();
@@ -65,9 +68,10 @@ public class DomeinController {
 
     //UC2
     /**
-     * Maakt een object van Spel aan afhankelijk van de gekozen moeilijkheidsgraad.
-     * 
-     * @param moeilijkheidsgraad 
+     * Maakt een object van Spel aan afhankelijk van de gekozen
+     * moeilijkheidsgraad.
+     *
+     * @param moeilijkheidsgraad
      */
     public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
         switch (moeilijkheidsgraad) {
@@ -84,9 +88,10 @@ public class DomeinController {
     }
 
     /**
-     * Geeft een overzicht van alle mogelijke moeilijkheidsgraden en het aantal overwinningen per moeilijkheidsgraad.
-     * 
-     * @return 
+     * Geeft een overzicht van alle mogelijke moeilijkheidsgraden en het aantal
+     * overwinningen per moeilijkheidsgraad.
+     *
+     * @return
      */
     public String[][] startMasterMind() {
         String[][] overzicht;
@@ -112,8 +117,8 @@ public class DomeinController {
 
     /**
      * Geeft een overzicht van het spelbord terug.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String[][] geefSpelbord() {
         Spelbord spelbord = spel.getSpelbord();
@@ -130,18 +135,19 @@ public class DomeinController {
 
     //setters
     /**
-     * Setter.
-     * Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de parameter.
-     * @param deSpeler  een object van Speler
+     * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
+     * parameter.
+     *
+     * @param deSpeler een object van Speler
      */
     private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
         this.deSpeler = deSpeler;
     }
 
     /**
-     * Setter.
-     * Zorgt ervoor dat het attribuut spel de waarde krijgt van de parameter.
-     * 
+     * Setter. Zorgt ervoor dat het attribuut spel de waarde krijgt van de
+     * parameter.
+     *
      * @param spel een object van Spel
      */
     private void setSpel(Spel spel) {

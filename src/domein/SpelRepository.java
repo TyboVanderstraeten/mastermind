@@ -5,20 +5,19 @@ import persistentie.SpelMapper;
 
 /**
  * Zorgt voor de verbinding met de SpelMapper uit de persistentielaag.
- * 
+ *
  */
 public class SpelRepository {
 
     private final SpelMapper mapper;
 
     /**
-     * Class constructor.
-     * roept de constructor van Spelmapper aan.
+     * Class constructor. roept de constructor van Spelmapper aan.
      */
     public SpelRepository() {
         mapper = new SpelMapper();
     }
-    
+
 //    public Spel[] geefSpellen(){
 //        List<Spel> spellen =mapper.geefSpellen();
 //        Spel[] spelletjes = new Spel[spellen.size()];
@@ -27,7 +26,4 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
-
-    
-
 }

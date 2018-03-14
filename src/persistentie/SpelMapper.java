@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Zorgt voor de connectie met de Spel objecten uit de databank.
- * 
+ *
  */
 public class SpelMapper {
 

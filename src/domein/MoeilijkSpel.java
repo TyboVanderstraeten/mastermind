@@ -2,19 +2,18 @@ package domein;
 
 /**
  * Subklasse van Spel waarbij de moeilijkheidsgraad moeilijk is.
- * 
+ *
  */
-public class MoeilijkSpel extends Spel{
-    
+public class MoeilijkSpel extends Spel {
+
     /**
-     * Class constructor.
-     * Roept de default constructor van de superklasse Spel aan.
-     * 
+     * Class constructor. Roept de default constructor van de superklasse Spel
+     * aan.
+     *
      * @see Spel
      */
-    public MoeilijkSpel(){
+    public MoeilijkSpel() {
         super();
     }
 
-    
 }
