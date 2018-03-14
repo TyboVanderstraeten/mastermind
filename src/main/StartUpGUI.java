@@ -1,5 +1,7 @@
 package main;
 
+import gui.LoginScherm;
+import gui.RegistreerScherm;
 import gui.WelkomScherm;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,7 +14,10 @@ public class StartUpGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         WelkomScherm welkomScherm = new WelkomScherm();
-        Scene scene = new Scene(welkomScherm,300,200);
+        LoginScherm loginScherm = new LoginScherm();
+        RegistreerScherm registreerScherm = new RegistreerScherm();
+        
+        Scene scene = new Scene(loginScherm,300,200);
         
         primaryStage.setScene(scene);
         

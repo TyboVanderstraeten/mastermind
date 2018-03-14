@@ -21,16 +21,12 @@ public class WelkomScherm extends GridPane {
 
         //EventHandling
         //Meldaan knop die naar het loginscherm leidt
-        //WERKT NIET ????? HOW TO PLS
+        //WERKT NIET! Manier vinden om als button klik -> loginscherm openen!
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 LoginScherm loginScherm = new LoginScherm();
                 Scene scene = new Scene(loginScherm, 300, 200);
-                
-
-                primaryStage.setTitle("Mastermind");
-                primaryStage.show();
             }
         });
 
