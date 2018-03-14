@@ -56,11 +56,12 @@ public class RegistreerScherm extends GridPane {
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                
             }
         });
 
         //Annuleerknop sluit venster en gaat terug naar welkomscherm
+        //Sluit registreerscherm nog niet af?!
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -32,6 +32,7 @@ public class WelkomScherm extends GridPane {
 
         //EventHandling
         //Meldaan knop die naar het loginscherm leidt
+        //Sluit welkomscherm nog niet af?!
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -44,6 +45,7 @@ public class WelkomScherm extends GridPane {
         });
 
         //Registreer knop die naar het registreerscherm leidt
+        //Sluit welkomscherm nog niet af?!
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -11,6 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import domein.DomeinController;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class LoginScherm extends GridPane {
 
@@ -38,31 +41,31 @@ public class LoginScherm extends GridPane {
         this.add(btnAnnuleer, 1, 3);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
-        Label lblMessage = new Label("");
-        this.add(lblMessage, 0, 4, 2, 1);
-
         //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
 
-        /*Om een soort van 'tooltip' te geven bij gebruikersnaam, wachtwoord
-        WERKT NIET!! 
-        Indien werkt = invoeren bij registreren!*/
-//        if (txfGebruikersnaam.isFocused()) {
-//            lblMessage.setText("Gebruikersnaam bevat max. 40 karakters");
-//        }
         //EventHandling
         //Meldaan knop meldt de speler aan!
-        //NOG AAN TE VULLEN!!
+        //NOG CHECKEN OF WEL DEGELIJK AANMELD
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                DomeinController domeinController = new DomeinController();
+                domeinController.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
+                Alert alertAangemeld = new Alert(AlertType.INFORMATION);
+                alertAangemeld.setTitle("Aanmelden");
+                alertAangemeld.setHeaderText("Aanmelden succesvol");
+                //Moet nog naar 'domeinController.geefSpelersnaam();
+                alertAangemeld.setContentText(String.format("Speler '%s' is succesvol aangemeld!", txfGebruikersnaam.getText()));
+                alertAangemeld.showAndWait();
 
             }
         });
 
         //Annuleerknop sluit venster en gaat terug naar welkomscherm
+        //Sluit loginscherm nog niet af?!
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

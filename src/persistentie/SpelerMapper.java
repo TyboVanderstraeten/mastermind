@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class SpelerMapper {
 
-    private static final String INSERT_SPELER = "INSTERT INTO ID222177_g68.speler (spelersnaam, wachtwoord)" + "VALUES (?,?)";
+    private static final String INSERT_SPELER = "INSTERT INTO ID222177_g68.speler (spelersnaam, wachtwoord)" + "VALUES (?,?)"; //INSTERT????
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
@@ -56,7 +56,7 @@ public class SpelerMapper {
 //        } catch (SQLException ex) {
 //            throw new RuntimeException(ex);
 //        }
-        Speler speler = new Speler("bob", "appel");
+        Speler speler = new Speler("bob", "appel999");
         return speler;
     }
 
