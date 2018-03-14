@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -7,32 +8,38 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class WelkomScherm extends GridPane {
 
     public WelkomScherm() {
         Label lblWelkom = new Label("Mastermind");
-        this.add(lblWelkom, 0, 0, 2, 1);
+        this.add(lblWelkom, 0, 0, 3, 1);
 
         Button btnMeldAan = new Button("Meld aan");
         this.add(btnMeldAan, 0, 1);
 
         Button btnRegistreer = new Button("Registreer");
         this.add(btnRegistreer, 1, 1);
-        
+
+        Button btnStop = new Button("Stop");
+        this.add(btnStop, 2, 1);
+
         //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
-        this.setVgap(10);      
+        this.setVgap(10);
 
         //EventHandling
         //Meldaan knop die naar het loginscherm leidt
-        //WERKT NIET! Manier vinden om als button klik -> loginscherm openen!
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                Stage stage = new Stage();
                 LoginScherm loginScherm = new LoginScherm();
-                Scene scene = new Scene(loginScherm, 300, 200);
+                stage.setScene(new Scene(loginScherm,300,200));
+                stage.setTitle("Aanmelden");
+                stage.show();
             }
         });
 
@@ -41,6 +48,14 @@ public class WelkomScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
 
+            }
+        });
+
+        //Stop knop die het programma stopt
+        btnStop.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
             }
         });
 

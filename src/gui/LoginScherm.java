@@ -62,8 +62,7 @@ public class LoginScherm extends GridPane {
             }
         });
 
-        //Annuleerknop sluit venster en gaat terug naar welkomscherm!!
-        //WERKT
+        //Annuleerknop sluit venster en gaat terug naar welkomscherm
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

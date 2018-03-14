@@ -18,13 +18,13 @@ public class RegistreerScherm extends GridPane {
         Label lblRegistreer = new Label("Registreer");
         this.add(lblRegistreer, 0, 0, 2, 1);
         
-        Label lblGebruikersnaam = new Label("Gebruikersnaam");
+        Label lblGebruikersnaam = new Label("Gebruikersnaam:");
         this.add(lblGebruikersnaam, 0, 1);
         
-        Label lblWachtwoord = new Label("Wachtwoord");
+        Label lblWachtwoord = new Label("Wachtwoord:");
         this.add(lblWachtwoord, 0, 2);
         
-        Label lblWachtwoordBevestiging = new Label("Bevestig wachtwoord");
+        Label lblWachtwoordBevestiging = new Label("Bevestig wachtwoord:");
         this.add(lblWachtwoordBevestiging, 0, 3);
         
         TextField txfGebruikersnaam = new TextField();
@@ -59,8 +59,7 @@ public class RegistreerScherm extends GridPane {
             }
         });
 
-        //Annuleerknop sluit venster en gaat terug naar welkomscherm!!
-        //WERKT
+        //Annuleerknop sluit venster en gaat terug naar welkomscherm
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
