@@ -37,7 +37,7 @@ public class WelkomScherm extends GridPane {
             public void handle(ActionEvent event) {
                 Stage stage = new Stage();
                 LoginScherm loginScherm = new LoginScherm();
-                stage.setScene(new Scene(loginScherm,300,200));
+                stage.setScene(new Scene(loginScherm, 300, 200));
                 stage.setTitle("Aanmelden");
                 stage.show();
             }
@@ -47,7 +47,11 @@ public class WelkomScherm extends GridPane {
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Stage stage = new Stage();
+                RegistreerScherm registreerScherm = new RegistreerScherm();
+                stage.setScene(new Scene(registreerScherm, 300, 200));
+                stage.setTitle("Registreren");
+                stage.show();
             }
         });
 

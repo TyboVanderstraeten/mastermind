@@ -1,15 +1,16 @@
 package gui;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class LoginScherm extends GridPane {
 
@@ -45,13 +46,12 @@ public class LoginScherm extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
 
-        //Om een soort van 'tooltip' te geven bij gebruikersnaam, wachtwoord
-        //WERKT NIET!!
+        /*Om een soort van 'tooltip' te geven bij gebruikersnaam, wachtwoord
+        WERKT NIET!! 
+        Indien werkt = invoeren bij registreren!*/
 //        if (txfGebruikersnaam.isFocused()) {
 //            lblMessage.setText("Gebruikersnaam bevat max. 40 karakters");
 //        }
-
-
         //EventHandling
         //Meldaan knop meldt de speler aan!
         //NOG AAN TE VULLEN!!
@@ -66,7 +66,11 @@ public class LoginScherm extends GridPane {
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Platform.exit();
+                Stage stage = new Stage();
+                WelkomScherm welkomScherm = new WelkomScherm();
+                stage.setScene(new Scene(welkomScherm, 300, 200));
+                stage.setTitle("Mastermind");
+                stage.show();
             }
         });
 
