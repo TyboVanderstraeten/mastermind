@@ -40,14 +40,21 @@ public class LoginScherm extends GridPane {
         Label lblMessage = new Label("");
         this.add(lblMessage, 0, 4, 2, 1);
 
+        //Positionering
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);
+
         //Om een soort van 'tooltip' te geven bij gebruikersnaam, wachtwoord
         //WERKT NIET!!
-        if (txfGebruikersnaam.isFocused()) {
-            lblMessage.setText("Gebruikersnaam bevat max. 40 karakters");
-        }
+//        if (txfGebruikersnaam.isFocused()) {
+//            lblMessage.setText("Gebruikersnaam bevat max. 40 karakters");
+//        }
+
 
         //EventHandling
         //Meldaan knop meldt de speler aan!
+        //NOG AAN TE VULLEN!!
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -56,17 +63,13 @@ public class LoginScherm extends GridPane {
         });
 
         //Annuleerknop sluit venster en gaat terug naar welkomscherm!!
+        //WERKT
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Platform.exit();
             }
         });
-
-        //Positionering
-        this.setAlignment(Pos.CENTER);
-        this.setHgap(10);
-        this.setVgap(10);
 
     }
 }

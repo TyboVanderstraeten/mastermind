@@ -1,5 +1,8 @@
 package gui;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -44,7 +47,26 @@ public class RegistreerScherm extends GridPane {
         //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
-        this.setVgap(10);      
+        this.setVgap(10);     
+        
+        //EventHandling
+        //Registreerknop registreert de speler!
+        //NOG AAN TE VULLEN!!
+        btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        //Annuleerknop sluit venster en gaat terug naar welkomscherm!!
+        //WERKT
+        btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
+            }
+        });
         
     }
     
