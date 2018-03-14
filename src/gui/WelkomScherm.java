@@ -1,39 +1,41 @@
 package gui;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
-public class WelkomScherm extends Application {
+public class WelkomScherm extends GridPane {
 
-    @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    public WelkomScherm() {
+        Label lblWelkom = new Label("Mastermind");
+        this.add(lblWelkom, 0, 0, 2, 1);
 
+        Button btnMeldAan = new Button("Meld aan");
+        this.add(btnMeldAan, 0, 1);
+
+        Button btnRegistreer = new Button("Registreer");
+        this.add(btnRegistreer, 1, 1);
+
+        //EventHandling
+        
+        //Meldaan knop die naar het loginscherm leidt
+        btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+
+            }
+        });
+        
+        //Registreer knop die naar het registreerscherm leidt
+        btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
             }
         });
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }
