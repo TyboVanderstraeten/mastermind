@@ -17,7 +17,7 @@ public class StartUpGUI extends Application {
         LoginScherm loginScherm = new LoginScherm();
         RegistreerScherm registreerScherm = new RegistreerScherm();
         
-        Scene scene = new Scene(registreerScherm,300,200);
+        Scene scene = new Scene(loginScherm,300,200);
         
         primaryStage.setScene(scene);
         
