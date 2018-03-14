@@ -13,7 +13,7 @@ import domein.DomeinController;
  *
  *
  */
-public class startUp {
+public class StartUpCUI {
 
     /**
      * maakt een object van de DomeinController en geeft deze mee aan de
