@@ -2,6 +2,7 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,11 @@ public class WelkomScherm extends GridPane {
 
         Button btnRegistreer = new Button("Registreer");
         this.add(btnRegistreer, 1, 1);
+        
+        //Positionering
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);      
 
         //EventHandling
         //Meldaan knop die naar het loginscherm leidt

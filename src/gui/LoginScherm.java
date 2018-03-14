@@ -3,7 +3,6 @@ package gui;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -34,6 +33,13 @@ public class LoginScherm extends GridPane {
         Button btnAnnuleer = new Button("Annuleer");
         this.add(btnAnnuleer, 1, 3);
         setHalignment(btnAnnuleer, HPos.RIGHT);
+        
+        Label lblMessage = new Label("");
+        this.add(lblMessage,0,4,2,1);
+        
+        if(lblGebruikersnaam.isHover() == true){
+            lblMessage.setText("Gebruikersnaam bevat max. 40 karakters");
+        }
         
         //Positionering
         this.setAlignment(Pos.CENTER);

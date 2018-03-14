@@ -1,9 +1,13 @@
 package gui;
 
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import static javafx.scene.layout.GridPane.setHalignment;
 
 public class RegistreerScherm extends GridPane {
     
@@ -28,6 +32,19 @@ public class RegistreerScherm extends GridPane {
         
         PasswordField pwfWachtwoordBevestiging = new PasswordField();
         this.add(pwfWachtwoordBevestiging, 1, 3);
+        
+        Button btnRegistreer = new Button("Registreer");
+        this.add(btnRegistreer, 0, 4);
+        setHalignment(btnRegistreer, HPos.LEFT);
+        
+        Button btnAnnuleer = new Button("Annuleer");
+        this.add(btnAnnuleer, 1, 4);
+        setHalignment(btnAnnuleer, HPos.RIGHT);
+        
+        //Positionering
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);      
         
     }
     
