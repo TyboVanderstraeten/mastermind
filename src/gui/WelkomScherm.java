@@ -2,6 +2,7 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -19,15 +20,20 @@ public class WelkomScherm extends GridPane {
         this.add(btnRegistreer, 1, 1);
 
         //EventHandling
-        
         //Meldaan knop die naar het loginscherm leidt
+        //WERKT NIET ????? HOW TO PLS
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                LoginScherm loginScherm = new LoginScherm();
+                Scene scene = new Scene(loginScherm, 300, 200);
+                
 
+                primaryStage.setTitle("Mastermind");
+                primaryStage.show();
             }
         });
-        
+
         //Registreer knop die naar het registreerscherm leidt
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
