@@ -59,10 +59,11 @@ public class SpelerMapper {
         return speler;
     }
     
+    //ENKEL GEMAAKT OM TE TESTEN OF ER DATA IN DE DB KAN GEPOMPT WORDEN!!! --Tybo
     public void voegSpelerToeHardcoded() throws SQLException{
         Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
         Statement insertStatement = conn.createStatement();
-        insertStatement.executeUpdate("INSERT INTO Speler(spelersnaam,wachtwoord) " + "VALUES('TyboVanderstraeten','Appel123')");
+        insertStatement.executeUpdate("INSERT INTO Speler(spelersnaam,wachtwoord) " + "VALUES('TyboVanderstraeten','Appel123')");      
     }
 
 }
