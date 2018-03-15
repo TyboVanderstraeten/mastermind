@@ -29,7 +29,7 @@ public abstract class Rij {
         String[] pinkleuren = new String[codepinnen.length + evaluatiepinnen.length + 1];     //+1 omdat ik een plek per rij bijhoudt voor "Evaluatie'
         for (int i = 0; i < codepinnen.length; i++) {
             if (codepinnen[i] == null) {
-                pinkleuren[i] = "   X  ";
+                pinkleuren[i] = "   o  ";
             } else {
                 pinkleuren[i] = String.format("%6s", codepinnen[i].getKleur());
             }
@@ -38,7 +38,7 @@ public abstract class Rij {
         pinkleuren[codepinnen.length] = "\t\tEvaluatie:";
         for (int i = codepinnen.length + 1; i < codepinnen.length + evaluatiepinnen.length + 1; i++) {
             if (evaluatiepinnen[i - codepinnen.length - 1] == null) {
-                pinkleuren[i] = "   X  ";
+                pinkleuren[i] = "   o  ";
             } else {
                 pinkleuren[i] = String.format("%5s", evaluatiepinnen[i].getKleur());
             }

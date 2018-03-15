@@ -7,6 +7,7 @@ public class Spelbord {
 
     private final Rij[] rijen;
     private final String[] willekeurigeCode;
+    private int aantalPogingen;
 
     /**
      * Class constructor met een String[] als parameter. Geeft het attribuut
@@ -18,6 +19,7 @@ public class Spelbord {
      */
     public Spelbord(String[] willekeurigeCode) {
         this.willekeurigeCode = willekeurigeCode;
+        aantalPogingen = 0;
         rijen = new Rij[13];
         for (int i = 0; i < 13; i++) {
             if (willekeurigeCode.length == 4) {
@@ -45,5 +47,17 @@ public class Spelbord {
         }
         return overzicht;
     }
+    
+    public void geefPoging(String[] poging){        
+        rijen[aantalPogingen].geefVolgendePoging(poging);
+        aantalPogingen++;
+    }
 
+    
+    //GETTERS
+
+    public String[] getWillekeurigeCode() {
+        return willekeurigeCode;
+    }
+    
 }
