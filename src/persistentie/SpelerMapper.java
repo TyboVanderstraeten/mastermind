@@ -63,7 +63,7 @@ public class SpelerMapper {
     public void voegSpelerToeHardcoded() throws SQLException{
         Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
         Statement insertStatement = conn.createStatement();
-        insertStatement.executeUpdate("INSERT INTO Speler(spelersnaam,wachtwoord) " + "VALUES('TyboVanderstraeten','Appel123')");      
+        insertStatement.executeUpdate("INSERT INTO Speler" + "VALUES('TyboVanderstraeten','Appel123',0,0,0,0)");      
     }
 
 }
