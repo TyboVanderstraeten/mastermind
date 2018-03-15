@@ -6,8 +6,7 @@ package domein;
  */
 public abstract class Spel {
     private final Spelbord spelbord;
-    private String spelnaam;
-    private int aantalPogingen;
+    private String spelnaam;    
     private String[] poging;
 
     /**
@@ -33,6 +32,8 @@ public abstract class Spel {
     public Spelbord getSpelbord() {
         return spelbord;
     }
+    
+    
 
     //private void setSpelnaam(String spelnaam) {
     //    this.spelnaam = spelnaam;                 //nog niet nodig
