@@ -97,6 +97,20 @@ public class MastermindApplicatie {
         for (String[] a : overzicht) {
             System.out.println(Arrays.toString(a));
         }
+        
+        //Poging indienen
+        String[] poging= new String[domeinController.geefSpelbord().length]; ///verkeerd, will change
+        for(int i = 0; i<poging.length; i++){
+            System.out.printf("Geef de kleur van pin %d in de rij%nDe geldige kleuren zijn: groen - rood - blauw - grijs - ...", i+1);
+            poging[i] = input.next();
+        }
+        domeinController.geefPoging(poging);
+        
+        String[][] spelbord2 = domeinController.geefSpelbord();
+        for (String[] x : spelbord) {
+            System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
+        }
+        
 
     }
 }

@@ -151,7 +151,7 @@ public class DomeinController {
     
     private String[] geefOverzicht(){
         String[] overzicht = new String[4];
-        
+        return null;
     }
     //setters
     /**
