@@ -43,7 +43,7 @@ public class SpelerRepository {
      *
      * @param speler een object van Speler
      */
-    public void voegSpelerToe(Speler speler) {
+    public void voegSpelerToe(Speler speler) {        
         this.mapper.voegSpelerToe(speler);
     }
 

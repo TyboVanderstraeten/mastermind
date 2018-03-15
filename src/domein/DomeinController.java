@@ -79,9 +79,15 @@ public class DomeinController {
                 spel = new MakkelijkSpel();
                 break;
             case 2:
+                if (deSpeler.getAantalGewonnen()[0] < 20) {
+                    throw new IllegalArgumentException("Deze mogelijkheidsgraad is pas toegankelijk als u 20 makkelijke spellen heeft gewonnen.");
+                }
                 spel = new NormaalSpel();
                 break;
             case 3:
+                if (deSpeler.getAantalGewonnen()[1] < 20) {
+                    throw new IllegalArgumentException("Deze mogelijkheidsgraad is pas toegankelijk als u 20 normale spellen heeft gewonnen.");
+                }
                 spel = new MoeilijkSpel();
                 break;
         }

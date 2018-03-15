@@ -5,7 +5,6 @@ package domein;
  *
  */
 public abstract class Spel {
-
     private final Spelbord spelbord;
     private String spelnaam;
     private int aantalPogingen;
