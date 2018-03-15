@@ -57,8 +57,7 @@ public class LoginScherm extends GridPane {
                 Alert alertAangemeld = new Alert(AlertType.INFORMATION);
                 alertAangemeld.setTitle("Aanmelden");
                 alertAangemeld.setHeaderText("Aanmelden succesvol");
-                //Moet nog naar 'domeinController.geefSpelersnaam();
-                alertAangemeld.setContentText(String.format("Speler '%s' is succesvol aangemeld!", txfGebruikersnaam.getText()));
+                alertAangemeld.setContentText(String.format("Speler '%s' is succesvol aangemeld!", domeinController.geefSpelersnaam()));
                 alertAangemeld.showAndWait();
 
             }

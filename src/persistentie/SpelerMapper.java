@@ -13,8 +13,10 @@ import java.sql.Statement;
  *
  */
 public class SpelerMapper {
+
     //TEST ACCOUNT = 'Test' met pass 'Test1234'
-    private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord)" + "VALUES (?,?)"; //INSTERT????
+    private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
+    private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
@@ -45,7 +47,7 @@ public class SpelerMapper {
         Speler speler = null;
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?")) {
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELER)) {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {

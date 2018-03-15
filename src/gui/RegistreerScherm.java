@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
+import domein.DomeinController;
+import javafx.scene.control.Alert;
 
 public class RegistreerScherm extends GridPane {
 
@@ -50,13 +52,18 @@ public class RegistreerScherm extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
 
-        //EventHandling
+        //EventHandlingµ
         //Registreerknop registreert de speler!
-        //NOG AAN TE VULLEN!!
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                DomeinController domeinController = new DomeinController();
+                domeinController.registreer(txfGebruikersnaam.getText(), pwfWachtwoord.getText(), pwfWachtwoordBevestiging.getText());
+                Alert alertGeregistreerd = new Alert(Alert.AlertType.INFORMATION);
+                alertGeregistreerd.setTitle("Registreren");
+                alertGeregistreerd.setHeaderText("Registreren succesvol");
+                alertGeregistreerd.setContentText("Speler is succesvol geregistreerd!");
+                alertGeregistreerd.showAndWait();
             }
         });
 
