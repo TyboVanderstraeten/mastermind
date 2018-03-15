@@ -38,7 +38,7 @@ public class MastermindApplicatie {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
         //NIET IN VOLGORDE ETC.
         boolean geldig = false;
-
+        // Try catch binnen de try catch vermijden! Anders oplossen :) (Voor opnieuw vragen spelersnaam (apart), wachtwoord (apart),...
         //  AANMELDEN/REGISTREREN
         do {
             try {
