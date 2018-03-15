@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Zorgt voor de connectie met de Spelerobjecten van de databank.
@@ -56,6 +57,12 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
         return speler;
+    }
+    
+    public void voegSpelerToeHardcoded() throws SQLException{
+        Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+        Statement insertStatement = conn.createStatement();
+        insertStatement.executeUpdate("INSERT INTO Speler(spelersnaam,wachtwoord) " + "VALUES('TyboVanderstraeten','Appel123')");
     }
 
 }
