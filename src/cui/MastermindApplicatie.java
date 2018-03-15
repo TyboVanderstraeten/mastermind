@@ -38,6 +38,7 @@ public class MastermindApplicatie {
         Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
         //NIET IN VOLGORDE ETC.
         boolean geldig = false;
+        boolean geldig1 = false;
         // Try catch binnen de try catch vermijden! Anders oplossen :) (Voor opnieuw vragen spelersnaam (apart), wachtwoord (apart),...
         //  AANMELDEN/REGISTREREN
         do {
@@ -73,8 +74,19 @@ public class MastermindApplicatie {
         System.out.println(domeinController.geefSpelersnaam());
 
         //  SPELBORD TERUGGEVEN
-        System.out.println("Welke moeilijkheidsgraad wenst u te spelen? (geef het nummer)\n1: makkelijk\n2: normaal\n3: moeilijk");
-        domeinController.kiesMoeilijkheidsgraad(input.nextInt());
+        do {
+            try {
+                System.out.println("Welke moeilijkheidsgraad wenst u te spelen? (geef het nummer)\n1: makkelijk\n2: normaal\n3: moeilijk");
+                domeinController.kiesMoeilijkheidsgraad(input.nextInt());
+                geldig1 = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ongeldige invoer!");
+                input.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!geldig1);
+
         String[][] spelbord = domeinController.geefSpelbord();
         for (String[] x : spelbord) {
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
