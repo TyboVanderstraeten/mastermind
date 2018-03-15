@@ -1,6 +1,6 @@
 package domein;
 
-import java.security.SecureRandom;
+
 
 /**
  * Abstracte superklasse van MakkelijkSpel, NormaalSpel en MoeilijkSpel.
@@ -8,8 +8,7 @@ import java.security.SecureRandom;
  */
 public abstract class Spel {
 
-    private final Spelbord spelbord;
-    private final String[] willekeurigeCode;        //moet spel dit kennen? spelbord kent dit ook
+    private final Spelbord spelbord;    
     private String spelnaam;
     private int aantalPogingen;
     private String[] poging;
@@ -21,9 +20,10 @@ public abstract class Spel {
      */
     public Spel() {
         genereerWillekeurigeCode();
+        this.spelbord = new Spelbord(genereerWillekeurigeCode());
     }
 
-    protected abstract void genereerWillekeurigeCode();  
+    protected abstract String[] genereerWillekeurigeCode();  
     
     
     /**

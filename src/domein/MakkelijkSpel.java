@@ -8,7 +8,7 @@ import java.security.SecureRandom;
  */
 public class MakkelijkSpel extends Spel {
 
-    private final String[] willekeurigeCode = new String[4];
+    
 
     /**
      * Class constructor. roept de default constructor van de superklasse Spel
@@ -21,7 +21,8 @@ public class MakkelijkSpel extends Spel {
     }
 
     @Override
-    protected void genereerWillekeurigeCode() {
+    protected String[] genereerWillekeurigeCode() {
+        String[] willekeurigeCode = new String[4];
         //RANDOMCODE GENERATOR        
         SecureRandom random = new SecureRandom();
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs"};      //willekeurige kleuren? of staat dit ergens??
@@ -33,6 +34,7 @@ public class MakkelijkSpel extends Spel {
             kleuren[getal] = kleuren[keuze - 1];
             keuze--;
         }
+        return willekeurigeCode;
         
     }
 }

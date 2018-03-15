@@ -7,7 +7,7 @@ import java.security.SecureRandom;
  *
  */
 public class MoeilijkSpel extends Spel {
-    private final String[] willekeurigeCode = new String[5];
+    
     
     /**
      * Class constructor. Roept de default constructor van de superklasse Spel
@@ -16,13 +16,13 @@ public class MoeilijkSpel extends Spel {
      * @see Spel
      */
     public MoeilijkSpel() {
-        super();
-        Spelbord spelbord = new Spelbord(willekeurigeCode);
+        super();        
     }
 
     @Override
-    protected void genereerWillekeurigeCode() {
+    protected String[] genereerWillekeurigeCode() {
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs", "X"};
+        String[] willekeurigeCode = new String[5];
         SecureRandom random = new SecureRandom();
         int keuze = 9;
             int aantal = 0;            
@@ -36,6 +36,7 @@ public class MoeilijkSpel extends Spel {
                     }
                 }
             }
+            return willekeurigeCode;
     }
 
 }
