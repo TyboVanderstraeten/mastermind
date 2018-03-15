@@ -7,7 +7,7 @@ import java.security.SecureRandom;
  *
  */
 public class NormaalSpel extends Spel {
-    
+       
     /**
      * Class constructor roept de default constructor van de superklasse Spel
      * aan.
@@ -19,7 +19,7 @@ public class NormaalSpel extends Spel {
     }
 
     @Override
-    protected String[] genereerWillekeurigeCode() {
+    protected final String[] genereerWillekeurigeCode() {
         String[] willekeurigeCode = new String[4];
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs"};
         SecureRandom random = new SecureRandom();

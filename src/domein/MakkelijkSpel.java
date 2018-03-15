@@ -7,7 +7,7 @@ import java.security.SecureRandom;
  *
  */
 public class MakkelijkSpel extends Spel {
-
+    
     
 
     /**
@@ -21,7 +21,7 @@ public class MakkelijkSpel extends Spel {
     }
 
     @Override
-    protected String[] genereerWillekeurigeCode() {
+    protected final String[] genereerWillekeurigeCode() {
         String[] willekeurigeCode = new String[4];
         //RANDOMCODE GENERATOR        
         SecureRandom random = new SecureRandom();
@@ -33,8 +33,7 @@ public class MakkelijkSpel extends Spel {
             willekeurigeCode[i] = kleuren[getal];
             kleuren[getal] = kleuren[keuze - 1];
             keuze--;
-        }
+        }               
         return willekeurigeCode;
-        
     }
 }

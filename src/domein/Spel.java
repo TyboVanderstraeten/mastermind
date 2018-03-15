@@ -1,14 +1,12 @@
 package domein;
 
-
-
 /**
  * Abstracte superklasse van MakkelijkSpel, NormaalSpel en MoeilijkSpel.
  *
  */
 public abstract class Spel {
 
-    private final Spelbord spelbord;    
+    private final Spelbord spelbord;
     private String spelnaam;
     private int aantalPogingen;
     private String[] poging;
@@ -19,13 +17,15 @@ public abstract class Spel {
      * code wordt ook in spel opgeslagen.
      */
     public Spel() {
-        genereerWillekeurigeCode();
         this.spelbord = new Spelbord(genereerWillekeurigeCode());
     }
 
-    protected abstract String[] genereerWillekeurigeCode();  
-    
-    
+    /**
+     *Abstracte klasse die in de subklasses een willekeurige code zal genereren afhankelijk van de moeilijkheidsgraad.
+     * @return
+     */
+    protected abstract String[] genereerWillekeurigeCode();
+
     /**
      * Getter geeft het attribuut spelbord terug.
      *
@@ -47,8 +47,7 @@ public abstract class Spel {
     public void setPoging(String[] poging) {
         this.poging = poging;
     }
-    
-    
+
 }
 
 //ATTRIBUTEN ISGEWONNEN EN MOEILIJKHEIDSGRAAD VERWIJDERT, ISGEWONNEN NIET NODIG, OOK NIET IN DATABANK, AANTAL GEWONNEN SPELLEN PER MOEILIJKHEIDSGRAAD WORDT GWN ZO OPGESLAGEN IN DE RESPECTIEVELIJKE KLASSE

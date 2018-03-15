@@ -13,6 +13,6 @@ public class MakkelijkeNormaleRij extends Rij {
      * @see Rij
      */
     public MakkelijkeNormaleRij() {
-        super();
+            super(new CodePin[4]);
     }
 }

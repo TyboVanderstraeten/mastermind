@@ -5,13 +5,15 @@ package domein;
  *
  */
 public class MoeilijkeRij extends Rij {
-
+    
+    
     /**
      * Class constructor. Roept de default constructor van de klasse Rij aan.
      *
      * @see Rij
      */
     public MoeilijkeRij() {
-        super();
-    }
+       super(new CodePin[5]);
+    }    
+    
 }

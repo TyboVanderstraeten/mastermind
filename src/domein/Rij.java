@@ -13,15 +13,11 @@ public abstract class Rij {
      * Class constructor. Geeft de arrays codepinnen en evaluatiepinnen de
      * juiste lengte afhankelijk van de moeilijkheidsgraad.
      *
-     */
-    public Rij() {
-        if (this.getClass().getSimpleName().equals("MakkelijkeNormaleRij")) {
-            codepinnen = new CodePin[4];
-        } else {
-            codepinnen = new CodePin[5];
-        }
-        evaluatiepinnen = new EvaluatiePin[codepinnen.length];
-
+     * @param codepinnen
+     */    
+    public Rij(Pin[] codepinnen){
+        this.codepinnen = codepinnen;
+        this.evaluatiepinnen = new EvaluatiePin[codepinnen.length];
     }
 
     /**
@@ -71,6 +67,8 @@ public abstract class Rij {
      */
     public Pin[] getCodepinnen() {
         return codepinnen;
-    }
+    }  
+    
+    
 
 }
