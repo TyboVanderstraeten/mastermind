@@ -52,7 +52,7 @@ public class RegistreerScherm extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
 
-        //EventHandlingµ
+        //EventHandling
         //Registreerknop registreert de speler!
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
