@@ -9,20 +9,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class WelkomScherm extends GridPane {
 
     public WelkomScherm() {
+        
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+        
         Label lblWelkom = new Label("Mastermind");
         this.add(lblWelkom, 0, 0, 3, 1);
 
-        Button btnMeldAan = new Button("Meld aan");
+        Button btnMeldAan = new Button(resourceBundle.getString("meldAan").toUpperCase());
         this.add(btnMeldAan, 0, 1);
 
-        Button btnRegistreer = new Button("Registreer");
+        Button btnRegistreer = new Button(resourceBundle.getString("registreer").toUpperCase());
         this.add(btnRegistreer, 1, 1);
 
-        Button btnStop = new Button("Stop");
+        Button btnStop = new Button(resourceBundle.getString("stop").toUpperCase());
         this.add(btnStop, 2, 1);
 
         //Positionering
@@ -39,7 +46,7 @@ public class WelkomScherm extends GridPane {
                 Stage stage = new Stage();
                 LoginScherm loginScherm = new LoginScherm();
                 stage.setScene(new Scene(loginScherm, 300, 200));
-                stage.setTitle("Aanmelden");
+                stage.setTitle(resourceBundle.getString("meldAan"));
                 stage.show();
             }
         });
@@ -52,7 +59,7 @@ public class WelkomScherm extends GridPane {
                 Stage stage = new Stage();
                 RegistreerScherm registreerScherm = new RegistreerScherm();
                 stage.setScene(new Scene(registreerScherm, 300, 200));
-                stage.setTitle("Registreren");
+                stage.setTitle(resourceBundle.getString("registreer"));
                 stage.show();
             }
         });

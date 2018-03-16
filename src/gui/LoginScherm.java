@@ -14,17 +14,24 @@ import javafx.stage.Stage;
 import domein.DomeinController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LoginScherm extends GridPane {
 
     public LoginScherm() {
-        Label lblMeldAan = new Label("Meld aan");
+        
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+        
+        Label lblMeldAan = new Label(resourceBundle.getString("meldAan"));
         this.add(lblMeldAan, 0, 0, 2, 1);
 
-        Label lblGebruikersnaam = new Label("Gebruikersnaam:");
+        Label lblGebruikersnaam = new Label(resourceBundle.getString("gebruiker"));
         this.add(lblGebruikersnaam, 0, 1);
 
-        Label lblWachtwoord = new Label("Wachtwoord:");
+        Label lblWachtwoord = new Label(resourceBundle.getString("wachtwoord"));
         this.add(lblWachtwoord, 0, 2);
 
         TextField txfGebruikersnaam = new TextField();
@@ -33,11 +40,11 @@ public class LoginScherm extends GridPane {
         PasswordField pwfWachtwoord = new PasswordField();
         this.add(pwfWachtwoord, 1, 2);
 
-        Button btnMeldAan = new Button("Meld aan");
+        Button btnMeldAan = new Button(resourceBundle.getString("meldAan").toUpperCase());
         this.add(btnMeldAan, 0, 3);
         setHalignment(btnMeldAan, HPos.LEFT);
 
-        Button btnAnnuleer = new Button("Annuleer");
+        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie").toUpperCase());
         this.add(btnAnnuleer, 1, 3);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
@@ -55,9 +62,9 @@ public class LoginScherm extends GridPane {
                 DomeinController domeinController = new DomeinController();
                 domeinController.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
                 Alert alertAangemeld = new Alert(AlertType.INFORMATION);
-                alertAangemeld.setTitle("Aanmelden");
-                alertAangemeld.setHeaderText("Aanmelden succesvol");
-                alertAangemeld.setContentText(String.format("Speler '%s' is succesvol aangemeld!", domeinController.geefSpelersnaam()));
+                alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
+                alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
+                alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), domeinController.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
                 alertAangemeld.showAndWait();
 
             }

@@ -14,20 +14,27 @@ import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 import domein.DomeinController;
 import javafx.scene.control.Alert;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class RegistreerScherm extends GridPane {
 
     public RegistreerScherm() {
-        Label lblRegistreer = new Label("Registreer");
+        
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+        
+        Label lblRegistreer = new Label(resourceBundle.getString("registreer"));
         this.add(lblRegistreer, 0, 0, 2, 1);
 
-        Label lblGebruikersnaam = new Label("Gebruikersnaam:");
+        Label lblGebruikersnaam = new Label(resourceBundle.getString("gebruiker"));
         this.add(lblGebruikersnaam, 0, 1);
 
-        Label lblWachtwoord = new Label("Wachtwoord:");
+        Label lblWachtwoord = new Label(resourceBundle.getString("wachtwoord"));
         this.add(lblWachtwoord, 0, 2);
 
-        Label lblWachtwoordBevestiging = new Label("Bevestig wachtwoord:");
+        Label lblWachtwoordBevestiging = new Label(resourceBundle.getString("wachtwoordHerhaling"));
         this.add(lblWachtwoordBevestiging, 0, 3);
 
         TextField txfGebruikersnaam = new TextField();
@@ -39,11 +46,11 @@ public class RegistreerScherm extends GridPane {
         PasswordField pwfWachtwoordBevestiging = new PasswordField();
         this.add(pwfWachtwoordBevestiging, 1, 3);
 
-        Button btnRegistreer = new Button("Registreer");
+        Button btnRegistreer = new Button(resourceBundle.getString("registreer").toUpperCase());
         this.add(btnRegistreer, 0, 4);
         setHalignment(btnRegistreer, HPos.LEFT);
 
-        Button btnAnnuleer = new Button("Annuleer");
+        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie").toUpperCase());
         this.add(btnAnnuleer, 1, 4);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
@@ -60,9 +67,9 @@ public class RegistreerScherm extends GridPane {
                 DomeinController domeinController = new DomeinController();
                 domeinController.registreer(txfGebruikersnaam.getText(), pwfWachtwoord.getText(), pwfWachtwoordBevestiging.getText());
                 Alert alertGeregistreerd = new Alert(Alert.AlertType.INFORMATION);
-                alertGeregistreerd.setTitle("Registreren");
-                alertGeregistreerd.setHeaderText("Registreren succesvol");
-                alertGeregistreerd.setContentText("Speler is succesvol geregistreerd!");
+                alertGeregistreerd.setTitle(resourceBundle.getString("registreren"));
+                alertGeregistreerd.setHeaderText(resourceBundle.getString("geslaagdeRegistratie"));
+                alertGeregistreerd.setContentText(resourceBundle.getString("registratieSuccesvol"));
                 alertGeregistreerd.showAndWait();
             }
         });
