@@ -41,8 +41,8 @@ public class Spelbord {
      * @return
      */
     public String[][] geefOverzichtMetPinnen() {
-        String[][] overzicht = new String[rijen.length][];
-        for (int i = 0; i < rijen.length; i++) {
+        String[][] overzicht = new String[rijen.length-1][];
+        for (int i = 0; i < rijen.length-1; i++) {              //RIJ MET CODE MAG NIET GETOOND WORDEN
             overzicht[i] = rijen[i].geefPinkleuren();
         }
         return overzicht;

@@ -53,11 +53,12 @@ public class MastermindApplicatie {
 
         geefOverzicht();
 
+        doePoging();
+
+        toonSpelbord();
+
     }
 
-    
-    
-    
     private void meldAanRegistreer() {
         boolean geldig = false;
         Scanner input = new Scanner(System.in);
@@ -68,7 +69,6 @@ public class MastermindApplicatie {
                 System.out.println("2: " + resourceBundle.getString("registreer").toUpperCase());
                 switch (input.nextInt()) {
                     case 1:
-
                         System.out.print(resourceBundle.getString("naam"));
                         String spelersnaam = input.next();
                         System.out.print(resourceBundle.getString("wachtwoord"));
@@ -97,8 +97,6 @@ public class MastermindApplicatie {
         } while (!geldig);
     }
 
-    
-    
     private void geefTaal() {
         Scanner input = new Scanner(System.in);
         System.out.println("Choose your language: (enter the number) \n1: nederlands \n2: français \n3: English");
@@ -119,8 +117,6 @@ public class MastermindApplicatie {
         }
     }
 
-    
-    
     private void kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
@@ -141,17 +137,15 @@ public class MastermindApplicatie {
         } while (!geldig);
     }
 
-    
-    
     private void toonSpelbord() {
+        System.out.println("\n\n");
         String[][] spelbord = domeinController.geefSpelbord();
         for (String[] x : spelbord) {
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
         }
+        System.out.println("\n\n");
     }
 
-    
-    
     private void geefOverzicht() {
         String[][] overzicht = domeinController.startMasterMind();
         for (String[] a : overzicht) {
@@ -159,14 +153,17 @@ public class MastermindApplicatie {
         }
     }
 
-    
-    
     private void doePoging() {
         Scanner input = new Scanner(System.in);
-        String[] poging = new String[domeinController.geefSpelbord().length]; ///verkeerd, will change
+        String[] poging = new String[domeinController.geefSpelbord()[0].length == 9 ? 4 : 5]; ///verkeerd, will change
+        String[] kleuren = {resourceBundle.getString("blauw"), resourceBundle.getString("groen"), resourceBundle.getString("rood"), resourceBundle.getString("paars"), resourceBundle.getString("geel"), resourceBundle.getString("oranje"), resourceBundle.getString("bruin"), resourceBundle.getString("grijs")};
         for (int i = 0; i < poging.length; i++) {
-            System.out.printf("%s %d %s%n%s", resourceBundle.getString("kleurIngevenD1"), i + 1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+            System.out.printf("%n%s %d %s%n%s%n", resourceBundle.getString("kleurIngevenD1"), i + 1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
             poging[i] = input.next();
+            if (!Arrays.asList(kleuren).contains(poging[i])) {
+                System.out.println("Ongeldige kleur");
+                i--;
+            }
         }
         domeinController.geefPoging(poging);
     }

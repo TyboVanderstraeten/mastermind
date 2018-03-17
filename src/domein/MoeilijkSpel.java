@@ -21,7 +21,7 @@ public class MoeilijkSpel extends Spel {
 
     @Override
     protected final String[] genereerWillekeurigeCode() {
-        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "rood", "oranje", "grijs", "X"};
+        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "oranje", "grijs", "X"};
         String[] willekeurigeCode = new String[5];
         SecureRandom random = new SecureRandom();
         int keuze = 9;
