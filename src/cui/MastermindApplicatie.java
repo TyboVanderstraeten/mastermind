@@ -44,11 +44,24 @@ public class MastermindApplicatie {
         boolean geldig1 = false;
         
         ResourceBundle resourceBundle;
-        
-        resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-//      resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-//      resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-        
+                  
+        System.out.println("Choose your language: (enter the number) \n1: nederlands \n2: français \n3: English");
+            
+        switch (input.nextInt()){
+            case 1:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                break;
+            case 2:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+                break;
+            case 3:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+                break;
+            default: 
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                break;
+            }
+                
         // Try catch binnen de try catch vermijden! Anders oplossen :) (Voor opnieuw vragen spelersnaam (apart), wachtwoord (apart),...
         //  AANMELDEN/REGISTREREN
         do {
