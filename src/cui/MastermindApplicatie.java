@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class MastermindApplicatie {
 
     private final DomeinController domeinController;
+    private ResourceBundle resourceBundle;
 
     /**
      * Class constructor. geeft het attribuut domeinController de waarde van de
@@ -37,47 +38,44 @@ public class MastermindApplicatie {
      * </ul>
      */
     public void startApplicatie() {
-        
-        Scanner input = new Scanner(System.in);         //moet aangepast worden, gwn gebruikt om te testen.
-        //NIET IN VOLGORDE ETC.
-        boolean geldig = false;
-        boolean geldig1 = false;
-        
-        ResourceBundle resourceBundle;
-                  
-        System.out.println("Choose your language: (enter the number) \n1: nederlands \n2: français \n3: English");
-            
-        switch (input.nextInt()){
-            case 1:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-                break;
-            case 2:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-                break;
-            case 3:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-                break;
-            default: 
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-                break;
-            }
-                
+
+        //moet aangepast worden, gwn gebruikt om te testen.
+        //NIET IN VOLGORDE ETC.        
         // Try catch binnen de try catch vermijden! Anders oplossen :) (Voor opnieuw vragen spelersnaam (apart), wachtwoord (apart),...
-        //  AANMELDEN/REGISTREREN
+        geefTaal();
+
+        meldAanRegistreer();
+        System.out.println(domeinController.geefSpelersnaam());
+
+        kiesMoeilijkheidsgraad();
+
+        toonSpelbord();
+
+        geefOverzicht();
+
+    }
+
+    
+    
+    
+    private void meldAanRegistreer() {
+        boolean geldig = false;
+        Scanner input = new Scanner(System.in);
         do {
             try {
                 System.out.println(resourceBundle.getString("aanmeldenRegistratie"));
                 System.out.println("1: " + resourceBundle.getString("meldAan").toUpperCase());
                 System.out.println("2: " + resourceBundle.getString("registreer").toUpperCase());
                 switch (input.nextInt()) {
-
                     case 1:
+
                         System.out.print(resourceBundle.getString("naam"));
                         String spelersnaam = input.next();
                         System.out.print(resourceBundle.getString("wachtwoord"));
                         domeinController.meldAan(spelersnaam, input.next());
                         break;
                     case 2:
+
                         System.out.print(resourceBundle.getString("naam2"));
                         String spelernaam = input.next();
                         System.out.print(resourceBundle.getString("wachtwoord"));
@@ -85,6 +83,7 @@ public class MastermindApplicatie {
                         System.out.print(resourceBundle.getString("wachtwoordHerhaling"));
                         System.out.println("");
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
+
                         break;
                 }
                 geldig = true;
@@ -96,9 +95,35 @@ public class MastermindApplicatie {
                 input.nextLine();
             }
         } while (!geldig);
-        System.out.println(domeinController.geefSpelersnaam());
+    }
 
-        //  SPELBORD TERUGGEVEN
+    
+    
+    private void geefTaal() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choose your language: (enter the number) \n1: nederlands \n2: français \n3: English");
+
+        switch (input.nextInt()) {
+            case 1:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                break;
+            case 2:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+                break;
+            case 3:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+                break;
+            default:
+                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                break;
+        }
+    }
+
+    
+    
+    private void kiesMoeilijkheidsgraad() {
+        Scanner input = new Scanner(System.in);
+        boolean geldig = false;
         do {
             try {
                 System.out.println(resourceBundle.getString("keuzeMoeilijkheid"));
@@ -106,39 +131,44 @@ public class MastermindApplicatie {
                 System.out.println("2: " + resourceBundle.getString("normaleMoeilijkheidsgraad"));
                 System.out.println("3: " + resourceBundle.getString("moeilijkeMoeilijkheidsgraad"));
                 domeinController.kiesMoeilijkheidsgraad(input.nextInt());
-                geldig1 = true;
+                geldig = true;
             } catch (NumberFormatException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        } while (!geldig1);
+        } while (!geldig);
+    }
 
+    
+    
+    private void toonSpelbord() {
         String[][] spelbord = domeinController.geefSpelbord();
         for (String[] x : spelbord) {
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
         }
+    }
 
-        //  OVERZICHT TERUGGEVEN
+    
+    
+    private void geefOverzicht() {
         String[][] overzicht = domeinController.startMasterMind();
         for (String[] a : overzicht) {
             System.out.println(Arrays.toString(a));
         }
-        
-        //Poging indienen
-        String[] poging= new String[domeinController.geefSpelbord().length]; ///verkeerd, will change
-        for(int i = 0; i<poging.length; i++){
-            System.out.printf("%s %d %s%n%s", resourceBundle.getString("kleurIngevenD1"), i+1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+    }
+
+    
+    
+    private void doePoging() {
+        Scanner input = new Scanner(System.in);
+        String[] poging = new String[domeinController.geefSpelbord().length]; ///verkeerd, will change
+        for (int i = 0; i < poging.length; i++) {
+            System.out.printf("%s %d %s%n%s", resourceBundle.getString("kleurIngevenD1"), i + 1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
             poging[i] = input.next();
         }
         domeinController.geefPoging(poging);
-        
-        String[][] spelbord2 = domeinController.geefSpelbord();
-        for (String[] x : spelbord) {
-            System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
-        }
-        
-
     }
+
 }
