@@ -49,7 +49,7 @@ public class Spelbord {
     }
     
     public void geefPoging(String[] poging){        
-        rijen[aantalPogingen].geefVolgendePoging(poging);
+        rijen[aantalPogingen].geefPoging(poging);
         aantalPogingen++;
     }
 

@@ -17,7 +17,7 @@ public abstract class Spel {
     public Spel() {
         this.spelbord = new Spelbord(genereerWillekeurigeCode());
     }
-
+ 
     /**
      *Abstracte klasse die in de subklasses een willekeurige code zal genereren afhankelijk van de moeilijkheidsgraad.
      * @return

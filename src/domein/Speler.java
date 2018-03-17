@@ -10,6 +10,7 @@ public class Speler {
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
     private Spel spel;
+    private int aantalSterren = 0;
 
     //constructors
     /**
@@ -79,6 +80,10 @@ public class Speler {
             throw new IllegalArgumentException("Wachtwoord moet 8-25 karakters bevatten (grenzen inbegrepen)!");
         }
         this.wachtwoord = wachtwoord;
+    }
+    
+    public void setSpel(Spel spel){
+        this.spel = spel;
     }
 
 }

@@ -54,7 +54,7 @@ public abstract class Rij {
      *
      * @param poging de kleuren die de speler heeft ingegeven als poging.
      */
-    public void geefVolgendePoging(String[] poging) {
+    public void geefPoging(String[] poging) {
         for (int i = 0; i < codepinnen.length; i++) {
             codepinnen[i] = new CodePin(poging[i]);
         }

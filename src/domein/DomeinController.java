@@ -91,6 +91,7 @@ public class DomeinController {
                 spel = new MoeilijkSpel();
                 break;
         }
+        deSpeler.setSpel(spel);
     }
 
     /**
