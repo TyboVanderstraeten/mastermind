@@ -14,8 +14,8 @@ public abstract class Rij {
      * juiste lengte afhankelijk van de moeilijkheidsgraad.
      *
      * @param codepinnen
-     */    
-    public Rij(Pin[] codepinnen){
+     */
+    public Rij(Pin[] codepinnen) {
         this.codepinnen = codepinnen;
         this.evaluatiepinnen = new EvaluatiePin[codepinnen.length];
     }
@@ -31,7 +31,7 @@ public abstract class Rij {
             if (codepinnen[i] == null) {
                 pinkleuren[i] = "   o  ";
             } else {
-                pinkleuren[i] = String.format("%6s", codepinnen[i].getKleur());
+                pinkleuren[i] = String.format("%-6s", codepinnen[i].getKleur());
             }
         }
 
@@ -40,7 +40,7 @@ public abstract class Rij {
             if (evaluatiepinnen[i - codepinnen.length - 1] == null) {
                 pinkleuren[i] = "   o  ";
             } else {
-                pinkleuren[i] = String.format("%5s", evaluatiepinnen[i].getKleur());
+                pinkleuren[i] = String.format("%-5s", evaluatiepinnen[i].getKleur());
             }
         }
 
@@ -67,8 +67,6 @@ public abstract class Rij {
      */
     public Pin[] getCodepinnen() {
         return codepinnen;
-    }  
-    
-    
+    }
 
 }

@@ -5,6 +5,7 @@ package domein;
  *
  */
 public class Speler {
+
     private String spelersnaam;
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
@@ -24,9 +25,7 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    public Spel getSpel() {
-        return spel;
-    }
+    
 
     //getters
     /**

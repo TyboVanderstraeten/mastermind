@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.Arrays;
+
 /**
  * Het Spelbord. Bevat de attributen rijen en willekeurigeCode *
  */
@@ -42,8 +44,9 @@ public class Spelbord {
      * @return
      */
     public String[][] geefOverzichtMetPinnen() {
-        String[][] overzicht = new String[rijen.length - 1][];
-        for (int i = 0; i < rijen.length - 1; i++) {              //RIJ MET CODE MAG NIET GETOOND WORDEN
+        int aantalRijen = isGewonnen || aantalPogingen == 12 ? rijen.length : rijen.length - 1;
+        String[][] overzicht = new String[aantalRijen][];
+        for (int i = 0; i < aantalRijen; i++) {
             overzicht[i] = rijen[i].geefPinkleuren();
         }
         return overzicht;
@@ -52,7 +55,7 @@ public class Spelbord {
     public void geefPoging(String[] poging) {
         rijen[aantalPogingen].geefPoging(poging);
         aantalPogingen++;
-        if (poging == willekeurigeCode) {
+        if (Arrays.equals(poging, willekeurigeCode)) {
             this.isGewonnen = true;
         }
     }

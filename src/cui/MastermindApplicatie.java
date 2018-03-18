@@ -49,11 +49,12 @@ public class MastermindApplicatie {
 
         kiesMoeilijkheidsgraad();
 
-        toonSpelbord();
-
         geefOverzicht();
+        while (domeinController.geefSpelbord().length == 12) {
+            toonSpelbord();
+            doePoging();
 
-        doePoging();
+        }
 
         toonSpelbord();
 
@@ -143,6 +144,12 @@ public class MastermindApplicatie {
         System.out.println("\n\n");
         String[][] spelbord = domeinController.geefSpelbord();
         for (String[] x : spelbord) {
+            if (spelbord.length == 13 && x == spelbord[spelbord.length - 1]) {
+                x[x.length / 2] = String.format("\t\t%10s", " ");
+                for (int i = x.length / 2 + 1; i < x.length; i++) {   //x.length/2 is 4 (makkelijk/normaal) of 5 (moeilijk)
+                    x[i] = String.format("%6s", " ");
+                }
+            }
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
         }
         System.out.println("\n\n");
@@ -157,7 +164,7 @@ public class MastermindApplicatie {
 
     private void doePoging() {
         Scanner input = new Scanner(System.in);
-        String[] poging = new String[domeinController.geefSpelbord()[0].length == 9 ? 4 : 5]; ///verkeerd, will change
+        String[] poging = new String[domeinController.geefSpelbord()[0].length == 9 ? 4 : 5];
         String[] kleuren = {resourceBundle.getString("blauw"), resourceBundle.getString("groen"), resourceBundle.getString("rood"), resourceBundle.getString("paars"), resourceBundle.getString("geel"), resourceBundle.getString("oranje"), resourceBundle.getString("bruin"), resourceBundle.getString("grijs")};
         for (int i = 0; i < poging.length; i++) {
             System.out.printf("%n%s %d %s%n%s%n", resourceBundle.getString("kleurIngevenD1"), i + 1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
@@ -174,7 +181,7 @@ public class MastermindApplicatie {
         String uitvoer = "";
         String[] overzicht = domeinController.geefOverzicht();
         uitvoer += String.format("De code was: %s%n", overzicht[0].replace(",", " ").replace("[", "").replace("]", ""));
-        uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1])==1?"":"en");
+        uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1]) == 1 ? "" : "en");
         uitvoer += String.format("aantal sterren: %s%n", overzicht[2]);
         uitvoer += String.format("aantal spellen tot volgende ster: %s%n", overzicht[3]);
         System.out.println(uitvoer);
