@@ -9,8 +9,7 @@ public class Speler {
     private String spelersnaam;
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
-    private Spel spel;
-    private int aantalSterren = 0;
+    private Spel spel;    
 
     //constructors
     /**

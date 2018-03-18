@@ -31,7 +31,7 @@ public abstract class Spel {
      */
     public Spelbord getSpelbord() {
         return spelbord;
-    }
+    }    
     
     
 
