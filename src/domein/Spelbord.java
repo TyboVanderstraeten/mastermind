@@ -8,6 +8,7 @@ public class Spelbord {
     private final Rij[] rijen;
     private final String[] willekeurigeCode;
     private int aantalPogingen;
+    private boolean isGewonnen;
 
     /**
      * Class constructor met een String[] als parameter. Geeft het attribuut
@@ -41,23 +42,28 @@ public class Spelbord {
      * @return
      */
     public String[][] geefOverzichtMetPinnen() {
-        String[][] overzicht = new String[rijen.length-1][];
-        for (int i = 0; i < rijen.length-1; i++) {              //RIJ MET CODE MAG NIET GETOOND WORDEN
+        String[][] overzicht = new String[rijen.length - 1][];
+        for (int i = 0; i < rijen.length - 1; i++) {              //RIJ MET CODE MAG NIET GETOOND WORDEN
             overzicht[i] = rijen[i].geefPinkleuren();
         }
         return overzicht;
     }
-    
-    public void geefPoging(String[] poging){        
+
+    public void geefPoging(String[] poging) {
         rijen[aantalPogingen].geefPoging(poging);
         aantalPogingen++;
+        if (poging == willekeurigeCode) {
+            this.isGewonnen = true;
+        }
     }
 
-    
     //GETTERS
-
     public String[] getWillekeurigeCode() {
         return willekeurigeCode;
     }
-    
+
+    public int getAantalPogingen() {
+        return aantalPogingen;
+    }
+
 }

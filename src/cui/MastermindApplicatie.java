@@ -57,6 +57,8 @@ public class MastermindApplicatie {
 
         toonSpelbord();
 
+        geefEindoverzicht();
+
     }
 
     private void meldAanRegistreer() {
@@ -166,6 +168,16 @@ public class MastermindApplicatie {
             }
         }
         domeinController.geefPoging(poging);
+    }
+
+    private void geefEindoverzicht() {
+        String uitvoer = "";
+        String[] overzicht = domeinController.geefOverzicht();
+        uitvoer += String.format("De code was: %s%n", overzicht[0].replace(",", " ").replace("[", "").replace("]", ""));
+        uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1])==1?"":"en");
+        uitvoer += String.format("aantal sterren: %s%n", overzicht[2]);
+        uitvoer += String.format("aantal spellen tot volgende ster: %s%n", overzicht[3]);
+        System.out.println(uitvoer);
     }
 
 }

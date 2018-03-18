@@ -4,6 +4,7 @@ import domein.MakkelijkSpel;
 import domein.NormaalSpel;
 import domein.MoeilijkSpel;
 import domein.Spel;
+import domein.Speler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +19,21 @@ import java.util.List;
  */
 public class SpelMapper {
 
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelersnaam, wachtwoord) VALUES (?,?)";
+
+    public void voegSpelToe(Spel spel, Speler speler) {               //moet nog aangepast worden
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(INSERT_SPEL)) {
+            query.setString(1, spel.getSpelnaam());
+            query.setInt(2, spel.getSpelbord().getAantalPogingen());
+            query.setString(3, speler.getSpelersnaam());
+            query.setString(4, spel.getClass().getSimpleName());
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 //    public Spel geefSpel(String spelnaam) {  
 //        Spel spel = null;
 //

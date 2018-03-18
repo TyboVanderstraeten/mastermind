@@ -26,4 +26,11 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
+    
+    
+    
+    public void registreerSpel(String spelnaam){
+        mapper.voegSpelToe(spel, speler);
+    }
+    
 }

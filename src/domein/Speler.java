@@ -23,7 +23,6 @@ public class Speler {
     public Speler(String spelersnaam, String wachtwoord) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
-
     }
 
     //getters

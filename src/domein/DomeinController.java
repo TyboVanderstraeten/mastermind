@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.Arrays;
+
 /**
  * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. *
  */
@@ -133,6 +135,7 @@ public class DomeinController {
     }
 
     //UC3
+    
     /**
      * Geeft een poging door.
      *
@@ -146,23 +149,51 @@ public class DomeinController {
         return spel.getSpelbord().getWillekeurigeCode();
     }
 
-    private String[] geefOverzicht() {
+    public String[] geefOverzicht() {
         String[] overzicht = new String[4];
+        overzicht[0] = Arrays.toString(spel.getSpelbord().getWillekeurigeCode());
+        overzicht[1] = String.format("%d", spel.getSpelbord().getAantalPogingen());
         int[] aantalGewonnen = deSpeler.getAantalGewonnen();
+        int getal = 0;
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
-                overzicht[1] = String.format("%d", aantalGewonnen[0]);
+                getal = aantalGewonnen[0];
                 break;
             case "NormaalSpel":
-                overzicht[1] = String.format("%d", aantalGewonnen[1]);
+                getal = aantalGewonnen[1];
                 break;
             case "MoeilijkSpel":
-                overzicht[1] = String.format("%d", aantalGewonnen[2]);
+                getal = aantalGewonnen[2];
                 break;
         }
-        return null;
+
+        if (getal >= 250) {
+            overzicht[2] = "✩✩✩✩✩";
+            overzicht[3] = "max aantal sterren";
+        } else if (getal >= 100) {
+            overzicht[2] = "✩✩✩✩";
+            overzicht[3] = String.format("nog %d aantal sterren tot volgende ster.", 250 - getal);
+        } else if (getal >= 50) {
+            overzicht[2] = "✩✩✩";
+            overzicht[3] = String.format("nog %d aantal sterren tot volgende ster.", 100 - getal);
+        } else if (getal >= 20) {
+            overzicht[2] = "✩✩";
+            overzicht[3] = String.format("nog %d aantal sterren tot volgende ster.", 50 - getal);
+        } else if (getal >= 10) {
+            overzicht[2] = "✩";
+            overzicht[3] = String.format("nog %d aantal sterren tot volgende ster.", 20 - getal);
+        } else {
+            overzicht[2] = "0";
+            overzicht[3] = String.format("nog %d aantal sterren tot volgende ster.", 10 - getal);
+        }
+
+        return overzicht;
     }
 
+    
+    public void registreerSpel(String spelnaam){
+        spelRepository.registreerSpel(spelnaam);
+    }
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
