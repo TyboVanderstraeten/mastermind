@@ -23,13 +23,13 @@ public class WelkomScherm extends GridPane {
         Label lblWelkom = new Label("Mastermind");
         this.add(lblWelkom, 0, 0, 3, 1);
 
-        Button btnMeldAan = new Button(resourceBundle.getString("meldAan").toUpperCase());
+        Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));
         this.add(btnMeldAan, 0, 1);
 
-        Button btnRegistreer = new Button(resourceBundle.getString("registreer").toUpperCase());
+        Button btnRegistreer = new Button(resourceBundle.getString("registreer"));
         this.add(btnRegistreer, 1, 1);
 
-        Button btnStop = new Button(resourceBundle.getString("stop").toUpperCase());
+        Button btnStop = new Button(resourceBundle.getString("stop"));
         this.add(btnStop, 2, 1);
 
         //Positionering

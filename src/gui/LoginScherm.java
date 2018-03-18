@@ -40,11 +40,11 @@ public class LoginScherm extends GridPane {
         PasswordField pwfWachtwoord = new PasswordField();
         this.add(pwfWachtwoord, 1, 2);
 
-        Button btnMeldAan = new Button(resourceBundle.getString("meldAan").toUpperCase());
+        Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));
         this.add(btnMeldAan, 0, 3);
         setHalignment(btnMeldAan, HPos.LEFT);
 
-        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie").toUpperCase());
+        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie"));
         this.add(btnAnnuleer, 1, 3);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 

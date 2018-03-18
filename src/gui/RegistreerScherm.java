@@ -46,11 +46,11 @@ public class RegistreerScherm extends GridPane {
         PasswordField pwfWachtwoordBevestiging = new PasswordField();
         this.add(pwfWachtwoordBevestiging, 1, 3);
 
-        Button btnRegistreer = new Button(resourceBundle.getString("registreer").toUpperCase());
+        Button btnRegistreer = new Button(resourceBundle.getString("registreer"));
         this.add(btnRegistreer, 0, 4);
         setHalignment(btnRegistreer, HPos.LEFT);
 
-        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie").toUpperCase());
+        Button btnAnnuleer = new Button(resourceBundle.getString("annulatie"));
         this.add(btnAnnuleer, 1, 4);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
