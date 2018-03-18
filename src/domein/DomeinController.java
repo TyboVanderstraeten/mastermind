@@ -132,28 +132,37 @@ public class DomeinController {
         return spelbord.geefOverzichtMetPinnen();
     }
 
-    
-    
-    
     //UC3
-    
     /**
      * Geeft een poging door.
+     *
      * @param poging de ingevoerde poging van de speler.
      */
     public void geefPoging(String[] poging) {
         spel.getSpelbord().geefPoging(poging);
     }
 
-    
-    public String[] geefCode(String[] poging){
+    public String[] geefCode(String[] poging) {
         return spel.getSpelbord().getWillekeurigeCode();
     }
-    
-    private String[] geefOverzicht(){
+
+    private String[] geefOverzicht() {
         String[] overzicht = new String[4];
+        int[] aantalGewonnen = deSpeler.getAantalGewonnen();
+        switch (spel.getClass().getSimpleName()) {
+            case "MakkelijkSpel":
+                overzicht[1] = String.format("%d", aantalGewonnen[0]);
+                break;
+            case "NormaalSpel":
+                overzicht[1] = String.format("%d", aantalGewonnen[1]);
+                break;
+            case "MoeilijkSpel":
+                overzicht[1] = String.format("%d", aantalGewonnen[2]);
+                break;
+        }
         return null;
     }
+
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
