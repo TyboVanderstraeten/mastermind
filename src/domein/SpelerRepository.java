@@ -41,9 +41,10 @@ public class SpelerRepository {
      * Voegt een spelerobject toe aan de databank. (de speler wordt meegegeven
      * met de mapper die het uiteindelijk zal toevoegen.)
      *
+     *
      * @param speler een object van Speler
      */
-    public void voegSpelerToe(Speler speler) {        
+    public void voegSpelerToe(Speler speler) {
         this.mapper.voegSpelerToe(speler);
     }
 

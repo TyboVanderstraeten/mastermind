@@ -135,7 +135,6 @@ public class DomeinController {
     }
 
     //UC3
-    
     /**
      * Geeft een poging door.
      *
@@ -190,10 +189,10 @@ public class DomeinController {
         return overzicht;
     }
 
-    
-    public void registreerSpel(String spelnaam){
-        spelRepository.registreerSpel(spelnaam);
+    public void registreerSpel(String spelnaam) {
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
+
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de

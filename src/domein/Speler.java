@@ -5,11 +5,10 @@ package domein;
  *
  */
 public class Speler {
-
     private String spelersnaam;
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
-    private Spel spel;    
+    private Spel spel;
 
     //constructors
     /**
@@ -23,6 +22,10 @@ public class Speler {
     public Speler(String spelersnaam, String wachtwoord) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
+    }
+
+    public Spel getSpel() {
+        return spel;
     }
 
     //getters
@@ -79,8 +82,8 @@ public class Speler {
         }
         this.wachtwoord = wachtwoord;
     }
-    
-    public void setSpel(Spel spel){
+
+    public void setSpel(Spel spel) {
         this.spel = spel;
     }
 
