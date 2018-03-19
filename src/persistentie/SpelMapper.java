@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelersnaam, wachtwoord) VALUES (?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelersnaam, wachtwoord) VALUES (?,?)"; //spelnaam ontbreekt ?
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
         try (
