@@ -102,7 +102,7 @@ public class MastermindApplicatie {
 
     private void geefTaal() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Choose your language: (enter the number) \n1: nederlands \n2: français \n3: English");
+        System.out.println("Choose your language: (enter the number) \n1: Nederlands \n2: Français \n3: English");
 
         switch (input.nextInt()) {
             case 1:
