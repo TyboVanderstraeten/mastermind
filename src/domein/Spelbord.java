@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Spelbord {
 
     private final Rij[] rijen;
-    private final String[] willekeurigeCode;
+    private final String[] willekeurigeCode = {"groen" , "groen", "groen", "groen", "groen"};
     private int aantalPogingen;
     private boolean isGewonnen;
 
@@ -21,20 +21,20 @@ public class Spelbord {
      * bekomen.
      */
     public Spelbord(String[] willekeurigeCode) {
-        this.willekeurigeCode = willekeurigeCode;
+        //this.willekeurigeCode = willekeurigeCode;
         aantalPogingen = 0;
         rijen = new Rij[13];
-        for (int i = 0; i < 13; i++) {
-            if (willekeurigeCode.length == 4) {
-                rijen[i] = new MakkelijkeNormaleRij();
-            } else {
-                rijen[i] = new MoeilijkeRij();
-            }
-        }
+//        for (int i = 0; i < 13; i++) {
+//            if ("MakkelijkSpel".equals(Spel.class.getSimpleName())) {
+//                rijen[i] = new MakkelijkeRij();
+//            } else {
+//                rijen[i] = new MoeilijkeRij();
+//            }
+//        }
 
-        for (int i = 0; i < willekeurigeCode.length; i++) {
-            rijen[rijen.length - 1].getCodepinnen()[i] = new CodePin(willekeurigeCode[i]);
-        }
+//        for (int i = 0; i < willekeurigeCode.length; i++) {
+//            rijen[rijen.length - 1].getCodepinnen()[i] = new CodePin(willekeurigeCode[i]);
+//        }
     }
 
     /**
@@ -53,7 +53,7 @@ public class Spelbord {
     }
 
     public void geefPoging(String[] poging) {
-        rijen[aantalPogingen].geefPoging(poging);
+        rijen[aantalPogingen].geefPoging(poging, willekeurigeCode);
         aantalPogingen++;
         if (Arrays.equals(poging, willekeurigeCode)) {
             this.isGewonnen = true;
@@ -68,5 +68,11 @@ public class Spelbord {
     public int getAantalPogingen() {
         return aantalPogingen;
     }
+
+    public Rij[] getRijen() {
+        return rijen;
+    }
+    
+    
 
 }
