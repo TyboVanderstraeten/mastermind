@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Spelbord {
 
     private final Rij[] rijen;
-    private final String[] willekeurigeCode = {"groen" , "groen", "groen", "groen", "groen"};
+    private final String[] willekeurigeCode;
     private int aantalPogingen;
     private boolean isGewonnen;
 
@@ -21,7 +21,7 @@ public class Spelbord {
      * bekomen.
      */
     public Spelbord(String[] willekeurigeCode) {
-        //this.willekeurigeCode = willekeurigeCode;
+        this.willekeurigeCode = willekeurigeCode;
         aantalPogingen = 0;
         rijen = new Rij[13];
 //        for (int i = 0; i < 13; i++) {
