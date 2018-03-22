@@ -192,6 +192,11 @@ public class DomeinController {
     public void registreerSpel(String spelnaam) {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
+    
+    public String[] geefSpellen()
+    {
+        spelRepository
+    }
 
     //setters
     /**
@@ -213,5 +218,4 @@ public class DomeinController {
     private void setSpel(Spel spel) {
         this.spel = spel;
     }
-
 }

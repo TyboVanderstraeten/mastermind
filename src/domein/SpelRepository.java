@@ -30,5 +30,9 @@ public class SpelRepository {
     public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
         mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
-
+    
+    public Spel[] geefSpellen()
+    {
+        mapper.
+    }
 }
