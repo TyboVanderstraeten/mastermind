@@ -23,6 +23,7 @@ public class MakkelijkSpel extends Spel {
             super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
         }
 
+        //Denk niet dat klopt, werkt wel maar vrij omslachtig
     }
 
     @Override

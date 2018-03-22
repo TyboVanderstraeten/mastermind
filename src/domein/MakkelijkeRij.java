@@ -13,11 +13,11 @@ public class MakkelijkeRij extends Rij {
      * @see Rij
      */
     public MakkelijkeRij() {
-            super(new CodePin[4]);            
+        super(new CodePin[4]);
     }
-    
+
     @Override
-    public void geefPoging(String[] poging, String[] willekeurigeCode){
+    public void geefPoging(String[] poging, String[] willekeurigeCode) {
         for (int i = 0; i < getCodepinnen().length; i++) {
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (willekeurigeCode[i].equals(poging[i])) {
@@ -25,7 +25,7 @@ public class MakkelijkeRij extends Rij {
                 continue;
             }
             for (int j = 0; j < getEvaluatiepinnen().length; j++) {
-                if (willekeurigeCode[i].equals(poging[j])) {
+                if (willekeurigeCode[j].equals(poging[i])) {
                     getEvaluatiepinnen()[i] = new EvaluatiePin("Wit");
                 }
             }

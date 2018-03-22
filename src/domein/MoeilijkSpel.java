@@ -22,6 +22,8 @@ public class MoeilijkSpel extends Spel {
         for (int i = 0; i < super.getSpelbord().getWillekeurigeCode().length; i++) {
             super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
         }
+
+        //Denk niet dat klopt, werkt wel maar vrij omslachtig
     }
 
     @Override
