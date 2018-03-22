@@ -15,7 +15,7 @@ public class MakkelijkSpel extends Spel {
      * @see Spel
      */
     public MakkelijkSpel() {
-        
+        this(null, null, null);
     }
     
     public MakkelijkSpel(String spelnaam, String spelersNaam, String willekeurigeCode) {

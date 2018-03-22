@@ -15,13 +15,7 @@ public class MoeilijkSpel extends Spel {
      * @see Spel
      */
     public MoeilijkSpel() {
-        super();
-        for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
-            super.getSpelbord().getRijen()[i] = new MoeilijkeRij();
-        }
-        for (int i = 0; i < super.getSpelbord().getWillekeurigeCode().length; i++) {
-            super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
-        }
+        this(null, null, null);
 
         //Denk niet dat klopt, werkt wel maar vrij omslachtig
     }
