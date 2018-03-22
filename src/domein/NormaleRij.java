@@ -1,18 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package domein;
 
 /**
- * Subklasse van Rij waarbij de moeilijkheidsgraad moeilijk is.
  *
+ * @author bramd
  */
-public class MoeilijkeRij extends Rij {
+public class NormaleRij extends Rij {
 
-    /**
-     * Class constructor. Roept de default constructor van de klasse Rij aan.
-     *
-     * @see Rij
-     */
-    public MoeilijkeRij() {
-        super(new CodePin[5]);
+    public NormaleRij() {
+        super(new CodePin[4]);
     }
 
     @Override
@@ -40,5 +40,4 @@ public class MoeilijkeRij extends Rij {
         }
 
     }
-
 }

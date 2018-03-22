@@ -31,6 +31,8 @@ public class WelkomScherm extends GridPane {
 
         Button btnStop = new Button(resourceBundle.getString("stop"));
         this.add(btnStop, 2, 1);
+        
+        
 
         //Positionering
         this.setAlignment(Pos.CENTER);
