@@ -195,7 +195,18 @@ public class DomeinController {
     
     public String[] geefSpellen()
     {
-        spelRepository
+        String[] spellenString;
+        int teller = 0;
+        
+        spellenString = new String[spelRepository.geefSpellen().length];
+        
+        for (Spel spel : spelRepository.geefSpellen())
+        {
+            spellenString[teller] = spel.getSpelnaam();
+            teller++;
+        }
+        
+        return spellenString;
     }
 
     //setters

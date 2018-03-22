@@ -33,6 +33,15 @@ public class SpelRepository {
     
     public Spel[] geefSpellen()
     {
-        mapper.
+        Spel[] spellen = new Spel[mapper.geefSpellen().size()];
+        int teller = 0;
+        
+        for (Spel spel : mapper.geefSpellen())
+        {
+            spellen[teller] = spel;
+            teller++;
+        }
+        
+        return spellen;
     }
 }

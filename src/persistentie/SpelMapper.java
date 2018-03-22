@@ -63,18 +63,19 @@ public class SpelMapper {
                 ResultSet rs = query.executeQuery()) {
 
             while (rs.next()) {
+                String spelnaam = rs.getString("spelnaam");
                 String spelersnaam = rs.getString("spelersnaam");
                 String willekeurigeCode = rs.getString("willekeurigeCode");                
                 String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
                 
                 if (moeilijkheidsgraad == "makkelijk"){
-                    spellen.add(new MakkelijkSpel(spelersnaam, willekeurigeCode));
+                    spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
                 }
                 else if (moeilijkheidsgraad == "normaal"){
-                    spellen.add(new NormaalSpel(spelersnaam, willekeurigeCode));
+                    spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
                 }
                 else if (moeilijkheidsgraad == "moeilijk"){
-                    spellen.add(new MoeilijkSpel(spelersnaam, willekeurigeCode));
+                    spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
                 }
             }
         } catch (SQLException ex) {
