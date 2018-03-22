@@ -24,15 +24,18 @@ public class SpelMapper {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(INSERT_SPEL)) {
-            query.setString(1, spelnaam);
-            query.setInt(2, spel.getSpelbord().getAantalPogingen());
-            query.setString(3, spelersnaam);
-            query.setString(4, spel.getClass().getSimpleName());
-            query.executeUpdate();
+                    query.setString(1, spelnaam);
+                    query.setInt(2, spel.getSpelbord().getAantalPogingen());
+                    query.setString(3, spelersnaam);
+                    query.setString(4, spel.getClass().getSimpleName());
+                    query.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
+    
+    private static final String GEEFSPELLEN = "SELECT * FROM ID222177_g68.Spel";
+    
 //    public Spel geefSpel(String spelnaam) {  
 //        Spel spel = null;
 //
@@ -52,25 +55,35 @@ public class SpelMapper {
 //        return spel;
 //    }
 //
-//    public List<Spel> geefSpellen() {
-//        List<Spel> spellen = new ArrayList<>();
-//
-//        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-//                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel");
-//                ResultSet rs = query.executeQuery()) {
-//
-//            while (rs.next()) {
-//                String spelersnaam = rs.getString("spelersnaam");
-//                String willekeurigeCode = rs.getString("willekeurigeCode");                
-//
-//                spellen.add(new MakkelijkSpel(spelersnaam, willekeurigeCode));   
-//            }
-//        } catch (SQLException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-//        return spellen;
-//    }
+    public List<Spel> geefSpellen() {
+        List<Spel> spellen = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel");
+                ResultSet rs = query.executeQuery()) {
+
+            while (rs.next()) {
+                String spelnaam = rs.getString("spelnaam");
+                String spelersnaam = rs.getString("spelersnaam");
+                String willekeurigeCode = rs.getString("willekeurigeCode");                
+                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+                
+                if (moeilijkheidsgraad == "makkelijk"){
+                    spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
+                }
+                else if (moeilijkheidsgraad == "normaal"){
+                    spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
+                }
+                else if (moeilijkheidsgraad == "moeilijk"){
+                    spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return spellen;
+    }
 }
 
 //SUBKLASSES IN DATABASE NODIG

@@ -30,5 +30,18 @@ public class SpelRepository {
     public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
         mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
-
+    
+    public Spel[] geefSpellen()
+    {
+        Spel[] spellen = new Spel[mapper.geefSpellen().size()];
+        int teller = 0;
+        
+        for (Spel spel : mapper.geefSpellen())
+        {
+            spellen[teller] = spel;
+            teller++;
+        }
+        
+        return spellen;
+    }
 }

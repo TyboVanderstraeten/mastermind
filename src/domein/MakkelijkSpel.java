@@ -15,6 +15,10 @@ public class MakkelijkSpel extends Spel {
      * @see Spel
      */
     public MakkelijkSpel() {
+        
+    }
+    
+    public MakkelijkSpel(String spelnaam, String spelersNaam, String willekeurigeCode) {
         super();
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new MakkelijkeRij();

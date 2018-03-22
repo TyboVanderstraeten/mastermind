@@ -7,6 +7,7 @@
 public abstract class Spel {
 
     private final Spelbord spelbord;
+    private String spelnaam;
 
     /**
      * Class constructor. Genereert de random code (de oplossing) en roept dan
@@ -32,6 +33,10 @@ public abstract class Spel {
      */
     public Spelbord getSpelbord() {
         return spelbord;
+    }
+    
+    public String getSpelnaam(){
+        return spelnaam;
     }
 
     //private void setSpelnaam(String spelnaam) {
