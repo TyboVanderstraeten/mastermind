@@ -30,6 +30,7 @@ public class NormaalSpel extends Spel {
     protected final String[] genereerWillekeurigeCode() {
         String[] willekeurigeCode = new String[4];
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs"};
+        //int[] kleuren2 = {0,1, 2, 3, 4, 5, 6, 7};
         SecureRandom random = new SecureRandom();
         for (int i = 0; i < willekeurigeCode.length; i++) {
             int getal = random.nextInt(8);

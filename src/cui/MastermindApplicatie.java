@@ -59,7 +59,7 @@ public class MastermindApplicatie {
         toonSpelbord();
 
         geefEindoverzicht();
-               
+
     }
 
     private void meldAanRegistreer() {
@@ -143,7 +143,11 @@ public class MastermindApplicatie {
     private void toonSpelbord() {
         System.out.println("\n\n");
         String[][] spelbord = domeinController.geefSpelbord();
+        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
         for (String[] x : spelbord) {
+//            for(String a : x){                
+//                 a = resourceBundle.getString(kleuren[Integer.parseInt(a)]);                
+//            }
             if (spelbord.length == 13 && x == spelbord[spelbord.length - 1]) {
                 x[x.length / 2] = String.format("\t\t%10s", " ");
                 for (int i = x.length / 2 + 1; i < x.length; i++) {   //x.length/2 is 4 (makkelijk/normaal) of 5 (moeilijk)
@@ -151,15 +155,24 @@ public class MastermindApplicatie {
                 }
             }
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
+            
         }
         System.out.println("\n\n");
     }
 
     private void geefOverzicht() {
         String[][] overzicht = domeinController.startMasterMind();
+        
+        for (String[] a : overzicht) {
+            for (String x : a) {
+               
+            }
+        }
+        
         for (String[] a : overzicht) {
             System.out.println(Arrays.toString(a));
         }
+
     }
 
     private void doePoging() {

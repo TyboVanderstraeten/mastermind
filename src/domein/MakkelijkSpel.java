@@ -32,6 +32,7 @@ public class MakkelijkSpel extends Spel {
         //RANDOMCODE GENERATOR        
         SecureRandom random = new SecureRandom();
         String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs"};      //willekeurige kleuren? of staat dit ergens??
+        //int[] kleuren2 = {0,1, 2, 3, 4, 5, 6, 7};
 
         int keuze = 8;
         for (int i = 0; i < willekeurigeCode.length; i++) {

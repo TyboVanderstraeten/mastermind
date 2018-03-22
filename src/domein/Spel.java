@@ -1,4 +1,4 @@
-package domein;
+    package domein;
 
 /**
  * Abstracte superklasse van MakkelijkSpel, NormaalSpel en MoeilijkSpel.
