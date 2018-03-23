@@ -1,5 +1,7 @@
  package domein;
 
+import exceptions.MoeilijkSpelToegangException;
+import exceptions.NormaalSpelToegangException;
 import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
 
@@ -83,13 +85,13 @@ public class DomeinController {
                 break;
             case 2:
                 if (deSpeler.getAantalGewonnen()[0] < 20) {
-                    throw new IllegalArgumentException("Deze mogelijkheidsgraad is pas toegankelijk als u 20 makkelijke spellen heeft gewonnen.");
+                    throw new NormaalSpelToegangException();
                 }
                 spel = new NormaalSpel();
                 break;
             case 3:
                 if (deSpeler.getAantalGewonnen()[1] < 20) {
-                    throw new IllegalArgumentException("Deze mogelijkheidsgraad is pas toegankelijk als u 20 normale spellen heeft gewonnen.");
+                    throw new MoeilijkSpelToegangException();
                 }
                 spel = new MoeilijkSpel();
                 break;
