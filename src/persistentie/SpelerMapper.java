@@ -1,6 +1,7 @@
 package persistentie;
 
 import domein.Speler;
+import exceptions.SpelerNietUniekException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class SpelerMapper {
             query.setString(2, speler.getWachtwoord());
             query.executeUpdate();
         } catch (SQLException ex) {
-            throw new RuntimeException("Speler bestaat al!");
+            throw new SpelerNietUniekException();
         }
     }
 

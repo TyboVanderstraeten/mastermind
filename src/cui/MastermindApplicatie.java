@@ -19,7 +19,6 @@ public class MastermindApplicatie {
 
     /* Voor exceptions : 
         - Nog domeinregel voor wachtwoord!!!
-        - MySQLIntegrity exception opvangen (wanneer spelersnaam al bestaat!!!!!
      */
     private final DomeinController domeinController;
     private ResourceBundle resourceBundle;
