@@ -181,7 +181,7 @@ public class MastermindApplicatie {
         String[] poging = new String[domeinController.geefSpelbord()[0].length == 9 ? 4 : 5];
         String[] kleuren = {resourceBundle.getString("blauw"), resourceBundle.getString("groen"), resourceBundle.getString("rood"), resourceBundle.getString("paars"), resourceBundle.getString("geel"), resourceBundle.getString("oranje"), resourceBundle.getString("bruin"), resourceBundle.getString("grijs")};
         for (int i = 0; i < poging.length; i++) {
-            System.out.printf("%n%s %d %s%n%s%n", resourceBundle.getString("kleurIngevenD1"), i + 1, resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+            System.out.printf("%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"));
             poging[i] = input.next();
             if (!Arrays.asList(kleuren).contains(poging[i])) {
                 System.out.println("Ongeldige kleur");
