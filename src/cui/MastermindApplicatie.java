@@ -52,7 +52,7 @@ public class MastermindApplicatie {
         kiesMoeilijkheidsgraad();
 
         geefOverzicht();
-        while (domeinController.geefSpelbord().length == 12) {
+        while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length-1][0].contains("#     ") ) {
             toonSpelbord();
             doePoging();
 
