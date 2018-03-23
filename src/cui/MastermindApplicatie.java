@@ -17,6 +17,10 @@ import java.lang.RuntimeException;
  */
 public class MastermindApplicatie {
 
+    /* Voor exceptions : 
+        - Nog domeinregel voor wachtwoord!!!
+        - MySQLIntegrity exception opvangen (wanneer spelersnaam al bestaat!!!!!
+     */
     private final DomeinController domeinController;
     private ResourceBundle resourceBundle;
 
@@ -109,21 +113,35 @@ public class MastermindApplicatie {
 
     private void geefTaal() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Choose your language: (enter the number) \n1: Nederlands \n2: Français \n3: English");
+        boolean geldig = false;
+        do {
+            try {
+                System.out.println("Choose your language: (enter the number) \n1: Nederlands \n2: Français \n3: English");
 
-        switch (input.nextInt()) {
-            case 1:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-                break;
-            case 2:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-                break;
-            case 3:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-                break;
-            default:
-                throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
-        }
+                switch (input.nextInt()) {
+                    case 1:
+                        resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                        geldig = true;
+                        break;
+                    case 2:
+                        resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+                        geldig = true;
+                        break;
+                    case 3:
+                        resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+                        geldig = true;
+                        break;
+                    default:
+                        throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(resourceBundle.getString("ongeldig"));
+                input.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                input.nextLine();
+            }
+        } while (!geldig);
     }
 
     private void kiesMoeilijkheidsgraad() {
