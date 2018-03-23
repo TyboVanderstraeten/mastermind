@@ -43,19 +43,21 @@ public class Spelbord {
      *
      * @return
      */
-    public String[][] geefOverzichtMetPinnen() {        
+    public String[][] geefOverzichtMetPinnen() {
         String[][] overzicht = new String[rijen.length][];
         for (int i = 0; i < rijen.length; i++) {
-            overzicht[i] = rijen[i].geefPinkleuren();            
+            overzicht[i] = rijen[i].geefPinkleuren();
         }
-        if(!Arrays.equals(overzicht[aantalPogingen ==0?0:aantalPogingen-1], overzicht[rijen.length-1]) && aantalPogingen !=12){
-            overzicht[rijen.length-1][rijen[rijen.length-1].getCodepinnen().length] = "";
-            for(int i = 0; i<rijen[rijen.length-1].getCodepinnen().length; i++){
-                overzicht[rijen.length-1][i] = String.format("%-6s", "#");
-                overzicht[rijen.length-1][rijen[rijen.length-1].getCodepinnen().length+1+i] = String.format("%-5s", " ");
+        String[] huidig = Arrays.copyOfRange(overzicht[aantalPogingen ==0?0:aantalPogingen-1], 0, willekeurigeCode.length-1);       //werkt niet atm
+        
+        if (!Arrays.equals(huidig, overzicht[rijen.length-1]) && aantalPogingen!=12) {
+            overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length] = "";
+            for (int i = 0; i < rijen[rijen.length - 1].getCodepinnen().length; i++) {
+                overzicht[rijen.length - 1][i] = String.format("%-6s", "#");
+                overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length + 1 + i] = String.format("%-5s", " ");
             }
-                
-            }
+
+        }
         return overzicht;
     }
 
@@ -79,7 +81,5 @@ public class Spelbord {
     public Rij[] getRijen() {
         return rijen;
     }
-    
-    
 
 }
