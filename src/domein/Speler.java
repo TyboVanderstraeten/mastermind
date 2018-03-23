@@ -63,7 +63,7 @@ public class Speler {
      * @param spelersnaam spelersnaam van de gebruiker
      */
     private void setSpelersnaam(String spelersnaam) {
-        if (spelersnaam.length() > 40 || spelersnaam == null) {
+        if (spelersnaam.length() > 40) {
             throw new IllegalArgumentException("Spelersnaam mag max. 40 karakters bevatten en mag niet leeg zijn!");
         }
         this.spelersnaam = spelersnaam;

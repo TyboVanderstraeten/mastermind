@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Zorgt voor de connectie met de Spelerobjecten van de databank.
@@ -25,7 +24,7 @@ public class SpelerMapper {
      * @param speler een object van Speler.
      * @see domein.Speler
      */
-    public void voegSpelerToe(Speler speler) {               //moet nog aangepast worden
+    public void voegSpelerToe(Speler speler) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(INSERT_SPELER)) {
@@ -46,7 +45,8 @@ public class SpelerMapper {
     public Speler geefSpeler(String spelersnaam) {
         Speler speler = null;
 
-        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_SPELER)) {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
