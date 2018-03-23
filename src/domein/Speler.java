@@ -79,9 +79,11 @@ public class Speler {
      * @param wachtwoord wachtwoord van de gebruiker
      */
     private void setWachtwoord(String wachtwoord) {
-        if (wachtwoord.length() < 8 || wachtwoord.length() > 25) {
+        String wachtwoordVoorwaarden = "[0-9][a-zA-Z]{6}[a-zA-Z]*[0-9]";
+        if(!(wachtwoord.matches(wachtwoordVoorwaarden))){
             throw new WachtwoordException();
         }
+        
         this.wachtwoord = wachtwoord;
     }
 

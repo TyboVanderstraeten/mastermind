@@ -17,9 +17,6 @@ import java.lang.RuntimeException;
  */
 public class MastermindApplicatie {
 
-    /* Voor exceptions : 
-        - Nog domeinregel voor wachtwoord!!!
-     */
     private final DomeinController domeinController;
     private ResourceBundle resourceBundle;
 
