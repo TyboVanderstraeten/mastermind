@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.lang.RuntimeException;
 
 /**
  * De applicatie zelf,de verschillende handelingen worden in de juiste volgorde
@@ -96,6 +97,9 @@ public class MastermindApplicatie {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException | NullPointerException e) {
+                System.out.println(e.getMessage());
+                input.nextLine();
+            } catch(RuntimeException e){
                 System.out.println(e.getMessage());
                 input.nextLine();
             }

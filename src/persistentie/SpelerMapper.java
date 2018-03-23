@@ -32,7 +32,7 @@ public class SpelerMapper {
             query.setString(2, speler.getWachtwoord());
             query.executeUpdate();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new RuntimeException("Speler bestaat al!");
         }
     }
 
@@ -57,7 +57,8 @@ public class SpelerMapper {
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
-        }
+        }             
+        
         return speler;
     }
 
