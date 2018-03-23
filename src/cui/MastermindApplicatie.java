@@ -15,6 +15,10 @@ import java.util.ResourceBundle;
  *
  */
 public class MastermindApplicatie {
+    /* Voor exceptions : 
+        - Nog domeinregel voor wachtwoord!!!
+        - MySQLIntegrity exception opvangen (wanneer spelersnaam al bestaat!!!!!
+    */
 
     private final DomeinController domeinController;
     private ResourceBundle resourceBundle;
@@ -126,7 +130,7 @@ public class MastermindApplicatie {
                     default:
                         throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException e) {
