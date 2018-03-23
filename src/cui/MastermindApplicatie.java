@@ -1,6 +1,8 @@
 package cui;
 
 import domein.DomeinController;
+import exceptions.MeldAanRegistreerKeuzeException;
+import exceptions.TaalKeuzeException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -87,16 +89,13 @@ public class MastermindApplicatie {
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
                         break;
                     default:
-                        throw new IllegalArgumentException("ongeldige keuze.");
+                        throw new MeldAanRegistreerKeuzeException(); //werkt niet, geeft rode lijntjes?!
                 }
                 geldig = true;
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                input.nextLine();
-            } catch (NullPointerException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 System.out.println(e.getMessage());
                 input.nextLine();
             }
@@ -119,8 +118,7 @@ public class MastermindApplicatie {
                 resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
                 break;
             default:
-                resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-                break;
+                throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
         }
     }
 
