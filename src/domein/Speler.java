@@ -1,5 +1,8 @@
 package domein;
 
+import exceptions.SpelersnaamException;
+import exceptions.WachtwoordException;
+
 /**
  * Zorgt voor de interactie met de speler.
  *
@@ -64,7 +67,7 @@ public class Speler {
      */
     private void setSpelersnaam(String spelersnaam) {
         if (spelersnaam.length() > 40) {
-            throw new IllegalArgumentException("Spelersnaam mag max. 40 karakters bevatten en mag niet leeg zijn!");
+            throw new SpelersnaamException();
         }
         this.spelersnaam = spelersnaam;
     }
@@ -77,7 +80,7 @@ public class Speler {
      */
     private void setWachtwoord(String wachtwoord) {
         if (wachtwoord.length() < 8 || wachtwoord.length() > 25) {
-            throw new IllegalArgumentException("Wachtwoord moet 8-25 karakters bevatten (grenzen inbegrepen)!");
+            throw new WachtwoordException();
         }
         this.wachtwoord = wachtwoord;
     }
