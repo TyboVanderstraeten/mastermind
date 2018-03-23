@@ -45,12 +45,11 @@ public class MastermindApplicatie {
         geefTaal();
 
         meldAanRegistreer();
-        System.out.println(domeinController.geefSpelersnaam());
 
         kiesMoeilijkheidsgraad();
 
         geefOverzicht();
-        while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length-1][0].contains("#     ") ) {
+        while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0].contains("#     ")) {
             toonSpelbord();
             doePoging();
 
@@ -87,6 +86,8 @@ public class MastermindApplicatie {
                         System.out.println("");
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
                         break;
+                    default:
+                        throw new IllegalArgumentException("ongeldige keuze.");
                 }
                 geldig = true;
             } catch (InputMismatchException e) {
@@ -95,11 +96,12 @@ public class MastermindApplicatie {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 input.nextLine();
-            } catch(NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println(e.getMessage());
                 input.nextLine();
             }
         } while (!geldig);
+        System.out.println(domeinController.geefSpelersnaam());
     }
 
     private void geefTaal() {
