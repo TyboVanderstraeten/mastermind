@@ -1,6 +1,8 @@
 package cui;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import domein.DomeinController;
+import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -86,7 +88,6 @@ public class MastermindApplicatie {
                         System.out.print(resourceBundle.getString("wachtwoordHerhaling"));
                         System.out.println("");
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
-
                         break;
                 }
                 geldig = true;
@@ -155,20 +156,20 @@ public class MastermindApplicatie {
                 }
             }
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
-            
+
         }
         System.out.println("\n\n");
     }
 
     private void geefOverzicht() {
         String[][] overzicht = domeinController.startMasterMind();
-        
+
         for (String[] a : overzicht) {
             for (String x : a) {
-               
+
             }
         }
-        
+
         for (String[] a : overzicht) {
             System.out.println(Arrays.toString(a));
         }
