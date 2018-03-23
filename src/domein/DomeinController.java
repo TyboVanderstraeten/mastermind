@@ -2,6 +2,7 @@
 
 import exceptions.MoeilijkSpelToegangException;
 import exceptions.NormaalSpelToegangException;
+import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
 
@@ -38,6 +39,8 @@ public class DomeinController {
         Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);       
         if (gevondenSpeler != null) {                                                       
             setDeSpeler(gevondenSpeler);
+        }else{
+            throw new SpelersnaamWachtwoordCombinatieException();
         }
     }
 
