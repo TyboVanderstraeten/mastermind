@@ -43,12 +43,19 @@ public class Spelbord {
      *
      * @return
      */
-    public String[][] geefOverzichtMetPinnen() {
-        int aantalRijen = isGewonnen || aantalPogingen == 12 ? rijen.length : rijen.length - 1;
-        String[][] overzicht = new String[aantalRijen][];
-        for (int i = 0; i < aantalRijen; i++) {
-            overzicht[i] = rijen[i].geefPinkleuren();
+    public String[][] geefOverzichtMetPinnen() {        
+        String[][] overzicht = new String[rijen.length][];
+        for (int i = 0; i < rijen.length; i++) {
+            overzicht[i] = rijen[i].geefPinkleuren();            
         }
+        if(overzicht[aantalPogingen] != willekeurigeCode || aantalPogingen != 12){
+            overzicht[rijen.length-1][rijen[rijen.length-1].getCodepinnen().length] = "";
+            for(int i = 0; i<rijen[rijen.length-1].getCodepinnen().length; i++){
+                overzicht[rijen.length-1][i] = String.format("%-6s", "#");
+                overzicht[rijen.length-1][rijen[rijen.length-1].getCodepinnen().length+1+i] = String.format("%-5s", " ");
+            }
+                
+            }
         return overzicht;
     }
 
