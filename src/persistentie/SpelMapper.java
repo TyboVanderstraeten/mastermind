@@ -19,6 +19,7 @@ import java.util.List;
 public class SpelMapper {
 
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, aantalPogingen, spelersnaam, moeilijkheidsgraad) VALUES (?,?,?,?)";
+    private static final String GEEFSPELLEN = "SELECT * FROM ID222177_g68.Spel";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
         try (
@@ -34,7 +35,7 @@ public class SpelMapper {
         }
     }
     
-    private static final String GEEFSPELLEN = "SELECT * FROM ID222177_g68.Spel";
+    
     
 //    public Spel geefSpel(String spelnaam) {  
 //        Spel spel = null;
@@ -59,7 +60,7 @@ public class SpelMapper {
         List<Spel> spellen = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel");
+                PreparedStatement query = conn.prepareStatement(GEEFSPELLEN);
                 ResultSet rs = query.executeQuery()) {
 
             while (rs.next()) {

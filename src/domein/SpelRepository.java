@@ -44,4 +44,9 @@ public class SpelRepository {
         
         return spellen;
     }
+    
+    public void verwijderSpel(String spelnaam)
+    {
+        
+    }
 }
