@@ -217,7 +217,7 @@ public class DomeinController {
     
     public void verwijderSpel(String spelnaam)
     {
-        
+        spelRepository.verwijderSpel(spelnaam);
     }
 
     //setters

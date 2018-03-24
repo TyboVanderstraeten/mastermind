@@ -47,6 +47,6 @@ public class SpelRepository {
     
     public void verwijderSpel(String spelnaam)
     {
-        
+        mapper.verwijderSpel(spelnaam);
     }
 }
