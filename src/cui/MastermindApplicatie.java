@@ -168,12 +168,12 @@ public class MastermindApplicatie {
 //            for(String a : x){                
 //                 a = resourceBundle.getString(kleuren[Integer.parseInt(a)]);                
 //            }
-            if (spelbord.length == 13 && x == spelbord[spelbord.length - 1]) {
-                x[x.length / 2] = String.format("\t\t%10s", " ");
-                for (int i = x.length / 2 + 1; i < x.length; i++) {   //x.length/2 is 4 (makkelijk/normaal) of 5 (moeilijk)
-                    x[i] = String.format("%6s", " ");
-                }
-            }
+//            if (spelbord.length == 13 && x == spelbord[spelbord.length - 1]) {
+//                x[x.length / 2] = String.format("\t\t%10s", " ");
+//                for (int i = x.length / 2 + 1; i < x.length; i++) {   //x.length/2 is 4 (makkelijk/normaal) of 5 (moeilijk)
+//                    x[i] = String.format("%6s", " ");
+//                }
+//            }
             System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
 
         }

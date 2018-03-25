@@ -214,6 +214,11 @@ public class DomeinController {
         
         return spellenString;
     }
+    
+    public void verwijderSpel(String spelnaam)
+    {
+        spelRepository.verwijderSpel(spelnaam);
+    }
 
     //setters
     /**
