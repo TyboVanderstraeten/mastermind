@@ -24,7 +24,7 @@ public abstract class Spel {
      *
      * @return
      */
-    protected abstract String[] genereerWillekeurigeCode();
+    protected abstract int[] genereerWillekeurigeCode();
 
     /**
      * Getter geeft het attribuut spelbord terug.

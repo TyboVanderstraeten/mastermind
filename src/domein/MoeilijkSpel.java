@@ -33,16 +33,16 @@ public class MoeilijkSpel extends Spel {
     }
 
     @Override
-    protected final String[] genereerWillekeurigeCode() {
-        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "X"};
+    protected final int[] genereerWillekeurigeCode() {
+        //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "X"};
         //int[] kleuren2 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-        String[] willekeurigeCode = new String[5];
+        int[] willekeurigeCode = new int[5];
         SecureRandom random = new SecureRandom();
         int keuze = 9;
         int aantal = 0;
         for (int i = 0; i < 5; i++) {
             int getal = random.nextInt(keuze);
-            willekeurigeCode[i] = kleuren[getal];
+            willekeurigeCode[i] = getal;
             if (getal == 8) {
                 aantal++;
                 if (aantal == 2) {
