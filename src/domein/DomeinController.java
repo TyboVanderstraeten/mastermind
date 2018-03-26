@@ -15,7 +15,7 @@ public class DomeinController {
     private final SpelRepository spelRepository;
     private Speler deSpeler;
     private Spel spel;
-
+    
     //constructors
     /**
      * Class constructor. Creërt een object van SpelerRepository en een object
