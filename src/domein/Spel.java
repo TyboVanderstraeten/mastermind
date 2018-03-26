@@ -25,6 +25,17 @@ public abstract class Spel {
      * @return
      */
     protected abstract String[] genereerWillekeurigeCode();
+    
+    public int[] geefMoeilijkheidsgraden()
+    {
+        int[] moeilijkheidsgraden = new int[3];
+        
+        moeilijkheidsgraden[0] = 1;
+        moeilijkheidsgraden[1] = 2;
+        moeilijkheidsgraden[2] = 3;
+        
+        return moeilijkheidsgraden;
+    }
 
     /**
      * Getter geeft het attribuut spelbord terug.
