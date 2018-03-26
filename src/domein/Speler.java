@@ -11,7 +11,7 @@ public class Speler {
 
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = {0, 0, 0};
+    private int[] aantalGewonnen = {20, 20, 0};
     private Spel spel;
 
     //constructors
@@ -27,10 +27,9 @@ public class Speler {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
     }
-    
-    public Speler selectSpeler(String tegenspeler)
-    {
-        
+
+    public Speler selectSpeler(String tegenspeler) {
+        return null;
     }
 
     //getters

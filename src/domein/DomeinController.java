@@ -243,7 +243,7 @@ public class DomeinController {
     
     public Speler kiesTegenspeler(String tegenspeler)
     {
-        
+        return null;
     }
 
     //setters

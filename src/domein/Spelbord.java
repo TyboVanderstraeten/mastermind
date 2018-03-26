@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Spelbord {
 
     private final Rij[] rijen;
-    private final int[] willekeurigeCode = {0,0,0,0};
+    private final int[] willekeurigeCode;
     private int aantalPogingen;
 
     /**
@@ -20,7 +20,7 @@ public class Spelbord {
      * bekomen.
      */
     public Spelbord(int[] willekeurigeCode) {
-        //this.willekeurigeCode = willekeurigeCode;
+        this.willekeurigeCode = willekeurigeCode;
         aantalPogingen = 0;
         rijen = new Rij[13];
 //        for (int i = 0; i < 13; i++) {
