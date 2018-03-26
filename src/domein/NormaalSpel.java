@@ -39,14 +39,12 @@ public class NormaalSpel extends Spel {
     }
 
     @Override
-    protected final String[] genereerWillekeurigeCode() {
-        String[] willekeurigeCode = new String[4];
-        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs"};
-        //int[] kleuren2 = {0,1, 2, 3, 4, 5, 6, 7};
+    protected final int[] genereerWillekeurigeCode() {
+        int[] willekeurigeCode = new int[4];
+        //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs"};        
         SecureRandom random = new SecureRandom();
-        for (int i = 0; i < willekeurigeCode.length; i++) {
-            int getal = random.nextInt(8);
-            willekeurigeCode[i] = kleuren[getal];
+        for (int i = 0; i < willekeurigeCode.length; i++) {            
+            willekeurigeCode[i] = random.nextInt(8);  
         }
         return willekeurigeCode;
     }

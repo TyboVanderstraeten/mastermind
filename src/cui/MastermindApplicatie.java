@@ -55,7 +55,7 @@ public class MastermindApplicatie {
         kiesMoeilijkheidsgraad();
 
         geefOverzicht();
-        while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0].contains("#     ")) {
+        while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {          //ZOLANG CODELIJN GEMASKEERD IS (# BEVAT)
             toonSpelbord();
             doePoging();
 
@@ -102,7 +102,7 @@ public class MastermindApplicatie {
             } catch (IllegalArgumentException | NullPointerException e) {
                 System.out.println(e.getMessage());
                 input.nextLine();
-            } catch(RuntimeException e){
+            } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
                 input.nextLine();
             }
@@ -165,20 +165,16 @@ public class MastermindApplicatie {
 
     private void toonSpelbord() {
         System.out.println("\n\n");
-        String[][] spelbord = domeinController.geefSpelbord();
-        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
-        for (String[] x : spelbord) {
-//            for(String a : x){                
-//                 a = resourceBundle.getString(kleuren[Integer.parseInt(a)]);                
-//            }
-//            if (spelbord.length == 13 && x == spelbord[spelbord.length - 1]) {
-//                x[x.length / 2] = String.format("\t\t%10s", " ");
-//                for (int i = x.length / 2 + 1; i < x.length; i++) {   //x.length/2 is 4 (makkelijk/normaal) of 5 (moeilijk)
-//                    x[i] = String.format("%6s", " ");
-//                }
-//            }
-            System.out.println(Arrays.toString(x).replace(",", " ").replace("[", "| ").replace("]", " |"));
-
+        int[][] spelbord = domeinController.geefSpelbord();
+        //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
+        for (int[] rij : spelbord) {
+            String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", "\t\tEvaluatie:");
+            for (int pin : rij) {
+                if (pin >= 0) {
+                    x = x.replace(Integer.toString(pin), String.format("%-7s", resourceBundle.getString(Integer.toString(pin))));
+                }
+            }
+            System.out.println(x);
         }
         System.out.println("\n\n");
     }
@@ -198,16 +194,25 @@ public class MastermindApplicatie {
 
     }
 
+    //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #
+    //                      0          1           2       3       4       5       6       7           8          9         -2      -1      -3
     private void doePoging() {
         Scanner input = new Scanner(System.in);
-        String[] poging = new String[domeinController.geefSpelbord()[0].length == 9 ? 4 : 5];
-        String[] kleuren = {resourceBundle.getString("blauw"), resourceBundle.getString("groen"), resourceBundle.getString("rood"), resourceBundle.getString("paars"), resourceBundle.getString("geel"), resourceBundle.getString("oranje"), resourceBundle.getString("bruin"), resourceBundle.getString("grijs")};
+        int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
+        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7")};
         System.out.printf("%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"));
         for (int i = 0; i < poging.length; i++) {
-            poging[i] = input.next();
-            if (!Arrays.asList(kleuren).contains(poging[i])) {
+            String kleur = input.next();
+            if (!Arrays.asList(kleuren).contains(kleur)) {
                 System.out.println("Ongeldige kleur");
                 i--;
+                continue;
+            }
+            for (int j = 0; j < 8; j++) {
+                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
+                    poging[i] = j;
+                    break;
+                }
             }
         }
         domeinController.geefPoging(poging);
@@ -216,7 +221,11 @@ public class MastermindApplicatie {
     private void geefEindoverzicht() {
         String uitvoer = "";
         String[] overzicht = domeinController.geefOverzicht();
-        uitvoer += String.format("De code was: %s%n", overzicht[0].replace(",", " ").replace("[", "").replace("]", ""));
+        String code ="";// = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "");       
+        //not done
+        
+        
+        uitvoer += String.format("De code was: %s%n", code);
         uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1]) == 1 ? "" : "en");
         uitvoer += String.format("aantal sterren: %s%n", overzicht[2]);
         uitvoer += String.format("aantal spellen tot volgende ster: %s%n", overzicht[3]);

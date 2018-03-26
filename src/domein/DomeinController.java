@@ -135,7 +135,7 @@ public class DomeinController {
      *
      * @return
      */
-    public String[][] geefSpelbord() {
+    public int[][] geefSpelbord() {
         Spelbord spelbord = spel.getSpelbord();
         return spelbord.geefOverzichtMetPinnen();
     }
@@ -146,11 +146,11 @@ public class DomeinController {
      *
      * @param poging de ingevoerde poging van de speler.
      */
-    public void geefPoging(String[] poging) {
+    public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
     }
 
-    public String[] geefCode(String[] poging) {
+    public int[] geefCode(String[] poging) {
         return spel.getSpelbord().getWillekeurigeCode();
     }
 
