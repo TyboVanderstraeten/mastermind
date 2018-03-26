@@ -206,8 +206,7 @@ public class DomeinController {
         
         spellenString = new String[spelRepository.geefSpellen().length];
         
-        for (Spel spel : spelRepository.geefSpellen())
-        {
+        for (Spel spel : spelRepository.geefSpellen()){
             spellenString[teller] = spel.getSpelnaam();
             teller++;
         }
@@ -218,6 +217,33 @@ public class DomeinController {
     public void verwijderSpel(String spelnaam)
     {
         spelRepository.verwijderSpel(spelnaam);
+    }
+    
+    public int[][] startUitdaging()
+    {
+        int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
+        
+        int teller = 0;
+        int teller2 = 0;
+        
+        for (int graad : spel.geefMoeilijkheidsgraden()){
+            aantalGewonnenPerMoeilijkheid[teller][3] = graad;
+            
+            teller++;
+        }
+        
+        for (int score : deSpeler.getAantalGewonnen()){
+            aantalGewonnenPerMoeilijkheid[3][teller2] = score;
+            
+            teller2++;
+        }
+        
+        return aantalGewonnenPerMoeilijkheid;
+    }
+    
+    public Speler kiesTegenspeler(String tegenspeler)
+    {
+        return spelerRepository.selectSpeler(tegenspeler);
     }
 
     //setters

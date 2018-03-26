@@ -28,8 +28,6 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    
-
     //getters
     /**
      * Getter geeft het attribuut spelersnaam terug.
