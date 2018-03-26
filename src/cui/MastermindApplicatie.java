@@ -173,6 +173,9 @@ public class MastermindApplicatie {
                 if (pin >= 0) {
                     x = x.replace(Integer.toString(pin), String.format("%-7s", resourceBundle.getString(Integer.toString(pin))));
                 }
+                if (pin == rij[rij.length - 1]) {
+                    x = x.replace("Evaluatie:", " ");
+                }
             }
             System.out.println(x);
         }
@@ -221,11 +224,14 @@ public class MastermindApplicatie {
     private void geefEindoverzicht() {
         String uitvoer = "";
         String[] overzicht = domeinController.geefOverzicht();
-        String code ="";// = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "");       
-        //not done
-        
-        
-        uitvoer += String.format("De code was: %s%n", code);
+        String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
+
+        String codeString = "";
+        for (int i = 0; i < code.length; i++) {
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
+        }
+
+        uitvoer += String.format("De code was: %s%n", codeString);
         uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1]) == 1 ? "" : "en");
         uitvoer += String.format("aantal sterren: %s%n", overzicht[2]);
         uitvoer += String.format("aantal spellen tot volgende ster: %s%n", overzicht[3]);
