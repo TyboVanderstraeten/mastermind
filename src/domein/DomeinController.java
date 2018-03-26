@@ -240,6 +240,11 @@ public class DomeinController {
         
         return aantalGewonnenPerMoeilijkheid;
     }
+    
+    public Speler kiesTegenspeler(String tegenspeler)
+    {
+        
+    }
 
     //setters
     /**
