@@ -47,5 +47,10 @@ public class SpelerRepository {
     public void voegSpelerToe(Speler speler) {
         this.mapper.voegSpelerToe(speler);
     }
+    
+    public Speler selectSpeler(String spelersnaam)
+    {
+        return mapper.geefSpeler(spelersnaam);
+    }
 
 }

@@ -27,11 +27,6 @@ public class Speler {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
     }
-    
-    public Speler selectSpeler(String tegenspeler)
-    {
-        
-    }
 
     //getters
     /**
