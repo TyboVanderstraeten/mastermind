@@ -6,14 +6,14 @@ package domein;
  */
 public abstract class Pin {
 
-    private final String kleur;
+    private final int kleur;
     
     /**
      * Class constructor geeft het attribuut kleur de waarde van de parameter.
      *
      * @param kleur de kleur van de pin.
      */
-    public Pin(String kleur) {                          // IDEA VR LATER  ALT + 0149   •    en private static final ANSI_KLEUR
+    public Pin(int kleur) {                          // IDEA VR LATER  ALT + 0149   •    en private static final ANSI_KLEUR
         this.kleur = kleur;        
     }
 
@@ -22,7 +22,7 @@ public abstract class Pin {
      *
      * @return
      */
-    public String getKleur() {
+    public int getKleur() {
         return kleur;
     }
 

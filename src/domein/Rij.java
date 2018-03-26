@@ -25,23 +25,27 @@ public abstract class Rij {
      *
      * @return
      */
-    public String[] geefPinkleuren() {
-        String[] pinkleuren = new String[codepinnen.length + evaluatiepinnen.length + 1];     //+1 omdat ik een plek per rij bijhoudt voor "Evaluatie'
+    public int[] geefPinkleuren() {
+        int[] pinkleuren = new int[codepinnen.length + evaluatiepinnen.length + 1];     //+1 omdat ik een plek per rij bijhoudt voor "Evaluatie'
         for (int i = 0; i < codepinnen.length; i++) {
             if (codepinnen[i] == null) {
-                pinkleuren[i] = String.format("%-6s", "o");
+                pinkleuren[i] = -1;
+//                pinkleuren[i] = String.format("%-6s", "o");
             } else {
-                pinkleuren[i] = String.format("%-6s", codepinnen[i].getKleur());
+                pinkleuren[i] = codepinnen[i].getKleur();
+//                pinkleuren[i] = String.format("%-6s", codepinnen[i].getKleur());
             }
 
         }
 
-        pinkleuren[codepinnen.length] = "\t\tEvaluatie:";
+        pinkleuren[codepinnen.length] = -4;         // -4 = Evaluatie:
         for (int i = codepinnen.length + 1; i < codepinnen.length + evaluatiepinnen.length + 1; i++) {
             if (evaluatiepinnen[i - codepinnen.length - 1] == null) {
-                pinkleuren[i] = String.format("%-5s", "o");
+                pinkleuren[i] = -1;
+//                pinkleuren[i] = String.format("%-5s", "o");
             } else {
-                pinkleuren[i] = String.format("%-5s", evaluatiepinnen[i - codepinnen.length - 1].getKleur());
+                pinkleuren[i] = evaluatiepinnen[i-codepinnen.length-1].getKleur();
+//                pinkleuren[i] = String.format("%-5s", evaluatiepinnen[i - codepinnen.length - 1].getKleur());
             }
         }
 
@@ -51,15 +55,14 @@ public abstract class Rij {
     //UC3
     /**
      * Roept de constructor van codePin aan die de juiste kleur meekrijgt als
-     * parameter.
+     * //moet nog aangepast worden parameter.
      *
      * @param poging de kleuren die de speler heeft ingegeven als poging.
      * @param willekeurigeCode code waaraan de pinnen moeten gelijk zijn om het
      * spel te winnen. Moet meegegeven worden want rij kent alleen de pinnen in
      * zijn eigen rij.
      */
-    
-    public abstract void geefPoging(String[] poging, String[] willekeurigeCode); //{
+    public abstract void geefPoging(int[] poging, int[] willekeurigeCode); //{
 //        for (int i = 0; i < codepinnen.length; i++) {
 //            codepinnen[i] = new CodePin(poging[i]);
 //            if (willekeurigeCode[i].equals(poging[i])) {
@@ -74,12 +77,12 @@ public abstract class Rij {
 //        }
 //}
 
-/**
- * Getter geeft het attribuut codepinnen terug.
- *
- * @return
- */
-public Pin[] getCodepinnen() {
+    /**
+     * Getter geeft het attribuut codepinnen terug.
+     *
+     * @return
+     */
+    public Pin[] getCodepinnen() {
         return codepinnen;
     }
 
@@ -87,5 +90,4 @@ public Pin[] getCodepinnen() {
         return evaluatiepinnen;
     }
 
-    
 }

@@ -13,7 +13,7 @@ public class CodePin extends Pin {
      * @param kleur de kleur van de pin.
      * @see Pin
      */
-    public CodePin(String kleur) {
+    public CodePin(int kleur) {
         super(kleur);
     }    
 }

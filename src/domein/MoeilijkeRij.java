@@ -16,27 +16,27 @@ public class MoeilijkeRij extends Rij {
     }
 
     @Override
-    public void geefPoging(String[] poging, String[] willekeurigeCode) {
+    public void geefPoging(int[] poging, int[] willekeurigeCode) {
         int zwart = 0;
         int wit = 0;
         for (int i = 0; i < getCodepinnen().length; i++) {
             getCodepinnen()[i] = new CodePin(poging[i]);
-            if (willekeurigeCode[i].equals(poging[i])) {
+            if (willekeurigeCode[i] == poging[i]) {
                 zwart++;
                 continue;
             }
             for (int j = 0; j < getEvaluatiepinnen().length; j++) {
-                if (willekeurigeCode[j].equals(poging[i])) {
+                if (willekeurigeCode[j] == poging[i]) {
                     wit++;
                 }
             }
         }
 
         for (int i = 0; i < zwart; i++) {
-            getEvaluatiepinnen()[i] = new EvaluatiePin("zwart");
+            getEvaluatiepinnen()[i] = new EvaluatiePin(9);  //ZWART
         }
         for (int i = zwart; i < zwart + wit; i++) {
-            getEvaluatiepinnen()[i] = new EvaluatiePin("Wit");
+            getEvaluatiepinnen()[i] = new EvaluatiePin(8); //WIT
         }
 
     }

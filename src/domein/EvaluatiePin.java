@@ -13,7 +13,7 @@ public class EvaluatiePin extends Pin {
      * @param kleur
      * @see Pin
      */
-    public EvaluatiePin(String kleur) {
+    public EvaluatiePin(int kleur) {
         super(kleur);
     }
 }

@@ -8,9 +8,8 @@ import java.util.Arrays;
 public class Spelbord {
 
     private final Rij[] rijen;
-    private final String[] willekeurigeCode;
+    private final int[] willekeurigeCode = {0,0,0,0};
     private int aantalPogingen;
-    private boolean isGewonnen;
 
     /**
      * Class constructor met een String[] als parameter. Geeft het attribuut
@@ -20,8 +19,8 @@ public class Spelbord {
      * @param willekeurigeCode random gegenereerde code die speler moet proberen
      * bekomen.
      */
-    public Spelbord(String[] willekeurigeCode) {
-        this.willekeurigeCode = willekeurigeCode;
+    public Spelbord(int[] willekeurigeCode) {
+        //this.willekeurigeCode = willekeurigeCode;
         aantalPogingen = 0;
         rijen = new Rij[13];
 //        for (int i = 0; i < 13; i++) {
@@ -43,34 +42,36 @@ public class Spelbord {
      *
      * @return
      */
-    public String[][] geefOverzichtMetPinnen() {
-        String[][] overzicht = new String[rijen.length][];
+    public int[][] geefOverzichtMetPinnen() {
+        int[][] overzicht = new int[rijen.length][];
         for (int i = 0; i < rijen.length; i++) {
             overzicht[i] = rijen[i].geefPinkleuren();
         }
-        String[] huidig = Arrays.copyOfRange(overzicht[aantalPogingen ==0?0:aantalPogingen-1], 0, willekeurigeCode.length-1);       //werkt niet atm
-        
-        if (!Arrays.equals(huidig, overzicht[rijen.length-1]) && aantalPogingen!=12) {
-            overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length] = "";
-            for (int i = 0; i < rijen[rijen.length - 1].getCodepinnen().length; i++) {
-                overzicht[rijen.length - 1][i] = String.format("%-6s", "#");
-                overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length + 1 + i] = String.format("%-5s", " ");
+
+        int[] huidig = Arrays.copyOfRange(overzicht[aantalPogingen == 0 ? 0 : aantalPogingen - 1], 0, willekeurigeCode.length);
+        for (int i = 0; i < rijen[rijen.length - 1].getCodepinnen().length; i++) {
+            overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length + 1 + i] = -2;           //-2 = ""
+            if (!Arrays.toString(huidig).replaceAll("\\s", "").equals(Arrays.toString(willekeurigeCode).replaceAll("\\s", "")) && aantalPogingen != 12) {
+                overzicht[rijen.length - 1][i] = -3;      //-3 = #                           //INDIEN DE CODE NIET GEKRAAKT IS, IS DEZE GEMASKEERD (#)
             }
 
         }
         return overzicht;
     }
 
-    public void geefPoging(String[] poging) {
+    /**
+     * verhoogt het aantal pogingen en geeft de poging door aan de juiste rij.
+     *
+     * @param poging kleuren combinatie die de speler ingeeft.
+     */
+    public void geefPoging(int[] poging) {
         rijen[aantalPogingen].geefPoging(poging, willekeurigeCode);
         aantalPogingen++;
-        if (Arrays.equals(poging, willekeurigeCode)) {
-            this.isGewonnen = true;
-        }
+
     }
 
     //GETTERS
-    public String[] getWillekeurigeCode() {
+    public int[] getWillekeurigeCode() {
         return willekeurigeCode;
     }
 

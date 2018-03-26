@@ -17,16 +17,16 @@ public class MakkelijkeRij extends Rij {
     }
 
     @Override
-    public void geefPoging(String[] poging, String[] willekeurigeCode) {
+    public void geefPoging(int[] poging, int[] willekeurigeCode) {
         for (int i = 0; i < getCodepinnen().length; i++) {
             getCodepinnen()[i] = new CodePin(poging[i]);
-            if (willekeurigeCode[i].equals(poging[i])) {
-                getEvaluatiepinnen()[i] = new EvaluatiePin("Zwart");
+            if (willekeurigeCode[i] == poging[i]) {
+                getEvaluatiepinnen()[i] = new EvaluatiePin(9);          //ZWART
                 continue;
             }
             for (int j = 0; j < getEvaluatiepinnen().length; j++) {
-                if (willekeurigeCode[j].equals(poging[i])) {
-                    getEvaluatiepinnen()[i] = new EvaluatiePin("Wit");
+                if (willekeurigeCode[j] == poging[i]) {
+                    getEvaluatiepinnen()[i] = new EvaluatiePin(8);         //WIT
                 }
             }
         }
