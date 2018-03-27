@@ -26,7 +26,7 @@ public class MoeilijkeRij extends Rij {
         for (int j = 0; j < poging.length; j++) {
             aantal[willekeurigeCode[j]]++;
         }
-        System.out.println(Arrays.toString(aantal));
+        
         for (int i = 0; i < getCodepinnen().length; i++) {
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (willekeurigeCode[i] == poging[i]) {
@@ -43,8 +43,7 @@ public class MoeilijkeRij extends Rij {
                     --aantal[poging[i]];
                     if (aantal[poging[i]] < 0) {
                         wit--;
-                    }
-                    System.out.println(wit + "\n");
+                    }        
                     wit++;
                     break;
                 }
