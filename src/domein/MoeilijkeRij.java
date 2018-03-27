@@ -19,16 +19,22 @@ public class MoeilijkeRij extends Rij {
     public void geefPoging(int[] poging, int[] willekeurigeCode) {
         int zwart = 0;
         int wit = 0;
+        int[] aantal = new int[8];
+        for (int j = 0; j < poging.length; j++) {
+            aantal[poging[j]]++;
+        }
         for (int i = 0; i < getCodepinnen().length; i++) {
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (willekeurigeCode[i] == poging[i]) {
                 zwart++;
+                aantal[poging[i]]--;
                 continue;
             }
             for (int j = 0; j < getEvaluatiepinnen().length; j++) {
                 if (willekeurigeCode[j] == poging[i]) {
                     wit++;
-                }
+                }      
+
             }
         }
 
