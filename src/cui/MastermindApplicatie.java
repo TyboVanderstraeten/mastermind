@@ -82,10 +82,9 @@ public class MastermindApplicatie {
 
                         System.out.print(resourceBundle.getString("naam2"));
                         String spelernaam = input.next();
-                        System.out.print(resourceBundle.getString("wachtwoord"));
+                        System.out.print(resourceBundle.getString("wachtwoordMetVoorbeeld"));
                         String wachtwoord = input.next();
                         System.out.print(resourceBundle.getString("wachtwoordHerhaling"));
-                        System.out.println("");
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
                         break;
                     default:
@@ -164,11 +163,11 @@ public class MastermindApplicatie {
         int[][] spelbord = domeinController.geefSpelbord();
         //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
         for (int[] rij : spelbord) {
-            String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", rij==spelbord[spelbord.length-1]?String.format("\t\t%10s", " "):"\t\tEvaluatie:");
+            String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", rij == spelbord[spelbord.length - 1] ? String.format("\t\t%10s", " ") : "\t\tEvaluatie:");
             for (int pin : rij) {
                 if (pin >= 0) {
                     x = x.replace(Integer.toString(pin), String.format("%-7s", resourceBundle.getString(Integer.toString(pin))));
-                }                
+                }
             }
             System.out.println(x);
         }
@@ -200,7 +199,7 @@ public class MastermindApplicatie {
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
             if (!Arrays.asList(kleuren).contains(kleur)) {
-                System.out.println("Ongeldige kleur");
+                System.out.println(resourceBundle.getString("ongeldigeKleur"));
                 i--;
                 continue;
             }
@@ -224,10 +223,10 @@ public class MastermindApplicatie {
             codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
 
-        uitvoer += String.format("De code was: %s%n", codeString);
-        uitvoer += String.format("Gekraakt in %d poging%s%n", Integer.parseInt(overzicht[1]), Integer.parseInt(overzicht[1]) == 1 ? "" : "en");
-        uitvoer += String.format("aantal sterren: %s%n", overzicht[2]);
-        uitvoer += String.format("aantal spellen tot volgende ster: %s%n", overzicht[3]);
+        uitvoer += String.format("%s: %s%n", resourceBundle.getString("codeWas"), codeString);
+        uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
         System.out.println(uitvoer);
     }
 
