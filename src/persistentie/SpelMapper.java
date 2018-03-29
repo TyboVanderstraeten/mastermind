@@ -41,7 +41,7 @@ public class SpelMapper {
                 queryRij.setString(2, spelnaam);
                 queryRij.setString(3, spelersnaam);
                 queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
-                querySpel.executeUpdate();
+                queryRij.executeUpdate();
             }                        
             queryRij.setInt(1, spel.getSpelbord().getRijen().length-1);
             queryRij.setString(2, spelnaam);

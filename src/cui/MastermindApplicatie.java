@@ -54,9 +54,10 @@ public class MastermindApplicatie {
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {          //ZOLANG CODELIJN GEMASKEERD IS (# BEVAT)
             toonSpelbord();
             doePoging();
-            domeinController.registreerSpel("nieuwTestSpel");
+            
 
         }
+        domeinController.registreerSpel("pleasework2.0");
 
         toonSpelbord();
 
@@ -80,7 +81,6 @@ public class MastermindApplicatie {
                         domeinController.meldAan(spelersnaam, input.next());
                         break;
                     case 2:
-
                         System.out.print(resourceBundle.getString("naam2"));
                         String spelernaam = input.next();
                         System.out.print(resourceBundle.getString("wachtwoordMetVoorbeeld"));
