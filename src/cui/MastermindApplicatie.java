@@ -54,6 +54,7 @@ public class MastermindApplicatie {
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {          //ZOLANG CODELIJN GEMASKEERD IS (# BEVAT)
             toonSpelbord();
             doePoging();
+            domeinController.registreerSpel("bob");
 
         }
 
@@ -129,7 +130,7 @@ public class MastermindApplicatie {
                         throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
                 }
             } catch (InputMismatchException e) {
-                System.out.println(resourceBundle.getString("ongeldig"));
+                System.out.println("Invalid input!");
                 input.nextLine();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

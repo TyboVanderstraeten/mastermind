@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,40 +23,49 @@ public class SpelMapper {
     private static final String GEEF_SPELLEN = "SELECT * FROM ID222177_g68.Spel";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
 
+    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, combinatie, spelnaam) VALUES (?,?,?)";
+
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(INSERT_SPEL)) {
-                    query.setString(1, spelnaam);
-                    query.setInt(2, spel.getSpelbord().getAantalPogingen());
-                    query.setString(3, spelersnaam);
-                    query.setString(4, spel.getClass().getSimpleName());
-                    query.executeUpdate();
+                PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
+                PreparedStatement queryRij = conn.prepareStatement(INSERT_RIJ)) {
+            querySpel.setString(1, spelnaam);
+            querySpel.setInt(2, spel.getSpelbord().getAantalPogingen());
+            querySpel.setString(3, spelersnaam);
+            querySpel.setString(4, spel.getClass().getSimpleName());
+
+            for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
+                queryRij.setInt(1, i);
+                System.out.println(Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel")?5:4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
+                queryRij.setString(2, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel")?5:4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
+                queryRij.setString(3, spelnaam);                
+            }
+            querySpel.executeUpdate();
+            queryRij.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+
     }
-    
-    
-    
-//    public Spel geefSpel(String spelnaam) {  
-//        Spel spel = null;
-//
-//        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-//                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel WHERE spelnaam = ?")) {
-//            query.setString(1, spelnaam);
-//            try (ResultSet rs = query.executeQuery()) {
-//                if (rs.next()) {
-//                    String willekeurigeCode = rs.getString("willekeurigeCode");
-//                    spel = new MakkelijkSpel(spelnaam, willekeurigeCode);
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-//        return spel;
-//    }
+    //    public Spel geefSpel(String spelnaam) {  
+    //        Spel spel = null;
+    //
+    //        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+    //                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel WHERE spelnaam = ?")) {
+    //            query.setString(1, spelnaam);
+    //            try (ResultSet rs = query.executeQuery()) {
+    //                if (rs.next()) {
+    //                    String willekeurigeCode = rs.getString("willekeurigeCode");
+    //                    spel = new MakkelijkSpel(spelnaam, willekeurigeCode);
+    //                }
+    //            }
+    //        } catch (SQLException ex) {
+    //            throw new RuntimeException(ex);
+    //        }
+    //
+    //        return spel;
+    //    }
 
     public List<Spel> geefSpellen() {
         List<Spel> spellen = new ArrayList<>();
@@ -67,16 +77,14 @@ public class SpelMapper {
             while (rs.next()) {
                 String spelnaam = rs.getString("spelnaam");
                 String spelersnaam = rs.getString("spelersnaam");
-                String willekeurigeCode = rs.getString("willekeurigeCode");                
+                String willekeurigeCode = rs.getString("willekeurigeCode");
                 String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-                
-                if (moeilijkheidsgraad == "makkelijk"){
+
+                if (moeilijkheidsgraad == "makkelijk") {
                     spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
-                }
-                else if (moeilijkheidsgraad == "normaal"){
+                } else if (moeilijkheidsgraad == "normaal") {
                     spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
-                }
-                else if (moeilijkheidsgraad == "moeilijk"){
+                } else if (moeilijkheidsgraad == "moeilijk") {
                     spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
                 }
             }
@@ -86,14 +94,13 @@ public class SpelMapper {
 
         return spellen;
     }
-    
-    public void verwijderSpel(String spelnaam)
-    {
+
+    public void verwijderSpel(String spelnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(VERWIJDER_SPEL)) {
-                    query.setString(1, spelnaam);
-                    query.executeUpdate();
+            query.setString(1, spelnaam);
+            query.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
