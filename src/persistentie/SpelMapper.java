@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, aantalPogingen, spelersnaam, moeilijkheidsgraad) VALUES (?,?,?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT * FROM ID222177_g68.Spel";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
 
-    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, combinatie, spelnaam) VALUES (?,?,?)";
+    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
         try (
@@ -32,13 +32,14 @@ public class SpelMapper {
                 PreparedStatement queryRij = conn.prepareStatement(INSERT_RIJ)) {
             querySpel.setString(1, spelnaam);
             querySpel.setString(2, spelersnaam);
+            System.out.println(spel.getSpelbord().getAantalPogingen());
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
 
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
-                queryRij.setInt(1, i);
-                queryRij.setString(2, spelnaam);
-                queryRij.setString(3, spelersnaam);
+                queryRij.setString(1, spelnaam);
+                queryRij.setString(2, spelersnaam);
+                queryRij.setInt(3, i);
                 queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
 
             }
