@@ -111,8 +111,8 @@ public class MastermindApplicatie {
         do {
             try {
                 System.out.println("Choose your language: (enter the number) \n1: Nederlands \n2: Français \n3: English");
-
-                switch (input.nextInt()) {
+                int keuze = input.nextInt();
+                switch (keuze) {
                     case 1:
                         resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
                         geldig = true;
