@@ -40,11 +40,13 @@ public class SpelMapper {
                 queryRij.setInt(1, i);
                 queryRij.setString(2, spelnaam);
                 queryRij.setString(3, spelersnaam);
-
                 queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
-
-            }
-            querySpel.executeUpdate();
+                querySpel.executeUpdate();
+            }                        
+            queryRij.setInt(1, spel.getSpelbord().getRijen().length-1);
+            queryRij.setString(2, spelnaam);
+            queryRij.setString(3, spelersnaam);
+            queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length-1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             queryRij.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
