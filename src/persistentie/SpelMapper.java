@@ -22,7 +22,6 @@ public class SpelMapper {
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT * FROM ID222177_g68.Spel";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
-
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
@@ -35,7 +34,7 @@ public class SpelMapper {
             System.out.println(spel.getSpelbord().getAantalPogingen());
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
-
+            
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
                 queryRij.setString(2, spelnaam);
