@@ -54,7 +54,7 @@ public class MastermindApplicatie {
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {          //ZOLANG CODELIJN GEMASKEERD IS (# BEVAT)
             toonSpelbord();
             doePoging();
-            domeinController.registreerSpel("bob");
+            domeinController.registreerSpel("nieuwTestSpel");
 
         }
 
