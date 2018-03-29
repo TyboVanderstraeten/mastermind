@@ -174,7 +174,7 @@ public class DomeinController {
 
         if (getal >= 250) {
             overzicht[2] = "✩✩✩✩✩";
-            overzicht[3] = "max aantal sterren";
+            overzicht[3] = "/";
         } else if (getal >= 100) {
             overzicht[2] = "✩✩✩✩";
             overzicht[3] = String.format("%d", 250 - getal);

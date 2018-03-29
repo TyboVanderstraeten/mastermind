@@ -11,7 +11,7 @@ public class Speler {
 
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = {20, 20, 0};
+    private int[] aantalGewonnen = {250, 250, 250};
     private Spel spel;
 
     //constructors
