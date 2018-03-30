@@ -56,8 +56,8 @@ public class MastermindApplicatie {
             doePoging();
             
 
-        }
-        domeinController.registreerSpel("pleasework2.0");
+        }        
+        domeinController.registreerSpel("veranderNaamElkeKeerVoorlopig");
 
         toonSpelbord();
 
