@@ -20,9 +20,11 @@ import java.util.List;
 public class SpelMapper {
 
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
+    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT * FROM ID222177_g68.Spel";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
-    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
+    private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
+    
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
         try (
@@ -86,12 +88,18 @@ public class SpelMapper {
                 String willekeurigeCode = rs.getString("willekeurigeCode");
                 String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
 
-                if (moeilijkheidsgraad == "makkelijk") {
-                    spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
-                } else if (moeilijkheidsgraad == "normaal") {
-                    spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
-                } else if (moeilijkheidsgraad == "moeilijk") {
-                    spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
+                switch (moeilijkheidsgraad) {
+                    case "MakkelijkSpel":
+                        spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
+                        break;
+                    case "NormaalSpel":
+                        spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
+                        break;
+                    case "MoeilijkSpel":
+                        spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
+                        break;
+                    default:
+                        break;
                 }
             }
         } catch (SQLException ex) {
@@ -104,9 +112,12 @@ public class SpelMapper {
     public void verwijderSpel(String spelnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(VERWIJDER_SPEL)) {
-            query.setString(1, spelnaam);
-            query.executeUpdate();
+                PreparedStatement spelQuery = conn.prepareStatement(VERWIJDER_SPEL);
+                PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ)) {
+            spelQuery.setString(1, spelnaam);
+            spelQuery.executeUpdate();
+            rijQuery.setString(1, spelnaam);
+            rijQuery.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

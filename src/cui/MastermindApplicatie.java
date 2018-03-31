@@ -64,7 +64,7 @@ public class MastermindApplicatie {
         geefEindoverzicht();
 
     }
-
+    
     private void meldAanRegistreer() {
         boolean geldig = false;
         Scanner input = new Scanner(System.in);
@@ -138,7 +138,7 @@ public class MastermindApplicatie {
             }
         } while (!geldig);
     }
-
+    
     private void kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
