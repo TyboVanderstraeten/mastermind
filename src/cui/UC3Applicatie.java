@@ -77,7 +77,7 @@ public class UC3Applicatie {
             codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
 
-        uitvoer += String.format("%s: %s%n", resourceBundle.getString("codeWas"), codeString);
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
