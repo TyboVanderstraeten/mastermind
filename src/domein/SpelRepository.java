@@ -26,27 +26,23 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
-    
     public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
         mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
-    
-    public Spel[] geefSpellen()
-    {
-        Spel[] spellen = new Spel[mapper.geefSpellen().size()];
+
+    public String[] geefSpellen(String spelersnaam) {
+        String[] spelnamen = new String[mapper.geefSpelnamen(spelersnaam).size()];
         int teller = 0;
-        
-        for (Spel spel : mapper.geefSpellen())
-        {
-            spellen[teller] = spel;
+
+        for (String spelnaam : mapper.geefSpelnamen(spelersnaam)) {
+            spelnamen[teller] = spelnaam;
             teller++;
         }
-        
-        return spellen;
+
+        return spelnamen;
     }
-    
-    public void verwijderSpel(String spelnaam)
-    {
+
+    public void verwijderSpel(String spelnaam) {
         mapper.verwijderSpel(spelnaam);
     }
 }

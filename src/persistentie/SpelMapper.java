@@ -21,7 +21,7 @@ public class SpelMapper {
 
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
-    private static final String GEEF_SPELLEN = "SELECT * FROM ID222177_g68.Spel";
+    private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
     
@@ -73,38 +73,23 @@ public class SpelMapper {
     //        return spel;
     //    }
 
-    public List<Spel> geefSpellen() {
-        List<Spel> spellen = new ArrayList<>();
+    public List<String> geefSpelnamen(String spelersnaam) {
+        List<String> spelnamen = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(GEEF_SPELLEN);
-                ResultSet rs = query.executeQuery()) {
-
-            while (rs.next()) {
-                String spelnaam = rs.getString("spelnaam");
-                String spelersnaam = rs.getString("spelersnaam");
-                String willekeurigeCode = rs.getString("willekeurigeCode");
-                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-
-                switch (moeilijkheidsgraad) {
-                    case "MakkelijkSpel":
-                        spellen.add(new MakkelijkSpel(spelnaam, spelersnaam, willekeurigeCode));
-                        break;
-                    case "NormaalSpel":
-                        spellen.add(new NormaalSpel(spelnaam, spelersnaam, willekeurigeCode));
-                        break;
-                    case "MoeilijkSpel":
-                        spellen.add(new MoeilijkSpel(spelnaam, spelersnaam, willekeurigeCode));
-                        break;
-                    default:
-                        break;
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELLEN)) {
+            query.setString(1, spelersnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    String spelnaam = rs.getString("spelnaam");
+                    spelnamen.add(spelnaam);
                 }
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
 
-        return spellen;
+        return spelnamen;
     }
 
     public void verwijderSpel(String spelnaam) {

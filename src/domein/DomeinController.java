@@ -205,10 +205,10 @@ public class DomeinController {
         String[] spellenString;
         int teller = 0;
         
-        spellenString = new String[spelRepository.geefSpellen().length];
+        spellenString = new String[spelRepository.geefSpellen(deSpeler.getSpelersnaam()).length];
         
-        for (Spel spel : spelRepository.geefSpellen()){
-            spellenString[teller] = spel.getSpelnaam();
+        for (String spelnaam : spelRepository.geefSpellen(deSpeler.getSpelersnaam())){
+            spellenString[teller] = spelnaam;
             teller++;
         }
         

@@ -33,5 +33,8 @@ public class UC4Applicatie {
         for(int i = 0; i<spellen.length; i++){
             uitvoer += String.format("%d: %s%n", i, spellen[i]);
         }
+        System.out.println(uitvoer);
+        
     }
+    
 }
