@@ -5,12 +5,14 @@ import exceptions.NormaalSpelToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 /**
  * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. *
  */
 public class DomeinController {
-
+    
+    private final ResourceBundle resourceBundle;
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
     private Speler deSpeler;
@@ -20,8 +22,10 @@ public class DomeinController {
     /**
      * Class constructor. Creërt een object van SpelerRepository en een object
      * van SpelRepository. *
+     * @param resourceBundle
      */
-    public DomeinController() {
+    public DomeinController(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
     }
@@ -40,7 +44,7 @@ public class DomeinController {
         if (gevondenSpeler != null) {                                                       
             setDeSpeler(gevondenSpeler);
         }else{
-            throw new SpelersnaamWachtwoordCombinatieException();
+            throw new SpelersnaamWachtwoordCombinatieException(resourceBundle);
         }
     }
 
@@ -55,12 +59,12 @@ public class DomeinController {
      * wachtwoord)
      */
     public void registreer(String spelersnaam, String wachtwoord, String bevestiging) {
-        Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord);
+        Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord,resourceBundle);
         //wachtwoord moet gelijk zijn aan bevestiging
         if (wachtwoord.equals(bevestiging)) {
             spelerRepository.voegSpelerToe(nieuweSpeler);           //nog exception nodig
         }else{
-            throw new WachtwoordBevestigingFoutException();
+            throw new WachtwoordBevestigingFoutException(resourceBundle);
         }
         deSpeler = nieuweSpeler;
     }
@@ -88,13 +92,13 @@ public class DomeinController {
                 break;
             case 2:
                 if (deSpeler.getAantalGewonnen()[0] < 20) {
-                    throw new NormaalSpelToegangException();
+                    throw new NormaalSpelToegangException(resourceBundle);
                 }
                 spel = new NormaalSpel();
                 break;
             case 3:
                 if (deSpeler.getAantalGewonnen()[1] < 20) {
-                    throw new MoeilijkSpelToegangException();
+                    throw new MoeilijkSpelToegangException(resourceBundle);
                 }
                 spel = new MoeilijkSpel();
                 break;
