@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-//EXCEPTIONS DONE
-
+//EXCEPTIONS DONE (wel nog checken als speler vb al een spel 'test' heeft en hij wil nog een spel 'test' opslaan, dit mag niet!!!!!!) is nog niet opgevangen
+                  //Checken gebeurd al! via spelermapper, exception wordt daar getrowed, nog probleem als spel opgeslaan wordt dan wordt opnieuw poging gevraagd
 public class UC3Applicatie {
 
     private final ResourceBundle resourceBundle;
@@ -22,15 +22,24 @@ public class UC3Applicatie {
         Scanner input = new Scanner(System.in);
         boolean geldig = false; // boolean om te checken of eindoverzicht getoond mag worden! enkel tonen bij gewonnen spel! niet bij opslaan!
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {
-            System.out.print(resourceBundle.getString("opslaanKeuze"));
-            String keuze = input.next();
-            if ("x".equals(keuze)) {
-                System.out.print(resourceBundle.getString("vraagSpelnaam"));
-                String spelnaam = input.next();
-                domeinController.registreerSpel(spelnaam);
-                geldig = true;
-                break;
-            }
+//            boolean geldig2 = false;
+//            do {
+//                try {
+                    System.out.print(resourceBundle.getString("opslaanKeuze"));
+                    String keuze = input.next();
+                    if ("x".equals(keuze)) {
+                        System.out.print(resourceBundle.getString("vraagSpelnaam"));
+                        String spelnaam = input.next(); //Door met next() te werken ipv nextLine() kan spelnaam niet leeg zijn en hoeft dit niet extra opgevangen te worden!
+                        domeinController.registreerSpel(spelnaam);
+                        //geldig2 = true;
+                        geldig = true;
+                        break;
+                    }
+//                } catch (RuntimeException e) {
+//                    System.out.println(resourceBundle.getString(e.getMessage()));
+//                    input.nextLine();
+//                }
+//            } while (!geldig2);
             doePoging();
             toonSpelbord();
         }

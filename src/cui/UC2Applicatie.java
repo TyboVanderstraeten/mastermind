@@ -52,13 +52,14 @@ public class UC2Applicatie {
                 if(keuze < 1 || keuze > 3){
                     throw new MoeilijkheidsgraadKeuzeException();
                 }
-                domeinController.kiesMoeilijkheidsgraad(input.nextInt());
+                domeinController.kiesMoeilijkheidsgraad(keuze);
                 geldig = true;
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException e) {
                 System.out.println(resourceBundle.getString(e.getMessage()));
+                input.nextLine();
             }
         } while (!geldig);
     }

@@ -1,9 +1,7 @@
 package persistentie;
 
-import domein.MakkelijkSpel;
-import domein.NormaalSpel;
-import domein.MoeilijkSpel;
 import domein.Spel;
+import exceptions.SpelnaamNietUniekException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,7 +49,7 @@ public class SpelMapper {
             queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             queryRij.executeUpdate();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new SpelnaamNietUniekException();
         }
 
     }
