@@ -26,7 +26,7 @@ public class SpelMapper {
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
     
 
-    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden
+    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);

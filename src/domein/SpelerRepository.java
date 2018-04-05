@@ -52,5 +52,17 @@ public class SpelerRepository {
     {
         return mapper.geefSpeler(spelersnaam);
     }
+    
+    public int geefMakkelijkeWins(String spelersnaam){
+        return mapper.geefMakkelijkeWins(spelersnaam);
+    }
+    
+    public int geefNormaleWins(String spelersnaam){
+        return mapper.geefNormaleWins(spelersnaam);
+    }
+    
+    public int geefMoeilijkeWins(String spelersnaam){
+        return mapper.geefMoeilijkeWins(spelersnaam);
+    }
 
 }

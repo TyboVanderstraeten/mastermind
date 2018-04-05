@@ -9,9 +9,10 @@ import exceptions.WachtwoordException;
  */
 public class Speler {
     
+    private SpelerRepository spelerRepository;
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = {250, 250, 250};
+    private int[] aantalGewonnen = {spelerRepository.geefMakkelijkeWins(spelersnaam), spelerRepository.geefNormaleWins(spelersnaam), spelerRepository.geefMoeilijkeWins(spelersnaam)};
     private Spel spel;
 
     //constructors
