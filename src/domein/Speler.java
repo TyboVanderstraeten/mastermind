@@ -23,7 +23,7 @@ public class Speler {
      * @see #setSpelersnaam(java.lang.String)
      * @see #setWachtwoord(java.lang.String)
      */
-    public Speler(String spelersnaam, String wachtwoord) {      
+    public Speler(String spelersnaam, String wachtwoord) {    
         
       setSpelersnaam(spelersnaam);
       setWachtwoord(wachtwoord);

@@ -215,9 +215,11 @@ public class DomeinController {
         return spellenString;
     }
     
-    public void verwijderSpel(String spelnaam)
+    public void verwijderSpel(int spelnaam)
     {
-        spelRepository.verwijderSpel(spelnaam);
+        //Spel spel = spelRepository.laadSpel(int spelnaam);
+        spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
+        
     }
     
     public int[][] startUitdaging()

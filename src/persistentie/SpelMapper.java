@@ -22,9 +22,10 @@ public class SpelMapper {
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
+    private static final String GEEF_SPEL = "SELECT * FROM ID222177_G68.Spel where spelersnaam = ? AND spelnaam = ?";
+    private static final String GEEF_RIJEN = "SELECT * FROM ID22177_G68.Spel where spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
-    
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
@@ -32,7 +33,7 @@ public class SpelMapper {
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
                 PreparedStatement queryRij = conn.prepareStatement(INSERT_RIJ)) {
             querySpel.setString(1, spelnaam);
-            querySpel.setString(2, spelersnaam);            
+            querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
             querySpel.executeUpdate();
@@ -47,7 +48,7 @@ public class SpelMapper {
             queryRij.setInt(1, spel.getSpelbord().getRijen().length - 1);
             queryRij.setString(2, spelnaam);
             queryRij.setString(3, spelersnaam);
-            queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));            
+            queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             queryRij.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -92,20 +93,44 @@ public class SpelMapper {
         return spelnamen;
     }
 
-    public void verwijderSpel(String spelnaam) {
+    public void verwijderSpel(String spelnaam, String spelersnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement spelQuery = conn.prepareStatement(VERWIJDER_SPEL);
                 PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ)) {
             spelQuery.setString(1, spelnaam);
+            spelQuery.setString(2, spelersnaam);
             spelQuery.executeUpdate();
             rijQuery.setString(1, spelnaam);
+            rijQuery.setString(2, spelersnaam);
             rijQuery.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
+
+    // public Spel laadSpel(String spelnaam, String spelersnaam) {
+//        Spel spel = null;        
+//
+//        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+//                PreparedStatement query = conn.prepareStatement("GEEF_SPEL");
+//                PreparedStatement queryRij = conn.prepareStatement("GEEF_RIJEN")) {
+//            query.setString(1, spelnaam);
+//            query.setString(2, spelnaam);
+//            try (ResultSet rs = query.executeQuery()) {
+//                int aantalPogingen = rs.getInt("aantalPogingen");
+//                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+//
+//                while (rs.next()) {
+//
+//                    spel = new Spel();
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//
+//        return speler;
+//    }
 }
-
-
 //SUBKLASSES IN DATABASE NODIG
