@@ -55,7 +55,7 @@ public class UC2Applicatie {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println(resourceBundle.getString(e.getMessage()));
             }
         } while (!geldig);
     }

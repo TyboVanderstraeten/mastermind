@@ -97,7 +97,7 @@ public class MastermindApplicatie {
                 System.out.println("Invalid input!");
                 input.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println(resourceBundle.getString(e.getMessage()));
                 input.nextLine();
             }
         } while (!geldig);

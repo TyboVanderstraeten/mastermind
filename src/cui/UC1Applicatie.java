@@ -58,10 +58,10 @@ public class UC1Applicatie {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
             } catch (IllegalArgumentException | NullPointerException e) {
-                System.out.println(e.getMessage());
+                System.out.println(resourceBundle.getString(e.getMessage()));
                 input.nextLine();
             } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
+                System.out.println(resourceBundle.getString(e.getMessage()));
                 input.nextLine();
             }
         } while (!geldig);
