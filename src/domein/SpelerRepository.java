@@ -53,5 +53,9 @@ public class SpelerRepository {
         return mapper.geefSpeler(spelersnaam);
     }
     
+    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk){
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
+    }
+    
 
 }
