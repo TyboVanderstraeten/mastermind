@@ -91,13 +91,17 @@ public class MastermindApplicatie {
                         geldig = true;
                         break;
                     default:
-                        throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
+                        throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?! 
+                        //how? werkt wel bij meldAanRegistreerKeuze?????? zelfde manier??? = geeft NullPointerException!!
+                        //EDIT : werkte niet omdat er bij illegalargumentexception (catch) stond resourcebundle.getString, maar als je 
+                        //vb 8 ingeeft dan weet hij niet welke resourcebundle hij moet nemen dus creeert een nullpointerexception!
+                        //Oplossing : hardcoded, net als  bij de inputmismatchexception!
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
                 input.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(resourceBundle.getString(e.getMessage()));
+                System.out.println("You have to make a choice between 1,2 or 3!");
                 input.nextLine();
             }
         } while (!geldig);
