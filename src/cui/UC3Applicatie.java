@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 //EXCEPTIONS DONE (wel nog checken als speler vb al een spel 'test' heeft en hij wil nog een spel 'test' opslaan, dit mag niet!!!!!!) is nog niet opgevangen
                   //Checken gebeurd al! via spelermapper, exception wordt daar getrowed, nog probleem als spel opgeslaan wordt dan wordt opnieuw poging gevraagd
+
 public class UC3Applicatie {
 
     private final ResourceBundle resourceBundle;
@@ -29,7 +30,8 @@ public class UC3Applicatie {
                     String keuze = input.next();
                     if ("x".equals(keuze)) {
                         System.out.print(resourceBundle.getString("vraagSpelnaam"));
-                        String spelnaam = input.next(); //Door met next() te werken ipv nextLine() kan spelnaam niet leeg zijn en hoeft dit niet extra opgevangen te worden!
+                        //Door met next() te werken ipv nextLine() kan spelnaam niet leeg zijn en hoeft dit niet extra opgevangen te worden!
+                        String spelnaam = input.next(); 
                         domeinController.registreerSpel(spelnaam);
                         //geldig2 = true;
                         geldig = true;

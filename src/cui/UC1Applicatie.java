@@ -45,6 +45,7 @@ public class UC1Applicatie {
                         break;
                     case 2:
                         System.out.print(resourceBundle.getString("naam2"));
+                        //Door met next() te werken ipv nextLine() kan spelernaam niet leeg zijn en hoeft dit niet extra opgevangen te worden!
                         String spelernaam = input.next();
                         System.out.print(resourceBundle.getString("wachtwoordMetVoorbeeld"));
                         String wachtwoord = input.next();
