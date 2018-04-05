@@ -17,11 +17,24 @@ public class UC3Applicatie {
     }
 
     public void start() {
+        Scanner input = new Scanner(System.in);
+        boolean geldig = false;
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {
+            System.out.print(resourceBundle.getString("opslaanKeuze"));
+            String keuze = input.next();
+            if ("x".equals(keuze)) {
+                System.out.print(resourceBundle.getString("vraagSpelnaam"));
+                String spelnaam = input.next();
+                domeinController.registreerSpel(spelnaam);
+                geldig = true;
+                break;
+            }
             doePoging();
             toonSpelbord();
         }
-        geefEindoverzicht();
+        if (!geldig) {
+            geefEindoverzicht();
+        }
     }
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #
 //                     0          1           2       3       4       5       6       7           8          9         -2      -1      -3
@@ -30,16 +43,10 @@ public class UC3Applicatie {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
         String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
-        System.out.printf("%n%s%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+        System.out.printf("%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"));
 
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
-            if ("x".equals(kleur)) {
-                System.out.print(resourceBundle.getString("vraagSpelnaam"));
-                String spelnaam = input.next();
-                domeinController.registreerSpel(spelnaam);
-                break;
-            }
             if (!Arrays.asList(kleuren).contains(kleur)) {
                 System.out.println(resourceBundle.getString("ongeldigeKleur"));
                 i--;
