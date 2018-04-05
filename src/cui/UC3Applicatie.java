@@ -21,7 +21,6 @@ public class UC3Applicatie {
             doePoging();
             toonSpelbord();
         }
-        domeinController.registreerSpel("anothergame8");
         geefEindoverzicht();
     }
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #
@@ -30,10 +29,17 @@ public class UC3Applicatie {
     private void doePoging() {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
-        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7")};
-        System.out.printf("%n%s%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"),resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
+        System.out.printf("%n%s%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
+
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
+            if("x".equals(kleur)){
+                System.out.print(resourceBundle.getString("vraagSpelnaam"));
+                String spelnaam = input.next();
+                domeinController.registreerSpel(spelnaam);
+                break;
+            }
             if (!Arrays.asList(kleuren).contains(kleur)) {
                 System.out.println(resourceBundle.getString("ongeldigeKleur"));
                 i--;
@@ -46,6 +52,7 @@ public class UC3Applicatie {
                 }
             }
         }
+
         domeinController.geefPoging(poging);
     }
 
@@ -67,22 +74,22 @@ public class UC3Applicatie {
 
     private void geefEindoverzicht() {
         String uitvoer = "";
-        
+
         String[] overzicht = domeinController.geefOverzicht();
-        
+
         String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
 
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
             codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
-        
+
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
         System.out.println(uitvoer);
-        
+
         domeinController.updateSpelerAantalGewonnen();
     }
 }
