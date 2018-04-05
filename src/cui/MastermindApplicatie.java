@@ -12,6 +12,9 @@ import java.util.ResourceBundle;
  * uitgevoerd.
  *
  */
+
+//EXCEPTIONS DONE
+
 public class MastermindApplicatie {
 
     private final DomeinController domeinController;
@@ -95,7 +98,7 @@ public class MastermindApplicatie {
                         //how? werkt wel bij meldAanRegistreerKeuze?????? zelfde manier??? = geeft NullPointerException!!
                         //EDIT : werkte niet omdat er bij illegalargumentexception (catch) stond resourcebundle.getString, maar als je 
                         //vb 8 ingeeft dan weet hij niet welke resourcebundle hij moet nemen dus creeert een nullpointerexception!
-                        //Oplossing : hardcoded, net als  bij de inputmismatchexception!
+                        //Oplossing : hardcoded, net als  bij de inputmismatchexception! => taalkeuzeexception overbodig 
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");

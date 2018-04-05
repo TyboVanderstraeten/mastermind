@@ -11,6 +11,7 @@ import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+//EXCEPTIONS DONE
 
 public class UC1Applicatie {
     private final DomeinController domeinController;
