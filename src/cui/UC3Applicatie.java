@@ -34,7 +34,7 @@ public class UC3Applicatie {
 
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
-            if("x".equals(kleur)){
+            if ("x".equals(kleur)) {
                 System.out.print(resourceBundle.getString("vraagSpelnaam"));
                 String spelnaam = input.next();
                 domeinController.registreerSpel(spelnaam);
