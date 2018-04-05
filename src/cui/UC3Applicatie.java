@@ -18,7 +18,7 @@ public class UC3Applicatie {
 
     public void start() {
         Scanner input = new Scanner(System.in);
-        boolean geldig = false;
+        boolean geldig = false; // boolean om te checken of eindoverzicht getoond mag worden! enkel tonen bij gewonnen spel! niet bij opslaan!
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {
             System.out.print(resourceBundle.getString("opslaanKeuze"));
             String keuze = input.next();
