@@ -73,7 +73,7 @@ public class SpelerMapper {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    wins = rs.getInt(GEEF_MAKKELIJKWINS);
+                    wins = rs.getInt("aantalGewonnenMakkelijk");
                 }
             }
         } catch (SQLException ex) {
@@ -90,7 +90,7 @@ public class SpelerMapper {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    wins = rs.getInt(GEEF_NORMAALWINS);
+                    wins = rs.getInt("aantalGewonnenNormaal");
                 }
             }
         } catch (SQLException ex) {
@@ -105,9 +105,9 @@ public class SpelerMapper {
             Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
             PreparedStatement query = conn.prepareStatement(GEEF_MOEILIJKWINS);
             query.setString(1, spelersnaam);
-            try(ResultSet rs = query.executeQuery()){
-                if(rs.next()){
-                    wins = rs.getInt(GEEF_MOEILIJKWINS);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    wins = rs.getInt("aantalGewonnenMoeilijk");
                 }
             }
         } catch (SQLException ex) {
