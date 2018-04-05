@@ -32,8 +32,7 @@ public class SpelMapper {
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
                 PreparedStatement queryRij = conn.prepareStatement(INSERT_RIJ)) {
             querySpel.setString(1, spelnaam);
-            querySpel.setString(2, spelersnaam);
-            System.out.println(spel.getSpelbord().getAantalPogingen());
+            querySpel.setString(2, spelersnaam);            
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
             querySpel.executeUpdate();
@@ -48,8 +47,7 @@ public class SpelMapper {
             queryRij.setInt(1, spel.getSpelbord().getRijen().length - 1);
             queryRij.setString(2, spelnaam);
             queryRij.setString(3, spelersnaam);
-            queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
-            System.out.println(spelnaam + spelersnaam + Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
+            queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));            
             queryRij.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

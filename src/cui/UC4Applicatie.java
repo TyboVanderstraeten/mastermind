@@ -29,8 +29,9 @@ public class UC4Applicatie {
     private void laadSpel(){
         System.out.println("Kies een spel: ");
         String[] spellen = domeinController.geefSpellen();
-        for(String spel : spellen){
-            
+        String uitvoer = "";
+        for(int i = 0; i<spellen.length; i++){
+            uitvoer += String.format("%d: %s%n", i, spellen[i]);
         }
     }
 }
