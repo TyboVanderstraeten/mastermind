@@ -9,10 +9,9 @@ import exceptions.WachtwoordException;
  */
 public class Speler {
     
-    private SpelerRepository spelerRepository;
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = /*{250,250,250};*/{spelerRepository.geefMakkelijkeWins(spelersnaam), spelerRepository.geefNormaleWins(spelersnaam), spelerRepository.geefMoeilijkeWins(spelersnaam)};
+    private int[] aantalGewonnen = {250,250,250};
     private Spel spel;
 
     //constructors
@@ -21,7 +20,6 @@ public class Speler {
      *
      * @param spelersnaam de spelersnaam van de speler
      * @param wachtwoord het wachtwoord van de speler
-     * @param resourceBundle
      * @see #setSpelersnaam(java.lang.String)
      * @see #setWachtwoord(java.lang.String)
      */
