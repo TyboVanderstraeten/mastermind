@@ -1,9 +1,11 @@
 package exceptions;
 
+import java.util.ResourceBundle;
+
 public class WachtwoordBevestigingFoutException extends IllegalArgumentException {
 
-    public WachtwoordBevestigingFoutException() {
-        super("Wachtwoord en wachtwoordbevestiging moeten gelijk zijn!");
+    public WachtwoordBevestigingFoutException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("wachtwoordBevestigingFoutException"));
     }
 
     public WachtwoordBevestigingFoutException(String message) {

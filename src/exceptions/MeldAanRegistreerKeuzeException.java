@@ -1,9 +1,11 @@
 package exceptions;
 
+import java.util.ResourceBundle;
+
 public class MeldAanRegistreerKeuzeException extends IllegalArgumentException {
 
-    public MeldAanRegistreerKeuzeException() {
-        super("U moet een keuze maken tussen 1/2!");
+    public MeldAanRegistreerKeuzeException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("meldAanRegistreerKeuzeException"));
     }
 
     public MeldAanRegistreerKeuzeException(String message) {

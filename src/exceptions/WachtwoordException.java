@@ -1,9 +1,11 @@
 package exceptions;
 
+import java.util.ResourceBundle;
+
 public class WachtwoordException extends IllegalArgumentException{
 
-    public WachtwoordException() {
-        super("Wachtwoord moet beginnen en eindigen met een cijfer, met daartussen minstens 6 letters (groot of klein)!");
+    public WachtwoordException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("wachtwoordException"));
     }
 
     public WachtwoordException(String message) {

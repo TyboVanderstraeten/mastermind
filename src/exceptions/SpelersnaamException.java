@@ -1,9 +1,11 @@
 package exceptions;
 
+import java.util.ResourceBundle;
+
 public class SpelersnaamException extends IllegalArgumentException {
 
-    public SpelersnaamException() {
-        super("Spelersnaam mag max. 40 karakters bevatten en mag niet leeg zijn!");
+    public SpelersnaamException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("spelersnaamException"));
     }
 
     public SpelersnaamException(String message) {

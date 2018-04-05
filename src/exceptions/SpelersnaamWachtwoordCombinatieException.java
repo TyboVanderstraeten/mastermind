@@ -1,9 +1,11 @@
 package exceptions;
 
+import java.util.ResourceBundle;
+
 public class SpelersnaamWachtwoordCombinatieException extends NullPointerException {
 
-    public SpelersnaamWachtwoordCombinatieException() {
-        super("Spelersnaam/wachtwoord is incorrect!");
+    public SpelersnaamWachtwoordCombinatieException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("spelersnaamWachtwoordCombinatieException"));
     }
 
     public SpelersnaamWachtwoordCombinatieException(String message) {

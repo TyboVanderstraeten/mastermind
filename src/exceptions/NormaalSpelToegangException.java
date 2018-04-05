@@ -1,12 +1,14 @@
 package exceptions;
 
-public class NormaalSpelToegangException extends IllegalArgumentException{
-    
-    public NormaalSpelToegangException(){
-        super("Deze mogelijkheidsgraad is pas toegankelijk als u 20 makkelijke spellen heeft gewonnen.");
+import java.util.ResourceBundle;
+
+public class NormaalSpelToegangException extends IllegalArgumentException {
+
+    public NormaalSpelToegangException(ResourceBundle resourceBundle) {
+        super(resourceBundle.getString("normaalSpelToegangException"));
     }
-    
-    public NormaalSpelToegangException(String message){
+
+    public NormaalSpelToegangException(String message) {
         super(message);
     }
 
