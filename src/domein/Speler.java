@@ -8,10 +8,10 @@ import exceptions.WachtwoordException;
  *
  */
 public class Speler {
-    
+
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = {0,0,0};
+    private int[] aantalGewonnen = {0, 0, 0};
     private Spel spel;
 
     //constructors
@@ -23,13 +23,13 @@ public class Speler {
      * @see #setSpelersnaam(java.lang.String)
      * @see #setWachtwoord(java.lang.String)
      */
-    public Speler(String spelersnaam, String wachtwoord) {      
-        
-      setSpelersnaam(spelersnaam);
-      setWachtwoord(wachtwoord);
+    public Speler(String spelersnaam, String wachtwoord) {
+
+        setSpelersnaam(spelersnaam);
+        setWachtwoord(wachtwoord);
     }
-    
-    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen){
+
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
@@ -89,10 +89,10 @@ public class Speler {
      */
     private void setWachtwoord(String wachtwoord) {
         String wachtwoordVoorwaarden = "[0-9][a-zA-Z]{6}[a-zA-Z]*[0-9]";
-        if(!(wachtwoord.matches(wachtwoordVoorwaarden))){
+        if (!(wachtwoord.matches(wachtwoordVoorwaarden))) {
             throw new WachtwoordException();
         }
-        
+
         this.wachtwoord = wachtwoord;
     }
 
@@ -103,7 +103,19 @@ public class Speler {
     private void setAantalGewonnen(int[] aantalGewonnen) {
         this.aantalGewonnen = aantalGewonnen;
     }
-    
-    
+
+    public void verhoogAantalGewonnen() {
+        switch (spel.getClass().getSimpleName()) {
+            case "MakkelijkSpel":
+                aantalGewonnen[0]++;
+                break;
+            case "NormaalSpel":
+                aantalGewonnen[1]++;
+                break;
+            case "MoeilijkSpel":
+                aantalGewonnen[2]++;
+                break;
+        }
+    }
 
 }

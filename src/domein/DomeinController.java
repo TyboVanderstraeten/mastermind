@@ -149,6 +149,9 @@ public class DomeinController {
      */
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
+        if(spel.getSpelbord().getWillekeurigeCode().equals(poging)){
+            deSpeler.verhoogAantalGewonnen();
+        }
     }
 
     public int[] geefCode(String[] poging) {
