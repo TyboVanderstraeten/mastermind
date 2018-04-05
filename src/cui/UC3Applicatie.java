@@ -1,11 +1,9 @@
-
 package cui;
 
 import domein.DomeinController;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 
 public class UC3Applicatie {
 
@@ -15,7 +13,7 @@ public class UC3Applicatie {
     public UC3Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.resourceBundle = resourceBundle;
         this.domeinController = domeinController;
-        
+
     }
 
     public void start() {
@@ -23,11 +21,12 @@ public class UC3Applicatie {
             doePoging();
             toonSpelbord();
         }
-        domeinController.registreerSpel("TyboSpeeltEenSpelletje");
+        domeinController.registreerSpel("anothergame");
         geefEindoverzicht();
     }
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #
 //                     0          1           2       3       4       5       6       7           8          9         -2      -1      -3
+
     private void doePoging() {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
@@ -65,8 +64,7 @@ public class UC3Applicatie {
         }
         System.out.println("\n\n");
     }
-    
-    
+
     private void geefEindoverzicht() {
         String uitvoer = "";
         String[] overzicht = domeinController.geefOverzicht();
@@ -82,5 +80,6 @@ public class UC3Applicatie {
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
         System.out.println(uitvoer);
+        domeinController.updateSpelerAantalGewonnen();
     }
 }

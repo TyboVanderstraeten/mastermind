@@ -16,9 +16,7 @@ public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
     private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_MAKKELIJKWINS = "SELECT aantalGewonnenMakkelijk FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_NORMAALWINS = "SELECT aantalGewonnenNormaal FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_MOEILIJKWINS = "SELECT aantalGewonnenMoeilijk FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+    private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
@@ -69,55 +67,18 @@ public class SpelerMapper {
         return speler;
     }
 
-    public int geefMakkelijkeWins(String spelersnaam) {
-        int wins = 0;
-        try {
-            Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-            PreparedStatement query = conn.prepareStatement(GEEF_MAKKELIJKWINS);
-            query.setString(1, spelersnaam);
-            try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
-                    wins = rs.getInt("aantalGewonnenMakkelijk");
-                }
-            }
+    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNEN)) {
+            query.setInt(1, aantalGewonnenMakkelijk);
+            query.setInt(2, aantalGewonnenNormaal);
+            query.setInt(3, aantalGewonnenMoeilijk);
+            query.setString(4, spelersnaam);
+            query.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        return wins;
-    }
-
-    public int geefNormaleWins(String spelersnaam) {
-        int wins = 0;
-        try {
-            Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-            PreparedStatement query = conn.prepareStatement(GEEF_NORMAALWINS);
-            query.setString(1, spelersnaam);
-            try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
-                    wins = rs.getInt("aantalGewonnenNormaal");
-                }
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        return wins;
-    }
-
-    public int geefMoeilijkeWins(String spelersnaam) {
-        int wins = 0;
-        try {
-            Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-            PreparedStatement query = conn.prepareStatement(GEEF_MOEILIJKWINS);
-            query.setString(1, spelersnaam);
-            try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
-                    wins = rs.getInt("aantalGewonnenMoeilijk");
-                }
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        return wins;
     }
 
 }
