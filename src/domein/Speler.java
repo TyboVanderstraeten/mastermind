@@ -23,9 +23,16 @@ public class Speler {
      * @see #setSpelersnaam(java.lang.String)
      * @see #setWachtwoord(java.lang.String)
      */
-    public Speler(String spelersnaam, String wachtwoord) {
+    public Speler(String spelersnaam, String wachtwoord) {      
+        
+      setSpelersnaam(spelersnaam);
+      setWachtwoord(wachtwoord);
+    }
+    
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen){
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
+        setAantalGewonnen(aantalGewonnen);
     }
 
     public Speler selectSpeler(String tegenspeler) {
@@ -92,5 +99,11 @@ public class Speler {
     public void setSpel(Spel spel) {
         this.spel = spel;
     }
+
+    private void setAantalGewonnen(int[] aantalGewonnen) {
+        this.aantalGewonnen = aantalGewonnen;
+    }
+    
+    
 
 }

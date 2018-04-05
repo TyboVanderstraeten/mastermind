@@ -55,7 +55,11 @@ public class SpelerMapper {
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
                     String wachtwoord = rs.getString("wachtwoord");
-                    speler = new Speler(spelersnaam, wachtwoord);
+                    int[] aantalGewonnen = new int[3];
+                    aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
+                    aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
+                    aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen);
                 }
             }
         } catch (SQLException ex) {
