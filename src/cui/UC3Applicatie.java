@@ -31,7 +31,7 @@ public class UC3Applicatie {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
         String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7")};
-        System.out.printf("%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"));
+        System.out.printf("%n%s%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"),resourceBundle.getString("kleurIngevenD2"), resourceBundle.getString("kleurIngevenD3"));
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
             if (!Arrays.asList(kleuren).contains(kleur)) {
