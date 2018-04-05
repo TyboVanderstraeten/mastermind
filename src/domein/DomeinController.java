@@ -151,7 +151,7 @@ public class DomeinController {
      */
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
-        if (spel.getSpelbord().getWillekeurigeCode().equals(poging)) {
+        if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {            
             deSpeler.verhoogAantalGewonnen();
         }
     }
