@@ -197,7 +197,6 @@ public class DomeinController {
             overzicht[2] = "0";
             overzicht[3] = String.format("%d", 10 - getal);
         }
-        System.out.printf("Aantal gewonnen speler %d%n",deSpeler.getAantalGewonnen()[0]);
         return overzicht;
     }
     
