@@ -51,7 +51,7 @@ public class UC1Applicatie {
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
                         break;
                     default:
-                        throw new MeldAanRegistreerKeuzeException(resourceBundle); //werkt niet, geeft rode lijntjes?!
+                        throw new MeldAanRegistreerKeuzeException(); //werkt niet, geeft rode lijntjes?!
                 }
                 geldig = true;
             } catch (InputMismatchException e) {

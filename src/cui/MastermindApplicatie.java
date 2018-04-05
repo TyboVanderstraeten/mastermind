@@ -91,7 +91,7 @@ public class MastermindApplicatie {
                         geldig = true;
                         break;
                     default:
-                        throw new TaalKeuzeException(resourceBundle); //werkt niet, geeft rode lijntjes?!
+                        throw new TaalKeuzeException(); //werkt niet, geeft rode lijntjes?!
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");

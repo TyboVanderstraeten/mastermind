@@ -2,7 +2,6 @@ package domein;
 
 import exceptions.SpelersnaamException;
 import exceptions.WachtwoordException;
-import java.util.ResourceBundle;
 
 /**
  * Zorgt voor de interactie met de speler.
@@ -10,7 +9,6 @@ import java.util.ResourceBundle;
  */
 public class Speler {
     
-    private final ResourceBundle resourceBundle;
     private String spelersnaam;
     private String wachtwoord;
     private int[] aantalGewonnen = {250, 250, 250};
@@ -26,10 +24,9 @@ public class Speler {
      * @see #setSpelersnaam(java.lang.String)
      * @see #setWachtwoord(java.lang.String)
      */
-    public Speler(String spelersnaam, String wachtwoord,ResourceBundle resourceBundle) {
+    public Speler(String spelersnaam, String wachtwoord) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
-        this.resourceBundle = resourceBundle;
     }
 
     public Speler selectSpeler(String tegenspeler) {
@@ -73,7 +70,7 @@ public class Speler {
      */
     private void setSpelersnaam(String spelersnaam) {
         if (spelersnaam.length() > 40) {
-            throw new SpelersnaamException(resourceBundle);
+            throw new SpelersnaamException();
         }
         this.spelersnaam = spelersnaam;
     }
@@ -87,7 +84,7 @@ public class Speler {
     private void setWachtwoord(String wachtwoord) {
         String wachtwoordVoorwaarden = "[0-9][a-zA-Z]{6}[a-zA-Z]*[0-9]";
         if(!(wachtwoord.matches(wachtwoordVoorwaarden))){
-            throw new WachtwoordException(resourceBundle);
+            throw new WachtwoordException();
         }
         
         this.wachtwoord = wachtwoord;
