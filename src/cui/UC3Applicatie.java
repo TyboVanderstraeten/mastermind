@@ -2,9 +2,10 @@ package cui;
 
 import domein.DomeinController;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
+//EXCEPTIONS DONE
 
 public class UC3Applicatie {
 
