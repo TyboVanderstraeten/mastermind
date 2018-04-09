@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.List;
 import persistentie.SpelerMapper;
 
 /**
@@ -55,6 +56,10 @@ public class SpelerRepository {
     
     public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk){
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
+    }
+    
+    public List<String> geefTegenspelers(int moeilijkheidsgraad) {
+        return mapper.geefTegenspelers(moeilijkheidsgraad);
     }
     
 

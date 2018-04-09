@@ -5,6 +5,7 @@ import exceptions.NormaalSpelToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. *
@@ -248,6 +249,11 @@ public class DomeinController {
     
     public Speler kiesTegenspeler(String tegenspeler) {
         return spelerRepository.selectSpeler(tegenspeler);
+    }
+    
+    public List<String> geefTegenSpelers(int moeilijkheidsgraad)
+    {
+        return spelerRepository.geefTegenspelers(moeilijkheidsgraad);
     }
 
     //setters
