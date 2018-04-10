@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 //EXCEPTIONS DONE (wel nog checken als speler vb al een spel 'test' heeft en hij wil nog een spel 'test' opslaan, dit mag niet!!!!!!) is nog niet opgevangen
 //Checken gebeurd al! via spelermapper, exception wordt daar getrowed, nog probleem als spel opgeslaan wordt dan wordt opnieuw poging gevraagd
+
 public class UC3Applicatie {
 
     private final ResourceBundle resourceBundle;
@@ -24,8 +25,8 @@ public class UC3Applicatie {
         boolean geldig = false; // boolean om te checken of eindoverzicht getoond mag worden! enkel tonen bij gewonnen spel! niet bij opslaan!
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {
             boolean geldig2 = false;
-            do {
-                try {
+            //do {
+                //try {
                     System.out.print(resourceBundle.getString("opslaanKeuze"));
                     String keuze = input.next();
                     if ("x".equals(keuze)) {
@@ -37,11 +38,11 @@ public class UC3Applicatie {
                         geldig = true;
                         break;
                     }
-                } catch (RuntimeException e) {
+                /*} catch (RuntimeException e) {
                     System.out.println(resourceBundle.getString(e.getMessage()));
                     input.nextLine();
-                }
-            } while (!geldig2);
+                }*/
+            //} while (!geldig2);
             if (!geldig2) {
                 doePoging();
                 toonSpelbord();
