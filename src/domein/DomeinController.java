@@ -62,7 +62,7 @@ public class DomeinController {
         Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord);
         //wachtwoord moet gelijk zijn aan bevestiging
         if (wachtwoord.equals(bevestiging)) {
-            spelerRepository.voegSpelerToe(nieuweSpeler);           //nog exception nodig
+            spelerRepository.voegSpelerToe(nieuweSpeler);           
         } else {
             throw new WachtwoordBevestigingFoutException();
         }
