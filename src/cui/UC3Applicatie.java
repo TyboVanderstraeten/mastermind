@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-//EXCEPTIONS DONE 
+//EXCEPTIONS DONE // inputmismatchexception nog 
 
 public class UC3Applicatie {
 

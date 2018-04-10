@@ -42,8 +42,7 @@ public class MastermindApplicatie {
      * </ul>
      */
     public void startApplicatie() {        
-             
-        // Try catch binnen de try catch vermijden! Anders oplossen :) (Voor opnieuw vragen spelersnaam (apart), wachtwoord (apart),...
+
         geefTaal();
         UC1Applicatie uc1 = new UC1Applicatie(resourceBundle, domeinController);
         uc1.start();        
