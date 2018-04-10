@@ -59,24 +59,7 @@ public class SpelMapper {
         }
 
     }
-    //    public Spel geefSpel(String spelnaam) {  
-    //        Spel spel = null;
-    //
-    //        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-    //                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g68.spel WHERE spelnaam = ?")) {
-    //            query.setString(1, spelnaam);
-    //            try (ResultSet rs = query.executeQuery()) {
-    //                if (rs.next()) {
-    //                    String willekeurigeCode = rs.getString("willekeurigeCode");
-    //                    spel = new MakkelijkSpel(spelnaam, willekeurigeCode);
-    //                }
-    //            }
-    //        } catch (SQLException ex) {
-    //            throw new RuntimeException(ex);
-    //        }
-    //
-    //        return spel;
-    //    }
+
 
     public List<String> geefSpelnamen(String spelersnaam) {
         List<String> spelnamen = new ArrayList<>();
@@ -161,41 +144,4 @@ public class SpelMapper {
         return spel;
     }
 
-//        Spel spel = null;
-//        List<String> rijen= new ArrayList<>(); 
-//        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-//                PreparedStatement querySpel = conn.prepareStatement("GEEF_SPEL");
-//                PreparedStatement queryRij = conn.prepareStatement("GEEF_RIJEN")) {
-//            querySpel.setString(1, spelersnaam);
-//            querySpel.setString(2, spelnaam);
-//            queryRij.setString(1, spelersnaam);
-//            queryRij.setString(2, spelnaam);
-//            try (ResultSet rs = querySpel.executeQuery();
-//                    ResultSet rs2 = queryRij.executeQuery()) {
-//                int aantalPogingen = rs.getInt("aantalPogingen");
-//                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-//                
-//                while (rs2.next()) {
-//                    rijen.add(rs2.getString("combinatie"));
-//                    spel = new Spel();
-//                }
-//                
-//                for(int i =0; i<rijen.size(); i++){
-//                    
-//                }
-//                
-//                
-//                
-//                
-//            }
-//    }
-//    catch (SQLException ex
-//
-//    
-//        ) {
-//            throw new RuntimeException(ex);
-//    }
-//
-//    return speler ;
-//}
 }
