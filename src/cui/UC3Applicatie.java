@@ -2,11 +2,11 @@ package cui;
 
 import domein.DomeinController;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-//EXCEPTIONS DONE // inputmismatchexception nog 
-
+//EXCEPTIONS DONE
 public class UC3Applicatie {
 
     private final ResourceBundle resourceBundle;
@@ -36,6 +36,9 @@ public class UC3Applicatie {
                     doePoging();
                     toonSpelbord();
                 }
+            } catch (InputMismatchException e) {
+                System.out.println(resourceBundle.getString("ongeldig"));
+                input.nextLine();
             } catch (RuntimeException e) {
                 System.out.println(resourceBundle.getString(e.getMessage()));
                 input.nextLine();

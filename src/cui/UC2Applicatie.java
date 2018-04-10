@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
-
 public class UC2Applicatie {
 
     private final ResourceBundle resourceBundle;
@@ -24,7 +23,7 @@ public class UC2Applicatie {
         kiesMoeilijkheidsgraad();
         toonSpelbord();
         UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-        uc3.start();        
+        uc3.start();
     }
 
     private void geefOverzicht() {
@@ -51,7 +50,7 @@ public class UC2Applicatie {
                 System.out.println("2: " + resourceBundle.getString("normaleMoeilijkheidsgraad"));
                 System.out.println("3: " + resourceBundle.getString("moeilijkeMoeilijkheidsgraad"));
                 int keuze = input.nextInt();
-                if(keuze < 1 || keuze > 3){
+                if (keuze < 1 || keuze > 3) {
                     throw new MoeilijkheidsgraadKeuzeException();
                 }
                 domeinController.kiesMoeilijkheidsgraad(keuze);

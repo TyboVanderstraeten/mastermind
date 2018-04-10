@@ -12,13 +12,7 @@ import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-//EXCEPTIONS DONE behalve
-//Exception voor foutief username bij aanmelden, (correct username en foutief passwoord wordt wel opgevangen!!!!)
-/*(dacht dat het gewoon ging zijn zoals bij 'correct username but wrong pass', 
-maar is niet zo, als pass wrong is kan hij dat checken door naar de spelersnaam te zoeken en dan gewoon dat 
-ww in db te vergelijken met het ingevoerde ww, maar als spelersnaam verkeerd is bij aanmelden, 
-heeft het systeem geen idee naar wat hij moet zoeken en levert dit een nullpointer op)*/
-//EDIT = Opgelost!
+//EXCEPTIONS DONE
 public class UC1Applicatie {
 
     private final DomeinController domeinController;
