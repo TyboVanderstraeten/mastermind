@@ -23,6 +23,8 @@ public class UC2Applicatie {
         geefOverzicht();
         kiesMoeilijkheidsgraad();
         toonSpelbord();
+        UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+        uc3.start();        
     }
 
     private void geefOverzicht() {

@@ -12,22 +12,43 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
-
 public class UC1Applicatie {
+
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
-    
-    public UC1Applicatie(ResourceBundle resourcebundle, DomeinController domeinController){
+
+    public UC1Applicatie(ResourceBundle resourcebundle, DomeinController domeinController) {
         this.resourceBundle = resourcebundle;
-        this.domeinController = domeinController;        
+        this.domeinController = domeinController;
     }
-    
-    public final void start(){
+
+    public final void start() {
         meldAanRegistreer();
         System.out.println("\nWelkom " + domeinController.geefSpelersnaam() + "\n");
-        
+        switch (maakKeuze()) {
+            case 1:
+                UC2Applicatie uc2 = new UC2Applicatie(resourceBundle, domeinController);
+                uc2.start();
+                break;
+            case 2:
+                UC4Applicatie uc4 = new UC4Applicatie(resourceBundle, domeinController);
+                uc4.start();
+                break;
+            case 3:
+                UC5Applicatie uc5 = new UC5Applicatie(resourceBundle, domeinController);
+                uc5.start();
+                break;
+            case 4:
+                UC6Applicatie uc6 = new UC6Applicatie(resourceBundle, domeinController);
+                uc6.start();
+                break;
+            case 5:
+                UC7Applicatie uc7 = new UC7Applicatie(resourceBundle, domeinController);
+                uc7.start();
+        }
+
     }
-    
+
     private void meldAanRegistreer() {
         boolean geldig = false;
         Scanner input = new Scanner(System.in);
@@ -68,5 +89,21 @@ public class UC1Applicatie {
             }
         } while (!geldig);
         System.out.println(domeinController.geefSpelersnaam());
+    }
+
+    private int maakKeuze() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(resourceBundle.getString("maakKeuze"));
+        System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n5: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"));
+        int keuze;
+        do {
+            keuze = input.nextInt();
+            if (keuze < 1 || keuze > 5) {
+                System.out.println("Ongeldig getal!");
+            } else {
+                break;
+            }
+        } while (1 == 1);
+        return keuze;
     }
 }
