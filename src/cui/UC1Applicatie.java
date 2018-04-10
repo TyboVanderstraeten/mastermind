@@ -6,6 +6,7 @@
 package cui;
 
 import domein.DomeinController;
+import exceptions.KeuzemenuException;
 import exceptions.MeldAanRegistreerKeuzeException;
 import java.util.InputMismatchException;
 import java.util.ResourceBundle;
@@ -25,27 +26,37 @@ public class UC1Applicatie {
     public final void start() {
         meldAanRegistreer();
         System.out.println("\nWelkom " + domeinController.geefSpelersnaam() + "\n");
-        switch (maakKeuze()) {
-            case 1:
-                UC2Applicatie uc2 = new UC2Applicatie(resourceBundle, domeinController);
-                uc2.start();
-                break;
-            case 2:
-                UC4Applicatie uc4 = new UC4Applicatie(resourceBundle, domeinController);
-                uc4.start();
-                break;
-            case 3:
-                UC5Applicatie uc5 = new UC5Applicatie(resourceBundle, domeinController);
-                uc5.start();
-                break;
-            case 4:
-                UC6Applicatie uc6 = new UC6Applicatie(resourceBundle, domeinController);
-                uc6.start();
-                break;
-            case 5:
-                UC7Applicatie uc7 = new UC7Applicatie(resourceBundle, domeinController);
-                uc7.start();
-        }
+        boolean geldig = false;
+        do {
+            try {
+                switch (maakKeuze()) {
+                    case 1:
+                        UC2Applicatie uc2 = new UC2Applicatie(resourceBundle, domeinController);
+                        uc2.start();
+                        break;
+                    case 2:
+                        UC4Applicatie uc4 = new UC4Applicatie(resourceBundle, domeinController);
+                        uc4.start();
+                        break;
+                    case 3:
+                        UC5Applicatie uc5 = new UC5Applicatie(resourceBundle, domeinController);
+                        uc5.start();
+                        break;
+                    case 4:
+                        UC6Applicatie uc6 = new UC6Applicatie(resourceBundle, domeinController);
+                        uc6.start();
+                        break;
+                    case 5:
+                        UC7Applicatie uc7 = new UC7Applicatie(resourceBundle, domeinController);
+                        uc7.start();
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(resourceBundle.getString("ongeldig"));
+            } catch (IllegalArgumentException e) {
+                System.out.println(resourceBundle.getString(e.getMessage()));
+            }
+        } while (!geldig);
 
     }
 
@@ -74,7 +85,7 @@ public class UC1Applicatie {
                         domeinController.registreer(spelernaam, wachtwoord, input.next());
                         break;
                     default:
-                        throw new MeldAanRegistreerKeuzeException(); //werkt niet, geeft rode lijntjes?!
+                        throw new MeldAanRegistreerKeuzeException();
                 }
                 geldig = true;
             } catch (InputMismatchException e) {
@@ -95,15 +106,10 @@ public class UC1Applicatie {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuze"));
         System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n5: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"));
-        int keuze;
-        do {
-            keuze = input.nextInt();
-            if (keuze < 1 || keuze > 5) {
-                System.out.println("Ongeldig getal!");
-            } else {
-                break;
-            }
-        } while (1 == 1);
+        int keuze = input.nextInt();
+        if (keuze < 1 || keuze > 5) {
+            throw new KeuzemenuException();
+        }
         return keuze;
     }
 }

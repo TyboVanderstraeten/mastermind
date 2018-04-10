@@ -200,4 +200,3 @@ public class SpelMapper {
 //    return speler ;
 //}
 }
-//SUBKLASSES IN DATABASE NODIG
