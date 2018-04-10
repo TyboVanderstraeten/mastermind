@@ -94,7 +94,7 @@ public class UC1Applicatie {
     private int maakKeuze() {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuze"));
-        System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n 5: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"));
+        System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n5: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"));
         int keuze;
         do {
             keuze = input.nextInt();
