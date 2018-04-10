@@ -11,7 +11,7 @@ import java.util.List;
  * Bevat de methodes die zullen worden aangeroepn in de startApplicatie. *
  */
 public class DomeinController {
-    
+
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
     private Speler deSpeler;
@@ -40,8 +40,8 @@ public class DomeinController {
      * @param wachtwoord het wachtwoord van de gebruiker
      */
     public void meldAan(String spelersnaam, String wachtwoord) {
-        Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);        
-        if (gevondenSpeler != null) {            
+        Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);
+        if (gevondenSpeler != null) {
             setDeSpeler(gevondenSpeler);
         } else {
             throw new SpelersnaamWachtwoordCombinatieException();
@@ -62,7 +62,7 @@ public class DomeinController {
         Speler nieuweSpeler = new Speler(spelersnaam, wachtwoord);
         //wachtwoord moet gelijk zijn aan bevestiging
         if (wachtwoord.equals(bevestiging)) {
-            spelerRepository.voegSpelerToe(nieuweSpeler);           
+            spelerRepository.voegSpelerToe(nieuweSpeler);
         } else {
             throw new WachtwoordBevestigingFoutException();
         }
@@ -74,7 +74,7 @@ public class DomeinController {
      *
      * @return
      */
-    public String geefSpelersnaam() {        
+    public String geefSpelersnaam() {
         return deSpeler.getSpelersnaam();
     }
 
@@ -119,13 +119,13 @@ public class DomeinController {
         String[] aantal = x.split(" ");
         if (Integer.parseInt(aantal[0]) < 20) {
             overzicht = new String[1][2];
-            
+
         } else if (Integer.parseInt(aantal[1]) < 20) {
             overzicht = new String[2][2];
-            
+
         } else {
             overzicht = new String[3][2];
-            
+
         }
         for (int i = 0; i < overzicht.length; i++) {
             overzicht[i][0] = String.format("%-10s", moeilijkheidsgraden[i]);
@@ -152,15 +152,15 @@ public class DomeinController {
      */
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
-        if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {            
+        if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
             deSpeler.verhoogAantalGewonnen();
         }
     }
-    
+
     public int[] geefCode(String[] poging) {
         return spel.getSpelbord().getWillekeurigeCode();
     }
-    
+
     public String[] geefOverzicht() {
         String[] overzicht = new String[4];
         overzicht[0] = Arrays.toString(spel.getSpelbord().getWillekeurigeCode());
@@ -178,7 +178,7 @@ public class DomeinController {
                 getal = aantalGewonnen[2];
                 break;
         }
-        
+
         if (getal >= 250) {
             overzicht[2] = "✩✩✩✩✩";
             overzicht[3] = "/";
@@ -200,59 +200,57 @@ public class DomeinController {
         }
         return overzicht;
     }
-    
+
     public void registreerSpel(String spelnaam) {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
-    
+
     public String[] geefSpellen() {
         String[] spellenString;
         int teller = 0;
-        
+
         spellenString = new String[spelRepository.geefSpellen(deSpeler.getSpelersnaam()).length];
-        
+
         for (String spelnaam : spelRepository.geefSpellen(deSpeler.getSpelersnaam())) {
             spellenString[teller] = spelnaam;
             teller++;
         }
-        
+
         return spellenString;
     }
-    
-    public void verwijderSpel(int spelnaam)
-    {
+
+    public void verwijderSpel(int spelnaam) {
         //Spel spel = spelRepository.laadSpel(int spelnaam);
         spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
-        
+
     }
-    
+
     public int[][] startUitdaging() {
         int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
-        
+
         int teller = 0;
         int teller2 = 0;
-        
+
         for (int graad : spel.geefMoeilijkheidsgraden()) {
             aantalGewonnenPerMoeilijkheid[teller][3] = graad;
-            
+
             teller++;
         }
-        
+
         for (int score : deSpeler.getAantalGewonnen()) {
             aantalGewonnenPerMoeilijkheid[3][teller2] = score;
-            
+
             teller2++;
         }
-        
+
         return aantalGewonnenPerMoeilijkheid;
     }
-    
+
     public Speler kiesTegenspeler(String tegenspeler) {
         return spelerRepository.selectSpeler(tegenspeler);
     }
-    
-    public List<String> geefTegenSpelers(int moeilijkheidsgraad)
-    {
+
+    public List<String> geefTegenSpelers(int moeilijkheidsgraad) {
         return spelerRepository.geefTegenspelers(moeilijkheidsgraad);
     }
 
@@ -276,8 +274,8 @@ public class DomeinController {
     private void setSpel(Spel spel) {
         this.spel = spel;
     }
-    
-    public void updateSpelerAantalGewonnen(){
+
+    public void updateSpelerAantalGewonnen() {
         spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
     }
 }
