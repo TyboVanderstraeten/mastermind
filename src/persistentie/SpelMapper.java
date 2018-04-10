@@ -28,8 +28,8 @@ public class SpelMapper {
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel where spelersnaam = ? AND spelnaam = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij where spelersnaam = ? AND spelnaam = ?";
-    private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
-    private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
+    private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
+    private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
@@ -60,7 +60,6 @@ public class SpelMapper {
 
     }
 
-
     public List<String> geefSpelnamen(String spelersnaam) {
         List<String> spelnamen = new ArrayList<>();
 
@@ -70,7 +69,7 @@ public class SpelMapper {
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
                     String spelnaam = rs.getString("spelnaam");
-                    spelnamen.add(spelnaam);                    
+                    spelnamen.add(spelnaam);
                 }
             }
         } catch (SQLException ex) {
@@ -135,8 +134,9 @@ public class SpelMapper {
                     }
                 }
             }
-            for(int i =0; i<rijen.size()-1; i++)
-            spel.getSpelbord().geefPoging(rijen.get(i));
+            for (int i = 0; i < rijen.size() - 1; i++) {
+                spel.getSpelbord().geefPoging(rijen.get(i));
+            }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

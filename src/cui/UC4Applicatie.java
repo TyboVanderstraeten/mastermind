@@ -1,4 +1,3 @@
-
 package cui;
 
 import domein.DomeinController;
@@ -7,34 +6,34 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class UC4Applicatie {
+
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
-    
-    
-    public UC4Applicatie(ResourceBundle resourceBundle, DomeinController domeinController){
+
+    public UC4Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
-    
-    public void start(){
+
+    public void start() {
         laadSpel();
         toonSpelbord();
         UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
         uc3.start();
-    }    
-    
-    
-    public void laadSpel(){
+    }
+
+    public void laadSpel() {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[] spelnamen = domeinController.geefSpellen();
-        for(String spelnaam : spelnamen){
-            System.out.printf("- %s%n", spelnaam);
+        for (int teller = 0; teller < spelnamen.length; teller++) {
+            System.out.printf("%d) %s%n",teller, spelnamen[teller]);
         }
         String spelnaam = input.next();
         domeinController.laadSpel(spelnaam);
+        //domeinController.verwijderSpel();
     }
-    
+
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();
@@ -51,5 +50,4 @@ public class UC4Applicatie {
         System.out.println("\n\n");
     }
 
-    
 }
