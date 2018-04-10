@@ -85,10 +85,9 @@ public class SpelMapper {
                 PreparedStatement query = conn.prepareStatement(GEEF_SPELLEN)) {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     String spelnaam = rs.getString("spelnaam");
-                    spelnamen.add(spelnaam);
-                    System.out.println(spelnaam);
+                    spelnamen.add(spelnaam);                    
                 }
             }
         } catch (SQLException ex) {
