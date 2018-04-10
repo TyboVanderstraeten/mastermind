@@ -25,7 +25,7 @@ public class UC1Applicatie {
 
     public final void start() {
         meldAanRegistreer();
-        System.out.println("\nWelkom " + domeinController.geefSpelersnaam() + "\n");
+        System.out.println("\n" + domeinController.geefSpelersnaam() + "\n");
         boolean geldig = false;
         do {
             try {
@@ -99,7 +99,7 @@ public class UC1Applicatie {
                 input.nextLine();
             }
         } while (!geldig);
-        System.out.println(domeinController.geefSpelersnaam());
+        System.out.printf("%n%s %s%n", resourceBundle.getString("welkom"), domeinController.geefSpelersnaam());
     }
 
     private int maakKeuze() {

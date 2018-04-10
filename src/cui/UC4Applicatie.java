@@ -26,7 +26,7 @@ public class UC4Applicatie {
     
     public void laadSpel(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Maak een keuze uit één van deze spellen. (geef volledige naam)");
+        System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[] spelnamen = domeinController.geefSpellen();
         for(String spelnaam : spelnamen){
             System.out.printf("/ %s%n", spelnaam);
