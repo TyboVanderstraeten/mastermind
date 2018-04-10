@@ -40,10 +40,14 @@ public class DomeinController {
      * @param wachtwoord het wachtwoord van de gebruiker
      */
     public void meldAan(String spelersnaam, String wachtwoord) {
-        Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);
-        if (gevondenSpeler != null) {
-            setDeSpeler(gevondenSpeler);
-        } else {
+        try {
+            Speler gevondenSpeler = spelerRepository.geefSpeler(spelersnaam, wachtwoord);
+            if (gevondenSpeler != null) {
+                setDeSpeler(gevondenSpeler);
+            } else {
+                throw new SpelersnaamWachtwoordCombinatieException();
+            }
+        } catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();
         }
     }
