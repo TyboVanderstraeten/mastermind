@@ -11,7 +11,9 @@ import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-//EXCEPTIONS DONE
+//EXCEPTIONS DONE behalve
+//Exception voor foutief username bij aanmelden, (correct username en foutief passwoord wordt wel opgevangen!!!!)
+
 public class UC1Applicatie {
 
     private final DomeinController domeinController;
