@@ -74,7 +74,7 @@ public class MastermindApplicatie {
         boolean geldig = false;
         do {
             try {
-                System.out.println("Choose your language: (enter the number) \n1: Nederlands \n2: Français \n3: English");
+                System.out.println("Choose your language (enter the number): \n1: Nederlands \n2: Français \n3: English");
                 int keuze = input.nextInt();
                 switch (keuze) {
                     case 1:
