@@ -1,5 +1,11 @@
 package persistentie;
 
+import domein.MakkelijkSpel;
+import domein.MakkelijkeRij;
+import domein.MoeilijkSpel;
+import domein.NormaalSpel;
+import domein.Pin;
+import domein.Rij;
 import domein.Spel;
 import exceptions.SpelnaamNietUniekException;
 import java.sql.Connection;
@@ -20,8 +26,8 @@ public class SpelMapper {
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
-    private static final String GEEF_SPEL = "SELECT * FROM ID222177_G68.Spel where spelersnaam = ? AND spelnaam = ?";
-    private static final String GEEF_RIJEN = "SELECT * FROM ID22177_G68.Spel where spelersnaam = ? AND spelnaam = ?";
+    private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel where spelersnaam = ? AND spelnaam = ?";
+    private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij where spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ?";
 
@@ -82,6 +88,7 @@ public class SpelMapper {
                 if (rs.next()) {
                     String spelnaam = rs.getString("spelnaam");
                     spelnamen.add(spelnaam);
+                    System.out.println(spelnaam);
                 }
             }
         } catch (SQLException ex) {
@@ -107,28 +114,90 @@ public class SpelMapper {
         }
     }
 
-    // public Spel laadSpel(String spelnaam, String spelersnaam) {
-//        Spel spel = null;        
-//
+    public Spel laadSpel(String spelnaam, String spelersnaam) {
+        Spel spel = null;
+        List<int[]> rijen = new ArrayList<>();
+        String niveau = "";
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_SPEL);
+                PreparedStatement queryRij = conn.prepareStatement(GEEF_RIJEN)) {
+            query.setString(1, spelersnaam);
+            query.setString(2, spelnaam);
+            queryRij.setString(1, spelersnaam);
+            queryRij.setString(2, spelnaam);
+            try (ResultSet rs = queryRij.executeQuery()) {
+                while (rs.next()) {
+                    String combinatie = rs.getString("combinatie");
+                    String[] pinnen = combinatie.split("");
+                    int[] pinnenInt = new int[pinnen.length];
+                    for (int i = 0; i < pinnen.length; i++) {
+                        pinnenInt[i] = Integer.parseInt(pinnen[i]);
+                    }
+                    rijen.add(pinnenInt);
+                }
+            }
+
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    int aantalPogingen = rs.getInt("aantalPogingen");
+                    String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+                    switch (moeilijkheidsgraad) {
+                        case "MakkelijkSpel":
+                            spel = new MakkelijkSpel(rijen.get(rijen.size() - 1));
+                            break;
+                        case "NormaalSpel":
+                            spel = new NormaalSpel(rijen.get(rijen.size() - 1));
+                            break;
+                        case "MoeilijkSpel":
+                            spel = new MoeilijkSpel(rijen.get(rijen.size() - 1));
+                    }
+                }
+            }
+            for(int i =0; i<rijen.size()-1; i++)
+            spel.getSpelbord().geefPoging(rijen.get(i));
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return spel;
+    }
+
+//        Spel spel = null;
+//        List<String> rijen= new ArrayList<>(); 
 //        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-//                PreparedStatement query = conn.prepareStatement("GEEF_SPEL");
+//                PreparedStatement querySpel = conn.prepareStatement("GEEF_SPEL");
 //                PreparedStatement queryRij = conn.prepareStatement("GEEF_RIJEN")) {
-//            query.setString(1, spelnaam);
-//            query.setString(2, spelnaam);
-//            try (ResultSet rs = query.executeQuery()) {
+//            querySpel.setString(1, spelersnaam);
+//            querySpel.setString(2, spelnaam);
+//            queryRij.setString(1, spelersnaam);
+//            queryRij.setString(2, spelnaam);
+//            try (ResultSet rs = querySpel.executeQuery();
+//                    ResultSet rs2 = queryRij.executeQuery()) {
 //                int aantalPogingen = rs.getInt("aantalPogingen");
 //                String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-//
-//                while (rs.next()) {
-//
+//                
+//                while (rs2.next()) {
+//                    rijen.add(rs2.getString("combinatie"));
 //                    spel = new Spel();
 //                }
+//                
+//                for(int i =0; i<rijen.size(); i++){
+//                    
+//                }
+//                
+//                
+//                
+//                
 //            }
-//        } catch (SQLException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-//        return speler;
 //    }
+//    catch (SQLException ex
+//
+//    
+//        ) {
+//            throw new RuntimeException(ex);
+//    }
+//
+//    return speler ;
+//}
 }
 //SUBKLASSES IN DATABASE NODIG

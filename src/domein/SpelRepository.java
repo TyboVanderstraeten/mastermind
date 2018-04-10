@@ -31,7 +31,7 @@ public class SpelRepository {
     }
 
     public String[] geefSpellen(String spelersnaam) {
-        String[] spelnamen = new String[mapper.geefSpelnamen(spelersnaam).size()];
+       String[] spelnamen = new String[mapper.geefSpelnamen(spelersnaam).size()];
         int teller = 0;
 
         for (String spelnaam : mapper.geefSpelnamen(spelersnaam)) {
@@ -40,6 +40,10 @@ public class SpelRepository {
         }
 
         return spelnamen;
+    }
+    
+    public Spel geefSpel(String spelersnaam, String spelnaam){
+        return mapper.laadSpel(spelnaam, spelersnaam);
     }
 
     public void verwijderSpel(int spelnaam, String spelersnaam) {

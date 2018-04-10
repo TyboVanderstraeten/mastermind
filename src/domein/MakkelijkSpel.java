@@ -15,11 +15,11 @@ public class MakkelijkSpel extends Spel {
      * @see Spel
      */
     public MakkelijkSpel() {
-        this(null, null, null);
+        this(null);
     }
     
-    public MakkelijkSpel(String spelnaam, String spelersNaam, String willekeurigeCode) {
-        super();
+    public MakkelijkSpel(int[] willekeurigeCode) {
+        super(willekeurigeCode);                        
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new MakkelijkeRij();
         }

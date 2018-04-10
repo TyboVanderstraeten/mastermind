@@ -1,4 +1,4 @@
-    package domein;
+package domein;
 
 import exceptions.MoeilijkheidsgraadKeuzeException;
 import jdk.nashorn.internal.parser.TokenType;
@@ -18,7 +18,15 @@ public abstract class Spel {
      * code wordt ook in spel opgeslagen.
      */
     public Spel() {
-        this.spelbord = new Spelbord(genereerWillekeurigeCode());
+        this(null);         //niet meer nodig sinds UC4 laden spel
+    }
+
+    public Spel(int[] code) {
+        if (code == null) {
+            this.spelbord = new Spelbord(genereerWillekeurigeCode());
+        } else {
+            this.spelbord = new Spelbord(code);
+        }
     }
 
     /**
@@ -28,15 +36,14 @@ public abstract class Spel {
      * @return
      */
     protected abstract int[] genereerWillekeurigeCode();
-    
-    public int[] geefMoeilijkheidsgraden()
-    {
+
+    public int[] geefMoeilijkheidsgraden() {
         int[] moeilijkheidsgraden = new int[3];
-        
+
         moeilijkheidsgraden[0] = 1;
         moeilijkheidsgraden[1] = 2;
         moeilijkheidsgraden[2] = 3;
-        
+
         return moeilijkheidsgraden;
     }
 
@@ -48,8 +55,8 @@ public abstract class Spel {
     public Spelbord getSpelbord() {
         return spelbord;
     }
-    
-    public String getSpelnaam(){
+
+    public String getSpelnaam() {
         return spelnaam;
     }
 

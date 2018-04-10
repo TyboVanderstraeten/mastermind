@@ -15,19 +15,11 @@ public class NormaalSpel extends Spel {
      * @see Spel
      */
     public NormaalSpel() {
-        super();
-        for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
-            super.getSpelbord().getRijen()[i] = new NormaleRij();
-        }
-        for (int i = 0; i < super.getSpelbord().getWillekeurigeCode().length; i++) {
-            super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
-        }
-
-        //Denk niet dat klopt, werkt wel maar vrij omslachtig
+        this(null);
     }
     
-    public NormaalSpel(String spelnaam, String spelersNaam, String willekeurigeCode) {
-        super();
+    public NormaalSpel(int[] willekeurigeCode) {
+        super(willekeurigeCode);
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new NormaleRij();
         }
