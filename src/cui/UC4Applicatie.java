@@ -29,7 +29,7 @@ public class UC4Applicatie {
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[] spelnamen = domeinController.geefSpellen();
         for(String spelnaam : spelnamen){
-            System.out.printf("/ %s%n", spelnaam);
+            System.out.printf("- %s%n", spelnaam);
         }
         String spelnaam = input.next();
         domeinController.laadSpel(spelnaam);
