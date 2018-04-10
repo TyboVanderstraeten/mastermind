@@ -18,6 +18,7 @@ import java.util.Scanner;
 maar is niet zo, als pass wrong is kan hij dat checken door naar de spelersnaam te zoeken en dan gewoon dat 
 ww in db te vergelijken met het ingevoerde ww, maar als spelersnaam verkeerd is bij aanmelden, 
 heeft het systeem geen idee naar wat hij moet zoeken en levert dit een nullpointer op)*/
+//EDIT = Opgelost!
 public class UC1Applicatie {
 
     private final DomeinController domeinController;
