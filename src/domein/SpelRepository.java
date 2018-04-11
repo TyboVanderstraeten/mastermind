@@ -41,13 +41,13 @@ public class SpelRepository {
 
         return spelnamen;
     }
-    
+
     public Spel geefSpel(String spelersnaam, String spelnaam){
         return mapper.laadSpel(spelnaam, spelersnaam);
     }
 
-    public void verwijderSpel(int spelnaam, String spelersnaam) {
-        mapper.verwijderSpel(geefSpellen(spelersnaam)[spelnaam], spelersnaam);
+    public void verwijderSpel(String spelnaam, String spelersnaam) {
+        mapper.verwijderSpel(spelnaam, spelersnaam);
     }
     
 //    public Spel laadSpel(int spelnaam, String spelersnaam){

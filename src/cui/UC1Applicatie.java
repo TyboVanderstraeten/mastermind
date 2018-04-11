@@ -50,6 +50,9 @@ public class UC1Applicatie {
                         UC7Applicatie uc7 = new UC7Applicatie(resourceBundle, domeinController);
                         uc7.start();
                         break;
+                    case 6:
+                        System.exit(0);
+                        break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
@@ -105,9 +108,9 @@ public class UC1Applicatie {
     private int maakKeuze() {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuze"));
-        System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n5: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"));
+        System.out.printf("1: %s%n2: %s%n3: %s%n4: %s%n5: %s%n6: %s%n", resourceBundle.getString("startMastermind"), resourceBundle.getString("laadMastermind"), resourceBundle.getString("daagUit"), resourceBundle.getString("aanvaardUitdaging"), resourceBundle.getString("toonKlassementUitdagingen"),resourceBundle.getString("stoppen"));
         int keuze = input.nextInt();
-        if (keuze < 1 || keuze > 5) {
+        if (keuze < 1 || keuze > 6) {
             throw new KeuzemenuException();
         }
         return keuze;

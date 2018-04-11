@@ -207,8 +207,8 @@ public class DomeinController {
 
     public void registreerSpel(String spelnaam) {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
-    }    
-    
+    }
+
     public String[] geefSpellen() {
         String[] spellenString;
         int teller = 0;
@@ -222,17 +222,14 @@ public class DomeinController {
 
         return spellenString;
     }
-    
-    public void laadSpel(String spelnaam){
+
+    public void laadSpel(String spelnaam) {
         spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
         deSpeler.setSpel(spel);
     }
-    
-    public void verwijderSpel(int spelnaam)
-    {
-        //Spel spel = spelRepository.laadSpel(int spelnaam);
-        spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
 
+    public void verwijderSpel(String spelnaam) {
+        spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
     }
 
     public int[][] startUitdaging() {

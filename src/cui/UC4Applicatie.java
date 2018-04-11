@@ -27,11 +27,11 @@ public class UC4Applicatie {
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[] spelnamen = domeinController.geefSpellen();
         for (int teller = 0; teller < spelnamen.length; teller++) {
-            System.out.printf("%d) %s%n",teller, spelnamen[teller]);
+            System.out.printf("%d) %s%n", teller, spelnamen[teller]);
         }
         String spelnaam = input.next();
         domeinController.laadSpel(spelnaam);
-        //domeinController.verwijderSpel();
+        domeinController.verwijderSpel(spelnaam);
     }
 
     private void toonSpelbord() {

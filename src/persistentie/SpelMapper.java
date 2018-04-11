@@ -26,8 +26,8 @@ public class SpelMapper {
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
-    private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel where spelersnaam = ? AND spelnaam = ?";
-    private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij where spelersnaam = ? AND spelnaam = ?";
+    private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ?";
+    private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
 
