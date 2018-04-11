@@ -65,13 +65,7 @@ public class SpelMapper {
                 PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
             query.setString(1, spelnaam);
             query.setString(2, spelersnaam);
-            query.setString(3, spelnaam);
-            try (ResultSet rs = query.executeQuery()) {
-                while (rs.next()) {
-                    String spelnaam = rs.getString("spelnaam");
-                    spelnamen.add(spelnaam);
-                }
-            }
+            query.executeQuery();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -103,8 +97,10 @@ public class SpelMapper {
                 PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ)) {
             spelQuery.setString(1, spelnaam);
             spelQuery.setString(2, spelersnaam);
-            spelQuery.setInt(3, 1);
             spelQuery.executeUpdate();
+            rijQuery.setString(1, spelnaam);
+            rijQuery.setString(2, spelersnaam);
+            rijQuery.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
