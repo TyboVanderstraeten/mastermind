@@ -224,8 +224,12 @@ public class DomeinController {
     }
 
     public void laadSpel(String spelnaam) {
-        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
-        deSpeler.setSpel(spel);
+        //try {
+            spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+            deSpeler.setSpel(spel);
+        /*} catch (NullPointerException e) {
+            throw new SpelersnaamWachtwoordCombinatieException();
+        }*/
     }
 
     public void verwijderSpel(String spelnaam) {

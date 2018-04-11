@@ -32,8 +32,8 @@ public class UC4Applicatie {
         try {
             String spelnaam = input.next();
             domeinController.laadSpel(spelnaam);
-            domeinController.verwijderSpel(spelnaam);
-        } catch (NullPointerException e) {
+            //domeinController.verwijderSpel(spelnaam);
+        } catch (NullPointerException e) { //Try catch in comm. aanwezig in DomeinController, kan fout niet afhandelen -> spelnaam bestaat niet
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
         }
