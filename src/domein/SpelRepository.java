@@ -50,7 +50,9 @@ public class SpelRepository {
         mapper.verwijderSpel(spelnaam, spelersnaam);
     }
     
-    public void spelIsUitdaging(String spelnaam, String )
+    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
+        mapper.spelIsUitdaging(spelnaam, spelersnaam);
+    }
     
 //    public Spel laadSpel(int spelnaam, String spelersnaam){
 //        mapper.laadSpel(geefSpellen(spelersnaam)[spelnaam], spelersnaam);
