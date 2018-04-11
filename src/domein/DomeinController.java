@@ -261,19 +261,26 @@ public class DomeinController {
         return spelerRepository.kiesTegenspeler(tegenspeler);
     }
 
-    public List<String> geefTegenSpelers() {
-        return spelerRepository.geefTegenspelers(spel.getClass().getSimpleName());
+    public String[] geefTegenSpelers() {
+        String[] tegenspelersString;
+        int teller = 0;
+
+        tegenspelersString = new String[spelerRepository.geefTegenspelers(spel.getClass().getSimpleName()).length];
+
+        for (String tegenspelerNaam : spelerRepository.geefTegenspelers(spel.getClass().getSimpleName())) {
+            tegenspelersString[teller] = tegenspelerNaam;
+            teller++;
+        }
+
+        return tegenspelersString;
     }
 
-    public String[] aanvaardUitdaging(){
+    public String[] aanvaardUitdaging() {
         return spelRepository.geefUitdagingen();
-        
-        
+
     }
-    
+
     //KIESUITDAGING = LAADSPEL
-
-
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
@@ -281,7 +288,6 @@ public class DomeinController {
      *
      * @param deSpeler een object van Speler
      */
-
     private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
         this.deSpeler = deSpeler;
     }
