@@ -30,6 +30,7 @@ public class SpelMapper {
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
+    private static final String UPDATE_SPEL = "UPDATE ID2221777_g68.spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
@@ -57,7 +58,23 @@ public class SpelMapper {
         } catch (SQLException ex) {
             throw new SpelnaamNietUniekException();
         }
-
+    }
+    
+    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
+            query.setString(1, spelnaam);
+            query.setString(2, spelersnaam);
+            query.setString(3, spelnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    String spelnaam = rs.getString("spelnaam");
+                    spelnamen.add(spelnaam);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public List<String> geefSpelnamen(String spelersnaam) {
@@ -86,10 +103,8 @@ public class SpelMapper {
                 PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ)) {
             spelQuery.setString(1, spelnaam);
             spelQuery.setString(2, spelersnaam);
+            spelQuery.setInt(3, 1);
             spelQuery.executeUpdate();
-            rijQuery.setString(1, spelnaam);
-            rijQuery.setString(2, spelersnaam);
-            rijQuery.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
