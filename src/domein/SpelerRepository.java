@@ -49,7 +49,7 @@ public class SpelerRepository {
         this.mapper.voegSpelerToe(speler);
     }
     
-    public Speler selectSpeler(String spelersnaam)
+    public Speler kiesTegenspeler(String spelersnaam)
     {
         return mapper.geefSpeler(spelersnaam);
     }

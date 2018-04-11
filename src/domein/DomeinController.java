@@ -258,7 +258,7 @@ public class DomeinController {
     }
 
     public Speler kiesTegenspeler(String tegenspeler) {
-        return spelerRepository.selectSpeler(tegenspeler);
+        return spelerRepository.kiesTegenspeler(tegenspeler);
     }
 
     public List<String> geefTegenSpelers() {
