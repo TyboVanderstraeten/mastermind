@@ -48,19 +48,25 @@ public class SpelerRepository {
     public void voegSpelerToe(Speler speler) {
         this.mapper.voegSpelerToe(speler);
     }
-    
-    public Speler kiesTegenspeler(String spelersnaam)
-    {
+
+    public Speler kiesTegenspeler(String spelersnaam) {
         return mapper.geefSpeler(spelersnaam);
     }
-    
-    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk){
+
+    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
     }
-    
-    public List<String> geefTegenspelers(String moeilijkheidsgraad) {
-        return mapper.geefTegenspelers(moeilijkheidsgraad);
+
+    public String[] geefTegenspelers(String moeilijkheidsgraad) {
+        String[] tegenspelerNamen = new String[mapper.geefTegenspelers(moeilijkheidsgraad).size()];
+        int teller = 0;
+
+        for (String tegenspelerNaam : mapper.geefTegenspelers(moeilijkheidsgraad)) {
+            tegenspelerNamen[teller] = tegenspelerNaam;
+            teller++;
+        }
+
+        return tegenspelerNamen;
     }
-    
 
 }

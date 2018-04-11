@@ -156,8 +156,8 @@ public class SpelMapper {
     }
     
     
-    public String[] geefNamenUitdagingen(String spelnaam, String spelersnaam){
+   /* public String[] geefNamenUitdagingen(String spelnaam, String spelersnaam){
         
-    }
+    }*/
 
 }
