@@ -29,9 +29,14 @@ public class UC4Applicatie {
         for (int teller = 0; teller < spelnamen.length; teller++) {
             System.out.printf("%d) %s%n", teller, spelnamen[teller]);
         }
-        String spelnaam = input.next();
-        domeinController.laadSpel(spelnaam);
-        domeinController.verwijderSpel(spelnaam);
+        try {
+            String spelnaam = input.next();
+            domeinController.laadSpel(spelnaam);
+            domeinController.verwijderSpel(spelnaam);
+        } catch (NullPointerException e) {
+            System.out.println(resourceBundle.getString(e.getMessage()));
+            input.nextLine();
+        }
     }
 
     private void toonSpelbord() {
