@@ -18,7 +18,7 @@ public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
     private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_TEGENSPELERS = "SELECT spelersnaam FROM ID222177_g68.Spel WHERE moeilijkheidsgraad = ?";
+    private static final String GEEF_TEGENSPELERS = "SELECT DISTINCT spelersnaam FROM ID222177_g68.Spel WHERE moeilijkheidsgraad = ?";
     private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
 
     /**
@@ -90,8 +90,8 @@ public class SpelerMapper {
         
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNEN)) {
-                query.setInt(1, moeilijkheidsgraad);
+                PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {
+                query.setString(1, moeilijkheidsgraad);
                 try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
                     String spelersnaam = rs.getString("spelersnaam");
