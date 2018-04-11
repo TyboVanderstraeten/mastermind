@@ -225,8 +225,8 @@ public class DomeinController {
 
     public void laadSpel(String spelnaam) {
         //try {
-            spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
-            deSpeler.setSpel(spel);
+        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+        deSpeler.setSpel(spel);
         /*} catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();
         }*/
@@ -265,6 +265,15 @@ public class DomeinController {
         return spelerRepository.geefTegenspelers(moeilijkheidsgraad);
     }
 
+    public String[] aanvaardUitdaging(){
+        return spelRepository.geefUitdagingen();
+        
+        
+    }
+    
+    //KIESUITDAGING = LAADSPEL
+
+
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
@@ -272,6 +281,7 @@ public class DomeinController {
      *
      * @param deSpeler een object van Speler
      */
+
     private void setDeSpeler(Speler deSpeler) {          //Als deSpeler final is mag setter verdwijnen, maar geen zekerheid tot nu toe, == als uitloggen moet kunnen -> niet final, enkel aanmelden -> final
         this.deSpeler = deSpeler;
     }

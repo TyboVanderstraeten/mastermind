@@ -30,7 +30,7 @@ public class SpelMapper {
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String UPDATE_SPEL = "UPDATE ID2221777_g68.spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
+    private static final String UPDATE_SPEL = "UPDATE ID2221777_g68.spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";    
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
@@ -151,8 +151,13 @@ public class SpelMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
+        
         return spel;
+    }
+    
+    
+    public String[] geefNamenUitdagingen(String spelnaam, String spelersnaam){
+        
     }
 
 }
