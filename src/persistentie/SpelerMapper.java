@@ -84,7 +84,7 @@ public class SpelerMapper {
         }
     }
     
-    public List<String> geefTegenspelers(int moeilijkheidsgraad)
+    public List<String> geefTegenspelers(String moeilijkheidsgraad)
     {
         List<String> tegenspelers = new ArrayList<>();
         

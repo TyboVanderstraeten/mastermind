@@ -58,7 +58,7 @@ public class SpelerRepository {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
     }
     
-    public List<String> geefTegenspelers(int moeilijkheidsgraad) {
+    public List<String> geefTegenspelers(String moeilijkheidsgraad) {
         return mapper.geefTegenspelers(moeilijkheidsgraad);
     }
     

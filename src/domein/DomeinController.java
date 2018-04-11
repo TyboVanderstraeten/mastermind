@@ -261,8 +261,8 @@ public class DomeinController {
         return spelerRepository.selectSpeler(tegenspeler);
     }
 
-    public List<String> geefTegenSpelers(int moeilijkheidsgraad) {
-        return spelerRepository.geefTegenspelers(moeilijkheidsgraad);
+    public List<String> geefTegenSpelers() {
+        return spelerRepository.geefTegenspelers(spel.getClass().getSimpleName());
     }
 
     //setters
