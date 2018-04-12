@@ -246,14 +246,15 @@ public class DomeinController {
         return spellenString;
     }
 
-    public void laadSpel(String spelnaam) {
+    public void laadSpel(String spelnaam, int uitdaging) {
         //try {
-        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam, uitdaging);
         deSpeler.setSpel(spel);
         /*} catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();
         }*/
     }
+
 
     public void verwijderSpel(String spelnaam) {
         spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
@@ -298,10 +299,10 @@ public class DomeinController {
         return tegenspelersString;
     }
 
-    public String[] aanvaardUitdaging() {
-        return spelRepository.geefUitdagingen();
-
+    public String[][] aanvaardUitdaging() {        
+        return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());        
     }
+
 
     //KIESUITDAGING = LAADSPEL
     //setters
