@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad, isUitdaging) VALUES (?,?,?,?,?)";
-    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad, tegenspeler) VALUES (?,?,?,?,?)";
+    private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ? AND isUitdaging = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
@@ -33,7 +33,7 @@ public class SpelMapper {
     private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";    
     private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND isUitdaging = 1";
 
-    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
+    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel, String tegenspeler) {               //moet nog aangepast worden//EDIT: DONE
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
@@ -42,14 +42,14 @@ public class SpelMapper {
             querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
-            querySpel.setInt(5, 1);
+            querySpel.setString(5, tegenspeler);
             querySpel.executeUpdate();
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
                 queryRij.setString(2, spelnaam);
                 queryRij.setString(3, spelersnaam);
                 queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[i].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
-                queryRij.executeUpdate();
+                queryRij.executeQuery();
             }
 
             queryRij.setInt(1, spel.getSpelbord().getRijen().length - 1);
@@ -164,7 +164,7 @@ public class SpelMapper {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_UITDAGINGEN)) {
             query.setString(1, spelersnaam);
-            try (ResultSet rs = query.executeQuery()) {
+            try (ResultSet rs = query.executeUpdate()) {
                 while (rs.next()) {
                     String[] uitdagingInfo = new String[2];
                     String uitdagingsnaam = rs.getString("spelnaam");
