@@ -18,10 +18,13 @@ public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
     private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    //private static final String GEEF_TEGENSPELERS = "SELECT DISTINCT spelersnaam FROM ID222177_g68.Spel WHERE moeilijkheidsgraad = ? AND spelersnaam <> ?";
     private static final String GEEF_TEGENSPELERS = "SELECT spelersnaam FROM ID222177_g68.Speler WHERE ? >= ? AND spelersnaam <> ?";
     private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
-
+    //Klassement SQL query's
+    private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalPuntenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalPuntenMakkelijk DESC";
+    private static final String GEEF_SPELERSKLASSEMENTNORMAAL = "SELECT spelersnaam, aantalPuntenNormaal FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenNormaal > 0 ORDER BY aantalPuntenNormaal DESC";
+    private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalPuntenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalPuntenMoeilijk DESC";
+    
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
      * databank.
