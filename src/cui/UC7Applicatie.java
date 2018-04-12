@@ -16,7 +16,7 @@ public class UC7Applicatie {
     }
 
     public void start() {
-        
+        System.out.printf("%s",geefKlassement());
     }
 
     public String geefKlassement() {
@@ -26,18 +26,19 @@ public class UC7Applicatie {
         String klassement = "";
         klassement += String.format("%s", "Klassement voor makkelijke moeilijkheidsgraad");
         for (int teller = 0; teller < klassementMakkelijk.size(); teller++) {
-            System.out.printf("%s | %s%n",klassementMakkelijk.get(teller)[0],klassementMakkelijk.get(teller)[1]);    
+            klassement += String.format("%s | %s%n", klassementMakkelijk.get(teller)[0], klassementMakkelijk.get(teller)[1]);
         }
-        
+
         klassement += String.format("%s", "Klassement voor normale moeilijkheidsgraad");
         for (int teller = 0; teller < klassementNormaal.size(); teller++) {
-            System.out.printf("%s | %s%n",klassementNormaal.get(teller)[0],klassementNormaal.get(teller)[1]);    
+            klassement += String.format("%s | %s%n", klassementNormaal.get(teller)[0], klassementNormaal.get(teller)[1]);
         }
-        
+
         klassement += String.format("%s", "Klassement voor moeilijke moeilijkheidsgraad");
         for (int teller = 0; teller < klassementMoeilijk.size(); teller++) {
-            System.out.printf("%s | %s%n",klassementMoeilijk.get(teller)[0],klassementMoeilijk.get(teller)[1]);    
+            klassement += String.format("%s | %s%n", klassementMoeilijk.get(teller)[0], klassementMoeilijk.get(teller)[1]);
         }
+        return klassement;
     }
 
 }
