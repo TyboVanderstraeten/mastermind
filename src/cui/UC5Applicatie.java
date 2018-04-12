@@ -23,9 +23,20 @@ public class UC5Applicatie {
 
     public void kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
-        kiesMoeilijkheidsgraad();
-        System.out.println(resourceBundle.getString("maakKeuzeTegenspeler"));       
-        String[] tegenspelerNamen = domeinController.geefTegenSpelers(moeilijkheidsgraad);
+        String[] tegenspelerNamen = {};
+        switch (kiesMoeilijkheidsgraad()) {
+            case 1:
+                tegenspelerNamen = domeinController.geefTegenSpelers("MakkelijkSpel");
+                break;
+            case 2:
+                tegenspelerNamen = domeinController.geefTegenSpelers("NormaalSpel");
+                break;
+            case 3:
+                tegenspelerNamen = domeinController.geefTegenSpelers("MoeilijkSpel");
+                break;
+        }
+
+        System.out.println(resourceBundle.getString("maakKeuzeTegenspeler"));
         for (int teller = 0; teller < tegenspelerNamen.length; teller++) {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
         }
@@ -38,17 +49,18 @@ public class UC5Applicatie {
         }
 
     }
-    
-    private void kiesMoeilijkheidsgraad() {
+
+    private int kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
+        int keuze = 0;
         do {
             try {
                 System.out.println("\n" + resourceBundle.getString("keuzeMoeilijkheid"));
                 System.out.println("1: " + resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));
                 System.out.println("2: " + resourceBundle.getString("normaleMoeilijkheidsgraad"));
                 System.out.println("3: " + resourceBundle.getString("moeilijkeMoeilijkheidsgraad"));
-                int keuze = input.nextInt();
+                keuze = input.nextInt();
                 if (keuze < 1 || keuze > 3) {
                     throw new MoeilijkheidsgraadKeuzeException();
                 }
@@ -62,5 +74,6 @@ public class UC5Applicatie {
                 input.nextLine();
             }
         } while (!geldig);
+        return keuze;
     }
 }
