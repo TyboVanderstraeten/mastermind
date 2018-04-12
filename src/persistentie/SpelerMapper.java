@@ -24,7 +24,7 @@ public class SpelerMapper {
     private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalPuntenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalPuntenMakkelijk DESC";
     private static final String GEEF_SPELERSKLASSEMENTNORMAAL = "SELECT spelersnaam, aantalPuntenNormaal FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenNormaal > 0 ORDER BY aantalPuntenNormaal DESC";
     private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalPuntenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalPuntenMoeilijk DESC";
-    
+
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
      * databank.
@@ -68,7 +68,7 @@ public class SpelerMapper {
                     aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
                     aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
                     aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen,aantalGewonnenUitdagingen);
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen);
                 }
             }
         } catch (SQLException ex) {
@@ -114,4 +114,20 @@ public class SpelerMapper {
         return tegenspelers;
     }
 
+    public List<String> geefKlassementMakkelijk() {
+        List<String> klassementMakkelijk = new ArrayList<>();
+
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELERSKLASSEMENTMAKKELIJK)) {
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return klassementMakkelijk;
+    }
 }
