@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Arrays;
 import java.util.List;
 import persistentie.SpelMapper;
 
@@ -42,8 +43,8 @@ public class SpelRepository {
         return spelnamen;
     }
 
-    public Spel geefSpel(String spelersnaam, String spelnaam) {
-        return mapper.laadSpel(spelnaam, spelersnaam);
+    public Spel geefSpel(String spelersnaam, String spelnaam, int uitdaging) {
+        return mapper.laadSpel(spelnaam, spelersnaam, uitdaging);
     }
 
     public void verwijderSpel(String spelnaam, String spelersnaam) {
@@ -54,11 +55,16 @@ public class SpelRepository {
         mapper.spelIsUitdaging(spelnaam, spelersnaam);
     }
 
-    public String[] geefUitdagingen() {
-        String[] uitdagingen = {};
+   public String[][] geefUitdagingen(String spelersnaam) {
+        
+        List<String[]> uitdagingInfo = mapper.geefLijstUitdagingen(spelersnaam);
+        String[][] uitdagingen = new String[uitdagingInfo.size()][];
+        for(int i = 0; i<uitdagingen.length; i++){
+            uitdagingen[i]= uitdagingInfo.get(i);
+        }        
         return uitdagingen;
     }
-
+ 
 //    public Spel laadSpel(int spelnaam, String spelersnaam){
 //        mapper.laadSpel(geefSpellen(spelersnaam)[spelnaam], spelersnaam);
 //    }
