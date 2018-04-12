@@ -27,8 +27,8 @@ public class UC6Applicatie {
 
         if (uitdagingen.length != 0) {
             System.out.println("Kies een uitdaging. (geef volledige naam)");
-            for (int i = 0; i < uitdagingen.length; i++) {
-                System.out.printf("%d.) %s%n", i+1, Arrays.toString(uitdagingen[i]).replace("[", "").replace("]", "").replace(",", " | "));
+            for (int teller = 0; teller < uitdagingen.length; teller++) {
+                System.out.printf("%d) %s%n", teller+1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
             }
             domeinController.laadSpel(input.nextLine(), 1);
             toonSpelbord();
