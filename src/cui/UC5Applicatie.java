@@ -16,7 +16,7 @@ public class UC5Applicatie {
     }
 
     public void start() {
-
+        kiesTegenspeler();
     }
 
     public void kiesTegenspeler() {
