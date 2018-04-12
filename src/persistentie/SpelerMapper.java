@@ -114,15 +114,19 @@ public class SpelerMapper {
         return tegenspelers;
     }
 
-    public List<String> geefKlassementMakkelijk() {
-        List<String> klassementMakkelijk = new ArrayList<>();
+    public List<String[]> geefKlassementMakkelijk() {
+        List<String[]> klassementMakkelijk = new ArrayList<>();
 
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_SPELERSKLASSEMENTMAKKELIJK)) {
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
-                    
+                    String[] infoSpelerKlassement = new String[2];
+                    infoSpelerKlassement[0] = rs.getString("spelersnaam");
+                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMakkelijk"));
+
+                    klassementMakkelijk.add(infoSpelerKlassement);
                 }
             }
         } catch (SQLException ex) {
