@@ -84,8 +84,7 @@ public class UC5Applicatie {
         Scanner input = new Scanner(System.in);
         System.out.println("Geef een naam aan uw spel: "); //nog in resourcebundle zetten
         String spelnaam = input.next();  
-        domeinController.registreerSpel(spelnaam);
-        domeinController.spelIsUitdaging();
-        domeinController.registreerSpel(tegenSpeler, spelnaam);
+        domeinController.registreerUitdaging(tegenSpeler, spelnaam);        
+        
     }
 }

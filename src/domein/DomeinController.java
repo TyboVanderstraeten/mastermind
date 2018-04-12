@@ -229,11 +229,12 @@ public class DomeinController {
     }
 
     public void registreerSpel(String spelnaam) {
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, null);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
     }
 
-    public void registreerSpel(String spelersnaam, String spelnaam) {                    //VOOR 1EEN UITDAGING
-        spelRepository.registreerSpel(spelnaam, spelersnaam, spel);
+    public void registreerUitdaging(String tegenspeler, String spelnaam) {                    //VOOR 1EEN UITDAGING
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, tegenspeler);
+        spelRepository.registreerSpel(spelnaam, tegenspeler, spel, deSpeler.getSpelersnaam());
     }
 
     public String[] geefSpellen() {

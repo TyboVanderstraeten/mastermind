@@ -27,8 +27,8 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
-    public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
-        mapper.voegSpelToe(spelnaam, spelersnaam, spel);
+    public void registreerSpel(String spelnaam, String spelersnaam, Spel spel, String tegenspeler) {
+        mapper.voegSpelToe(spelnaam, spelersnaam, spel, tegenspeler);
     }
 
     public String[] geefSpellen(String spelersnaam) {
