@@ -26,13 +26,13 @@ public class UC5Applicatie {
         String[] tegenspelerNamen = {};
         switch (kiesMoeilijkheidsgraad()) {
             case 1:
-                tegenspelerNamen = domeinController.geefTegenSpelers("MakkelijkSpel");
+                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 0);
                 break;
             case 2:
-                tegenspelerNamen = domeinController.geefTegenSpelers("NormaalSpel");
+                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 20);
                 break;
             case 3:
-                tegenspelerNamen = domeinController.geefTegenSpelers("MoeilijkSpel");
+                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenNormaal", 20);
                 break;
         }
 
