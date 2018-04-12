@@ -16,23 +16,32 @@ public class UC6Applicatie {
     }
 
     public void start() {
-        aanvaardUitdaging();
-        toonSpelbord();
-        UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-        uc3.start();
-    }
-    
-    private void aanvaardUitdaging(){
-        Scanner input = new Scanner(System.in);
-        String[][] uitdagingen =domeinController.aanvaardUitdaging();
-        System.out.println("Kies een uitdaging. (geef volledige naam)");
-        for(int i =0; i<uitdagingen.length; i++){
-            System.out.printf("%d.) %s", i, Arrays.toString(uitdagingen[i]).replace("[", "").replace("]", "").replace(",", "|"));
+        System.out.println(aanvaardUitdaging());
+        if (!aanvaardUitdaging().isEmpty()) {
+            toonSpelbord();
+            UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+            uc3.start();
         }
-        domeinController.laadSpel(input.nextLine(), 1);    
     }
-    
-    
+
+    private String aanvaardUitdaging() {
+        Scanner input = new Scanner(System.in);
+
+        String[][] uitdagingen = domeinController.aanvaardUitdaging();
+        String uitvoer = "";
+        if (uitdagingen.length != 0) {
+            System.out.println("Kies een uitdaging. (geef volledige naam)");
+            for (int i = 0; i < uitdagingen.length; i++) {
+                uitvoer += String.format("%d.) %s%n", i, Arrays.toString(uitdagingen[i]).replace("[", "").replace("]", "").replace(",", "|"));
+            }
+            domeinController.laadSpel(input.nextLine(), 1);
+        } else {
+            System.out.println("U geeft geen uitdagingen!");
+
+        }
+        return uitvoer;
+    }
+
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();
