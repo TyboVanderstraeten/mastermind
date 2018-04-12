@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class UC7Applicatie {
 
     private final DomeinController domeinController;
