@@ -43,6 +43,7 @@ public class UC5Applicatie {
         try {
             String tegenspelerNaam = input.next();
             domeinController.kiesTegenspeler(tegenspelerNaam);
+            registreerSpel(tegenspelerNaam);
         } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
@@ -75,5 +76,15 @@ public class UC5Applicatie {
             }
         } while (!geldig);
         return keuze;
+    }
+    
+    
+    private void registreerSpel(String tegenSpeler){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Geef een naam aan uw spel: ");
+        String spelnaam = input.next();  
+        domeinController.registreerSpel(spelnaam);
+        domeinController.spelIsUitdaging();
+        domeinController.registreerSpel(tegenSpeler, spelnaam);
     }
 }

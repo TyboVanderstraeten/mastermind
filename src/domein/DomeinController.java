@@ -229,7 +229,11 @@ public class DomeinController {
     }
 
     public void registreerSpel(String spelnaam) {
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
+    }
+
+    public void registreerSpel(String spelersnaam, String spelnaam) {                    //VOOR 1EEN UITDAGING
+        spelRepository.registreerSpel(spelnaam, spelersnaam, spel);
     }
 
     public String[] geefSpellen() {
@@ -254,7 +258,6 @@ public class DomeinController {
             throw new SpelersnaamWachtwoordCombinatieException();
         }*/
     }
-
 
     public void verwijderSpel(String spelnaam) {
         spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
@@ -299,10 +302,13 @@ public class DomeinController {
         return tegenspelersString;
     }
 
-    public String[][] aanvaardUitdaging() {        
-        return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());        
+    public void spelIsUitdaging() {
+        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
     }
 
+    public String[][] aanvaardUitdaging() {
+        return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());
+    }
 
     //KIESUITDAGING = LAADSPEL
     //setters

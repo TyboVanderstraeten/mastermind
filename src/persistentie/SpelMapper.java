@@ -23,15 +23,15 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad, isUitdaging) VALUES (?,?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ? AND isUitdaging = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE * FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE * FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String UPDATE_SPEL = "UPDATE ID2221777_g68.spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";    
-    private static final String GEEF_UITDAGINGEN = "SELECT spelnaam and moeilijkheidsgraad FROM ID222177_g68.Spel where spelersnaam = ? AND isUitdaging = 1";
+    private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";    
+    private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND isUitdaging = 1";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
@@ -42,6 +42,7 @@ public class SpelMapper {
             querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
+            querySpel.setInt(5, 1);
             querySpel.executeUpdate();
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
@@ -66,7 +67,7 @@ public class SpelMapper {
                 PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
             query.setString(1, spelnaam);
             query.setString(2, spelersnaam);
-            query.executeQuery();
+            query.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -116,6 +117,7 @@ public class SpelMapper {
                 PreparedStatement queryRij = conn.prepareStatement(GEEF_RIJEN)) {
             query.setString(1, spelersnaam);
             query.setString(2, spelnaam);
+            query.setInt(3, 1);
             queryRij.setString(1, spelersnaam);
             queryRij.setString(2, spelnaam);
             try (ResultSet rs = queryRij.executeQuery()) {
@@ -166,7 +168,9 @@ public class SpelMapper {
                 while (rs.next()) {
                     String[] uitdagingInfo = new String[2];
                     String uitdagingsnaam = rs.getString("spelnaam");
+                    uitdagingInfo[0]=uitdagingsnaam;
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+                    uitdagingInfo[1]=moeilijkheidsgraad;
                     uitdagingen.add(uitdagingInfo);
                 }
             }
@@ -177,5 +181,14 @@ public class SpelMapper {
         return uitdagingen;
     }
 
+    
+    
+    
+    
+    
+    //UITDAGINGMAPPER? DUNNO FOR SURE
+    public void voegUitdagingToe(String speler1, String speler2, Spel spel){
+        
+    }
 
 }
