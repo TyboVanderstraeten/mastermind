@@ -116,8 +116,7 @@ public class SpelMapper {
                 PreparedStatement query = conn.prepareStatement(GEEF_SPEL);
                 PreparedStatement queryRij = conn.prepareStatement(GEEF_RIJEN)) {
             query.setString(1, spelersnaam);
-            query.setString(2, spelnaam);
-            query.setInt(3, 1);
+            query.setString(2, spelnaam);            
             queryRij.setString(1, spelersnaam);
             queryRij.setString(2, spelnaam);
             try (ResultSet rs = queryRij.executeQuery()) {
@@ -180,15 +179,9 @@ public class SpelMapper {
 
         return uitdagingen;
     }
-
     
     
     
     
-    
-    //UITDAGINGMAPPER? DUNNO FOR SURE
-    public void voegUitdagingToe(String speler1, String speler2, Spel spel){
-        
-    }
 
 }
