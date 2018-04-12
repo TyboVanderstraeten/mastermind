@@ -18,12 +18,13 @@ public class UC5Applicatie {
     }
 
     public void start() {
-        kiesTegenspeler();
+        registreerSpel(kiesTegenspeler());
     }
 
-    public void kiesTegenspeler() {
+    public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
+        String tegenspelerNaam = "";
         switch (kiesMoeilijkheidsgraad()) {
             case 1:
                 tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 0);
@@ -41,13 +42,13 @@ public class UC5Applicatie {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
         }
         try {
-            String tegenspelerNaam = input.next();
-            domeinController.kiesTegenspeler(tegenspelerNaam);
-            registreerSpel(tegenspelerNaam);
+            tegenspelerNaam = input.next();
+            //domeinController.kiesTegenspeler(tegenspelerNaam);
         } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
         }
+        return tegenspelerNaam;
 
     }
 
@@ -81,7 +82,7 @@ public class UC5Applicatie {
     
     private void registreerSpel(String tegenSpeler){
         Scanner input = new Scanner(System.in);
-        System.out.println("Geef een naam aan uw spel: ");
+        System.out.println("Geef een naam aan uw spel: "); //nog in resourcebundle zetten
         String spelnaam = input.next();  
         domeinController.registreerSpel(spelnaam);
         domeinController.spelIsUitdaging();
