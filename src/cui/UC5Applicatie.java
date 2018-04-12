@@ -64,7 +64,7 @@ public class UC5Applicatie {
                 if (keuze < 1 || keuze > 3) {
                     throw new MoeilijkheidsgraadKeuzeException();
                 }
-                domeinController.kiesMoeilijkheidsgraad(keuze);
+                domeinController.kiesMoeilijkheidsgraadUitdagingen(keuze);
                 geldig = true;
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
