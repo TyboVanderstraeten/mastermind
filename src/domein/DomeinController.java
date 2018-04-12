@@ -261,13 +261,13 @@ public class DomeinController {
         return spelerRepository.kiesTegenspeler(tegenspeler);
     }
 
-    public String[] geefTegenSpelers() {
+    public String[] geefTegenSpelers(String moeilijkheidsgraad) {
         String[] tegenspelersString;
         int teller = 0;
 
-        tegenspelersString = new String[spelerRepository.geefTegenspelers(spel.getClass().getSimpleName()).length];
+        tegenspelersString = new String[spelerRepository.geefTegenspelers(moeilijkheidsgraad).length];
 
-        for (String tegenspelerNaam : spelerRepository.geefTegenspelers(spel.getClass().getSimpleName())) {
+        for (String tegenspelerNaam : spelerRepository.geefTegenspelers(moeilijkheidsgraad)) {
             tegenspelersString[teller] = tegenspelerNaam;
             teller++;
         }
