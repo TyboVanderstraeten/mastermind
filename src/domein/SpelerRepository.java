@@ -57,11 +57,11 @@ public class SpelerRepository {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
     }
 
-    public String[] geefTegenspelers(String moeilijkheidsgraad) {
-        String[] tegenspelerNamen = new String[mapper.geefTegenspelers(moeilijkheidsgraad).size()];
+    public String[] geefTegenspelers(String moeilijkheidsgraad, String spelersnaam) {
+        String[] tegenspelerNamen = new String[mapper.geefTegenspelers(moeilijkheidsgraad, spelersnaam).size()];
         int teller = 0;
 
-        for (String tegenspelerNaam : mapper.geefTegenspelers(moeilijkheidsgraad)) {
+        for (String tegenspelerNaam : mapper.geefTegenspelers(moeilijkheidsgraad, spelersnaam)) {
             tegenspelerNamen[teller] = tegenspelerNaam;
             teller++;
         }

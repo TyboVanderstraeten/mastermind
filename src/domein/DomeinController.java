@@ -265,9 +265,9 @@ public class DomeinController {
         String[] tegenspelersString;
         int teller = 0;
 
-        tegenspelersString = new String[spelerRepository.geefTegenspelers(moeilijkheidsgraad).length];
+        tegenspelersString = new String[spelerRepository.geefTegenspelers(moeilijkheidsgraad, deSpeler.getSpelersnaam()).length];
 
-        for (String tegenspelerNaam : spelerRepository.geefTegenspelers(moeilijkheidsgraad)) {
+        for (String tegenspelerNaam : spelerRepository.geefTegenspelers(moeilijkheidsgraad, deSpeler.getSpelersnaam())) {
             tegenspelersString[teller] = tegenspelerNaam;
             teller++;
         }

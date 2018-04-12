@@ -18,7 +18,7 @@ public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
     private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_TEGENSPELERS = "SELECT DISTINCT spelersnaam FROM ID222177_g68.Spel WHERE moeilijkheidsgraad = ?";
+    private static final String GEEF_TEGENSPELERS = "SELECT DISTINCT spelersnaam FROM ID222177_g68.Spel WHERE moeilijkheidsgraad = ? AND spelersnaam <> ?";
     private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
 
     /**
@@ -84,7 +84,7 @@ public class SpelerMapper {
         }
     }
     
-    public List<String> geefTegenspelers(String moeilijkheidsgraad)
+    public List<String> geefTegenspelers(String moeilijkheidsgraad,String spelersnaam)
     {
         List<String> tegenspelers = new ArrayList<>();
         
@@ -92,10 +92,11 @@ public class SpelerMapper {
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {
                 query.setString(1, moeilijkheidsgraad);
+                query.setString(2, spelersnaam);
                 try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
-                    String spelersnaam = rs.getString("spelersnaam");
-                    tegenspelers.add(spelersnaam);
+                    String spelersnaamForAdd = rs.getString("spelersnaam");
+                    tegenspelers.add(spelersnaamForAdd);
                 }
             }
         } catch (SQLException ex) {
