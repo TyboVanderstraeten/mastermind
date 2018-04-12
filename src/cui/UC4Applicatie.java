@@ -31,7 +31,7 @@ public class UC4Applicatie {
         }
         try {
             String spelnaam = input.next();
-            domeinController.laadSpel(spelnaam, 0);
+            domeinController.laadSpel(spelnaam, 0);     //0 als het geen uitdaging is, 1 als dit wel zo is. Mss best keuzemenu gewoon/uitdaging laden toevoegen.
             //domeinController.verwijderSpel(spelnaam); MOET NOG GEBEUREN
         } catch (NullPointerException e) { //Try catch in comm. aanwezig in DomeinController, kan fout niet afhandelen -> spelnaam bestaat niet
             System.out.println(resourceBundle.getString(e.getMessage()));
