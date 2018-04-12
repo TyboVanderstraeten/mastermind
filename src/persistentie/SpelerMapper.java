@@ -93,7 +93,7 @@ public class SpelerMapper {
                 PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {
                 query.setString(1, moeilijkheidsgraad);
                 try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     String spelersnaam = rs.getString("spelersnaam");
                     tegenspelers.add(spelersnaam);
                 }
