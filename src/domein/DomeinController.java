@@ -1,7 +1,9 @@
 package domein;
 
 import exceptions.MoeilijkSpelToegangException;
+import exceptions.MoeilijkUitdagingToegangException;
 import exceptions.NormaalSpelToegangException;
+import exceptions.NormaalUitdagingToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.WachtwoordBevestigingFoutException;
 import java.util.Arrays;
@@ -103,6 +105,27 @@ public class DomeinController {
             case 3:
                 if (deSpeler.getAantalGewonnen()[1] < 20) {
                     throw new MoeilijkSpelToegangException();
+                }
+                spel = new MoeilijkSpel();
+                break;
+        }
+        deSpeler.setSpel(spel);
+    }
+
+    public void kiesMoeilijkheidsgraadUitdagingen(int moeilijkheidsgraad) {
+        switch (moeilijkheidsgraad) {
+            case 1:
+                spel = new MakkelijkSpel();
+                break;
+            case 2:
+                if (deSpeler.getAantalGewonnenUitdagingen()[0] < 20) {
+                    throw new NormaalUitdagingToegangException();
+                }
+                spel = new NormaalSpel();
+                break;
+            case 3:
+                if (deSpeler.getAantalGewonnenUitdagingen()[1] < 20) {
+                    throw new MoeilijkUitdagingToegangException();
                 }
                 spel = new MoeilijkSpel();
                 break;

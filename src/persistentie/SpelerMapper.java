@@ -58,10 +58,14 @@ public class SpelerMapper {
                 if (rs.next()) {
                     String wachtwoord = rs.getString("wachtwoord");
                     int[] aantalGewonnen = new int[3];
+                    int[] aantalGewonnenUitdagingen = new int[3];
                     aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
                     aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
                     aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen);
+                    aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
+                    aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
+                    aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen,aantalGewonnenUitdagingen);
                 }
             }
         } catch (SQLException ex) {

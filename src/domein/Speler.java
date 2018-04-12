@@ -12,6 +12,7 @@ public class Speler {
     private String spelersnaam;
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
+    private int[] aantalGewonennUitdagingen = {0, 0, 0};
     private Spel spel;
 
     //constructors
@@ -29,10 +30,11 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen) {
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
+        setAantalGewonnen(aantalGewonnenUitdagingen);
     }
 
     public Speler selectSpeler(String tegenspeler) {
@@ -65,6 +67,10 @@ public class Speler {
      */
     public int[] getAantalGewonnen() {
         return aantalGewonnen;
+    }
+
+    public int[] getAantalGewonnenUitdagingen() {
+        return aantalGewonennUitdagingen;
     }
 
     //setters
@@ -102,6 +108,10 @@ public class Speler {
 
     private void setAantalGewonnen(int[] aantalGewonnen) {
         this.aantalGewonnen = aantalGewonnen;
+    }
+
+    private void setAantalGewonnenUitdagingen(int[] aantalGewonnenUitdagingen) {
+        this.aantalGewonennUitdagingen = aantalGewonnenUitdagingen;
     }
 
     public void verhoogAantalGewonnen() {
