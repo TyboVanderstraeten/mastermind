@@ -251,9 +251,9 @@ public class DomeinController {
         return spellenString;
     }
 
-    public void laadSpel(String spelnaam, int uitdaging) {
+    public void laadSpel(String spelnaam) {
         //try {
-        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam, uitdaging);
+        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
         deSpeler.setSpel(spel);
         /*} catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();

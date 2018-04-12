@@ -43,8 +43,8 @@ public class SpelRepository {
         return spelnamen;
     }
 
-    public Spel geefSpel(String spelersnaam, String spelnaam, int uitdaging) {
-        return mapper.laadSpel(spelnaam, spelersnaam, uitdaging);
+    public Spel geefSpel(String spelersnaam, String spelnaam) {
+        return mapper.laadSpel(spelnaam, spelersnaam);
     }
 
     public void verwijderSpel(String spelnaam, String spelersnaam) {
