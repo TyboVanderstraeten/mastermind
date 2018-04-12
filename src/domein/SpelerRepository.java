@@ -69,5 +69,18 @@ public class SpelerRepository {
 
         return tegenspelerNamen;
     }
+    
+    //KLASSEMENT
+    public List<String[]> geefKlassementMakkelijk(){
+        return mapper.geefKlassementMakkelijk();    
+    }
+    
+    public List<String[]> geefKlassementNormaal(){
+        return mapper.geefKlassementNormaal();
+    }
+    
+    public List<String[]> geefKlassementMoeilijk(){
+        return mapper.geefKlassementMoeilijk();
+    }
 
 }

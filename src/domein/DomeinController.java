@@ -336,4 +336,17 @@ public class DomeinController {
     public void updateSpelerAantalGewonnen() {
         spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
     }
+    
+    //KLASSEMENT
+    public List<String[]> geefKlassementMakkelijk(){
+        return spelerRepository.geefKlassementMakkelijk();    
+    }
+    
+    public List<String[]> geefKlassementNormaal(){
+        return spelerRepository.geefKlassementNormaal();
+    }
+    
+    public List<String[]> geefKlassementMoeilijk(){
+        return spelerRepository.geefKlassementMoeilijk();
+    }
 }

@@ -113,7 +113,8 @@ public class SpelerMapper {
 
         return tegenspelers;
     }
-
+    
+    //KLASSEMENT
     public List<String[]> geefKlassementMakkelijk() {
         List<String[]> klassementMakkelijk = new ArrayList<>();
 
@@ -133,5 +134,47 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
         return klassementMakkelijk;
+    }
+
+    public List<String[]> geefKlassementNormaal() {
+        List<String[]> klassementNormaal = new ArrayList<>();
+
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELERSKLASSEMENTNORMAAL)) {
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    String[] infoSpelerKlassement = new String[2];
+                    infoSpelerKlassement[0] = rs.getString("spelersnaam");
+                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenNormaal"));
+
+                    klassementNormaal.add(infoSpelerKlassement);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return klassementNormaal;
+    }
+
+    public List<String[]> geefKlassementMoeilijk() {
+        List<String[]> klassementMoeilijk = new ArrayList<>();
+
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELERSKLASSEMENTMOEILIJK)) {
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    String[] infoSpelerKlassement = new String[2];
+                    infoSpelerKlassement[0] = rs.getString("spelersnaam");
+                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMoeilijk"));
+
+                    klassementMoeilijk.add(infoSpelerKlassement);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return klassementMoeilijk;
     }
 }
