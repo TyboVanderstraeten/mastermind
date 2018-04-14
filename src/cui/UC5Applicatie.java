@@ -43,7 +43,6 @@ public class UC5Applicatie {
         }
         try {
             tegenspelerNaam = input.next();
-            //domeinController.kiesTegenspeler(tegenspelerNaam);
         } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
