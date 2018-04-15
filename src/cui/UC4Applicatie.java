@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+//Verwijder spel moet nog gefixt worden!!
+
 public class UC4Applicatie {
 
     private final DomeinController domeinController;
@@ -32,7 +34,7 @@ public class UC4Applicatie {
         try {
             String spelnaam = input.next();
             domeinController.laadSpel(spelnaam); 
-            domeinController.verwijderSpel(spelnaam); //MOET NOG GEBEUREN
+            //domeinController.verwijderSpel(spelnaam); //MOET NOG GEBEUREN
         } catch (NullPointerException e) { //Try catch in comm. aanwezig in DomeinController, kan fout niet afhandelen -> spelnaam bestaat niet
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
