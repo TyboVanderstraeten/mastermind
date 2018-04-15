@@ -16,7 +16,7 @@ public class UC5Applicatie {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
-
+    
     public void start() {
         registreerSpel(kiesTegenspeler());
     }
