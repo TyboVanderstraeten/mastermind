@@ -30,7 +30,7 @@ public class SpelMapper {
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";    
+    private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND tegenspeler is not null";
 
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel, String tegenspeler) {               //moet nog aangepast worden//EDIT: DONE
@@ -61,7 +61,7 @@ public class SpelMapper {
             throw new SpelnaamNietUniekException();
         }
     }
-    
+
     public void spelIsUitdaging(String spelnaam, String spelersnaam) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
@@ -95,14 +95,14 @@ public class SpelMapper {
     public void verwijderSpel(String spelnaam, String spelersnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement spelQuery = conn.prepareStatement(VERWIJDER_SPEL);
-                PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ)) {
-            spelQuery.setString(1, spelnaam);
-            spelQuery.setString(2, spelersnaam);
-            spelQuery.executeUpdate();
+                PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ);
+                PreparedStatement spelQuery = conn.prepareStatement(VERWIJDER_SPEL)) {
             rijQuery.setString(1, spelnaam);
             rijQuery.setString(2, spelersnaam);
             rijQuery.executeUpdate();
+            spelQuery.setString(1, spelnaam);
+            spelQuery.setString(2, spelersnaam);
+            spelQuery.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -116,7 +116,7 @@ public class SpelMapper {
                 PreparedStatement query = conn.prepareStatement(GEEF_SPEL);
                 PreparedStatement queryRij = conn.prepareStatement(GEEF_RIJEN)) {
             query.setString(1, spelersnaam);
-            query.setString(2, spelnaam);            
+            query.setString(2, spelnaam);
             queryRij.setString(1, spelersnaam);
             queryRij.setString(2, spelnaam);
             try (ResultSet rs = queryRij.executeQuery()) {
@@ -153,12 +153,12 @@ public class SpelMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         return spel;
     }
-    
-    public List<String[]> geefLijstUitdagingen(String spelersnaam){
-        List<String[]> uitdagingen = new ArrayList<>();        
+
+    public List<String[]> geefLijstUitdagingen(String spelersnaam) {
+        List<String[]> uitdagingen = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_UITDAGINGEN)) {
@@ -167,9 +167,9 @@ public class SpelMapper {
                 while (rs.next()) {
                     String[] uitdagingInfo = new String[2];
                     String uitdagingsnaam = rs.getString("spelnaam");
-                    uitdagingInfo[0]=uitdagingsnaam;
+                    uitdagingInfo[0] = uitdagingsnaam;
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-                    uitdagingInfo[1]=moeilijkheidsgraad;
+                    uitdagingInfo[1] = moeilijkheidsgraad;
                     uitdagingen.add(uitdagingInfo);
                 }
             }
@@ -179,9 +179,5 @@ public class SpelMapper {
 
         return uitdagingen;
     }
-    
-    
-    
-    
 
 }
