@@ -36,7 +36,7 @@ public class UC5Applicatie {
                 tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenNormaal", 20);
                 break;
         }
-
+        
         System.out.println(resourceBundle.getString("maakKeuzeTegenspeler"));
         for (int teller = 0; teller < tegenspelerNamen.length; teller++) {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
