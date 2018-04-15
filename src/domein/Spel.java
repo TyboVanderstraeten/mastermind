@@ -11,7 +11,6 @@ public abstract class Spel {
 
     private final Spelbord spelbord;
     private String spelnaam;
-    private int aantalPogingen;
 
     /**
      * Class constructor. Genereert de random code (de oplossing) en roept dan
@@ -61,9 +60,6 @@ public abstract class Spel {
         return spelnaam;
     }
     
-    public int getAantalPogingen() {
-        return aantalPogingen;
-    }
 
     //private void setSpelnaam(String spelnaam) {
     //    this.spelnaam = spelnaam;                 //nog niet nodig

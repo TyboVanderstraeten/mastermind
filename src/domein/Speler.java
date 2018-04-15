@@ -103,10 +103,10 @@ public class Speler {
         this.wachtwoord = wachtwoord;
     }
     
-    public void setScore(int makkelijk, int normaal, int moeilijk)
-    {
-        this.score = int[makkelijk, normaal, moeilijk];
-    }
+//    public void setScore(int makkelijk, int normaal, int moeilijk)
+//    {
+//        this.score = int[makkelijk, normaal, moeilijk];
+//    }
 
     public void setSpel(Spel spel) {
         this.spel = spel;
