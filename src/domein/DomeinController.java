@@ -18,6 +18,8 @@ public class DomeinController {
     private final SpelRepository spelRepository;
     private Speler deSpeler;
     private Spel spel;
+    private String uitdager;
+    private String uitgedaagde;
 
     //constructors
     /**
@@ -233,6 +235,9 @@ public class DomeinController {
     }
 
     public void registreerUitdaging(String tegenspeler, String spelnaam) {                    //VOOR 1EEN UITDAGING
+        uitdager = deSpeler.getSpelersnaam();
+        uitgedaagde = tegenspeler;
+        
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, tegenspeler);
         spelRepository.registreerSpel(spelnaam, tegenspeler, spel, deSpeler.getSpelersnaam());
     }
