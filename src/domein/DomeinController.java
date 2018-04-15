@@ -18,8 +18,7 @@ public class DomeinController {
     private final SpelRepository spelRepository;
     private Speler deSpeler;
     private Spel spel;
-    private String uitdager;
-    private String uitgedaagde;
+    private Speler tegenspeler;
 
     //constructors
     /**
@@ -235,9 +234,6 @@ public class DomeinController {
     }
 
     public void registreerUitdaging(String tegenspeler, String spelnaam) {                    //VOOR 1EEN UITDAGING
-        uitdager = deSpeler.getSpelersnaam();
-        uitgedaagde = tegenspeler;
-        
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, tegenspeler);
         spelRepository.registreerSpel(spelnaam, tegenspeler, spel, deSpeler.getSpelersnaam());
     }
@@ -314,6 +310,50 @@ public class DomeinController {
 
     public String[][] aanvaardUitdaging() {
         return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());
+    }
+    
+    public void berekenScore()
+    {
+        int aantalPogingenSpeler;
+        int aantalPogingenTegenspeler;
+        
+        aantalPogingenSpeler = spel.getAantalPogingen();
+        aantalPogingenTegenspeler = spel.getAantalPogingen();
+        
+        if (aantalPogingenSpeler >= aantalPogingenTegenspeler)
+        {
+            switch (spel.getClass().getSimpleName()) {
+            case "MakkelijkSpel":
+                deSpeler.setScore(3, 0, 0);
+                tegenspeler.setScore(-1, 0, 0);
+                break;
+            case "NormaalSpel":
+                deSpeler.setScore(0, 3, 0);
+                tegenspeler.setScore(0, -1, 0);
+                break;
+            case "MoeilijkSpel":
+                deSpeler.setScore(0, 0, 3);
+                tegenspeler.setScore(0, 0, -1);
+                break;
+            }
+        }
+        else
+        {
+            switch (spel.getClass().getSimpleName()) {
+            case "MakkelijkSpel":
+                deSpeler.setScore(-1, 0, 0);
+                tegenspeler.setScore(3, 0, 0);
+                break;
+            case "NormaalSpel":
+                deSpeler.setScore(0, -1, 0);
+                tegenspeler.setScore(0, 3, 0);
+                break;
+            case "MoeilijkSpel":
+                deSpeler.setScore(0, 0, -1);
+                tegenspeler.setScore(0, 0, 3);
+                break;
+            }
+        }
     }
 
     //KIESUITDAGING = LAADSPEL

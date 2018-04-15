@@ -14,6 +14,7 @@ public class Speler {
     private int[] aantalGewonnen = {0, 0, 0};
     private int[] aantalGewonennUitdagingen = {0, 0, 0};
     private Spel spel;
+    private int[] score = {0, 0, 0};
 
     //constructors
     /**
@@ -100,6 +101,11 @@ public class Speler {
         }
 
         this.wachtwoord = wachtwoord;
+    }
+    
+    public void setScore(int makkelijk, int normaal, int moeilijk)
+    {
+        this.score = int[makkelijk, normaal, moeilijk];
     }
 
     public void setSpel(Spel spel) {
