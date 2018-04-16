@@ -3,6 +3,7 @@ package gui;
 import javafx.scene.layout.GridPane;
 import domein.DomeinController;
 import gui.KeuzeScherm;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import java.util.Arrays;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -38,12 +40,13 @@ public class KlassementScherm extends GridPane {
         Label lblMakkelijk = new Label(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));
         this.add(lblMakkelijk, 0, 0);
 
+        //List<String> klassementMakkelijk = new ArrayList<>();
+        for (int teller = 0; teller < dc.geefKlassementMakkelijk().size(); teller++) {
+            dataMakkelijk.add(dc.geefKlassementMakkelijk().get(teller)[0] + " : " + dc.geefKlassementMakkelijk().get(teller)[1]);
+        }
+
         ListView<String> lvKlassementMakkelijk = new ListView<>();
         lvKlassementMakkelijk.setPrefSize(400, 600);
-
-        for (int i = 0; i < dc.geefKlassementMakkelijk().size(); i++) {
-            dataMakkelijk.add(dc.geefKlassementMakkelijk().toString());
-        }
 
         lvKlassementMakkelijk.setItems(dataMakkelijk);
         this.add(lvKlassementMakkelijk, 0, 1);
