@@ -24,7 +24,7 @@ public class MakkelijkeRij extends Rij {
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (code[i] == poging[i]) {
                 getEvaluatiepinnen()[i] = new EvaluatiePin(9);          //ZWART         
-                code[i] = -111;
+                code[i] = -111; //zodat hier niet meer opgechecked wordt
             }
         }
         for (int i = 0; i < getCodepinnen().length; i++) {            
