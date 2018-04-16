@@ -13,7 +13,6 @@ public class StartUpGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         WelkomScherm welkomScherm = new WelkomScherm();
-        KeuzeScherm keuzeScherm = new KeuzeScherm();
 
         Scene scene = new Scene(welkomScherm, 600, 400);
 
