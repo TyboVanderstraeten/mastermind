@@ -2,6 +2,8 @@ package gui;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,15 +14,22 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import domein.DomeinController;
 
 public class TaalScherm extends GridPane {
 
-    public TaalScherm() {
+    private final DomeinController dc;
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+    public TaalScherm(DomeinController dc) {
+        this.dc = dc;
+        buildGui();
+    }
+
+    private void buildGui() {
+
         //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
         //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-
         //IMAGES
         Image vlagNederland = new Image("/images/vlag_nederland.png");
         ImageView ivNederland = new ImageView(vlagNederland);
@@ -54,6 +63,17 @@ public class TaalScherm extends GridPane {
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
+
+        //Eventhandling
+        btnNederlands.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
+                WelkomScherm welkomScherm = new WelkomScherm(dc);
+                Stage stage = (Stage) (getScene().getWindow());
+
+            }
+        };
 
     }
 
