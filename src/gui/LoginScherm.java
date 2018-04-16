@@ -64,17 +64,17 @@ public class LoginScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 dc.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
+
                 Alert alertAangemeld = new Alert(AlertType.INFORMATION);
                 alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
                 alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
                 alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), dc.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
                 alertAangemeld.showAndWait();
-                
-                Stage stage = (Stage)(getScene().getWindow());
-                KeuzeScherm keuzeScherm = new KeuzeScherm(dc,resourceBundle);
-                stage.setScene(new Scene(keuzeScherm,1280,720));
+
+                Stage stage = (Stage) (getScene().getWindow());
+                KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                stage.setScene(new Scene(keuzeScherm, 1280, 720));
                 stage.setTitle(resourceBundle.getString("menu"));
-                
 
             }
         });

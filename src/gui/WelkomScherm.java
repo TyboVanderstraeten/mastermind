@@ -53,7 +53,7 @@ public class WelkomScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                RegistreerScherm registreerScherm = new RegistreerScherm(dc, WelkomScherm.this);
+                RegistreerScherm registreerScherm = new RegistreerScherm(dc, resourceBundle, WelkomScherm.this);
                 stage.setScene(new Scene(registreerScherm, 1280, 720));
                 stage.setTitle(resourceBundle.getString("registreer"));
 
