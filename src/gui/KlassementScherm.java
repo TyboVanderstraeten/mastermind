@@ -27,15 +27,17 @@ public class KlassementScherm extends GridPane {
     private void buildGui() {
 
         ListView<String> lvKlassementMakkelijk = new ListView<>();
-        lvKlassementMakkelijk.setPrefSize(400, 200);
+        ObservableList<String> items = FXCollections.observableArrayList("Test", "wejo", "cool");
+        lvKlassementMakkelijk.setItems(items);
+        lvKlassementMakkelijk.setPrefSize(400, 600);
         this.add(lvKlassementMakkelijk, 0, 0);
 
         ListView<String> lvKlassementNormaal = new ListView<>();
-        lvKlassementMakkelijk.setPrefSize(400, 200);
+        lvKlassementNormaal.setPrefSize(400, 600);
         this.add(lvKlassementNormaal, 1, 0);
 
         ListView<String> lvKlassementMoeilijk = new ListView<>();
-        lvKlassementMakkelijk.setPrefSize(400, 200);
+        lvKlassementMoeilijk.setPrefSize(400, 600);
         this.add(lvKlassementMoeilijk, 2, 0);
 
         //Positionering
