@@ -14,9 +14,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WelkomScherm extends GridPane {
-
+private final DomeinController dc;
     public WelkomScherm(DomeinController dc) {
-
+        this.dc = dc;
+        buildGui();
+    }
+    
+    private void buildGui(){
         ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
 //      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
 //      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);

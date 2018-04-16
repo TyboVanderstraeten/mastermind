@@ -73,7 +73,7 @@ public class TaalScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
 
             }
-        };
+        });
 
     }
 
