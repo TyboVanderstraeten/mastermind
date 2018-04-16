@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class LoginScherm extends GridPane {
 
-    public LoginScherm() {
+    public LoginScherm(DomeinController dc, WelkomScherm ws) {
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
         //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
@@ -75,11 +75,9 @@ public class LoginScherm extends GridPane {
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = new Stage();
-                WelkomScherm welkomScherm = new WelkomScherm();
-                stage.setScene(new Scene(welkomScherm, 300, 200));
+                Stage stage = (Stage)(getScene().getWindow());              
+                stage.setScene(ws.getScene());
                 stage.setTitle("Mastermind");
-                stage.show();
             }
         });
 

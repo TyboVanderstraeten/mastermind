@@ -1,5 +1,6 @@
 package main;
 
+import domein.DomeinController;
 import gui.KeuzeScherm;
 import gui.LoginScherm;
 import gui.RegistreerScherm;
@@ -12,7 +13,9 @@ public class StartUpGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        WelkomScherm welkomScherm = new WelkomScherm();
+        
+        DomeinController dc = new DomeinController();
+        WelkomScherm welkomScherm = new WelkomScherm(dc);
 
         Scene scene = new Scene(welkomScherm, 600, 400);
 
