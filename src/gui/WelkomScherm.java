@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class WelkomScherm extends GridPane {
 
     private final DomeinController dc;

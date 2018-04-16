@@ -17,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class LoginScherm extends GridPane {
 
     private final DomeinController dc;
@@ -46,12 +47,15 @@ public class LoginScherm extends GridPane {
         PasswordField pwfWachtwoord = new PasswordField();
         this.add(pwfWachtwoord, 1, 2);
 
+        Label lblError = new Label();
+        this.add(lblError, 0, 3, 2, 1);
+
         Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));
-        this.add(btnMeldAan, 0, 3);
+        this.add(btnMeldAan, 0, 4);
         setHalignment(btnMeldAan, HPos.LEFT);
 
         Button btnAnnuleer = new Button(resourceBundle.getString("annulatie"));
-        this.add(btnAnnuleer, 1, 3);
+        this.add(btnAnnuleer, 1, 4);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
         //Positionering
@@ -63,29 +67,42 @@ public class LoginScherm extends GridPane {
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
+                try {
+                    dc.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
 
-                Alert alertAangemeld = new Alert(AlertType.INFORMATION);
-                alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
-                alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
-                alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), dc.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
-                alertAangemeld.showAndWait();
+                    Alert alertAangemeld = new Alert(AlertType.INFORMATION);
+                    alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
+                    alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
+                    alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), dc.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
+                    alertAangemeld.showAndWait();
 
-                Stage stage = (Stage) (getScene().getWindow());
-                KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                stage.setScene(new Scene(keuzeScherm, 1280, 720));
-                stage.setTitle(resourceBundle.getString("menu"));
-
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle(resourceBundle.getString("menu"));
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    lblError.setText(resourceBundle.getString(e.getMessage()));
+                    txfGebruikersnaam.clear();
+                    pwfWachtwoord.clear();
+                } catch (RuntimeException e) {
+                    lblError.setText(resourceBundle.getString(e.getMessage()));
+                    txfGebruikersnaam.clear();
+                    pwfWachtwoord.clear();
+                }
             }
-        });
+        }
+        );
 
-        btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
+        btnAnnuleer.setOnAction(
+                new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event
+            ) {
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(welkomScherm.getScene());
                 stage.setTitle("Mastermind");
             }
-        });
+        }
+        );
     }
 }

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import domein.DomeinController;
 import javafx.scene.Scene;
 
+//EXCEPTIONS DONE
 public class TaalScherm extends GridPane {
 
     private final DomeinController dc;

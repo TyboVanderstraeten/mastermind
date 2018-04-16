@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class KeuzeScherm extends GridPane {
 
     private final DomeinController dc;
