@@ -29,8 +29,6 @@ public class TaalScherm extends GridPane {
 
     private void buildGui() {
 
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
         //IMAGES
         Image vlagNederland = new Image("/images/vlag_nederland.png");
         ImageView ivNederland = new ImageView(vlagNederland);
@@ -70,13 +68,34 @@ public class TaalScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-                WelkomScherm welkomScherm = new WelkomScherm(dc);
+                WelkomScherm welkomScherm = new WelkomScherm(dc, resourceBundle);
                 Stage stage = (Stage) (getScene().getWindow());
-                stage.setScene(new Scene(welkomScherm,1280,720));
+                stage.setScene(new Scene(welkomScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
         });
 
+        btnEngels.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+                WelkomScherm welkomScherm = new WelkomScherm(dc, resourceBundle);
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(new Scene(welkomScherm, 1280, 720));
+                stage.setTitle("Mastermind");
+            }
+        });
+
+        btnFrans.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
+                WelkomScherm welkomScherm = new WelkomScherm(dc, resourceBundle);
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(new Scene(welkomScherm, 1280, 720));
+                stage.setTitle("Mastermind");
+            }
+        });
     }
 
 }
