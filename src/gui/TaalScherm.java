@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import domein.DomeinController;
+import javafx.scene.Scene;
 
 public class TaalScherm extends GridPane {
 
@@ -71,7 +72,8 @@ public class TaalScherm extends GridPane {
                 ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
                 WelkomScherm welkomScherm = new WelkomScherm(dc);
                 Stage stage = (Stage) (getScene().getWindow());
-
+                stage.setScene(new Scene(welkomScherm,1280,720));
+                stage.setTitle("Mastermind");
             }
         });
 

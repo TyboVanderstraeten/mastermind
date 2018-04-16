@@ -1,23 +1,19 @@
 package main;
 
 import domein.DomeinController;
-import gui.KeuzeScherm;
-import gui.LoginScherm;
-import gui.RegistreerScherm;
-import gui.WelkomScherm;
+import gui.TaalScherm;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StartUpGUI extends Application {
 
-    @Override
+   @Override
     public void start(Stage primaryStage) {
-        
         DomeinController dc = new DomeinController();
-        WelkomScherm welkomScherm = new WelkomScherm(dc);
-
-        Scene scene = new Scene(welkomScherm, 600, 400);
+        TaalScherm ts = new TaalScherm(dc);
+        Scene scene = new Scene(ts, 1280, 720);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Mastermind");
