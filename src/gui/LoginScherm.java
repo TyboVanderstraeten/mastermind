@@ -19,12 +19,18 @@ import java.util.ResourceBundle;
 
 public class LoginScherm extends GridPane {
 
-    public LoginScherm(DomeinController dc, WelkomScherm ws) {
+    private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
+    private final WelkomScherm welkomScherm;
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+    public LoginScherm(DomeinController dc, ResourceBundle resourceBundle, WelkomScherm welkomScherm) {
+        this.dc = dc;
+        this.resourceBundle = resourceBundle;
+        this.welkomScherm = welkomScherm;
+        buildGui();
+    }
 
+    private void buildGui() {
         Label lblMeldAan = new Label(resourceBundle.getString("meldAan"));
         this.add(lblMeldAan, 0, 0, 2, 1);
 
@@ -54,32 +60,29 @@ public class LoginScherm extends GridPane {
         this.setVgap(10);
 
         //EventHandling
-        //Meldaan knop meldt de speler aan!
-        //NOG CHECKEN OF WEL DEGELIJK AANMELD
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DomeinController domeinController = new DomeinController();
-                domeinController.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
+                dc.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
                 Alert alertAangemeld = new Alert(AlertType.INFORMATION);
                 alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
                 alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
-                alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), domeinController.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
+                alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), dc.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
                 alertAangemeld.showAndWait();
+                
+                Stage stage = (Stage)(getScene().getWindow());
+                
 
             }
         });
 
-        //Annuleerknop sluit venster en gaat terug naar welkomscherm
-        //Sluit loginscherm nog niet af?!
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());              
-                stage.setScene(ws.getScene());
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(welkomScherm.getScene());
                 stage.setTitle("Mastermind");
             }
         });
-
     }
 }
