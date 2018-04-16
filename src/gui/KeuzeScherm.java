@@ -1,5 +1,6 @@
 package gui;
 
+import domein.DomeinController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -8,12 +9,17 @@ import java.util.ResourceBundle;
 
 public class KeuzeScherm extends GridPane {
 
-    public KeuzeScherm() {
-        
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-        
+    private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
+
+    public KeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
+        this.dc = dc;
+        this.resourceBundle = resourceBundle;
+        buildGui();
+    }
+
+    private void buildGui() {
+
         Button btnStartMastermind = new Button(resourceBundle.getString("start"));
         this.add(btnStartMastermind, 0, 0);
 

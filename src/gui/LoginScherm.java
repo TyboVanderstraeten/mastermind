@@ -71,6 +71,9 @@ public class LoginScherm extends GridPane {
                 alertAangemeld.showAndWait();
                 
                 Stage stage = (Stage)(getScene().getWindow());
+                KeuzeScherm keuzeScherm = new KeuzeScherm(dc,resourceBundle);
+                stage.setScene(new Scene(keuzeScherm,1280,720));
+                stage.setTitle(resourceBundle.getString("menu"));
                 
 
             }
