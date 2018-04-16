@@ -80,7 +80,10 @@ public class KeuzeScherm extends GridPane {
         btnKlassement.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Stage stage = (Stage) (getScene().getWindow());
+                KlassementScherm klassementScherm = new KlassementScherm(dc, resourceBundle, KeuzeScherm.this);
+                stage.setScene(new Scene(klassementScherm, 1280, 720));
+                stage.setTitle(resourceBundle.getString("klassement"));
             }
         });
 

@@ -4,6 +4,7 @@ import javafx.scene.layout.GridPane;
 import domein.DomeinController;
 import gui.KeuzeScherm;
 import java.util.ResourceBundle;
+import javafx.scene.control.Button;
 
 //EXCEPTIONS DONE
 public class KlassementScherm extends GridPane {
