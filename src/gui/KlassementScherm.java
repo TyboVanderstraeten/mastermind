@@ -40,9 +40,8 @@ public class KlassementScherm extends GridPane {
         Label lblMakkelijk = new Label(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));
         this.add(lblMakkelijk, 0, 0);
 
-        //List<String> klassementMakkelijk = new ArrayList<>();
         for (int teller = 0; teller < dc.geefKlassementMakkelijk().size(); teller++) {
-            dataMakkelijk.add(dc.geefKlassementMakkelijk().get(teller)[0] + " : " + dc.geefKlassementMakkelijk().get(teller)[1]);
+            dataMakkelijk.add(dc.geefKlassementMakkelijk().get(teller)[0] + " | " + dc.geefKlassementMakkelijk().get(teller)[1]);
         }
 
         ListView<String> lvKlassementMakkelijk = new ListView<>();
@@ -55,12 +54,12 @@ public class KlassementScherm extends GridPane {
         Label lblNormaal = new Label(resourceBundle.getString("normaleMoeilijkheidsgraad"));
         this.add(lblNormaal, 1, 0);
 
+        for (int teller = 0; teller < dc.geefKlassementNormaal().size(); teller++) {
+            dataNormaal.add(dc.geefKlassementNormaal().get(teller)[0] + " | " + dc.geefKlassementNormaal().get(teller)[1]);
+        }
+
         ListView<String> lvKlassementNormaal = new ListView<>();
         lvKlassementNormaal.setPrefSize(400, 600);
-
-        for (int i = 0; i < dc.geefKlassementNormaal().size(); i++) {
-            dataNormaal.add(dc.geefKlassementNormaal());
-        }
 
         lvKlassementNormaal.setItems(dataNormaal);
         this.add(lvKlassementNormaal, 1, 1);
@@ -69,12 +68,12 @@ public class KlassementScherm extends GridPane {
         Label lblMoeilijk = new Label(resourceBundle.getString("moeilijkeMoeilijkheidsgraad"));
         this.add(lblMoeilijk, 2, 0);
 
+        for (int teller = 0; teller < dc.geefKlassementMoeilijk().size(); teller++) {
+            dataMoeilijk.add(dc.geefKlassementMoeilijk().get(teller)[0] + " | " + dc.geefKlassementMoeilijk().get(teller)[1]);
+        }
+
         ListView<String> lvKlassementMoeilijk = new ListView<>();
         lvKlassementMoeilijk.setPrefSize(400, 600);
-
-        for (int i = 0; i < dc.geefKlassementMoeilijk().size(); i++) {
-            dataMoeilijk.add(dc.geefKlassementMoeilijk());
-        }
 
         lvKlassementMoeilijk.setItems(dataMoeilijk);
         this.add(lvKlassementMoeilijk, 2, 1);
