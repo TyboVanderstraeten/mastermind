@@ -14,25 +14,23 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WelkomScherm extends GridPane {
-private final DomeinController dc;
-    public WelkomScherm(DomeinController dc) {
+
+    private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
+
+    public WelkomScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
+        this.resourceBundle = resourceBundle;
         buildGui();
     }
-    
-    private void buildGui(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
 
-        Label lblWelkom = new Label("Mastermind");
-        this.add(lblWelkom, 0, 0, 3, 1);
+    private void buildGui() {
 
         Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));
-        this.add(btnMeldAan, 0, 1);
+        this.add(btnMeldAan, 0, 0);
 
         Button btnRegistreer = new Button(resourceBundle.getString("registreer"));
-        this.add(btnRegistreer, 1, 1);
+        this.add(btnRegistreer, 1, 0);
 
         //Positionering
         this.setAlignment(Pos.CENTER);
