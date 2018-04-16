@@ -18,11 +18,11 @@ import javafx.stage.Stage;
 import domein.DomeinController;
 import javafx.scene.Scene; 
 
-public class UitdagingenScherm {
+public class DaagUitScherm {
     
     private final DomeinController dc;
 
-    public UitdagingenScherm(DomeinController dc) {
+    public DaagUitScherm(DomeinController dc) {
         this.dc = dc;
         buildGui();
     
