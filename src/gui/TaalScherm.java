@@ -2,6 +2,7 @@ package gui;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -35,23 +36,24 @@ public class TaalScherm extends GridPane {
         ImageView ivEngeland = new ImageView(vlagEngeland);
         ivEngeland.setFitHeight(100);
         ivEngeland.setFitWidth(150);
-        
-        
-        //Objects
-        Label lblMastermind = new Label("Mastermind");
-        this.add(lblMastermind, 0, 0, 3, 1);
 
+        //Objects
         Button btnNederlands = new Button();
         btnNederlands.setGraphic(ivNederland);
-        this.add(btnNederlands, 0, 1);
+        this.add(btnNederlands, 0, 0);
 
         Button btnFrans = new Button();
         btnFrans.setGraphic(ivFrankrijk);
-        this.add(btnFrans, 1, 1);
+        this.add(btnFrans, 1, 0);
 
         Button btnEngels = new Button();
         btnEngels.setGraphic(ivEngeland);
-        this.add(btnEngels, 2, 1);
+        this.add(btnEngels, 2, 0);
+
+        //Positionering
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);
 
     }
 
