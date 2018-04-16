@@ -1,5 +1,6 @@
 package gui;
 
+import domein.DomeinController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class WelkomScherm extends GridPane {
 
-    public WelkomScherm() {
+    public WelkomScherm(DomeinController dc) {
         
         ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
 //      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
@@ -45,11 +46,11 @@ public class WelkomScherm extends GridPane {
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = new Stage();
-                LoginScherm loginScherm = new LoginScherm();
+                Stage stage = (Stage)(getScene().getWindow());
+                LoginScherm loginScherm = new LoginScherm(dc, WelkomScherm.this);               
                 stage.setScene(new Scene(loginScherm, 300, 200));
                 stage.setTitle(resourceBundle.getString("meldAan"));
-                stage.show();
+                
             }
         });
 
@@ -58,11 +59,11 @@ public class WelkomScherm extends GridPane {
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = new Stage();
-                RegistreerScherm registreerScherm = new RegistreerScherm();
+                Stage stage = (Stage)(getScene().getWindow());
+                RegistreerScherm registreerScherm = new RegistreerScherm(dc, WelkomScherm.this);                
                 stage.setScene(new Scene(registreerScherm, 300, 200));
                 stage.setTitle(resourceBundle.getString("registreer"));
-                stage.show();
+                
             }
         });
 
