@@ -16,11 +16,11 @@ import java.util.ResourceBundle;
 public class WelkomScherm extends GridPane {
 
     public WelkomScherm(DomeinController dc) {
-        
+
         ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
 //      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
 //      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-        
+
         Label lblWelkom = new Label("Mastermind");
         this.add(lblWelkom, 0, 0, 3, 1);
 
@@ -29,11 +29,6 @@ public class WelkomScherm extends GridPane {
 
         Button btnRegistreer = new Button(resourceBundle.getString("registreer"));
         this.add(btnRegistreer, 1, 1);
-
-        Button btnStop = new Button(resourceBundle.getString("stop"));
-        this.add(btnStop, 2, 1);
-        
-        
 
         //Positionering
         this.setAlignment(Pos.CENTER);
@@ -46,11 +41,11 @@ public class WelkomScherm extends GridPane {
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());
-                LoginScherm loginScherm = new LoginScherm(dc, WelkomScherm.this);               
+                Stage stage = (Stage) (getScene().getWindow());
+                LoginScherm loginScherm = new LoginScherm(dc, WelkomScherm.this);
                 stage.setScene(new Scene(loginScherm, 300, 200));
                 stage.setTitle(resourceBundle.getString("meldAan"));
-                
+
             }
         });
 
@@ -59,22 +54,13 @@ public class WelkomScherm extends GridPane {
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());
-                RegistreerScherm registreerScherm = new RegistreerScherm(dc, WelkomScherm.this);                
+                Stage stage = (Stage) (getScene().getWindow());
+                RegistreerScherm registreerScherm = new RegistreerScherm(dc, WelkomScherm.this);
                 stage.setScene(new Scene(registreerScherm, 300, 200));
                 stage.setTitle(resourceBundle.getString("registreer"));
-                
+
             }
         });
-
-        //Stop knop die het programma stopt
-        btnStop.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Platform.exit();
-            }
-        });
-
     }
 
 }
