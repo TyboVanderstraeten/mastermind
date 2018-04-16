@@ -41,7 +41,8 @@ public class KlassementScherm extends GridPane {
         this.add(lblMakkelijk, 0, 0);
 
         for (int teller = 0; teller < dc.geefKlassementMakkelijk().size(); teller++) {
-            dataMakkelijk.add(dc.geefKlassementMakkelijk().get(teller)[0] + " | " + dc.geefKlassementMakkelijk().get(teller)[1]);
+            int index = teller + 1;
+            dataMakkelijk.add(index + ") " + dc.geefKlassementMakkelijk().get(teller)[0] + " | " + dc.geefKlassementMakkelijk().get(teller)[1]);
         }
 
         ListView<String> lvKlassementMakkelijk = new ListView<>();
@@ -55,7 +56,8 @@ public class KlassementScherm extends GridPane {
         this.add(lblNormaal, 1, 0);
 
         for (int teller = 0; teller < dc.geefKlassementNormaal().size(); teller++) {
-            dataNormaal.add(dc.geefKlassementNormaal().get(teller)[0] + " | " + dc.geefKlassementNormaal().get(teller)[1]);
+            int index = teller + 1;
+            dataNormaal.add(index + ") " + dc.geefKlassementNormaal().get(teller)[0] + " | " + dc.geefKlassementNormaal().get(teller)[1]);
         }
 
         ListView<String> lvKlassementNormaal = new ListView<>();
@@ -69,7 +71,8 @@ public class KlassementScherm extends GridPane {
         this.add(lblMoeilijk, 2, 0);
 
         for (int teller = 0; teller < dc.geefKlassementMoeilijk().size(); teller++) {
-            dataMoeilijk.add(dc.geefKlassementMoeilijk().get(teller)[0] + " | " + dc.geefKlassementMoeilijk().get(teller)[1]);
+            int index = teller + 1;
+            dataMoeilijk.add(index + ") " + dc.geefKlassementMoeilijk().get(teller)[0] + " | " + dc.geefKlassementMoeilijk().get(teller)[1]);
         }
 
         ListView<String> lvKlassementMoeilijk = new ListView<>();
@@ -94,6 +97,9 @@ public class KlassementScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(keuzeScherm.getScene());
                 stage.setTitle(resourceBundle.getString("menu"));
+                dataMakkelijk.clear();
+                dataNormaal.clear();
+                dataMoeilijk.clear();
             }
         });
 
