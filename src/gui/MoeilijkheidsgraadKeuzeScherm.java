@@ -2,6 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import java.util.ResourceBundle;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -14,6 +15,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
     public MoeilijkheidsgraadKeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
+        buildGui();
     }
 
     private void buildGui() {
@@ -26,6 +28,11 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
 
         Button btnMoeilijk = new Button(resourceBundle.getString("moeilijkeMoeilijkheidsgraad"));
         this.add(btnMoeilijk, 2, 0);
+
+        //Positionering
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);
     }
 
 }

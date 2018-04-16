@@ -13,30 +13,30 @@ import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
 public class KeuzeScherm extends GridPane {
-    
+
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
-    
+
     public KeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         buildGui();
     }
-    
+
     private void buildGui() {
-        
+
         Button btnStartMastermind = new Button(resourceBundle.getString("start"));
         this.add(btnStartMastermind, 0, 0);
-        
+
         Button btnLaadSpel = new Button(resourceBundle.getString("laad"));
         this.add(btnLaadSpel, 1, 0);
-        
+
         Button btnDaagUit = new Button(resourceBundle.getString("uitdagen"));
         this.add(btnDaagUit, 2, 0);
-        
+
         Button btnAanvaardUitdaging = new Button(resourceBundle.getString("aanvaarden"));
         this.add(btnAanvaardUitdaging, 3, 0);
-        
+
         Button btnKlassement = new Button(resourceBundle.getString("klassement"));
         this.add(btnKlassement, 4, 0);
 
@@ -52,10 +52,38 @@ public class KeuzeScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
                 MoeilijkheidsgraadKeuzeScherm moeilijkheidsgraadKeuzeScherm = new MoeilijkheidsgraadKeuzeScherm(dc, resourceBundle);
                 stage.setScene(new Scene(moeilijkheidsgraadKeuzeScherm, 1280, 720));
-                stage.setTitle(resourceBundle.getString("moeilijkheidsgraad"));      
+                stage.setTitle(resourceBundle.getString("moeilijkheidsgraad"));
             }
         });
-        
+
+        btnLaadSpel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        btnDaagUit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        btnAanvaardUitdaging.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        btnKlassement.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
     }
-    
+
 }
