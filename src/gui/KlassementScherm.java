@@ -26,15 +26,15 @@ public class KlassementScherm extends GridPane {
 
     private void buildGui() {
 
-        ListView<String> lvKlassementMakkelijk = new ListView<String>();
+        ListView<String> lvKlassementMakkelijk = new ListView<>();
         lvKlassementMakkelijk.setPrefSize(400, 200);
         this.add(lvKlassementMakkelijk, 0, 0);
 
-        ListView<String> lvKlassementNormaal = new ListView<String>();
+        ListView<String> lvKlassementNormaal = new ListView<>();
         lvKlassementMakkelijk.setPrefSize(400, 200);
         this.add(lvKlassementNormaal, 1, 0);
 
-        ListView<String> lvKlassementMoeilijk = new ListView<String>();
+        ListView<String> lvKlassementMoeilijk = new ListView<>();
         lvKlassementMakkelijk.setPrefSize(400, 200);
         this.add(lvKlassementMoeilijk, 2, 0);
 
