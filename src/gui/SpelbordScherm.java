@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -43,6 +44,7 @@ public class SpelbordScherm extends GridPane {
         System.out.println("test");
         int[][] spelbord = dc.geefSpelbord();
         System.out.println("test");
+        this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
         for (int i = 0; i < spelbord.length; i++) {
@@ -50,13 +52,10 @@ public class SpelbordScherm extends GridPane {
                 Label label = new Label();
                 switch (spelbord[i][j]) {
                     case -2:
-                        label.setText("    ");
-                        break;
-                    case -3:
-                        label.setText("#");
-                        break;
+                        label.setText("\t");
+                        break;                    
                     case -4:
-                        label.setText("          ");
+                        label.setText("\t\t");
                         break;
                     default:
                         String kleur = String.format("/images/pin_%d.png", spelbord[i][j]);
@@ -101,8 +100,20 @@ public class SpelbordScherm extends GridPane {
                 this.add(label, j, i);
             }
         }
-        System.out.println("test");
-        System.out.println(this.getColumnConstraints().size());     //moet weg, gwn om te testen.
+        
+        TextField txfKleur1 = new TextField();
+        txfKleur1.setPrefWidth(30);
+        TextField txfKleur2 = new TextField();
+        txfKleur2.setPrefWidth(30);
+        TextField txfKleur3 = new TextField();
+        txfKleur3.setPrefWidth(30);
+        TextField txfKleur4 = new TextField();
+        txfKleur4.setPrefWidth(30);
+        this.add(txfKleur1, 14, 6);
+        this.add(txfKleur2, 15, 6);
+        this.add(txfKleur3, 16, 6);
+        this.add(txfKleur4, 17, 6);
+        
 
         Label groen = new Label(resourceBundle.getString("0"));
         Label blauw = new Label(resourceBundle.getString("1"));
@@ -142,18 +153,7 @@ public class SpelbordScherm extends GridPane {
         this.add(bruin, 17, 2);
 
         
-        TextField txfKleur1 = new TextField();
-        txfKleur1.setPrefWidth(30);
-        TextField txfKleur2 = new TextField();
-        txfKleur2.setPrefWidth(30);
-        TextField txfKleur3 = new TextField();
-        txfKleur3.setPrefWidth(30);
-        TextField txfKleur4 = new TextField();
-        txfKleur4.setPrefWidth(30);
-        this.add(txfKleur1, 14, 6);
-        this.add(txfKleur2, 15, 6);
-        this.add(txfKleur3, 16, 6);
-        this.add(txfKleur4, 17, 6);
+        
         
         
         Button btnVoegToe = new Button("Voeg Toe");
@@ -161,38 +161,39 @@ public class SpelbordScherm extends GridPane {
         Button btnOpslaan = new Button("Opslaan");
         this.add(btnOpslaan, 17, 12);
 
+        
         btnVoegToe.setOnAction(new EventHandler<ActionEvent>() {
             //WERKT NOG NIET
             
             @Override
             public void handle(ActionEvent event) {
 //
-//                int[] poging = new int[SpelbordScherm.this.getColumnConstraints().size()];
-//
-//                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
-//                
-//
-//                for (Node node : SpelbordScherm.this.getChildren()) {
-//
-//                    if (node instanceof TextField) {
-//                        String kleur = ((TextField) node).getText();
-//
-//                        for (int i = 0; i < poging.length; i++) {
-//                            if (!Arrays.asList(alleKleuren).contains(kleur)) {
-//                                //nog foutLabel toevoegen.
-//                                i--;
-//                                continue;
-//                            }
-//                            for (int j = 0; j < 8; j++) {
-//                                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
-//                                    poging[i] = j;
-//                                    break;
-//                                }
-//                            }
-//                        }
-//                    }
-//                } 
-//                dc.geefPoging(poging);
+                int[] poging = new int[spelbord.length/2];
+
+                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
+                
+
+                for (Node node : SpelbordScherm.this.getChildren()) {
+
+                    if (node instanceof TextField) {
+                        String kleur = ((TextField) node).getText();
+
+                        for (int i = 0; i < poging.length; i++) {
+                            if (!Arrays.asList(alleKleuren).contains(kleur)) {
+                                //nog foutLabel toevoegen.
+                                i--;
+                                continue;
+                            }
+                            for (int j = 0; j < 8; j++) {
+                                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
+                                    poging[i] = j;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } 
+                dc.geefPoging(poging);
 //
             }
 
