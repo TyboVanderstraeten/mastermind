@@ -41,79 +41,12 @@ public class SpelbordScherm extends GridPane {
 
     private void buildGui() {
         dc.kiesMoeilijkheidsgraad(1);
-        System.out.println("test");
         int[][] spelbord = dc.geefSpelbord();
-        System.out.println("test");
+        int rij =0;
+        toonSpelbord(spelbord);
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
-        for (int i = 0; i < spelbord.length; i++) {
-            for (int j = 0; j < spelbord[i].length; j++) {
-                Label label = new Label();
-                switch (spelbord[i][j]) {
-                    case -2:
-                        label.setText("\t");
-                        break;                    
-                    case -4:
-                        label.setText("\t\t");
-                        break;
-                    default:
-                        String kleur = String.format("/images/pin_%d.png", spelbord[i][j]);
-                        label.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));//                                
-                }
-                
-                
-                //DRAG AND DROP OM MSS LATER TE IMPLEMENTEREN
-                
-//                label.setOnDragOver(new EventHandler<DragEvent>() {
-//                    @Override
-//                    public void handle(DragEvent event) {
-//                        /* data is dragged over the target */
-// /* accept it only if it is not dragged from the same node 
-//                        * and if it has a string data */
-//                        if (event.getGestureSource() != label
-//                                && event.getDragboard().hasString()) {
-//                            /* allow for moving */
-//                            event.acceptTransferModes(TransferMode.MOVE);
-//                        }
-//
-//                        event.consume();
-//                    }
-//                });
-//                label.setOnDragDropped(new EventHandler<DragEvent>() {
-//                    public void handle(DragEvent event) {
-//                        /* data dropped */
-// /* if there is a string data on dragboard, read it and use it */
-//                        Dragboard db = event.getDragboard();
-//                        boolean success = false;
-//                        if (db.hasString()) {
-//                            label.setText(db.getString());
-//                            success = true;
-//                        }
-//                        /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                        event.setDropCompleted(success);
-//
-//                        event.consume();
-//                    }
-//                });
-                this.add(label, j, i);
-            }
-        }
-        
-        TextField txfKleur1 = new TextField();
-        txfKleur1.setPrefWidth(30);
-        TextField txfKleur2 = new TextField();
-        txfKleur2.setPrefWidth(30);
-        TextField txfKleur3 = new TextField();
-        txfKleur3.setPrefWidth(30);
-        TextField txfKleur4 = new TextField();
-        txfKleur4.setPrefWidth(30);
-        this.add(txfKleur1, 14, 6);
-        this.add(txfKleur2, 15, 6);
-        this.add(txfKleur3, 16, 6);
-        this.add(txfKleur4, 17, 6);
-        
 
         Label groen = new Label(resourceBundle.getString("0"));
         Label blauw = new Label(resourceBundle.getString("1"));
@@ -152,32 +85,25 @@ public class SpelbordScherm extends GridPane {
         this.add(grijs, 17, 1);
         this.add(bruin, 17, 2);
 
-        
-        
-        
-        
         Button btnVoegToe = new Button("Voeg Toe");
         this.add(btnVoegToe, 14, 12);
         Button btnOpslaan = new Button("Opslaan");
         this.add(btnOpslaan, 17, 12);
 
-        
         btnVoegToe.setOnAction(new EventHandler<ActionEvent>() {
             //WERKT NOG NIET
-            
+
             @Override
             public void handle(ActionEvent event) {
 //
-                int[] poging = new int[spelbord.length/2];
-
-                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
+                int[] poging = new int[spelbord[0].length / 2];    
                 
+                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
 
                 for (Node node : SpelbordScherm.this.getChildren()) {
 
                     if (node instanceof TextField) {
                         String kleur = ((TextField) node).getText();
-
                         for (int i = 0; i < poging.length; i++) {
                             if (!Arrays.asList(alleKleuren).contains(kleur)) {
                                 //nog foutLabel toevoegen.
@@ -192,8 +118,9 @@ public class SpelbordScherm extends GridPane {
                             }
                         }
                     }
-                } 
+                }
                 dc.geefPoging(poging);
+                update(dc.geefSpelbord());
 //
             }
 
@@ -213,10 +140,72 @@ public class SpelbordScherm extends GridPane {
 
     }
 
-    
+    private void toonSpelbord(int[][] spelbord) {
+        int rij;
+        for (int i = 0; i < spelbord.length; i++) {
+            for (int j = 0; j < spelbord[i].length; j++) {
+                Label label = new Label();
+                switch (spelbord[i][j]) {
+                    case -2:
+                        label.setText("\t");
+                        break;
+                    case -4:
+                        label.setText("\t\t");
+                        break;
+                    default:
+                        String kleur = String.format("/images/pin_%d.png", spelbord[i][j]);
+                        label.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));//   
+                        
+                }
+
+                //DRAG AND DROP OM MSS LATER TE IMPLEMENTEREN
+//                label.setOnDragOver(new EventHandler<DragEvent>() {
+//                    @Override
+//                    public void handle(DragEvent event) {
+//                        /* data is dragged over the target */
+// /* accept it only if it is not dragged from the same node 
+//                        * and if it has a string data */
+//                        if (event.getGestureSource() != label
+//                                && event.getDragboard().hasString()) {
+//                            /* allow for moving */
+//                            event.acceptTransferModes(TransferMode.MOVE);
+//                        }
+//
+//                        event.consume();
+//                    }
+//                });
+//                label.setOnDragDropped(new EventHandler<DragEvent>() {
+//                    public void handle(DragEvent event) {
+//                        /* data dropped */
+// /* if there is a string data on dragboard, read it and use it */
+//                        Dragboard db = event.getDragboard();
+//                        boolean success = false;
+//                        if (db.hasString()) {
+//                            label.setText(db.getString());
+//                            success = true;
+//                        }
+//                        /* let the source know whether the string was successfully 
+//         * transferred and used */
+//                        event.setDropCompleted(success);
+//
+//                        event.consume();
+//                    }
+//                });                
+                this.add(label, j, i);
+            }
+            if (i < (spelbord[0].length - 1) / 2) {
+                TextField txf = new TextField();
+                txf.setPrefWidth(30);
+                this.add(txf, 14 + i, 6);
+            }
+        }
+    }
+
+    private void update(int[][] spelbord) {
+        
+    }
+
     //OOK VOOR DRAG AND DROP
-    
-    
 //    private void dragDropEvent(Label label) {
 //        label.setOnDragDetected(new EventHandler<MouseEvent>() {
 //
@@ -234,5 +223,4 @@ public class SpelbordScherm extends GridPane {
 //            }
 //        });
 //    }
-
 }
