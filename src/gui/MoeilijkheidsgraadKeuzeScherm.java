@@ -33,6 +33,9 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
+        
+        //Eventhandling
+        
     }
 
 }

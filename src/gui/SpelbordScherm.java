@@ -40,7 +40,6 @@ public class SpelbordScherm extends GridPane {
     }
 
     private void buildGui() {
-        dc.kiesMoeilijkheidsgraad(1);
         int[][] spelbord = dc.geefSpelbord();
         toonSpelbord(spelbord);
         this.setAlignment(Pos.CENTER);
@@ -58,6 +57,7 @@ public class SpelbordScherm extends GridPane {
 
         groen.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_0.png"), 45, 45, false, false)));
         //dragDropEvent(groen);
+        
         blauw.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_1.png"), 45, 45, false, false)));
         //dragDropEvent(blauw);
         rood.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_2.png"), 45, 45, false, false)));
