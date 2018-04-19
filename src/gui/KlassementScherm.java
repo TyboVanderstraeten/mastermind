@@ -1,4 +1,3 @@
-package gui;
 
 import javafx.scene.layout.GridPane;
 import domein.DomeinController;
