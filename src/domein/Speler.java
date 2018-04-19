@@ -13,8 +13,8 @@ public class Speler {
     private String wachtwoord;
     private int[] aantalGewonnen = {0, 0, 0};
     private int[] aantalGewonennUitdagingen = {0, 0, 0};
+    private int[] aantalPunten = {0, 0, 0};
     private Spel spel;
-    private int[] score = {0, 0, 0};
 
     //constructors
     /**
@@ -31,11 +31,12 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen) {
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalPunten) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
         setAantalGewonnen(aantalGewonnenUitdagingen);
+        setAantalPunten(aantalPunten);
     }
 
     public Speler selectSpeler(String tegenspeler) {
@@ -74,6 +75,10 @@ public class Speler {
         return aantalGewonennUitdagingen;
     }
 
+    public int[] getAantalPunten() {
+        return aantalPunten;
+    }
+
     //setters
     /**
      * Setter zorgt ervoor dat het attribuut spelersnaam de waarde krijgt van de
@@ -103,10 +108,6 @@ public class Speler {
         this.wachtwoord = wachtwoord;
     }
 
-    public void setScore(int makkelijk, int normaal, int moeilijk)
-    {
-        this.score = int[makkelijk, normaal, moeilijk];
-    }
     public void setSpel(Spel spel) {
         this.spel = spel;
     }
@@ -117,6 +118,10 @@ public class Speler {
 
     private void setAantalGewonnenUitdagingen(int[] aantalGewonnenUitdagingen) {
         this.aantalGewonennUitdagingen = aantalGewonnenUitdagingen;
+    }
+
+    private void setAantalPunten(int[] aantalPunten) {
+        this.aantalPunten = aantalPunten;
     }
 
     public void verhoogAantalGewonnen() {
