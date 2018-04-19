@@ -42,7 +42,7 @@ public class SpelbordScherm extends GridPane {
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
         toonSpelbord(spelbord);
-        
+
         //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
@@ -58,8 +58,7 @@ public class SpelbordScherm extends GridPane {
         Label bruin = new Label(resourceBundle.getString("7"));
 
         groen.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_0.png"), 45, 45, false, false)));
-        //dragDropEvent(groen);
-        
+        //dragDropEvent(groen);  
         blauw.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_1.png"), 45, 45, false, false)));
         //dragDropEvent(blauw);
         rood.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_2.png"), 45, 45, false, false)));
@@ -103,13 +102,13 @@ public class SpelbordScherm extends GridPane {
                 for (Node node : SpelbordScherm.this.getChildren()) {
 
                     if (node instanceof TextField) {
-                        String kleur = ((TextField) node).getText();
+                        String kleur = ((TextField) node).getText().toLowerCase();
                         if (!Arrays.asList(alleKleuren).contains(kleur)) {
                             //nog foutlabel                                
                             continue;
                         }
                         for (int j = 0; j < 8; j++) {
-                            if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {                                
+                            if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
                                 poging[teller] = j;
                                 teller++;
                                 break;
@@ -207,7 +206,7 @@ public class SpelbordScherm extends GridPane {
         for (int i = 0; i < spelbord.length; i++) {
             if (Arrays.toString(spelbord[i]).equals("[-1, -1, -1, -1, -4, -1, -1, -1, -1]") || i >= spelbord.length - 2) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
                 for (Node node : this.getChildren()) {
-                    if (node instanceof Label && this.getRowIndex(node) == (i > spelbord.length - 2 ? i : i - 1) && this.getColumnIndex(node) < (i==spelbord.length-1?spelbord[i].length/2:spelbord[i].length) && this.getColumnIndex(node) != spelbord[i].length / 2){
+                    if (node instanceof Label && this.getRowIndex(node) == (i > spelbord.length - 2 ? i : i - 1) && this.getColumnIndex(node) < (i == spelbord.length - 1 ? spelbord[i].length / 2 : spelbord[i].length) && this.getColumnIndex(node) != spelbord[i].length / 2) {
                         String kleur = String.format("/images/pin_%d.png", spelbord[i >= spelbord.length - 2 ? i : i - 1][this.getColumnIndex(node)]);
                         ((Label) node).setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));
                     }
