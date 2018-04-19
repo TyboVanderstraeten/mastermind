@@ -42,6 +42,8 @@ public class SpelbordScherm extends GridPane {
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
         toonSpelbord(spelbord);
+        
+        //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
