@@ -82,7 +82,7 @@ public class SpelerMapper {
                     aantalGespeeldUitdagingen[0] = rs.getInt("aantalGespeeldUitdagingenMakkelijk");
                     aantalGespeeldUitdagingen[1] = rs.getInt("aantalGespeeldUitdagingenNormaal");
                     aantalGespeeldUitdagingen[2] = rs.getInt("aantalGespeeldUitdagingenNormaal");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten,aantalGespeeldUitdagingen);
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten, aantalGespeeldUitdagingen);
                 }
             }
         } catch (SQLException ex) {
@@ -132,6 +132,7 @@ public class SpelerMapper {
         return aantalGespeeldeUitdagingen;
     }
 
+    //Onderstaande methode is voor singleplayer spellen
     public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);

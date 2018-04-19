@@ -67,7 +67,7 @@ public class SpelerRepository {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
     }
     
-
+    
     public String[] geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
         String[] tegenspelerNamen = new String[mapper.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenUitdagingen, spelersnaam
         ).size()];
