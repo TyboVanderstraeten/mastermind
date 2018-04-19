@@ -70,14 +70,14 @@ public class KeuzeScherm extends GridPane {
             }
         });
 
-        btnAanvaardUitdaging.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());
-                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
-                stage.setScene(new Scene(spelbordScherm, 1280, 720));
-            }
-        });
+//        btnAanvaardUitdaging.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                Stage stage = (Stage)(getScene().getWindow());
+//                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
+//                stage.setScene(new Scene(spelbordScherm, 1280, 720));
+//            }
+//        });
 
         btnKlassement.setOnAction(new EventHandler<ActionEvent>() {
             @Override

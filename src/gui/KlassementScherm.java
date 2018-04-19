@@ -15,6 +15,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
