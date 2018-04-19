@@ -27,3 +27,6 @@ hs_err_pid*
 /vpproject/
 /build/
 /dist/
+/mastermind-g68d/build/
+/mastermind-g68d/dist/
+/mastermind-g68d/nbproject/private/
