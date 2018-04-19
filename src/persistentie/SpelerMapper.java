@@ -90,7 +90,6 @@ public class SpelerMapper {
 
     public int[] geefAantalGewonnenUitdagingen(String spelersnaam) {
         int[] aantalGewonnenUitdagingen = new int[3];
-
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_SPELER)) {
@@ -113,7 +112,7 @@ public class SpelerMapper {
         int[] aantalGespeeldeUitdagingen = new int[3];
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(GEEF_AANTALGESPEELDEUITDAGINGEN)) {
+                PreparedStatement query = conn.prepareStatement(GEEF_AANTALGESPEELDUITDAGINGEN)) {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
@@ -160,7 +159,7 @@ public class SpelerMapper {
     public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGESPEELDEUITDAGINGEN)) {
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGESPEELDUITDAGINGEN)) {
             query.setInt(1, aantalGespeeldeUitdagingenMakkelijk);
             query.setInt(2, aantalGespeeldeUitdagingenNormaal);
             query.setInt(3, aantalGespeeldeUitdagingenMoeilijk);
