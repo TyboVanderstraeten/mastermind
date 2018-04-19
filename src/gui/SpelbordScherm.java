@@ -24,10 +24,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
-/**
- *
- * @author bramd
- */
+//EXCEPTIONS NOG NIET DONE
 public class SpelbordScherm extends GridPane {
 
     private final DomeinController dc;
