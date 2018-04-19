@@ -14,6 +14,7 @@ public class Speler {
     private int[] aantalGewonnen = {0, 0, 0};
     private int[] aantalGewonnenUitdagingen = {0, 0, 0};
     private int[] aantalPunten = {0, 0, 0};
+    private int[] aantalGespeeldUitdagingen = {0, 0, 0};
     private Spel spel;
 
     //constructors
@@ -31,12 +32,13 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalPunten) {
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalPunten, int[] aantalGespeeldUitdagingen) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
         setAantalGewonnen(aantalGewonnenUitdagingen);
         setAantalPunten(aantalPunten);
+        setAantalGespeeldUitdagingen(aantalGespeeldUitdagingen);
     }
 
     public Speler selectSpeler(String tegenspeler) {
@@ -77,6 +79,10 @@ public class Speler {
 
     public int[] getAantalPunten() {
         return aantalPunten;
+    }
+
+    public int[] getAantalGespeeldUitdagingen() {
+        return aantalGespeeldUitdagingen;
     }
 
     //setters
@@ -124,6 +130,11 @@ public class Speler {
         this.aantalPunten = aantalPunten;
     }
 
+    private void setAantalGespeeldUitdagingen(int[] aantalGespeeldUitdagingen) {
+        this.aantalGespeeldUitdagingen = aantalGespeeldUitdagingen;
+    }
+    
+    //Methode om het aantal gewonnen (spellen geen uitdagingen) spellen te verhogen
     public void verhoogAantalGewonnen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
