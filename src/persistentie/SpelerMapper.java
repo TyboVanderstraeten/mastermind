@@ -69,6 +69,7 @@ public class SpelerMapper {
                     int[] aantalGewonnen = new int[3];
                     int[] aantalGewonnenUitdagingen = new int[3];
                     int[] aantalPunten = new int[3];
+                    int[] aantalGespeeldUitdagingen = new int[3];
                     aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
                     aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
                     aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");
@@ -78,7 +79,10 @@ public class SpelerMapper {
                     aantalPunten[0] = rs.getInt("aantalPuntenMakkelijk");
                     aantalPunten[1] = rs.getInt("aantalPuntenNormaal");
                     aantalPunten[2] = rs.getInt("aantalPuntenMoeilijk");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten);
+                    aantalGespeeldUitdagingen[0] = rs.getInt("aantalGespeeldUitdagingenMakkelijk");
+                    aantalGespeeldUitdagingen[1] = rs.getInt("aantalGespeeldUitdagingenNormaal");
+                    aantalGespeeldUitdagingen[2] = rs.getInt("aantalGespeeldUitdagingenNormaal");
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten,aantalGespeeldUitdagingen);
                 }
             }
         } catch (SQLException ex) {
