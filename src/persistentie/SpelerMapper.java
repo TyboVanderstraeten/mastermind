@@ -24,7 +24,12 @@ public class SpelerMapper {
     private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalPuntenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalPuntenMakkelijk DESC";
     private static final String GEEF_SPELERSKLASSEMENTNORMAAL = "SELECT spelersnaam, aantalPuntenNormaal FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenNormaal > 0 ORDER BY aantalPuntenNormaal DESC";
     private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalPuntenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalPuntenMoeilijk DESC";
-
+    //uitdagingen SQL query's
+    private static final String UPDATE_AANTALGEWONNENUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenUitdagingenMakkelijk = ?, aantalGewonnenUitdagingenNormaal = ?, aantalGewonnenUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
+    private static final String UPDATE_AANTALPUNTEN = "UPDATE ID222177_g68.Speler SET aantalPuntenMakkelijk = ?, aantalPuntenNormaal = ?, aantalPuntenMoeilijk = ? WHERE spelersnaam = ?";
+    private static final String UPDATE_AANTALGESPEELDEUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
+    private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+    private static final String GEEF_AANTALGESPEELDEUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
      * databank.
@@ -77,6 +82,47 @@ public class SpelerMapper {
 
         return speler;
     }
+    
+    public int[] geefAantalGewonnenUitdagingen(String spelersnaam) {
+        int[] aantalGewonnenUitdagingen = new int[3];
+
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_SPELER)) {
+            query.setString(1, spelersnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
+                    aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
+                    aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return aantalGewonnenUitdagingen;
+    }
+    
+    public int[] geefAantalGespeeldeUitdagingen(String spelersnaam) {
+        int[] aantalGespeeldeUitdagingen = new int[3];
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_AANTALGESPEELDEUITDAGINGEN)) {
+            query.setString(1, spelersnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    aantalGespeeldeUitdagingen[0] = rs.getInt("aantalGespeeldeUitdagingenMakkelijk");
+                    aantalGespeeldeUitdagingen[1] = rs.getInt("aantalGespeeldeUitdagingenNormaal");
+                    aantalGespeeldeUitdagingen[2] = rs.getInt("aantalGespeeldeUitdagingenMoeilijk");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return aantalGespeeldeUitdagingen;
+    }
 
     public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
         try (
@@ -91,6 +137,50 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
+    
+    public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNENUITDAGINGEN)) {
+            query.setInt(1, aantalGewonnenUitdagingenMakkelijk);
+            query.setInt(2, aantalGewonnenUitdagingenNormaal);
+            query.setInt(3, aantalGewonnenUitdagingenMoeilijk);
+            query.setString(4, spelersnaam);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGESPEELDEUITDAGINGEN)) {
+            query.setInt(1, aantalGespeeldeUitdagingenMakkelijk);
+            query.setInt(2, aantalGespeeldeUitdagingenNormaal);
+            query.setInt(3, aantalGespeeldeUitdagingenMoeilijk);
+            query.setString(4, spelersnaam);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPUNTEN)) {
+            query.setInt(1, aantalPuntenMakkelijk);
+            query.setInt(2, aantalPuntenNormaal);
+            query.setInt(3, aantalPuntenMoeilijk);
+            query.setString(4, spelersnaam);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+  
 
     public List<String> geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
         List<String> tegenspelers = new ArrayList<>();

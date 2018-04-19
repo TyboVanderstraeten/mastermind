@@ -102,7 +102,7 @@ public class SpelbordScherm extends GridPane {
                 for (Node node : SpelbordScherm.this.getChildren()) {
 
                     if (node instanceof TextField) {
-                        String kleur = ((TextField) node).getText().toLowerCase();
+                        String kleur = ((TextField) node).getText().toLowerCase().trim();
                         if (!Arrays.asList(alleKleuren).contains(kleur)) {
                             //nog foutlabel                                
                             continue;
