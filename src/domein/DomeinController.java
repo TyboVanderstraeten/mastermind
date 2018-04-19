@@ -312,49 +312,49 @@ public class DomeinController {
         return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());
     }
     
-    public void berekenScore()
-    {
-        int aantalPogingenSpeler;
-        int aantalPogingenTegenspeler;
-        
-        aantalPogingenSpeler = spel.getSpelbord().getAantalPogingen();
-        aantalPogingenTegenspeler = spel.getSpelbord().getAantalPogingen();
-        
-        if (aantalPogingenSpeler >= aantalPogingenTegenspeler)
-        {
-            switch (spel.getClass().getSimpleName()) {
-            case "MakkelijkSpel":
-                deSpeler.setScore(3, 0, 0);
-                tegenspeler.setScore(-1, 0, 0);
-                break;
-            case "NormaalSpel":
-                deSpeler.setScore(0, 3, 0);
-                tegenspeler.setScore(0, -1, 0);
-                break;
-            case "MoeilijkSpel":
-                deSpeler.setScore(0, 0, 3);
-                tegenspeler.setScore(0, 0, -1);
-                break;
-            }
-        }
-        else
-        {
-            switch (spel.getClass().getSimpleName()) {
-            case "MakkelijkSpel":
-                deSpeler.setScore(-1, 0, 0);
-                tegenspeler.setScore(3, 0, 0);
-                break;
-            case "NormaalSpel":
-                deSpeler.setScore(0, -1, 0);
-                tegenspeler.setScore(0, 3, 0);
-                break;
-            case "MoeilijkSpel":
-                deSpeler.setScore(0, 0, -1);
-                tegenspeler.setScore(0, 0, 3);
-                break;
-            }
-        }
-    }
+//    public void berekenScore()
+//    {
+//        int aantalPogingenSpeler;
+//        int aantalPogingenTegenspeler;
+//        
+//        aantalPogingenSpeler = spel.getSpelbord().getAantalPogingen();
+//        aantalPogingenTegenspeler = spel.getSpelbord().getAantalPogingen();
+//        
+//        if (aantalPogingenSpeler >= aantalPogingenTegenspeler)
+//        {
+//            switch (spel.getClass().getSimpleName()) {
+//            case "MakkelijkSpel":
+//                deSpeler.setScore(3, 0, 0);
+//                tegenspeler.setScore(-1, 0, 0);
+//                break;
+//            case "NormaalSpel":
+//                deSpeler.setScore(0, 3, 0);
+//                tegenspeler.setScore(0, -1, 0);
+//                break;
+//            case "MoeilijkSpel":
+//                deSpeler.setScore(0, 0, 3);
+//                tegenspeler.setScore(0, 0, -1);
+//                break;
+//            }
+//        }
+//        else
+//        {
+//            switch (spel.getClass().getSimpleName()) {
+//            case "MakkelijkSpel":
+//                deSpeler.setScore(-1, 0, 0);
+//                tegenspeler.setScore(3, 0, 0);
+//                break;
+//            case "NormaalSpel":
+//                deSpeler.setScore(0, -1, 0);
+//                tegenspeler.setScore(0, 3, 0);
+//                break;
+//            case "MoeilijkSpel":
+//                deSpeler.setScore(0, 0, -1);
+//                tegenspeler.setScore(0, 0, 3);
+//                break;
+//            }
+//        }
+//    }
 
     //KIESUITDAGING = LAADSPEL
     //setters
