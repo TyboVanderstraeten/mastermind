@@ -17,14 +17,21 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class LoginScherm extends GridPane {
 
-    public LoginScherm(DomeinController dc, WelkomScherm ws) {
+    private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
+    private final WelkomScherm welkomScherm;
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-        //     ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
+    public LoginScherm(DomeinController dc, ResourceBundle resourceBundle, WelkomScherm welkomScherm) {
+        this.dc = dc;
+        this.resourceBundle = resourceBundle;
+        this.welkomScherm = welkomScherm;
+        buildGui();
+    }
 
+    private void buildGui() {
         Label lblMeldAan = new Label(resourceBundle.getString("meldAan"));
         this.add(lblMeldAan, 0, 0, 2, 1);
 
@@ -40,12 +47,15 @@ public class LoginScherm extends GridPane {
         PasswordField pwfWachtwoord = new PasswordField();
         this.add(pwfWachtwoord, 1, 2);
 
+        Label lblError = new Label();
+        this.add(lblError, 0, 3, 2, 1);
+
         Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));
-        this.add(btnMeldAan, 0, 3);
+        this.add(btnMeldAan, 0, 4);
         setHalignment(btnMeldAan, HPos.LEFT);
 
         Button btnAnnuleer = new Button(resourceBundle.getString("annulatie"));
-        this.add(btnAnnuleer, 1, 3);
+        this.add(btnAnnuleer, 1, 4);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
         //Positionering
@@ -54,32 +64,45 @@ public class LoginScherm extends GridPane {
         this.setVgap(10);
 
         //EventHandling
-        //Meldaan knop meldt de speler aan!
-        //NOG CHECKEN OF WEL DEGELIJK AANMELD
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DomeinController domeinController = new DomeinController();
-                domeinController.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
-                Alert alertAangemeld = new Alert(AlertType.INFORMATION);
-                alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
-                alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
-                alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), domeinController.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
-                alertAangemeld.showAndWait();
+                try {
+                    dc.meldAan(txfGebruikersnaam.getText(), pwfWachtwoord.getText());
 
+                    Alert alertAangemeld = new Alert(AlertType.INFORMATION);
+                    alertAangemeld.setTitle(resourceBundle.getString("meldAan"));
+                    alertAangemeld.setHeaderText(resourceBundle.getString("geslaagdeAanmelding"));
+                    alertAangemeld.setContentText(String.format("%s '%s' %s", resourceBundle.getString("aanmeldingSuccesvolD1"), dc.geefSpelersnaam(), resourceBundle.getString("aanmeldingSuccesvolD2")));
+                    alertAangemeld.showAndWait();
+
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle(resourceBundle.getString("menu"));
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    lblError.setText(resourceBundle.getString(e.getMessage()));
+                    txfGebruikersnaam.clear();
+                    pwfWachtwoord.clear();
+                } catch (RuntimeException e) {
+                    lblError.setText(resourceBundle.getString(e.getMessage()));
+                    txfGebruikersnaam.clear();
+                    pwfWachtwoord.clear();
+                }
             }
-        });
+        }
+        );
 
-        //Annuleerknop sluit venster en gaat terug naar welkomscherm
-        //Sluit loginscherm nog niet af?!
-        btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
+        btnAnnuleer.setOnAction(
+                new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());              
-                stage.setScene(ws.getScene());
+            public void handle(ActionEvent event
+            ) {
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(welkomScherm.getScene());
                 stage.setTitle("Mastermind");
             }
-        });
-
+        }
+        );
     }
 }

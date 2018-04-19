@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE
+//Nog schrijven van gelijke punten 
 public class UC7Applicatie {
 
     private final DomeinController domeinController;

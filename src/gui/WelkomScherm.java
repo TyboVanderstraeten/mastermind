@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class WelkomScherm extends GridPane {
 
     private final DomeinController dc;
@@ -38,27 +39,23 @@ public class WelkomScherm extends GridPane {
         this.setVgap(10);
 
         //EventHandling
-        //Meldaan knop die naar het loginscherm leidt
-        //Sluit welkomscherm nog niet af?!
         btnMeldAan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                LoginScherm loginScherm = new LoginScherm(dc, WelkomScherm.this);
-                stage.setScene(new Scene(loginScherm, 300, 200));
+                LoginScherm loginScherm = new LoginScherm(dc, resourceBundle, WelkomScherm.this);
+                stage.setScene(new Scene(loginScherm, 1280, 720));
                 stage.setTitle(resourceBundle.getString("meldAan"));
 
             }
         });
 
-        //Registreer knop die naar het registreerscherm leidt
-        //Sluit welkomscherm nog niet af?!
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                RegistreerScherm registreerScherm = new RegistreerScherm(dc, WelkomScherm.this);
-                stage.setScene(new Scene(registreerScherm, 300, 200));
+                RegistreerScherm registreerScherm = new RegistreerScherm(dc, resourceBundle, WelkomScherm.this);
+                stage.setScene(new Scene(registreerScherm, 1280, 720));
                 stage.setTitle(resourceBundle.getString("registreer"));
 
             }

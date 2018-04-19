@@ -82,7 +82,7 @@ public class Speler {
      * @param spelersnaam spelersnaam van de gebruiker
      */
     private void setSpelersnaam(String spelersnaam) {
-        if (spelersnaam.length() > 40) {
+        if (spelersnaam.length() > 40 || spelersnaam.isEmpty() || spelersnaam == null) {
             throw new SpelersnaamException();
         }
         this.spelersnaam = spelersnaam;
@@ -102,12 +102,11 @@ public class Speler {
 
         this.wachtwoord = wachtwoord;
     }
-    
+
 //    public void setScore(int makkelijk, int normaal, int moeilijk)
 //    {
 //        this.score = int[makkelijk, normaal, moeilijk];
 //    }
-
     public void setSpel(Spel spel) {
         this.spel = spel;
     }

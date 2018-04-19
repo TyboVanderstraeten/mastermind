@@ -17,19 +17,22 @@ import javafx.scene.control.Alert;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//EXCEPTIONS DONE
 public class RegistreerScherm extends GridPane {
-private final WelkomScherm ws;
-private final DomeinController dc;
 
-    public RegistreerScherm(DomeinController dc, WelkomScherm ws) {
+    private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
+    private final WelkomScherm welkomScherm;
+
+    public RegistreerScherm(DomeinController dc, ResourceBundle resourceBundle, WelkomScherm welkomScherm) {
         this.dc = dc;
-        this.ws = ws;
+        this.resourceBundle = resourceBundle;
+        this.welkomScherm = welkomScherm;
+        buildGui();
     }
-    private void buildGui(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ROOT);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.FRANCE);
-//      ResourceBundle resourceBundle = ResourceBundle.getBundle("talen.MessagesBundle", Locale.ENGLISH);
-        
+
+    private void buildGui() {
+
         Label lblRegistreer = new Label(resourceBundle.getString("registreer"));
         this.add(lblRegistreer, 0, 0, 2, 1);
 
@@ -51,12 +54,15 @@ private final DomeinController dc;
         PasswordField pwfWachtwoordBevestiging = new PasswordField();
         this.add(pwfWachtwoordBevestiging, 1, 3);
 
+        Label lblError = new Label();
+        this.add(lblError, 0, 4, 2, 1);
+
         Button btnRegistreer = new Button(resourceBundle.getString("registreer"));
-        this.add(btnRegistreer, 0, 4);
+        this.add(btnRegistreer, 0, 5);
         setHalignment(btnRegistreer, HPos.LEFT);
 
         Button btnAnnuleer = new Button(resourceBundle.getString("annulatie"));
-        this.add(btnAnnuleer, 1, 4);
+        this.add(btnAnnuleer, 1, 5);
         setHalignment(btnAnnuleer, HPos.RIGHT);
 
         //Positionering
@@ -64,28 +70,37 @@ private final DomeinController dc;
         this.setHgap(10);
         this.setVgap(10);
 
-        //EventHandling
-        //Registreerknop registreert de speler!
+        //Eventhandling
         btnRegistreer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DomeinController domeinController = new DomeinController();
-                domeinController.registreer(txfGebruikersnaam.getText(), pwfWachtwoord.getText(), pwfWachtwoordBevestiging.getText());
-                Alert alertGeregistreerd = new Alert(Alert.AlertType.INFORMATION);
-                alertGeregistreerd.setTitle(resourceBundle.getString("registreren"));
-                alertGeregistreerd.setHeaderText(resourceBundle.getString("geslaagdeRegistratie"));
-                alertGeregistreerd.setContentText(resourceBundle.getString("registratieSuccesvol"));
-                alertGeregistreerd.showAndWait();
+                try {
+                    dc.registreer(txfGebruikersnaam.getText(), pwfWachtwoord.getText(), pwfWachtwoordBevestiging.getText());
+
+                    Alert alertGeregistreerd = new Alert(Alert.AlertType.INFORMATION);
+                    alertGeregistreerd.setTitle(resourceBundle.getString("registreren"));
+                    alertGeregistreerd.setHeaderText(resourceBundle.getString("geslaagdeRegistratie"));
+                    alertGeregistreerd.setContentText(resourceBundle.getString("registratieSuccesvol"));
+                    alertGeregistreerd.showAndWait();
+
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle(resourceBundle.getString("menu"));
+                } catch (IllegalArgumentException e) {
+                    lblError.setText(resourceBundle.getString(e.getMessage()));
+                    txfGebruikersnaam.clear();
+                    pwfWachtwoord.clear();
+                    pwfWachtwoordBevestiging.clear();
+                }
             }
         });
 
-        //Annuleerknop sluit venster en gaat terug naar welkomscherm
-        //Sluit registreerscherm nog niet af?!
         btnAnnuleer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage stage = (Stage)(getScene().getWindow());             
-                stage.setScene(ws.getScene());   
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(welkomScherm.getScene());
                 stage.setTitle("Mastermind");
             }
         });
