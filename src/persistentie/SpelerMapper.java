@@ -30,6 +30,7 @@ public class SpelerMapper {
     private static final String UPDATE_AANTALGESPEELDEUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGESPEELDEUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
      * databank.
@@ -67,13 +68,17 @@ public class SpelerMapper {
                     String wachtwoord = rs.getString("wachtwoord");
                     int[] aantalGewonnen = new int[3];
                     int[] aantalGewonnenUitdagingen = new int[3];
+                    int[] aantalPunten = new int[3];
                     aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
                     aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
                     aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");
                     aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
                     aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
                     aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen);
+                    aantalPunten[0] = rs.getInt("aantalPuntenMakkelijk");
+                    aantalPunten[1] = rs.getInt("aantalPuntenNormaal");
+                    aantalPunten[2] = rs.getInt("aantalPuntenMoeilijk");
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten);
                 }
             }
         } catch (SQLException ex) {
@@ -82,7 +87,7 @@ public class SpelerMapper {
 
         return speler;
     }
-    
+
     public int[] geefAantalGewonnenUitdagingen(String spelersnaam) {
         int[] aantalGewonnenUitdagingen = new int[3];
 
@@ -103,7 +108,7 @@ public class SpelerMapper {
 
         return aantalGewonnenUitdagingen;
     }
-    
+
     public int[] geefAantalGespeeldeUitdagingen(String spelersnaam) {
         int[] aantalGespeeldeUitdagingen = new int[3];
         try (
@@ -137,7 +142,7 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -151,7 +156,7 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -165,7 +170,7 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -179,8 +184,6 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
-    
-  
 
     public List<String> geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
         List<String> tegenspelers = new ArrayList<>();
@@ -203,7 +206,7 @@ public class SpelerMapper {
 
         return tegenspelers;
     }
-    
+
     //KLASSEMENT
     public List<String[]> geefKlassementMakkelijk() {
         List<String[]> klassementMakkelijk = new ArrayList<>();
