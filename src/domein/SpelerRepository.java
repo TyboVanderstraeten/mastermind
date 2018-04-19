@@ -60,11 +60,11 @@ public class SpelerRepository {
     public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenuitdagingenMakkelijk, int aantalGewonnenuitdagingenNormaal, int aantalGewonnenuitdagingenMoeilijk) {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenuitdagingenMakkelijk, aantalGewonnenuitdagingenNormaal, aantalGewonnenuitdagingenMoeilijk);
     }
-    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalGewonnenuitdagingenNormaal, int aantalGewonnenuitdagingenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenuitdagingenMakkelijk, aantalGewonnenuitdagingenNormaal, aantalGewonnenuitdagingenMoeilijk);
+    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalPuntenMakkelijk, aantalPuntenNormaal, aantalPuntenMoeilijk);
     }
-    public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
+    public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
     }
     
 
