@@ -27,9 +27,9 @@ public class SpelerMapper {
     //uitdagingen SQL query's
     private static final String UPDATE_AANTALGEWONNENUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenUitdagingenMakkelijk = ?, aantalGewonnenUitdagingenNormaal = ?, aantalGewonnenUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String UPDATE_AANTALPUNTEN = "UPDATE ID222177_g68.Speler SET aantalPuntenMakkelijk = ?, aantalPuntenNormaal = ?, aantalPuntenMoeilijk = ? WHERE spelersnaam = ?";
-    private static final String UPDATE_AANTALGESPEELDEUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
+    private static final String UPDATE_AANTALGESPEELDUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_AANTALGESPEELDEUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+    private static final String GEEF_AANTALGESPEELDUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
