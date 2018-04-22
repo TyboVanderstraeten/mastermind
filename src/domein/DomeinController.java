@@ -19,8 +19,7 @@ public class DomeinController {
     private final UitdagingRepository uitdagingRepository;
     private Uitdaging uitdaging;
     private Speler deSpeler;
-    private Spel spel;
-    private Speler tegenspeler;
+    private Spel spel;    
 
     //constructors
     /**
