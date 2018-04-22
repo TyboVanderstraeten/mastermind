@@ -16,6 +16,7 @@ public class DomeinController {
 
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
+    private final UitdagingRepository uitdagingRepository;
     private Speler deSpeler;
     private Spel spel;
     private Speler tegenspeler;
@@ -31,6 +32,7 @@ public class DomeinController {
     public DomeinController() {
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
+        uitdagingRepository = new UitdagingRepository();
     }
 
     //UC1   
@@ -168,8 +170,7 @@ public class DomeinController {
      * @return
      */
     public int[][] geefSpelbord() {
-        Spelbord spelbord = spel.getSpelbord();
-        return spelbord.geefOverzichtMetPinnen();
+        return spel.getSpelbord().geefOverzichtMetPinnen();
     }
 
     //UC3
@@ -230,12 +231,11 @@ public class DomeinController {
     }
 
     public void registreerSpel(String spelnaam) {
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, null);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
     }
 
     public void registreerUitdaging(String tegenspeler, String spelnaam) {                    //VOOR 1EEN UITDAGING
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel, tegenspeler);
-        spelRepository.registreerSpel(spelnaam, tegenspeler, spel, deSpeler.getSpelersnaam());
+        uitdagingRepository.registreerUitdaging(deSpeler.getSpelersnaam(), tegenspeler, spel);
     }
 
     public String[] geefSpellen() {
@@ -262,7 +262,7 @@ public class DomeinController {
     }
 
     public void verwijderSpel(String spelnaam) {
-        spelRepository.verwijderSpel(spelnaam, /*deSpeler.getSpelersnaam()*/"testdetest");
+        spelRepository.verwijderSpel(spelnaam, /*deSpeler.getSpelersnaam()*/ "testdetest");
     }
 
     public int[][] startUitdaging() {
@@ -303,15 +303,20 @@ public class DomeinController {
 
         return tegenspelersString;
     }
-
-    public void spelIsUitdaging() {
-        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
-    }
-
-    public String[][] aanvaardUitdaging() {
-        return spelRepository.geefUitdagingen(deSpeler.getSpelersnaam());
-    }
     
+//UC6
+    
+//    public void spelIsUitdaging() {
+//        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
+//    }
+    public String[][] aanvaardUitdaging() {
+        return uitdagingRepository.geefUitdagingen(deSpeler.getSpelersnaam());
+    }
+
+    public void laadUitdaging(String spelersnaam) {
+        spel = uitdagingRepository.laadUitdaging(spelersnaam);
+    }
+
 //    public void berekenScore()
 //    {
 //        int aantalPogingenSpeler;
@@ -355,7 +360,6 @@ public class DomeinController {
 //            }
 //        }
 //    }
-
     //KIESUITDAGING = LAADSPEL
     //setters
     /**
@@ -381,17 +385,17 @@ public class DomeinController {
     public void updateSpelerAantalGewonnen() {
         spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
     }
-    
+
     //KLASSEMENT
-    public List<String[]> geefKlassementMakkelijk(){
-        return spelerRepository.geefKlassementMakkelijk();    
+    public List<String[]> geefKlassementMakkelijk() {
+        return spelerRepository.geefKlassementMakkelijk();
     }
-    
-    public List<String[]> geefKlassementNormaal(){
+
+    public List<String[]> geefKlassementNormaal() {
         return spelerRepository.geefKlassementNormaal();
     }
-    
-    public List<String[]> geefKlassementMoeilijk(){
+
+    public List<String[]> geefKlassementMoeilijk() {
         return spelerRepository.geefKlassementMoeilijk();
     }
 }

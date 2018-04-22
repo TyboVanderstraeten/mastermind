@@ -27,8 +27,8 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
-    public void registreerSpel(String spelnaam, String spelersnaam, Spel spel, String tegenspeler) {
-        mapper.voegSpelToe(spelnaam, spelersnaam, spel, tegenspeler);
+    public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
+        mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
 
     public String[] geefSpellen(String spelersnaam) {
@@ -51,19 +51,19 @@ public class SpelRepository {
         mapper.verwijderSpel(spelnaam, spelersnaam);
     }
 
-    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
-        mapper.spelIsUitdaging(spelnaam, spelersnaam);
-    }
+                        //    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
+                        //        mapper.spelIsUitdaging(spelnaam, spelersnaam);
+                        //    }
 
-   public String[][] geefUitdagingen(String spelersnaam) {
-        
-        List<String[]> uitdagingInfo = mapper.geefLijstUitdagingen(spelersnaam);
-        String[][] uitdagingen = new String[uitdagingInfo.size()][];
-        for(int i = 0; i<uitdagingen.length; i++){
-            uitdagingen[i]= uitdagingInfo.get(i);
-        }        
-        return uitdagingen;
-    }
+                        //   public String[][] geefUitdagingen(String spelersnaam) {
+                        //        
+                        //        List<String[]> uitdagingInfo = mapper.geefLijstUitdagingen(spelersnaam);
+                        //        String[][] uitdagingen = new String[uitdagingInfo.size()][];
+                        //        for(int i = 0; i<uitdagingen.length; i++){
+                        //            uitdagingen[i]= uitdagingInfo.get(i);
+                        //        }        
+                        //        return uitdagingen;
+                        //    }
  
 //    public Spel laadSpel(int spelnaam, String spelersnaam){
 //        mapper.laadSpel(geefSpellen(spelersnaam)[spelnaam], spelersnaam);

@@ -23,22 +23,21 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad, tegenspeler) VALUES (?,?,?,?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String VERWIJDER_RIJ = "DELETE FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND tegenspeler is not null";
+    //private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
+    //private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND tegenspeler is not null";
     //SQL statement opvragen aantalPogingen per speler per uitdaging (zal gebruikt worden om score te berekenen)
     private static final String GEEF_AANTALPOGINGEN_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String GEEF_TEGENSPELER_UITDAGING = "SELECT tegenspeler FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String GEEF_AANTALPOGINGEN_TEGENSPELER_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
-    
 
-    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel, String tegenspeler) {               //moet nog aangepast worden//EDIT: DONE
+    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
@@ -47,7 +46,6 @@ public class SpelMapper {
             querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
-            querySpel.setString(5, tegenspeler);
             querySpel.executeUpdate();
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
@@ -67,17 +65,16 @@ public class SpelMapper {
         }
     }
 
-    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
-        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
-            query.setString(1, spelnaam);
-            query.setString(2, spelersnaam);
-            query.executeUpdate();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
+//    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
+//        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+//                PreparedStatement query = conn.prepareStatement(UPDATE_SPEL)) {
+//            query.setString(1, spelnaam);
+//            query.setString(2, spelersnaam);
+//            query.executeUpdate();
+//        } catch (SQLException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
     public List<String> geefSpelnamen(String spelersnaam) {
         List<String> spelnamen = new ArrayList<>();
 
@@ -150,41 +147,17 @@ public class SpelMapper {
                         case "MoeilijkSpel":
                             spel = new MoeilijkSpel(rijen.get(rijen.size() - 1));
                     }
+                    for (int i = 0; i < rijen.size() - 1; i++) {
+                        spel.getSpelbord().geefPoging(rijen.get(i));
+                    }
                 }
             }
-            for (int i = 0; i < rijen.size() - 1; i++) {
-                spel.getSpelbord().geefPoging(rijen.get(i));
-            }
+
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
 
         return spel;
     }
-
-    public List<String[]> geefLijstUitdagingen(String spelersnaam) {
-        List<String[]> uitdagingen = new ArrayList<>();
-
-        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(GEEF_UITDAGINGEN)) {
-            query.setString(1, spelersnaam);
-            try (ResultSet rs = query.executeQuery()) {
-                while (rs.next()) {
-                    String[] uitdagingInfo = new String[2];
-                    String uitdagingsnaam = rs.getString("spelnaam");
-                    uitdagingInfo[0] = uitdagingsnaam;
-                    String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
-                    uitdagingInfo[1] = moeilijkheidsgraad;
-                    uitdagingen.add(uitdagingInfo);
-                }
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        return uitdagingen;
-    }
-    
-    
 
 }
