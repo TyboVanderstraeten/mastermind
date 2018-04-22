@@ -112,8 +112,7 @@ public class SpelMapper {
 
     public Spel laadSpel(String spelnaam, String spelersnaam) {
         Spel spel = null;
-        List<int[]> rijen = new ArrayList<>();
-        String niveau = "";
+        List<int[]> rijen = new ArrayList<>();        
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_SPEL);
                 PreparedStatement queryRij = conn.prepareStatement(GEEF_RIJEN)) {
