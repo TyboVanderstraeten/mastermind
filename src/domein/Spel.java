@@ -9,7 +9,7 @@ import exceptions.MoeilijkheidsgraadKeuzeException;
 public abstract class Spel {
 
     private final Spelbord spelbord;
-    private String spelnaam;
+    private String spelnaam;    
 
     /**
      * Class constructor. Genereert de random code (de oplossing) en roept dan
@@ -58,7 +58,6 @@ public abstract class Spel {
     public String getSpelnaam() {
         return spelnaam;
     }
-    
 
     //private void setSpelnaam(String spelnaam) {
     //    this.spelnaam = spelnaam;                 //nog niet nodig

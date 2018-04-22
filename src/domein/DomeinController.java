@@ -17,6 +17,7 @@ public class DomeinController {
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
     private final UitdagingRepository uitdagingRepository;
+    private Uitdaging uitdaging;
     private Speler deSpeler;
     private Spel spel;
     private Speler tegenspeler;
@@ -314,7 +315,8 @@ public class DomeinController {
     }
 
     public void laadUitdaging(String spelersnaam) {
-        spel = uitdagingRepository.laadUitdaging(spelersnaam);
+        uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
+        spel = uitdaging.getSpel();
     }
 
 //    public void berekenScore()

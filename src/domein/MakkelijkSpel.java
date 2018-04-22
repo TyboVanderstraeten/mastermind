@@ -19,15 +19,18 @@ public class MakkelijkSpel extends Spel {
     }
     
     public MakkelijkSpel(int[] willekeurigeCode) {
+           this(willekeurigeCode, 0);
+    }
+    
+    //voor uitdaging
+    public MakkelijkSpel(int[] willekeurigeCode, int uitdagingNummer){
         super(willekeurigeCode);                        
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new MakkelijkeRij();
         }
         for (int i = 0; i < super.getSpelbord().getWillekeurigeCode().length; i++) {
             super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
-        }
-
-        
+        }     
     }
 
     @Override

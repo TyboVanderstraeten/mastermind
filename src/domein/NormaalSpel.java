@@ -19,6 +19,12 @@ public class NormaalSpel extends Spel {
     }
     
     public NormaalSpel(int[] willekeurigeCode) {
+        this(willekeurigeCode, 0);
+        
+    }
+    
+    //voor uitdaging
+    public NormaalSpel(int[] willekeurigeCode, int uitdagingNummer){
         super(willekeurigeCode);
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new NormaleRij();
@@ -26,8 +32,6 @@ public class NormaalSpel extends Spel {
         for (int i = 0; i < super.getSpelbord().getWillekeurigeCode().length; i++) {
             super.getSpelbord().getRijen()[super.getSpelbord().getRijen().length - 1].getCodepinnen()[i] = new CodePin(super.getSpelbord().getWillekeurigeCode()[i]);
         }
-        
-        //Denk niet dat klopt, werkt wel maar vrij omslachtig
     }
 
     @Override

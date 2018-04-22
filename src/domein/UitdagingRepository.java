@@ -13,7 +13,7 @@ import persistentie.UitdagingMapper;
  * @author bramd
  */
 public class UitdagingRepository {
-
+    
     private final UitdagingMapper mapper;
 
     public UitdagingRepository() {
@@ -31,10 +31,10 @@ public class UitdagingRepository {
             uitdagingen[i] = uitdagingInfo.get(i);
         }
         return uitdagingen;
-        
+
     }
-    
-    public Spel laadUitdaging(String spelersnaam){
+
+    public Uitdaging laadUitdaging(String spelersnaam) {
         return mapper.laadUitdaging(spelersnaam);
     }
 
