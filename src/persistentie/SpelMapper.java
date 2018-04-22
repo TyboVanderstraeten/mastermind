@@ -133,8 +133,7 @@ public class SpelMapper {
             }
 
             try (ResultSet rs = query.executeQuery()) {
-                if (rs.next()) {
-                    int aantalPogingen = rs.getInt("aantalPogingen");
+                if (rs.next()) {                    
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
                     switch (moeilijkheidsgraad) {
                         case "MakkelijkSpel":

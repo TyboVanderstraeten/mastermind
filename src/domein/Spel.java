@@ -1,7 +1,6 @@
 package domein;
 
 import exceptions.MoeilijkheidsgraadKeuzeException;
-import jdk.nashorn.internal.parser.TokenType;
 
 /**
  * Abstracte superklasse van MakkelijkSpel, NormaalSpel en MoeilijkSpel.

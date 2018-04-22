@@ -67,9 +67,7 @@ public class UitdagingMapper {
 
     public Spel laadUitdaging(String spelersnaam) {
 
-        Spel spel = null;
-        List<int[]> rijen = new ArrayList<>();
-        String niveau = "";
+        Spel spel = null;               
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_UITDAGING)) {
             query.setString(1, spelersnaam);
@@ -92,9 +90,7 @@ public class UitdagingMapper {
                         case "MoeilijkSpel":
                             spel = new MoeilijkSpel(code);
                     }
-                    for (int i = 0; i < rijen.size() - 1; i++) {
-                        spel.getSpelbord().geefPoging(rijen.get(i));
-                    }
+                    
                 }
             }
 
