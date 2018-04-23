@@ -136,7 +136,7 @@ public class Speler {
      * @param spelersnaam spelersnaam van de gebruiker
      */
     private void setSpelersnaam(String spelersnaam) {
-        if (spelersnaam.length() > 40 || spelersnaam == null || spelersnaam.isEmpty()) {
+        if (spelersnaam.length() > 40 || spelersnaam.isEmpty()) {
             throw new SpelersnaamException();
         }
         this.spelersnaam = spelersnaam;
