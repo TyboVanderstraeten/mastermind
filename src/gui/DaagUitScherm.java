@@ -16,19 +16,22 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import domein.DomeinController;
-import javafx.scene.Scene; 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 
 public class DaagUitScherm {
-    
+
     private final DomeinController dc;
+    private static final ObservableList dataTegenspelers = FXCollections.observableArrayList();
 
     public DaagUitScherm(DomeinController dc) {
         this.dc = dc;
         buildGui();
-    
 
     }
-    private void buildGui(){
-        
+
+    private void buildGui() {
+       
     }
 }
