@@ -28,6 +28,8 @@ public class UitdagingMapper {
     private static final String INSERT_UITDAGING = "INSERT INTO ID222177_g68.Uitdaging (speler1, speler2, moeilijkheidsgraad, code) VALUES (?,?,?,?)";
     private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ?";
     private static final String GEEF_UITDAGING = "SELECT moeilijkheidsgraad, code, nummer FROM ID222177_g68.Uitdaging WHERE speler1 = ?";
+    private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingen FROM ID222177_g68.Uitdaging WHERE nummer = ?";
+    private static final String UPDATE_AANTALPOGINGEN = "UPDATE ID222177_g68.Uitdaging SET aantalPogingen = ? WHERE nummer = ?";
 
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
@@ -68,7 +70,7 @@ public class UitdagingMapper {
 
     public Uitdaging laadUitdaging(String spelersnaam) {
 
-        Spel spel = null;  
+        Spel spel = null;
         Uitdaging uitdaging = null;
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_UITDAGING)) {
@@ -86,7 +88,7 @@ public class UitdagingMapper {
                     switch (moeilijkheidsgraad) {
                         case "MakkelijkSpel":
                             spel = new MakkelijkSpel(code);
-                            break; 
+                            break;
                         case "NormaalSpel":
                             spel = new NormaalSpel(code);
                             break;
@@ -103,5 +105,35 @@ public class UitdagingMapper {
 
         return uitdaging;
 
+    }
+
+    public int geefAantalPogingen(int nummer) {
+        int aantalPogingen = 0;
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_AANTALPOGINGEN)) {
+            query.setInt(1, nummer);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    aantalPogingen = rs.getInt("aantalPogingen");
+
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return aantalPogingen;
+
+    }
+
+    public void voegAantalPogingenToe(int aantalPogingen, int nummer) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPOGINGEN)) {
+            query.setInt(1, aantalPogingen);
+            query.setInt(2, nummer);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

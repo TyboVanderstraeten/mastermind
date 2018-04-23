@@ -10,6 +10,7 @@ public abstract class Spel {
 
     private final Spelbord spelbord;
     private String spelnaam;    
+    private int nummer;
 
     /**
      * Class constructor. Genereert de random code (de oplossing) en roept dan
@@ -17,10 +18,14 @@ public abstract class Spel {
      * code wordt ook in spel opgeslagen.
      */
     public Spel() {
-        this(null);         //niet meer nodig sinds UC4 laden spel
+        this(null, 0);         //niet meer nodig sinds UC4 laden spel
     }
 
     public Spel(int[] code) {
+        this(code, 0);
+    }
+    
+    public Spel(int[] code, int nummer){
         if (code == null) {
             this.spelbord = new Spelbord(genereerWillekeurigeCode());
         } else {
@@ -57,6 +62,10 @@ public abstract class Spel {
 
     public String getSpelnaam() {
         return spelnaam;
+    }
+    
+    public int getNummer(){
+        return nummer;
     }
 
     //private void setSpelnaam(String spelnaam) {

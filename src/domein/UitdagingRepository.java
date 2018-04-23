@@ -37,5 +37,12 @@ public class UitdagingRepository {
     public Uitdaging laadUitdaging(String spelersnaam) {
         return mapper.laadUitdaging(spelersnaam);
     }
+    
+    public int geefAantalPogingen(int nummer){
+        return mapper.geefAantalPogingen(nummer);
+    }
 
+    public void voegAantalPogingenToe(int aantalPogingen, int nummer){
+        mapper.voegAantalPogingenToe(aantalPogingen, nummer);
+    }
 }

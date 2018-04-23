@@ -24,7 +24,7 @@ public class MakkelijkSpel extends Spel {
     
     //voor uitdaging
     public MakkelijkSpel(int[] willekeurigeCode, int uitdagingNummer){
-        super(willekeurigeCode);                        
+        super(willekeurigeCode, uitdagingNummer);                        
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new MakkelijkeRij();
         }

@@ -15,7 +15,7 @@ public class MoeilijkSpel extends Spel {
      * @see Spel
      */
     public MoeilijkSpel() {
-        this(null);        
+        this(null, 0);        
     }
     
     public MoeilijkSpel(int[] willekeurigeCode) {
@@ -25,7 +25,7 @@ public class MoeilijkSpel extends Spel {
     
     //voor uitdaging
     public MoeilijkSpel(int[] willekeurigeCode, int uitdagingNummer){
-        super(willekeurigeCode);
+        super(willekeurigeCode, uitdagingNummer);
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new MoeilijkeRij();
         }

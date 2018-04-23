@@ -15,7 +15,7 @@ public class NormaalSpel extends Spel {
      * @see Spel
      */
     public NormaalSpel() {
-        this(null);
+        this(null, 0);
     }
     
     public NormaalSpel(int[] willekeurigeCode) {
@@ -25,7 +25,7 @@ public class NormaalSpel extends Spel {
     
     //voor uitdaging
     public NormaalSpel(int[] willekeurigeCode, int uitdagingNummer){
-        super(willekeurigeCode);
+        super(willekeurigeCode, uitdagingNummer);
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
             super.getSpelbord().getRijen()[i] = new NormaleRij();
         }

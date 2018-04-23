@@ -19,7 +19,7 @@ public class DomeinController {
     private final UitdagingRepository uitdagingRepository;
     private Uitdaging uitdaging;
     private Speler deSpeler;
-    private Spel spel;    
+    private Spel spel;
 
     //constructors
     /**
@@ -182,7 +182,12 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            deSpeler.verhoogAantalGewonnen();
+            if (spel.getNummer() != 0) {
+                deSpeler.verhoogAantalGewonnenUitdagingen();
+                deSpeler.verhoogAantalGespeeldeUitdagingen();
+            } else {
+                deSpeler.verhoogAantalGewonnen();
+            }
         }
     }
 
@@ -303,9 +308,8 @@ public class DomeinController {
 
         return tegenspelersString;
     }
-    
+
 //UC6
-    
 //    public void spelIsUitdaging() {
 //        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
 //    }
@@ -361,7 +365,38 @@ public class DomeinController {
 //            }
 //        }
 //    }
+    public void berekenScore() {
+        if (spel.getNummer() != 0) {    //controleert of het spel een uitdaging is
+            if (uitdagingRepository.geefAantalPogingen(spel.getNummer()) != 0) {
+                //nog voorwaarde nodig + hoe verhogen bij andere speler?
+                //spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+            }
+
+        }
+    }
+
     //KIESUITDAGING = LAADSPEL
+    public void updateSpeler() {
+        if (spel.getNummer() != 0) {
+            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
+        } else {
+            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
+        }
+    }
+
+    //KLASSEMENT
+    public List<String[]> geefKlassementMakkelijk() {
+        return spelerRepository.geefKlassementMakkelijk();
+    }
+
+    public List<String[]> geefKlassementNormaal() {
+        return spelerRepository.geefKlassementNormaal();
+    }
+
+    public List<String[]> geefKlassementMoeilijk() {
+        return spelerRepository.geefKlassementMoeilijk();
+    }
+
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
@@ -383,20 +418,4 @@ public class DomeinController {
         this.spel = spel;
     }
 
-    public void updateSpelerAantalGewonnen() {
-        spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
-    }
-
-    //KLASSEMENT
-    public List<String[]> geefKlassementMakkelijk() {
-        return spelerRepository.geefKlassementMakkelijk();
-    }
-
-    public List<String[]> geefKlassementNormaal() {
-        return spelerRepository.geefKlassementNormaal();
-    }
-
-    public List<String[]> geefKlassementMoeilijk() {
-        return spelerRepository.geefKlassementMoeilijk();
-    }
 }
