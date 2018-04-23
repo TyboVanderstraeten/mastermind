@@ -45,9 +45,7 @@ public class Speler {
         return null;
     }
 
-    
-    
-     //Methode om het aantal gewonnen (spellen geen uitdagingen) spellen te verhogen
+    //Methode om het aantal gewonnen (spellen geen uitdagingen) spellen te verhogen
     public void verhoogAantalGewonnen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
@@ -61,8 +59,8 @@ public class Speler {
                 break;
         }
     }
-    
-    public void verhoogAantalGewonnenUitdagingen(){
+
+    public void verhoogAantalGewonnenUitdagingen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
                 aantalGewonnenUitdagingen[0]++;
@@ -75,8 +73,8 @@ public class Speler {
                 break;
         }
     }
-    
-    public void verhoogAantalGespeeldeUitdagingen(){
+
+    public void verhoogAantalGespeeldeUitdagingen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
                 aantalGespeeldeUitdagingen[0]++;
@@ -89,11 +87,7 @@ public class Speler {
                 break;
         }
     }
-    
-    
-    
-    
-    
+
     //getters
     /**
      * Getter geeft het attribuut spelersnaam terug.
@@ -142,7 +136,7 @@ public class Speler {
      * @param spelersnaam spelersnaam van de gebruiker
      */
     private void setSpelersnaam(String spelersnaam) {
-        if (spelersnaam.length() > 40 || spelersnaam.isEmpty() || spelersnaam == null) {
+        if (spelersnaam.length() > 40 || spelersnaam == null || spelersnaam.isEmpty()) {
             throw new SpelersnaamException();
         }
         this.spelersnaam = spelersnaam;
@@ -182,7 +176,5 @@ public class Speler {
     private void setAantalGespeeldeUitdagingen(int[] aantalGespeeldeUitdagingen) {
         this.aantalGespeeldeUitdagingen = aantalGespeeldeUitdagingen;
     }
-    
-   
 
 }
