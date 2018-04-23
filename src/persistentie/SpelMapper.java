@@ -29,7 +29,6 @@ public class SpelMapper {
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String VERWIJDER_RIJ = "DELETE FROM ID2221777_g68.Rij WHERE spelnaam = ? AND spelersnaam = ?";
     //private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
     //private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND tegenspeler is not null";
     //SQL statement opvragen aantalPogingen per speler per uitdaging (zal gebruikt worden om score te berekenen)
@@ -97,11 +96,7 @@ public class SpelMapper {
     public void verwijderSpel(String spelnaam, String spelersnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement rijQuery = conn.prepareStatement(VERWIJDER_RIJ);
                 PreparedStatement spelQuery = conn.prepareStatement(VERWIJDER_SPEL)) {
-            rijQuery.setString(1, spelnaam);
-            rijQuery.setString(2, spelersnaam);
-            rijQuery.executeUpdate();
             spelQuery.setString(1, spelnaam);
             spelQuery.setString(2, spelersnaam);
             spelQuery.executeUpdate();
