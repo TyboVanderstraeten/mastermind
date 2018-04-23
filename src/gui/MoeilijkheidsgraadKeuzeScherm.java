@@ -64,7 +64,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
                     stage.setScene(new Scene(spelbordScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
-                    lblError.setText(resourceBundle.getString("normaalUitdagingToegangException"));
+                    lblError.setText(resourceBundle.getString("normaalSpelGuiToegangException"));
                 }
             }
         });
@@ -79,7 +79,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
                     stage.setScene(new Scene(spelbordScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
-                    lblError.setText(resourceBundle.getString("moeilijkUitdagingToegangException"));
+                    lblError.setText(resourceBundle.getString("moeilijkSpelGuiToegangException"));
                 }
             }
         });

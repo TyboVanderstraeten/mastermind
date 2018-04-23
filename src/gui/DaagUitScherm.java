@@ -20,18 +20,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 
-public class DaagUitScherm {
+public class DaagUitScherm extends GridPane {
 
     private final DomeinController dc;
+    private final ResourceBundle resourceBundle;
     private static final ObservableList dataTegenspelers = FXCollections.observableArrayList();
 
-    public DaagUitScherm(DomeinController dc) {
+    public DaagUitScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
+        this.resourceBundle = resourceBundle;
         buildGui();
 
     }
 
     private void buildGui() {
-       
+
     }
 }
