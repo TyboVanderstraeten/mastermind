@@ -66,7 +66,10 @@ public class KeuzeScherm extends GridPane {
         btnDaagUit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Stage stage = (Stage) (getScene().getWindow());
+                DaagUitMoeilijkheidsgraadScherm daagUitMoeilijkheidsgraadScherm = new DaagUitMoeilijkheidsgraadScherm(dc, resourceBundle);
+                stage.setScene(new Scene(daagUitMoeilijkheidsgraadScherm, 1280, 720));
+                stage.setTitle(resourceBundle.getString("moeilijkheidsgraad"));
             }
         });
 
@@ -78,7 +81,6 @@ public class KeuzeScherm extends GridPane {
 //                stage.setScene(new Scene(spelbordScherm, 1280, 720));
 //            }
 //        });
-
         btnKlassement.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
