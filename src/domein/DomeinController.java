@@ -262,7 +262,7 @@ public class DomeinController {
     }
 
     public void verwijderSpel(String spelnaam) {
-        spelRepository.verwijderSpel(spelnaam, /*deSpeler.getSpelersnaam()*/ "testdetest");
+        spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
     }
 
     public int[][] startUitdaging() {
