@@ -73,7 +73,7 @@ public class SpelbordScherm extends GridPane {
         bruin.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_7.png"), 45, 45, false, false)));
         //dragDropEvent(bruin);
 
-        Label kleuren = new Label("ALLE MOGELIJKE KLEUREN");
+        Label kleuren = new Label(resourceBundle.getString("allemogelijkekleurenGui"));
         this.add(kleuren, 14, 0, 4, 1);
         this.add(groen, 14, 1);
         this.add(blauw, 14, 2);
@@ -84,12 +84,12 @@ public class SpelbordScherm extends GridPane {
         this.add(grijs, 17, 1);
         this.add(bruin, 17, 2);
 
-        Label lblKleurenIngeven = new Label("Uw poging:");
+        Label lblKleurenIngeven = new Label(resourceBundle.getString("uwPogingGui"));
         this.add(lblKleurenIngeven, 14, 3);
 
-        Button btnVoegToe = new Button("Voeg Toe");
+        Button btnVoegToe = new Button(resourceBundle.getString("voegToeGui"));
         this.add(btnVoegToe, 14, 5);
-        Button btnOpslaan = new Button("Opslaan");
+        Button btnOpslaan = new Button(resourceBundle.getString("OpslaanGui"));
         this.add(btnOpslaan, 14, 8);
 
         btnVoegToe.setOnAction(new EventHandler<ActionEvent>() {
@@ -132,9 +132,9 @@ public class SpelbordScherm extends GridPane {
         //!!!!
         //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
         //+ nodes nodig in btnSlaOp om daar te verwijderen
-        Label lblSpelnaam = new Label("Spelnaam");
+        Label lblSpelnaam = new Label(resourceBundle.getString("SpelnaamGui"));
         TextField txfSpelnaam = new TextField();
-        Button btnSlaOp = new Button("Sla op");
+        Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
         //!!!!
         
         btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
@@ -226,11 +226,11 @@ public class SpelbordScherm extends GridPane {
 
     private void update(int[][] spelbord) {
 
-        for (int i = 0; i < spelbord.length; i++) {
-            if (Arrays.toString(spelbord[i]).equals("[-1, -1, -1, -1, -4, -1, -1, -1, -1]") || i >= spelbord.length - 2) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
+        for (int i = 0; i < spelbord.length+1; i++) {
+            if (i>=spelbord.length-1 || Arrays.toString(spelbord[i]).equals("[-1, -1, -1, -1, -4, -1, -1, -1, -1]")) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
                 for (Node node : this.getChildren()) {
-                    if (node instanceof Label && this.getRowIndex(node) == (i > spelbord.length - 2 ? i : i - 1) && this.getColumnIndex(node) < (i == spelbord.length - 1 ? spelbord[i].length / 2 : spelbord[i].length) && this.getColumnIndex(node) != spelbord[i].length / 2) {
-                        String kleur = String.format("/images/pin_%d.png", spelbord[i >= spelbord.length - 2 ? i : i - 1][this.getColumnIndex(node)]);
+                    if (node instanceof Label && this.getRowIndex(node) == (i - 1) && this.getColumnIndex(node) < (i == spelbord.length? spelbord[i-1].length / 2 : spelbord[i-1].length) && this.getColumnIndex(node) != spelbord[i-1].length / 2) {
+                        String kleur = String.format("/images/pin_%d.png", spelbord[i - 1][this.getColumnIndex(node)]);
                         ((Label) node).setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));
                     }
                 }
