@@ -126,11 +126,11 @@ public class SpelbordScherm extends GridPane {
         btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                Label lblSpelnaam = new Label("Spelnaam");
+                SpelbordScherm.this.add(lblSpelnaam,14,7);
                 TextField txfSpelnaam = new TextField();
-                txfSpelnaam.setPromptText("uw spelnaam");
-                SpelbordScherm.this.add(txfSpelnaam, 14, 7, 3, 1);
-                Button btnSlaOp = new Button();
-                btnSlaOp.setText("Sla op");
+                SpelbordScherm.this.add(txfSpelnaam, 14, 8, 3, 1);
+                Button btnSlaOp = new Button("Sla op");
                 SpelbordScherm.this.add(btnSlaOp, 4, 16);
             }
         });
