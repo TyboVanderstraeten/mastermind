@@ -86,7 +86,7 @@ public class RegistreerScherm extends GridPane {
                     Stage stage = (Stage) (getScene().getWindow());
                     KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                     stage.setScene(new Scene(keuzeScherm, 1280, 720));
-                    stage.setTitle(resourceBundle.getString("menu"));
+                    stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
                     lblError.setText(resourceBundle.getString(e.getMessage()));
                     txfGebruikersnaam.clear();

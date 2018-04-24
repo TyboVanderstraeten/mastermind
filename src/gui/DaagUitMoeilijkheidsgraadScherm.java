@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.scene.layout.GridPane;
 import domein.DomeinController;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -8,23 +9,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-//EXCEPTIONS DONE
-public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
+public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
 
-    public MoeilijkheidsgraadKeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
+    public DaagUitMoeilijkheidsgraadScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         buildGui();
     }
 
     private void buildGui() {
-
         Button btnMakkelijk = new Button(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));
         this.add(btnMakkelijk, 0, 0);
 
@@ -46,10 +44,9 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
         btnMakkelijk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.kiesMoeilijkheidsgraad(1);
                 Stage stage = (Stage) (getScene().getWindow());
-                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
-                stage.setScene(new Scene(spelbordScherm, 1280, 720));
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 0);
+                stage.setScene(new Scene(daagUitScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
         });
@@ -57,32 +54,22 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
         btnNormaal.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    dc.kiesMoeilijkheidsgraad(2);
-                    Stage stage = (Stage) (getScene().getWindow());
-                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
-                    stage.setScene(new Scene(spelbordScherm, 1280, 720));
-                    stage.setTitle("Mastermind");
-                } catch (IllegalArgumentException e) {
-                    lblError.setText(resourceBundle.getString("normaalSpelGuiToegangException"));
-                }
+                Stage stage = (Stage) (getScene().getWindow());
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20);
+                stage.setScene(new Scene(daagUitScherm, 1280, 720));
+                stage.setTitle("Mastermind");
             }
         });
 
         btnMoeilijk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    dc.kiesMoeilijkheidsgraad(3);
-                    Stage stage = (Stage) (getScene().getWindow());
-                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
-                    stage.setScene(new Scene(spelbordScherm, 1280, 720));
-                    stage.setTitle("Mastermind");
-                } catch (IllegalArgumentException e) {
-                    lblError.setText(resourceBundle.getString("moeilijkSpelGuiToegangException"));
-                }
+                Stage stage = (Stage) (getScene().getWindow());
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20);
+                stage.setScene(new Scene(daagUitScherm, 1280, 720));
+                stage.setTitle("Mastermind");
+
             }
         });
     }
-
 }
