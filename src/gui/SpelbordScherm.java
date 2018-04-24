@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.Stage;
 
 //EXCEPTIONS NOG NIET DONE
 public class SpelbordScherm extends GridPane {
@@ -82,10 +84,13 @@ public class SpelbordScherm extends GridPane {
         this.add(grijs, 17, 1);
         this.add(bruin, 17, 2);
 
+        Label lblKleurenIngeven = new Label("Uw poging:");
+        this.add(lblKleurenIngeven, 14, 3);
+
         Button btnVoegToe = new Button("Voeg Toe");
-        this.add(btnVoegToe, 14, 12);
+        this.add(btnVoegToe, 14, 5);
         Button btnOpslaan = new Button("Opslaan");
-        this.add(btnOpslaan, 17, 12);
+        this.add(btnOpslaan, 14, 8);
 
         btnVoegToe.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -122,22 +127,43 @@ public class SpelbordScherm extends GridPane {
             }
 
         });
-
+        
+        
+        //!!!!
+        //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
+        //+ nodes nodig in btnSlaOp om daar te verwijderen
+        Label lblSpelnaam = new Label("Spelnaam");
+        TextField txfSpelnaam = new TextField();
+        Button btnSlaOp = new Button("Sla op");
+        //!!!!
+        
         btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Label lblSpelnaam = new Label("Spelnaam");
-                SpelbordScherm.this.add(lblSpelnaam,14,7);
-                TextField txfSpelnaam = new TextField();
-                SpelbordScherm.this.add(txfSpelnaam, 14, 8, 3, 1);
-                Button btnSlaOp = new Button("Sla op");
-                SpelbordScherm.this.add(btnSlaOp, 4, 16);
+                if (SpelbordScherm.this.getChildren().contains(lblSpelnaam)) {
+                    SpelbordScherm.this.getChildren().removeAll(lblSpelnaam, txfSpelnaam, btnSlaOp);
+                } else {
+                    SpelbordScherm.this.add(lblSpelnaam, 14, 9);
+                    SpelbordScherm.this.add(txfSpelnaam, 14, 10, 3, 1);                    
+                    SpelbordScherm.this.add(btnSlaOp, 17, 10);
+                }
             }
         });
 
+        btnSlaOp.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                dc.registreerSpel(txfSpelnaam.getText().trim());
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
+                stage.setTitle("Mastermind");
+                
+            }
+            
+        });
     }
 
-    private void toonSpelbord(int[][] spelbord) {        
+    private void toonSpelbord(int[][] spelbord) {
         for (int i = 0; i < spelbord.length; i++) {
             for (int j = 0; j < spelbord[i].length; j++) {
                 Label label = new Label();
@@ -189,10 +215,11 @@ public class SpelbordScherm extends GridPane {
 //                });    
                 this.add(label, j, i);
             }
+
             if (i < (spelbord[0].length - 1) / 2) {
                 TextField txf = new TextField();
                 txf.setPrefWidth(30);
-                this.add(txf, 14 + i, 6);
+                this.add(txf, 14 + i, 4);
             }
         }
     }
