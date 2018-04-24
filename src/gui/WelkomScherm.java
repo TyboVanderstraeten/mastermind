@@ -45,7 +45,7 @@ public class WelkomScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
                 LoginScherm loginScherm = new LoginScherm(dc, resourceBundle, WelkomScherm.this);
                 stage.setScene(new Scene(loginScherm, 1280, 720));
-                stage.setTitle(resourceBundle.getString("meldAan"));
+                stage.setTitle("Mastermind");
 
             }
         });
@@ -56,7 +56,7 @@ public class WelkomScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
                 RegistreerScherm registreerScherm = new RegistreerScherm(dc, resourceBundle, WelkomScherm.this);
                 stage.setScene(new Scene(registreerScherm, 1280, 720));
-                stage.setTitle(resourceBundle.getString("registreer"));
+                stage.setTitle("Mastermind");
 
             }
         });

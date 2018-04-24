@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import domein.DomeinController;
+import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -44,9 +45,16 @@ public class DaagUitScherm extends GridPane {
         Label lblKiesTegenspeler = new Label(resourceBundle.getString("selecteerTegenspeler"));
         this.add(lblKiesTegenspeler, 0, 0);
 
+        /*Gewone manier
         for (int teller = 0; teller < dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie).length; teller++) {
-            dataTegenspelers.add(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)[teller]);
-        }
+        dataTegenspelers.add(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)[teller]);
+        }*/
+        /*Enhanced for manier
+        for (String geefTegenSpeler : dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)) {
+        dataTegenspelers.add(geefTegenSpeler);
+        }*/
+        //Collection manier
+        dataTegenspelers.addAll(Arrays.asList(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)));
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);
