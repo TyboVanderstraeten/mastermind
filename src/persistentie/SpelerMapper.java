@@ -30,6 +30,7 @@ public class SpelerMapper {
     private static final String UPDATE_AANTALGESPEELDUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGESPEELDUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+    private static final String UPDATE_AANTALGEWONNENTEGENSPELER = "update Speler as s join Uitdaging as u on (s.spelersnaam = u.speler1 OR s.spelersnaam  = u.speler2) set ? = ? + 1 where u.nummer = ? and s.spelersnaam != ?";
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
@@ -140,6 +141,32 @@ public class SpelerMapper {
             query.setInt(1, aantalGewonnenMakkelijk);
             query.setInt(2, aantalGewonnenNormaal);
             query.setInt(3, aantalGewonnenMoeilijk);
+            query.setString(4, spelersnaam);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void updateTegenSpelerAantalGewonnen(String spelersnaam, int nummer, String moeilijkheidsgraad) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNENUITDAGINGEN)) {
+            switch (moeilijkheidsgraad) {
+                case "MakkelijkSpel":
+                    query.setString(1, "aantalGewonnenUitdagingenMakkelijk");
+                    query.setString(2, "aantalGewonnenUitdagingenMakkelijk");
+                    break;
+                case "NormaalSpel":
+                    query.setString(1, "aantalGewonnenUitdagingenNormaal");
+                    query.setString(2, "aantalGewonnenUitdagingenNormaal");
+                    break;
+                case "MoeilijkSpel":
+                    query.setString(1, "aantalGewonnenUitdagingenMoeilijk");
+                    query.setString(2, "aantalGewonnenUitdagingenMoeilijk");
+                    break;
+            }
+            query.setInt(3, nummer);
             query.setString(4, spelersnaam);
             query.executeUpdate();
         } catch (SQLException ex) {

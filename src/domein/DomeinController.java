@@ -239,7 +239,7 @@ public class DomeinController {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
     }
 
-    public void registreerUitdaging(String tegenspeler, String spelnaam) {                    //VOOR 1EEN UITDAGING
+    public void registreerUitdaging(String tegenspeler) {                    //VOOR 1EEN UITDAGING
         uitdagingRepository.registreerUitdaging(deSpeler.getSpelersnaam(), tegenspeler, spel);
     }
 
@@ -366,12 +366,25 @@ public class DomeinController {
 //        }
 //    }
     public void berekenScore() {
+        int aantalP = uitdagingRepository.geefAantalPogingen(spel.getNummer());         //aantalP is aantal pogingen van tegenspeler
         if (spel.getNummer() != 0) {    //controleert of het spel een uitdaging is
-            if (uitdagingRepository.geefAantalPogingen(spel.getNummer()) != 0) {
+            if (uitdagingRepository.geefAantalPogingen(spel.getNummer()) != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
+                if (aantalP > spel.getSpelbord().getAantalPogingen()) {
+                    deSpeler.verhoogAantalGewonnenUitdagingen();
+                } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {
+                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(spel.getNummer(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
+                } else {
+                    if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
+                        deSpeler.verhoogAantalGewonnenUitdagingen();
+                    } else {
+                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(spel.getNummer(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
+                    }
+                }
                 //nog voorwaarde nodig + hoe verhogen bij andere speler?
                 //spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+            } else {
+                uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), spel.getNummer());
             }
-
         }
     }
 

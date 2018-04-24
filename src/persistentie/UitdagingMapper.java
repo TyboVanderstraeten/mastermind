@@ -27,7 +27,7 @@ public class UitdagingMapper {
 
     private static final String INSERT_UITDAGING = "INSERT INTO ID222177_g68.Uitdaging (speler1, speler2, moeilijkheidsgraad, code) VALUES (?,?,?,?)";
     private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ?";
-    private static final String GEEF_UITDAGING = "SELECT moeilijkheidsgraad, code, nummer FROM ID222177_g68.Uitdaging WHERE speler1 = ?";
+    private static final String GEEF_UITDAGING = "SELECT speler1, moeilijkheidsgraad, code, nummer FROM ID222177_g68.Uitdaging WHERE speler1 = ?";
     private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingen FROM ID222177_g68.Uitdaging WHERE nummer = ?";
     private static final String UPDATE_AANTALPOGINGEN = "UPDATE ID222177_g68.Uitdaging SET aantalPogingen = ? WHERE nummer = ?";
 
@@ -81,6 +81,7 @@ public class UitdagingMapper {
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
                     String[] codeString = rs.getString("code").split("");
                     int nummer = rs.getInt("nummer");
+                    String uitdager = rs.getString("speler1");
                     int[] code = new int[codeString.length];
                     for (int i = 0; i < codeString.length; i++) {
                         code[i] = Integer.parseInt(codeString[i]);
@@ -95,7 +96,7 @@ public class UitdagingMapper {
                         case "MoeilijkSpel":
                             spel = new MoeilijkSpel(code);
                     }
-                    uitdaging = new Uitdaging(spel, nummer);
+                    uitdaging = new Uitdaging(spel, nummer, uitdager);
                 }
             }
 

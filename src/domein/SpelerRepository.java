@@ -58,7 +58,7 @@ public class SpelerRepository {
     }
     
     public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenUitdagingenMakkelijk, aantalGewonnenUitdagingenNormaal, aantalGewonnenUitdagingenMoeilijk);
+        mapper.updateAantalGewonnenUitdagingen(spelersnaam, aantalGewonnenUitdagingenMakkelijk, aantalGewonnenUitdagingenNormaal, aantalGewonnenUitdagingenMoeilijk);
     }
     public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalPuntenMakkelijk, aantalPuntenNormaal, aantalPuntenMoeilijk);
@@ -66,6 +66,12 @@ public class SpelerRepository {
     public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
     }
+    
+    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String spelersnaam){
+        mapper.updateTegenSpelerAantalGewonnen(spelersnaam, nummer, moeilijkheidsgraad);
+    }
+    
+    
     
     
     public String[] geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
