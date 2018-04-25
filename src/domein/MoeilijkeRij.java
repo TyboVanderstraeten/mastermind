@@ -22,12 +22,19 @@ public class MoeilijkeRij extends Rij {
         int zwart = 0;
         int wit = 0;
 
-        int[] aantal = new int[8];
+        int[] aantal = new int[9];
         for (int j = 0; j < poging.length; j++) {
-            aantal[willekeurigeCode[j]]++;
-        }
-        
+            if (willekeurigeCode[j] == -5) {                //leeg: wou niet werken als ik 10 nam voor "leeg" ipv -5 dan gaf hij twee kleuren 1 en 0
+                aantal[aantal.length - 1]++;                //!!!!!!!!! NOG EXCEPTION TOEVOEGEN VOOR ALS ER MEER DAN 2 LEGE PINNEN ZIJN//
+            } else {
+                aantal[willekeurigeCode[j]]++;          //elke codepinkleur heeft een getal (0-7) we tellen hier het aantal van elk kleur op
+            }                                           //als we de kleur dan nemen in het volgende gedeelte trekken we er die dan weer vanaf
+        }                                               //dit is om er voor te zorgen dat er bv niet 4x wit op het spelbord komt als men 4x groen had ingegeven.
+
         for (int i = 0; i < getCodepinnen().length; i++) {
+            if (poging[i] == -5) {
+                continue;
+            }
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (willekeurigeCode[i] == poging[i]) {
                 zwart++;
@@ -43,7 +50,7 @@ public class MoeilijkeRij extends Rij {
                     --aantal[poging[i]];
                     if (aantal[poging[i]] < 0) {
                         wit--;
-                    }        
+                    }
                     wit++;
                     break;
                 }

@@ -73,7 +73,7 @@ public class SpelerMapper {
                     int[] aantalGespeeldUitdagingen = new int[3];
                     aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
                     aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
-                    aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");
+                    aantalGewonnen[2] = rs.getInt("aantalGewonnenMoeilijk");                    
                     aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
                     aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
                     aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");

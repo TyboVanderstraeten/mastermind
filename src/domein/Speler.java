@@ -11,10 +11,10 @@ public class Speler {
 
     private String spelersnaam;
     private String wachtwoord;
-    private int[] aantalGewonnen = {0, 0, 0};
-    private int[] aantalGewonnenUitdagingen = {0, 0, 0};
-    private int[] aantalPunten = {0, 0, 0};
-    private int[] aantalGespeeldeUitdagingen = {0, 0, 0};
+    private int[] aantalGewonnen; //= {0, 0, 0};
+    private int[] aantalGewonnenUitdagingen; //= {0, 0, 0};
+    private int[] aantalPunten; //= {0, 0, 0};
+    private int[] aantalGespeeldeUitdagingen; // = {0, 0, 0};
     private Spel spel;
 
     //constructors
@@ -36,7 +36,7 @@ public class Speler {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
-        setAantalGewonnen(aantalGewonnenUitdagingen);
+        setAantalGewonnenUitdagingen(aantalGewonnenUitdagingen);
         setAantalPunten(aantalPunten);
         setAantalGespeeldeUitdagingen(aantalGespeeldUitdagingen);
     }

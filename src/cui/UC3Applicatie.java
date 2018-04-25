@@ -39,10 +39,10 @@ public class UC3Applicatie {
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
-            } catch (RuntimeException e) {
-                System.out.println(resourceBundle.getString(e.getMessage()));
-                input.nextLine();
-            }
+            } //catch (RuntimeException e) {
+//                System.out.println(resourceBundle.getString(e.getMessage()));
+//                input.nextLine();
+//            }
         }
         if (!geldig) {
             geefEindoverzicht();
@@ -54,8 +54,8 @@ public class UC3Applicatie {
     private void doePoging() {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
-        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
-        System.out.printf("%n%s%n%s%n", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"));
+        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("-5")};
+        System.out.printf("%n%s%n%s%n%s", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), poging.length == 5 ? resourceBundle.getString("kleurIngevenD3") + "\n" : "");
 
         for (int i = 0; i < poging.length; i++) {
             String kleur = input.next();
@@ -64,11 +64,11 @@ public class UC3Applicatie {
                 i--;
                 continue;
             }
-            for (int j = 0; j < 8; j++) {
-                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
-                    poging[i] = j;
+            for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length-1); j++) {
+                if (kleur.equals(resourceBundle.getString(Integer.toString(j==kleuren.length-1?-5:j)))) {   //nodig omdat ik vreemde bug kreeg als ik 10 ofzo gebruikte. Kreeg waarde van 1 en 0 uit resourcebundle ipv 10. //waarde van lege pin op -5 zetten fixt dit maar maakt code iets moeilijker
+                    poging[i] = j==kleuren.length-1?-5:j;
                     break;
-                }
+                }                
             }
         }
 
@@ -100,7 +100,7 @@ public class UC3Applicatie {
 
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
-            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
         }
 
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);

@@ -99,7 +99,7 @@ public class SpelbordScherm extends GridPane {
 //
                 int[] poging = new int[spelbord[0].length / 2];
 
-                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("x")};
+                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("-5")};
                 int teller = 0;
                 for (Node node : SpelbordScherm.this.getChildren()) {
 
@@ -127,8 +127,7 @@ public class SpelbordScherm extends GridPane {
             }
 
         });
-        
-        
+
         //!!!!
         //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
         //+ nodes nodig in btnSlaOp om daar te verwijderen
@@ -136,7 +135,7 @@ public class SpelbordScherm extends GridPane {
         TextField txfSpelnaam = new TextField();
         Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
         //!!!!
-        
+
         btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -144,22 +143,22 @@ public class SpelbordScherm extends GridPane {
                     SpelbordScherm.this.getChildren().removeAll(lblSpelnaam, txfSpelnaam, btnSlaOp);
                 } else {
                     SpelbordScherm.this.add(lblSpelnaam, 14, 9);
-                    SpelbordScherm.this.add(txfSpelnaam, 14, 10, 3, 1);                    
+                    SpelbordScherm.this.add(txfSpelnaam, 14, 10, 3, 1);
                     SpelbordScherm.this.add(btnSlaOp, 17, 10);
                 }
             }
         });
 
-        btnSlaOp.setOnAction(new EventHandler<ActionEvent>(){
+        btnSlaOp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 dc.registreerSpel(txfSpelnaam.getText().trim());
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
                 stage.setTitle("Mastermind");
-                
+
             }
-            
+
         });
     }
 
@@ -226,10 +225,10 @@ public class SpelbordScherm extends GridPane {
 
     private void update(int[][] spelbord) {
 
-        for (int i = 0; i < spelbord.length+1; i++) {
-            if (i>=spelbord.length-1 || Arrays.toString(spelbord[i]).equals("[-1, -1, -1, -1, -4, -1, -1, -1, -1]")) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
+        for (int i = 0; i < spelbord.length + 1; i++) {
+            if (i >= spelbord.length - 1 || Arrays.toString(spelbord[i]).equals(spelbord[i].length / 2 == 5 ? "[-1, -1, -1, -1, -1, -4, -1, -1, -1, -1, -1]" : "[-1, -1, -1, -1, -4, -1, -1, -1, -1]")) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
                 for (Node node : this.getChildren()) {
-                    if (node instanceof Label && this.getRowIndex(node) == (i - 1) && this.getColumnIndex(node) < (i == spelbord.length? spelbord[i-1].length / 2 : spelbord[i-1].length) && this.getColumnIndex(node) != spelbord[i-1].length / 2) {
+                    if (node instanceof Label && this.getRowIndex(node) == (i - 1) && this.getColumnIndex(node) < (i == spelbord.length ? spelbord[i - 1].length / 2 : spelbord[i - 1].length) && this.getColumnIndex(node) != spelbord[i - 1].length / 2 && spelbord[i - 1][this.getColumnIndex(node)] != -5) { //als pin -5 (leeg) is hoeft deze niet aangepast te worden
                         String kleur = String.format("/images/pin_%d.png", spelbord[i - 1][this.getColumnIndex(node)]);
                         ((Label) node).setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));
                     }

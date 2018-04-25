@@ -106,7 +106,7 @@ public class DomeinController {
                 spel = new NormaalSpel();
                 break;
             case 3:
-                if (deSpeler.getAantalGewonnen()[1] < 20) {
+                if (deSpeler.getAantalGewonnen()[1] < 20) {                      
                     throw new MoeilijkSpelToegangException();
                 }
                 spel = new MoeilijkSpel();
@@ -127,7 +127,7 @@ public class DomeinController {
                 spel = new NormaalSpel();
                 break;
             case 3:
-                if (deSpeler.getAantalGewonnenUitdagingen()[1] < 20) {
+                if (deSpeler.getAantalGewonnenUitdagingen()[1] < 20) {                   
                     throw new MoeilijkUitdagingToegangException();
                 }
                 spel = new MoeilijkSpel();

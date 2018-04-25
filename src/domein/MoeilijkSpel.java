@@ -46,7 +46,8 @@ public class MoeilijkSpel extends Spel {
         for (int i = 0; i < 5; i++) {
             int getal = random.nextInt(keuze);
             willekeurigeCode[i] = getal;
-            if (getal == 8) {
+            if (getal == 8) {               //als het 8 is wil dit zeggen dat dit een lege pin is en dan moet dit -5 zijn.
+                willekeurigeCode[i]= -5;
                 aantal++;
                 if (aantal == 2) {
                     keuze = 8;
