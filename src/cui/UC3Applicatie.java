@@ -48,13 +48,13 @@ public class UC3Applicatie {
             geefEindoverzicht();
         }
     }
-//String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #
-//                     0          1           2       3       4       5       6       7           8          9         -2      -1      -3
+//String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #     Evaluatie   leeg
+//                     0          1           2       3       4       5       6       7           10          9         -2      -1      -3       -4         8
 
     private void doePoging() {
         Scanner input = new Scanner(System.in);
         int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
-        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("-5")};
+        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
         System.out.printf("%n%s%n%s%n%s", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), poging.length == 5 ? resourceBundle.getString("kleurIngevenD3") + "\n" : "");
 
         for (int i = 0; i < poging.length; i++) {
@@ -64,11 +64,11 @@ public class UC3Applicatie {
                 i--;
                 continue;
             }
-            for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length-1); j++) {
-                if (kleur.equals(resourceBundle.getString(Integer.toString(j==kleuren.length-1?-5:j)))) {   //nodig omdat ik vreemde bug kreeg als ik 10 ofzo gebruikte. Kreeg waarde van 1 en 0 uit resourcebundle ipv 10. //waarde van lege pin op -5 zetten fixt dit maar maakt code iets moeilijker
-                    poging[i] = j==kleuren.length-1?-5:j;
+            for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length - 1); j++) {
+                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {   //nodig omdat ik vreemde bug kreeg als ik 10 ofzo gebruikte. Kreeg waarde van 1 en 0 uit resourcebundle ipv 10. //waarde van lege pin op -5 zetten fixt dit maar maakt code iets moeilijker
+                    poging[i] = j;
                     break;
-                }                
+                }
             }
         }
 
@@ -80,10 +80,12 @@ public class UC3Applicatie {
         int[][] spelbord = domeinController.geefSpelbord();
         //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
         for (int[] rij : spelbord) {
-            String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", rij == spelbord[spelbord.length - 1] ? String.format("\t\t%10s", " ") : "\t\t" + resourceBundle.getString("evaluatie"));
-            for (int pin : rij) {
-                if (pin >= 0) {
-                    x = x.replace(Integer.toString(pin), String.format("%-7s", resourceBundle.getString(Integer.toString(pin))));
+            String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", rij == spelbord[spelbord.length - 1] ? String.format("\t\t%10s", " ") : "\t\t" + resourceBundle.getString("evaluatie")).replace("8", String.format("%-7s", "o"));
+
+            for (int i = rij.length - 1; i >= 0; i--) {         //ik begin vanachter omdat groen als nummer 1 heeft en wit als nummer 10. 
+                if (rij[i] >= 0) {                              //Als ik dit niet zou doen zou bij de replace van groen (1) ook de 1 van 10 nemen en dan print hij dus "groen" bij de evaluatiepinnen. replaceFirst is met regex en ik heb de waarde van het nummer nodig in de resbundle.
+                                                                //Andere oplossing zou zijn om wit en zwart in resourcebundle in 1 en 2 te veranderen maar dit werkt ook.
+                    x = x.replace((Integer.toString(rij[i])), String.format("%-7s", resourceBundle.getString(Integer.toString(rij[i]))));                                                                  
                 }
             }
             System.out.println(x);

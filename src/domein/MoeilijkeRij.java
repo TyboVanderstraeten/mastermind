@@ -23,16 +23,13 @@ public class MoeilijkeRij extends Rij {
         int wit = 0;
 
         int[] aantal = new int[9];
-        for (int j = 0; j < poging.length; j++) {
-            if (willekeurigeCode[j] == -5) {                //leeg: wou niet werken als ik 10 nam voor "leeg" ipv -5 dan gaf hij twee kleuren 1 en 0
-                aantal[aantal.length - 1]++;                //!!!!!!!!! NOG EXCEPTION TOEVOEGEN VOOR ALS ER MEER DAN 2 LEGE PINNEN ZIJN//
-            } else {
+        for (int j = 0; j < poging.length; j++) {            
                 aantal[willekeurigeCode[j]]++;          //elke codepinkleur heeft een getal (0-7) we tellen hier het aantal van elk kleur op
-            }                                           //als we de kleur dan nemen in het volgende gedeelte trekken we er die dan weer vanaf
-        }                                               //dit is om er voor te zorgen dat er bv niet 4x wit op het spelbord komt als men 4x groen had ingegeven.
+        }                                               //als we de kleur dan nemen in het volgende gedeelte trekken we er die dan weer vanaf
+                                                       //dit is om er voor te zorgen dat er bv niet 4x wit op het spelbord komt als men 4x groen had ingegeven.
 
         for (int i = 0; i < getCodepinnen().length; i++) {
-            if (poging[i] == -5) {
+            if (poging[i] == 8) {  //8 = lege pin
                 continue;
             }
             getCodepinnen()[i] = new CodePin(poging[i]);
@@ -62,7 +59,7 @@ public class MoeilijkeRij extends Rij {
             getEvaluatiepinnen()[i] = new EvaluatiePin(9);  //ZWART
         }
         for (int i = zwart; i < zwart + wit; i++) {
-            getEvaluatiepinnen()[i] = new EvaluatiePin(8); //WIT
+            getEvaluatiepinnen()[i] = new EvaluatiePin(10); //WIT
         }
 
     }

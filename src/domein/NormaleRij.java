@@ -51,7 +51,7 @@ public class NormaleRij extends Rij {
             getEvaluatiepinnen()[i] = new EvaluatiePin(9);      //ZWART
         }
         for (int i = zwart; i < zwart + wit; i++) {
-            getEvaluatiepinnen()[i] = new EvaluatiePin(8);     //WIT
+            getEvaluatiepinnen()[i] = new EvaluatiePin(10);     //WIT
         }
 
     }

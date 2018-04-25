@@ -30,7 +30,7 @@ public class MakkelijkeRij extends Rij {
         for (int i = 0; i < getCodepinnen().length; i++) {            
             for (int j = 0; j < getEvaluatiepinnen().length; j++) {
                 if (code[j] == poging[i]) {
-                    getEvaluatiepinnen()[i] = new EvaluatiePin(8);         //WIT
+                    getEvaluatiepinnen()[i] = new EvaluatiePin(10);         //WIT
                 }
             }
         }
