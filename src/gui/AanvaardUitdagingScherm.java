@@ -35,7 +35,7 @@ public class AanvaardUitdagingScherm extends GridPane {
         Label lblKiesUitdaging = new Label(resourceBundle.getString("selecteerUitdaging"));
         this.add(lblKiesUitdaging, 0, 0);
 
-        dataUitdagingen.addAll(Arrays.asList(dc.aanvaardUitdaging()));
+        dataUitdagingen.addAll(Arrays.asList(dc.geefUitdaging()));
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);
