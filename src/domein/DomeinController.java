@@ -389,16 +389,16 @@ public class DomeinController {
                     }
                 }
                 //nog voorwaarde nodig + hoe verhogen bij andere speler?
-                //spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+                spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             } else {
-                uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), spel.getId());
+                uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
             }
         }
     }
 
     //KIESUITDAGING = LAADSPEL
     public void updateSpeler() {
-        if (spel.getId() != 0) {
+        if (uitdaging.getId() != 0) {
             spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
         } else {
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
