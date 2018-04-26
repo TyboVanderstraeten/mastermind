@@ -80,7 +80,7 @@ public class KeuzeScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                AanvaardUitdagingScherm aanvaardUitdagingScherm = new AanvaardUitdagingScherm(dc, resourceBundle);
+                AanvaardUitdagingScherm aanvaardUitdagingScherm = new AanvaardUitdagingScherm(dc, resourceBundle, KeuzeScherm.this);
                 stage.setScene(new Scene(aanvaardUitdagingScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
