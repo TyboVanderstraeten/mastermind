@@ -28,10 +28,7 @@ public class MoeilijkeRij extends Rij {
         }                                               //als we de kleur dan nemen in het volgende gedeelte trekken we er die dan weer vanaf
                                                        //dit is om er voor te zorgen dat er bv niet 4x wit op het spelbord komt als men 4x groen had ingegeven.
 
-        for (int i = 0; i < getCodepinnen().length; i++) {
-            if (poging[i] == 8) {  //8 = lege pin
-                continue;
-            }
+        for (int i = 0; i < getCodepinnen().length; i++) {            
             getCodepinnen()[i] = new CodePin(poging[i]);
             if (willekeurigeCode[i] == poging[i]) {
                 zwart++;
