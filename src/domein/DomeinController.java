@@ -184,7 +184,7 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (spel.getNummer() != 0) {
+            if (uitdaging.getId() != 0) {
                 deSpeler.verhoogAantalGewonnenUitdagingen();
                 deSpeler.verhoogAantalGespeeldeUitdagingen();
             } else {
@@ -326,6 +326,7 @@ public class DomeinController {
     public void laadUitdaging(String spelersnaam) {
         uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
         spel = uitdaging.getSpel();
+        deSpeler.setSpel(spel);
     }
 
 //    public void berekenScore()
@@ -372,31 +373,32 @@ public class DomeinController {
 //        }
 //    }
     public void berekenScore() {
-        int aantalP = uitdagingRepository.geefAantalPogingen(spel.getNummer());         //aantalP is aantal pogingen van tegenspeler
-        if (spel.getNummer() != 0) {    //controleert of het spel een uitdaging is
-            if (uitdagingRepository.geefAantalPogingen(spel.getNummer()) != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
+
+        if (uitdaging.getId() != 0) {    //controleert of het spel een uitdaging is
+            int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId());         //aantalP is aantal pogingen van tegenspeler
+            if (aantalP != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
                 if (aantalP > spel.getSpelbord().getAantalPogingen()) {
                     deSpeler.verhoogAantalGewonnenUitdagingen();
-                } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {
-                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(spel.getNummer(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
+                } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {                    
+                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), uitdaging.getUitdager());
                 } else {
                     if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
                         deSpeler.verhoogAantalGewonnenUitdagingen();
                     } else {
-                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(spel.getNummer(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
+                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
                     }
                 }
                 //nog voorwaarde nodig + hoe verhogen bij andere speler?
                 //spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             } else {
-                uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), spel.getNummer());
+                uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), spel.getId());
             }
         }
     }
 
     //KIESUITDAGING = LAADSPEL
     public void updateSpeler() {
-        if (spel.getNummer() != 0) {
+        if (spel.getId() != 0) {
             spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
         } else {
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);

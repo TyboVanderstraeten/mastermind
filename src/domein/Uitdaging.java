@@ -11,12 +11,12 @@ package domein;
  */
 public class Uitdaging {
 
-    private int nummer;
+    private int id;
     private Spel spel;
     private String uitdager;
 
-    public Uitdaging(Spel spel, int nummer, String uitdager) {
-        setNummer(nummer);
+    public Uitdaging(Spel spel, int id, String uitdager) {
+        setId(id);
         setSpel(spel);
         setUitdager(uitdager);
     }
@@ -29,9 +29,13 @@ public class Uitdaging {
         return uitdager;
     }
     
+    public int getId(){
+        return id;
+    }
     
-    private void setNummer(int nummer) {
-        this.nummer = nummer;
+    
+    private void setId(int id) {
+        this.id = id;
     }
 
     private void setSpel(Spel spel) {

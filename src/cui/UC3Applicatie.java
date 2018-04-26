@@ -111,6 +111,8 @@ public class UC3Applicatie {
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
         System.out.println(uitvoer);
 
+        
         domeinController.updateSpeler();
+        domeinController.berekenScore();
     }
 }

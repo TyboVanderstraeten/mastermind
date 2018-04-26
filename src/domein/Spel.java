@@ -10,7 +10,7 @@ public abstract class Spel {
 
     private final Spelbord spelbord;
     private String spelnaam;    
-    private int nummer;
+    private int id;
 
     /**
      * Class constructor. Genereert de random code (de oplossing) en roept dan
@@ -25,7 +25,8 @@ public abstract class Spel {
         this(code, 0);
     }
     
-    public Spel(int[] code, int nummer){
+    public Spel(int[] code, int id){
+        this.id=id;
         if (code == null) {
             this.spelbord = new Spelbord(genereerWillekeurigeCode());
         } else {
@@ -64,8 +65,8 @@ public abstract class Spel {
         return spelnaam;
     }
     
-    public int getNummer(){
-        return nummer;
+    public int getId(){
+        return id;
     }
 
     //private void setSpelnaam(String spelnaam) {

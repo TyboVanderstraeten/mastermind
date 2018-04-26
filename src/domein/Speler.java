@@ -13,7 +13,7 @@ public class Speler {
     private String wachtwoord;
     private int[] aantalGewonnen; //= {0, 0, 0};
     private int[] aantalGewonnenUitdagingen; //= {0, 0, 0};
-    private int[] aantalPunten; //= {0, 0, 0};
+    //private int[] aantalPunten; //= {0, 0, 0};
     private int[] aantalGespeeldeUitdagingen; // = {0, 0, 0};
     private Spel spel;
 
@@ -32,12 +32,12 @@ public class Speler {
         setWachtwoord(wachtwoord);
     }
 
-    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalPunten, int[] aantalGespeeldUitdagingen) {
+    public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalGespeeldUitdagingen) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
         setAantalGewonnen(aantalGewonnen);
         setAantalGewonnenUitdagingen(aantalGewonnenUitdagingen);
-        setAantalPunten(aantalPunten);
+        //setAantalPunten(aantalPunten);
         setAantalGespeeldeUitdagingen(aantalGespeeldUitdagingen);
     }
 
@@ -120,9 +120,9 @@ public class Speler {
         return aantalGewonnenUitdagingen;
     }
 
-    public int[] getAantalPunten() {
-        return aantalPunten;
-    }
+//    public int[] getAantalPunten() {
+//        return aantalPunten;
+//    }
 
     public int[] getAantalGespeeldUitdagingen() {
         return aantalGespeeldeUitdagingen;
@@ -169,9 +169,9 @@ public class Speler {
         this.aantalGewonnenUitdagingen = aantalGewonnenUitdagingen;
     }
 
-    private void setAantalPunten(int[] aantalPunten) {
-        this.aantalPunten = aantalPunten;
-    }
+//    private void setAantalPunten(int[] aantalPunten) {
+//        this.aantalPunten = aantalPunten;
+//    }
 
     private void setAantalGespeeldeUitdagingen(int[] aantalGespeeldeUitdagingen) {
         this.aantalGespeeldeUitdagingen = aantalGespeeldeUitdagingen;

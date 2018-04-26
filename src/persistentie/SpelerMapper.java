@@ -21,15 +21,15 @@ public class SpelerMapper {
     private static final String GEEF_TEGENSPELERS = "SELECT spelersnaam FROM ID222177_g68.Speler WHERE ? >= ? AND spelersnaam <> ?";
     private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
     //Klassement SQL query's
-    private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalPuntenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalPuntenMakkelijk DESC";
-    private static final String GEEF_SPELERSKLASSEMENTNORMAAL = "SELECT spelersnaam, aantalPuntenNormaal FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenNormaal > 0 ORDER BY aantalPuntenNormaal DESC";
-    private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalPuntenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalPuntenMoeilijk DESC";
+    private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalGespeeldUitdagingenMakkelijk, aantalGewonnenUitdagingenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalPuntenMakkelijk DESC";
+    private static final String GEEF_SPELERSKLASSEMENTNORMAAL = "SELECT spelersnaam, aantalGespeeldUitdagingenNormaal, aantalGewonnenUitdagingenNormaal FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenNormaal > 0 ORDER BY aantalPuntenNormaal DESC";
+    private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalGespeeldUitdagingenMoeilijk, aantalGewonnenUitdagingenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalPuntenMoeilijk DESC";
     //uitdagingen SQL query's
     private static final String UPDATE_AANTALGEWONNENUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenUitdagingenMakkelijk = ?, aantalGewonnenUitdagingenNormaal = ?, aantalGewonnenUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String UPDATE_AANTALPUNTEN = "UPDATE ID222177_g68.Speler SET aantalPuntenMakkelijk = ?, aantalPuntenNormaal = ?, aantalPuntenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String UPDATE_AANTALGESPEELDUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_AANTALGESPEELDUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
+    private static final String GEEF_AANTALGESPEELDUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";    
     private static final String UPDATE_AANTALGEWONNENTEGENSPELER = "update Speler as s join Uitdaging as u on (s.spelersnaam = u.speler1 OR s.spelersnaam  = u.speler2) set ? = ? + 1 where u.nummer = ? and s.spelersnaam != ?";
 
     /**
@@ -69,7 +69,7 @@ public class SpelerMapper {
                     String wachtwoord = rs.getString("wachtwoord");
                     int[] aantalGewonnen = new int[3];
                     int[] aantalGewonnenUitdagingen = new int[3];
-                    int[] aantalPunten = new int[3];
+                    //int[] aantalPunten = new int[3];
                     int[] aantalGespeeldUitdagingen = new int[3];
                     aantalGewonnen[0] = rs.getInt("aantalGewonnenMakkelijk");
                     aantalGewonnen[1] = rs.getInt("aantalGewonnenNormaal");
@@ -77,13 +77,13 @@ public class SpelerMapper {
                     aantalGewonnenUitdagingen[0] = rs.getInt("aantalGewonnenUitdagingenMakkelijk");
                     aantalGewonnenUitdagingen[1] = rs.getInt("aantalGewonnenUitdagingenNormaal");
                     aantalGewonnenUitdagingen[2] = rs.getInt("aantalGewonnenUitdagingenMoeilijk");
-                    aantalPunten[0] = rs.getInt("aantalPuntenMakkelijk");
-                    aantalPunten[1] = rs.getInt("aantalPuntenNormaal");
-                    aantalPunten[2] = rs.getInt("aantalPuntenMoeilijk");
+//                    aantalPunten[0] = rs.getInt("aantalPuntenMakkelijk");
+//                    aantalPunten[1] = rs.getInt("aantalPuntenNormaal");
+//                    aantalPunten[2] = rs.getInt("aantalPuntenMoeilijk");
                     aantalGespeeldUitdagingen[0] = rs.getInt("aantalGespeeldUitdagingenMakkelijk");
                     aantalGespeeldUitdagingen[1] = rs.getInt("aantalGespeeldUitdagingenNormaal");
                     aantalGespeeldUitdagingen[2] = rs.getInt("aantalGespeeldUitdagingenNormaal");
-                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalPunten, aantalGespeeldUitdagingen);
+                    speler = new Speler(spelersnaam, wachtwoord, aantalGewonnen, aantalGewonnenUitdagingen, aantalGespeeldUitdagingen);
                 }
             }
         } catch (SQLException ex) {
@@ -121,9 +121,9 @@ public class SpelerMapper {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    aantalGespeeldeUitdagingen[0] = rs.getInt("aantalGespeeldeUitdagingenMakkelijk");
-                    aantalGespeeldeUitdagingen[1] = rs.getInt("aantalGespeeldeUitdagingenNormaal");
-                    aantalGespeeldeUitdagingen[2] = rs.getInt("aantalGespeeldeUitdagingenMoeilijk");
+                    aantalGespeeldeUitdagingen[0] = rs.getInt("aantalGespeeldUitdagingenMakkelijk");
+                    aantalGespeeldeUitdagingen[1] = rs.getInt("aantalGespeeldUitdagingenNormaal");
+                    aantalGespeeldeUitdagingen[2] = rs.getInt("aantalGespeeldUitdagingenMoeilijk");
                 }
             }
         } catch (SQLException ex) {
@@ -151,7 +151,7 @@ public class SpelerMapper {
     public void updateTegenSpelerAantalGewonnen(String spelersnaam, int nummer, String moeilijkheidsgraad) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNENUITDAGINGEN)) {
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNENTEGENSPELER)) {
             switch (moeilijkheidsgraad) {
                 case "MakkelijkSpel":
                     query.setString(1, "aantalGewonnenUitdagingenMakkelijk");
@@ -249,7 +249,9 @@ public class SpelerMapper {
                 while (rs.next()) {
                     String[] infoSpelerKlassement = new String[2];
                     infoSpelerKlassement[0] = rs.getString("spelersnaam");
-                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMakkelijk"));
+                    int score = rs.getInt("aantalGewonnenUitdagingenMakkelijk")*3 - (rs.getInt("aantalGespeeldUitdagingenMakkelijk")-rs.getInt("aantalGewonnenUitdagingenMakkelijk"));
+                    infoSpelerKlassement[1] = String.format("%d", score);
+                    //infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMakkelijk"));
 
                     klassementMakkelijk.add(infoSpelerKlassement);
                 }
@@ -270,7 +272,9 @@ public class SpelerMapper {
                 while (rs.next()) {
                     String[] infoSpelerKlassement = new String[2];
                     infoSpelerKlassement[0] = rs.getString("spelersnaam");
-                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenNormaal"));
+                    int score = rs.getInt("aantalGewonnenUitdagingenNormaal")*3 - (rs.getInt("aantalGespeeldUitdagingenNormaal")-rs.getInt("aantalGewonnenUitdagingenNormaal"));
+                    infoSpelerKlassement[1] = String.format("%d", score);
+                    //infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenNormaal"));
 
                     klassementNormaal.add(infoSpelerKlassement);
                 }
@@ -291,7 +295,9 @@ public class SpelerMapper {
                 while (rs.next()) {
                     String[] infoSpelerKlassement = new String[2];
                     infoSpelerKlassement[0] = rs.getString("spelersnaam");
-                    infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMoeilijk"));
+                    int score = rs.getInt("aantalGewonnenUitdagingenMoeilijk")*3 - (rs.getInt("aantalGespeeldUitdagingenMoeilijk")-rs.getInt("aantalGewonnenUitdagingenMoeilijk"));
+                    infoSpelerKlassement[1] = String.format("%d", score);
+                    //infoSpelerKlassement[1] = String.format("%d", rs.getInt("aantalPuntenMoeilijk"));
 
                     klassementMoeilijk.add(infoSpelerKlassement);
                 }
