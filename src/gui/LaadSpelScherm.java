@@ -6,19 +6,27 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import static javafx.scene.layout.GridPane.setHalignment;
+import javafx.stage.Stage;
 
 public class LaadSpelScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
+    private final KeuzeScherm keuzeScherm;
     private static final ObservableList dataSpellen = FXCollections.observableArrayList();
 
-    public LaadSpelScherm(DomeinController dc, ResourceBundle resourceBundle) {
+    public LaadSpelScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
+        this.keuzeScherm = keuzeScherm;
         buildGui();
     }
 
@@ -33,11 +41,26 @@ public class LaadSpelScherm extends GridPane {
         lvSpellen.setPrefSize(400, 600);
         lvSpellen.setItems(dataSpellen);
         this.add(lvSpellen, 0, 1);
-        
+
+        Button btnTerug = new Button(resourceBundle.getString("terug"));
+        this.add(btnTerug, 0, 2);
+        setHalignment(btnTerug, HPos.RIGHT);
+
         //Positionering
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
+
+        //EventHandling
+        btnTerug.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(keuzeScherm.getScene());
+                stage.setTitle("Mastermind");
+                dataSpellen.clear();
+            }
+        });
     }
 
 }

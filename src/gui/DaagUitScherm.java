@@ -78,7 +78,7 @@ public class DaagUitScherm extends GridPane {
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(keuzeScherm.getScene());
-                stage.setTitle(resourceBundle.getString("menu"));
+                stage.setTitle("Mastermind");
                 dataTegenspelers.clear();
             }
         });
