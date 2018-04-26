@@ -109,7 +109,7 @@ public class SpelbordScherm extends GridPane {
                             //nog foutlabel                                
                             continue;
                         }
-                        for (int j = 0; j < 8; j++) {
+                        for (int j = 0; j < (poging.length == 5 ? alleKleuren.length : alleKleuren.length - 1); j++) {
                             if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
                                 poging[teller] = j;
                                 teller++;
@@ -219,6 +219,7 @@ public class SpelbordScherm extends GridPane {
                 TextField txf = new TextField();
                 txf.setPrefWidth(110);
                 this.add(txf, 14 + i, 4);
+                
             }
         }
     }
@@ -228,7 +229,7 @@ public class SpelbordScherm extends GridPane {
         for (int i = 0; i < spelbord.length + 1; i++) {
             if (i >= spelbord.length - 1 || Arrays.toString(spelbord[i]).equals(spelbord[i].length / 2 == 5 ? "[-1, -1, -1, -1, -1, -4, -1, -1, -1, -1, -1]" : "[-1, -1, -1, -1, -4, -1, -1, -1, -1]")) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
                 for (Node node : this.getChildren()) {
-                    if (node instanceof Label && this.getRowIndex(node) == (i - 1) && this.getColumnIndex(node) < (i == spelbord.length ? spelbord[i - 1].length / 2 : spelbord[i - 1].length) && this.getColumnIndex(node) != spelbord[i - 1].length / 2 && spelbord[i - 1][this.getColumnIndex(node)] != 8) { //als pin 8 (leeg) is hoeft deze niet aangepast te worden
+                    if (node instanceof Label && this.getRowIndex(node) == (i - 1) && this.getColumnIndex(node) < (i == spelbord.length ? spelbord[i - 1].length / 2 : spelbord[i - 1].length) && this.getColumnIndex(node) != spelbord[i - 1].length / 2) { //als pin 8 (leeg) is hoeft deze niet aangepast te worden
                         String kleur = String.format("/images/pin_%d.png", spelbord[i - 1][this.getColumnIndex(node)] == 8 ? -1 : spelbord[i - 1][this.getColumnIndex(node)]);
                         ((Label) node).setGraphic(new ImageView(new Image(getClass().getResourceAsStream(kleur), 45, 45, false, false)));
                     }
