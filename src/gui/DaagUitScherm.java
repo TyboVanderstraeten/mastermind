@@ -21,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import static javafx.scene.layout.GridPane.setHalignment;
 
@@ -66,7 +67,11 @@ public class DaagUitScherm extends GridPane {
 
         Button btnTerug = new Button(resourceBundle.getString("terug"));
         this.add(btnTerug, 0, 2);
-        setHalignment(btnTerug, HPos.RIGHT);
+        setHalignment(btnTerug, HPos.LEFT);
+
+        Button btnDaagUit = new Button(resourceBundle.getString("uitdagen"));
+        this.add(btnDaagUit, 0, 2);
+        setHalignment(btnDaagUit, HPos.RIGHT);
 
         //Positionering
         this.setAlignment(Pos.CENTER);
@@ -81,6 +86,24 @@ public class DaagUitScherm extends GridPane {
                 stage.setScene(keuzeScherm.getScene());
                 stage.setTitle("Mastermind");
                 dataTegenspelers.clear();
+            }
+        });
+
+        btnDaagUit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dc.registreerUitdaging(lvTegenspelers.getSelectionModel().getSelectedItem());
+                
+                Alert alertUitgedaagd = new Alert(Alert.AlertType.INFORMATION);
+                alertUitgedaagd.setTitle(resourceBundle.getString("uitdagen"));
+                alertUitgedaagd.setHeaderText(resourceBundle.getString("uitdagenSuccesvol"));
+                alertUitgedaagd.setContentText(resourceBundle.getString("uitdagenGelukt"));
+                alertUitgedaagd.showAndWait();
+                
+                Stage stage = (Stage) (getScene().getWindow());
+                KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                stage.setTitle("Mastermind");
             }
         });
     }
