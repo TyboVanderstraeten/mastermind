@@ -7,7 +7,7 @@ import exceptions.NormaalUitdagingToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.SpelnaamBestaatNietException;
 import exceptions.WachtwoordBevestigingFoutException;
-import exceptions.spelnaamBestaatNietException;
+import exceptions.SpelnaamBestaatNietException;
 import java.util.Arrays;
 import java.util.List;
 
