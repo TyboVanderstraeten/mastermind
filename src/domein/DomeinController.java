@@ -108,7 +108,7 @@ public class DomeinController {
                 spel = new NormaalSpel();
                 break;
             case 3:
-                if (deSpeler.getAantalGewonnen()[1] < 20) {                      
+                if (deSpeler.getAantalGewonnen()[1] < 20) {
                     throw new MoeilijkSpelToegangException();
                 }
                 spel = new MoeilijkSpel();
@@ -129,7 +129,7 @@ public class DomeinController {
                 spel = new NormaalSpel();
                 break;
             case 3:
-                if (deSpeler.getAantalGewonnenUitdagingen()[1] < 20) {                   
+                if (deSpeler.getAantalGewonnenUitdagingen()[1] < 20) {
                     throw new MoeilijkUitdagingToegangException();
                 }
                 spel = new MoeilijkSpel();
@@ -238,7 +238,7 @@ public class DomeinController {
     }
 
     public void registreerSpel(String spelnaam) {
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                          
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
 
     public void registreerUitdaging(String tegenspeler) {                    //VOOR 1EEN UITDAGING
@@ -261,8 +261,12 @@ public class DomeinController {
 
     public void laadSpel(String spelnaam) {
         try {
-        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
-        deSpeler.setSpel(spel);
+            spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+            if (spel != null) {
+                deSpeler.setSpel(spel);
+            } else {
+                throw new SpelnaamBestaatNietException();
+            }
         } catch (NullPointerException e) {
             throw new SpelnaamBestaatNietException();
         }
