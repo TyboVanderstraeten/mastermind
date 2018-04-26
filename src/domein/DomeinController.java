@@ -5,6 +5,7 @@ import exceptions.MoeilijkUitdagingToegangException;
 import exceptions.NormaalSpelToegangException;
 import exceptions.NormaalUitdagingToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
+import exceptions.SpelnaamBestaatNietException;
 import exceptions.WachtwoordBevestigingFoutException;
 import exceptions.spelnaamBestaatNietException;
 import java.util.Arrays;
@@ -263,7 +264,7 @@ public class DomeinController {
         spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
         deSpeler.setSpel(spel);
         } catch (NullPointerException e) {
-            throw new spelnaamBestaatNietException();
+            throw new SpelnaamBestaatNietException();
         }
     }
 

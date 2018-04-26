@@ -33,7 +33,7 @@ public class UC4Applicatie {
             String spelnaam = input.next();
             domeinController.laadSpel(spelnaam); 
             domeinController.verwijderSpel(spelnaam);
-        } catch (NullPointerException e) { //Try catch in comm. aanwezig in DomeinController, kan fout niet afhandelen -> spelnaam bestaat niet
+        } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();
         }
