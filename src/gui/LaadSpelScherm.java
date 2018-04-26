@@ -44,7 +44,11 @@ public class LaadSpelScherm extends GridPane {
 
         Button btnTerug = new Button(resourceBundle.getString("terug"));
         this.add(btnTerug, 0, 2);
-        setHalignment(btnTerug, HPos.RIGHT);
+        setHalignment(btnTerug, HPos.LEFT);
+        
+        Button btnLaad = new Button(resourceBundle.getString("laad"));
+        this.add(btnLaad, 0, 2);
+        setHalignment(btnLaad, HPos.RIGHT);
 
         //Positionering
         this.setAlignment(Pos.CENTER);

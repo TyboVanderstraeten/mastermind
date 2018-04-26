@@ -44,7 +44,7 @@ public class AanvaardUitdagingScherm extends GridPane {
 
         Button btnTerug = new Button(resourceBundle.getString("terug"));
         this.add(btnTerug, 2, 2);
-        setHalignment(btnTerug, HPos.RIGHT);
+        setHalignment(btnTerug, HPos.LEFT);
 
         //Positionering
         this.setAlignment(Pos.CENTER);
