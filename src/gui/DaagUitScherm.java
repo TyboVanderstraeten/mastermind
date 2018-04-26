@@ -25,7 +25,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import static javafx.scene.layout.GridPane.setHalignment;
 
-//EXCEPTIONS DONE
+//EXCEPTIONS NOG NIET DONE
+//geeft nog nullpointer
 public class DaagUitScherm extends GridPane {
 
     private final DomeinController dc;

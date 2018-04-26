@@ -36,6 +36,7 @@ public class AanvaardUitdagingScherm extends GridPane {
         this.add(lblKiesUitdaging, 0, 0);
 
         dataUitdagingen.addAll(Arrays.asList(dc.geefUitdaging()));
+        
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);

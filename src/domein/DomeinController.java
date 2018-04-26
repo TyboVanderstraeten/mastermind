@@ -6,6 +6,7 @@ import exceptions.NormaalSpelToegangException;
 import exceptions.NormaalUitdagingToegangException;
 import exceptions.SpelersnaamWachtwoordCombinatieException;
 import exceptions.WachtwoordBevestigingFoutException;
+import exceptions.spelnaamBestaatNietException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -236,7 +237,7 @@ public class DomeinController {
     }
 
     public void registreerSpel(String spelnaam) {
-        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                     //this(spelnaam, deSpeler.getSpelersnaam(), spel);   ???     
+        spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);                          
     }
 
     public void registreerUitdaging(String tegenspeler) {                    //VOOR 1EEN UITDAGING
@@ -258,12 +259,12 @@ public class DomeinController {
     }
 
     public void laadSpel(String spelnaam) {
-        //try {
+        try {
         spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
         deSpeler.setSpel(spel);
-        /*} catch (NullPointerException e) {
-            throw new SpelersnaamWachtwoordCombinatieException();
-        }*/
+        } catch (NullPointerException e) {
+            throw new spelnaamBestaatNietException();
+        }
     }
 
     public void verwijderSpel(String spelnaam) {
