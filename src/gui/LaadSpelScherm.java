@@ -74,9 +74,8 @@ public class LaadSpelScherm extends GridPane {
         btnLaad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String spelnaam = lvSpellen.getSelectionModel().getSelectedItem();
-                dc.laadSpel(spelnaam);
-                dc.verwijderSpel(spelnaam);
+                dc.laadSpel(lvSpellen.getSelectionModel().getSelectedItem());
+                dc.verwijderSpel(lvSpellen.getSelectionModel().getSelectedItem());
                 Stage stage = (Stage) (getScene().getWindow());
                 SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
                 stage.setScene(new Scene(spelbordScherm, 1280, 720));
