@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+//EXCEPTIONS NOG NIET DONE
 public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
 
     private final DomeinController dc;

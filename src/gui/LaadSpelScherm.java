@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
+//EXCEPTIONS DONE
 public class LaadSpelScherm extends GridPane {
     
     private final DomeinController dc;
@@ -69,7 +70,7 @@ public class LaadSpelScherm extends GridPane {
         btnLaad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.laadSpel(lvSpellen.SelectedItems(0));;
+                //dc.laadSpel(lvSpellen.SelectedItems(0));;
             }
         });
     }

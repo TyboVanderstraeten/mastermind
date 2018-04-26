@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import static javafx.scene.layout.GridPane.setHalignment;
 
+//EXCEPTIONS DONE
 public class DaagUitScherm extends GridPane {
 
     private final DomeinController dc;
