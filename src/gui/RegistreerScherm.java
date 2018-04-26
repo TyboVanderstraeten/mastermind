@@ -104,7 +104,5 @@ public class RegistreerScherm extends GridPane {
                 stage.setTitle("Mastermind");
             }
         });
-
     }
-
 }

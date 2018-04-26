@@ -11,14 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+//EXCEPTIONS NOG NIET DONE
 public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
+    private final KeuzeScherm keuzeScherm;
 
-    public DaagUitMoeilijkheidsgraadScherm(DomeinController dc, ResourceBundle resourceBundle) {
+    public DaagUitMoeilijkheidsgraadScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
+        this.keuzeScherm = keuzeScherm;
         buildGui();
     }
 
@@ -45,7 +48,7 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 0);
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 0, keuzeScherm);
                 stage.setScene(new Scene(daagUitScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -55,7 +58,7 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20);
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20, keuzeScherm);
                 stage.setScene(new Scene(daagUitScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -65,7 +68,7 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20);
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20, keuzeScherm);
                 stage.setScene(new Scene(daagUitScherm, 1280, 720));
                 stage.setTitle("Mastermind");
 

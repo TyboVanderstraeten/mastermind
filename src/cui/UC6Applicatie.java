@@ -23,7 +23,7 @@ public class UC6Applicatie {
     private void aanvaardUitdaging() {
         Scanner input = new Scanner(System.in);
 
-        String[][] uitdagingen = domeinController.aanvaardUitdaging();
+        String[][] uitdagingen = domeinController.geefUitdaging();
 
         if (uitdagingen.length != 0) {
             System.out.println("Kies een uitdaging. (geef volledige naam)");

@@ -313,7 +313,7 @@ public class DomeinController {
 //    public void spelIsUitdaging() {
 //        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
 //    }
-    public String[][] aanvaardUitdaging() {
+    public String[][] geefUitdaging() {
         return uitdagingRepository.geefUitdagingen(deSpeler.getSpelersnaam());
     }
 

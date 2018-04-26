@@ -60,7 +60,7 @@ public class KeuzeScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                LaadSpelScherm laadSpelScherm = new LaadSpelScherm(dc, resourceBundle);
+                LaadSpelScherm laadSpelScherm = new LaadSpelScherm(dc, resourceBundle, KeuzeScherm.this);
                 stage.setScene(new Scene(laadSpelScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -70,7 +70,7 @@ public class KeuzeScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                DaagUitMoeilijkheidsgraadScherm daagUitMoeilijkheidsgraadScherm = new DaagUitMoeilijkheidsgraadScherm(dc, resourceBundle);
+                DaagUitMoeilijkheidsgraadScherm daagUitMoeilijkheidsgraadScherm = new DaagUitMoeilijkheidsgraadScherm(dc, resourceBundle, KeuzeScherm.this);
                 stage.setScene(new Scene(daagUitMoeilijkheidsgraadScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -80,7 +80,7 @@ public class KeuzeScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                AanvaardUitdagingScherm aanvaardUitdagingScherm = new AanvaardUitdagingScherm(dc, resourceBundle);
+                AanvaardUitdagingScherm aanvaardUitdagingScherm = new AanvaardUitdagingScherm(dc, resourceBundle, KeuzeScherm.this);
                 stage.setScene(new Scene(aanvaardUitdagingScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
