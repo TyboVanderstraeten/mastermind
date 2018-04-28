@@ -277,6 +277,8 @@ public class DomeinController {
     //-------------------///
     //-------UC5---------///
     //-------------------///
+    
+    //uitdaging laden bij aanmaken van speler?
     public int[][] startUitdaging() {
         int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
 
