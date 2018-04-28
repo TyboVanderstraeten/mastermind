@@ -17,7 +17,6 @@ public class UC6Applicatie {
 
     public void start() {
         aanvaardUitdaging();
-
     }
 
     private void aanvaardUitdaging() {
@@ -36,7 +35,6 @@ public class UC6Applicatie {
             uc3.start();
         } else {
             System.out.println("U geeft geen uitdagingen!");
-
         }
 
     }

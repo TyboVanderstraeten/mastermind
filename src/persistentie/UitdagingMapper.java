@@ -31,6 +31,9 @@ public class UitdagingMapper {
     private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingen FROM ID222177_g68.Uitdaging WHERE id = ?";
     private static final String UPDATE_AANTALPOGINGEN = "UPDATE ID222177_g68.Uitdaging SET aantalPogingen = ? WHERE id = ?";
 
+    //NEW
+    private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isHuidig = 1 OR speler2 =? AND isAanvaard = 1";
+
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -136,5 +139,24 @@ public class UitdagingMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    public String geefOpenUitdaging(String spelersnaam) {
+        String naam = "";
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(GEEF_AANVAARDE_UITDAGINGEN)) {
+            query.setString(1, spelersnaam);
+            query.setString(2, spelersnaam);
+            query.executeQuery();
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    naam = rs.getString("speler1");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return naam;
     }
 }
