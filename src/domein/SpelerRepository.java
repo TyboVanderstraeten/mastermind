@@ -49,54 +49,52 @@ public class SpelerRepository {
         this.mapper.voegSpelerToe(speler);
     }
 
-    public Speler kiesTegenspeler(String spelersnaam) {
-        return mapper.geefSpeler(spelersnaam);
-    }
-
-    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
-    }
-    
-    public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
-        mapper.updateAantalGewonnenUitdagingen(spelersnaam, aantalGewonnenUitdagingenMakkelijk, aantalGewonnenUitdagingenNormaal, aantalGewonnenUitdagingenMoeilijk);
-    }
-    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalPuntenMakkelijk, aantalPuntenNormaal, aantalPuntenMoeilijk);
-    }
-    public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
-    }
-    
-    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String spelersnaam){
-        mapper.updateTegenSpelerAantalGewonnen(spelersnaam, nummer, moeilijkheidsgraad);
-    }
-    
-    
-    
-    
+//    public Speler kiesTegenspeler(String spelersnaam) {
+//        return mapper.geefSpeler(spelersnaam);
+//    }
     public String[] geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
-        String[] tegenspelerNamen = new String[mapper.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenUitdagingen, spelersnaam
-        ).size()];
+        List<String> tegenSpelers = mapper.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenUitdagingen, spelersnaam);
+        String[] tegenspelerNamen = new String[tegenSpelers.size()];
         int teller = 0;
 
-        for (String tegenspelerNaam : mapper.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenUitdagingen, spelersnaam)) {
+        for (String tegenspelerNaam : tegenSpelers) {
             tegenspelerNamen[teller] = tegenspelerNaam;
             teller++;
         }
 
         return tegenspelerNamen;
     }
-    
-    //KLASSEMENT
-    public List<String[]> geefKlassementMakkelijk(){
-        return mapper.geefKlassementMakkelijk();    
+
+    public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGewonnenMakkelijk, aantalGewonnenNormaal, aantalGewonnenMoeilijk);
     }
-    
-    public List<String[]> geefKlassementNormaal(){
+
+    public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
+        mapper.updateAantalGewonnenUitdagingen(spelersnaam, aantalGewonnenUitdagingenMakkelijk, aantalGewonnenUitdagingenNormaal, aantalGewonnenUitdagingenMoeilijk);
+    }
+
+    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalPuntenMakkelijk, aantalPuntenNormaal, aantalPuntenMoeilijk);
+    }
+
+    public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
+        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
+    }
+
+    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String spelersnaam) {
+        mapper.updateTegenSpelerAantalGewonnen(spelersnaam, nummer, moeilijkheidsgraad);
+    }
+
+    //KLASSEMENT
+    public List<String[]> geefKlassementMakkelijk() {
+        return mapper.geefKlassementMakkelijk();
+    }
+
+    public List<String[]> geefKlassementNormaal() {
         return mapper.geefKlassementNormaal();
     }
-    
-    public List<String[]> geefKlassementMoeilijk(){
+
+    public List<String[]> geefKlassementMoeilijk() {
         return mapper.geefKlassementMoeilijk();
     }
 

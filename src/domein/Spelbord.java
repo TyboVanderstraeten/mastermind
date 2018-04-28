@@ -50,7 +50,7 @@ public class Spelbord {
 
         int[] huidig = Arrays.copyOfRange(overzicht[aantalPogingen == 0 ? 0 : aantalPogingen - 1], 0, willekeurigeCode.length);
         for (int i = 0; i < rijen[rijen.length - 1].getCodepinnen().length; i++) {
-            overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length + 1 + i] = -2;           //-2 = ""
+            overzicht[rijen.length - 1][rijen[rijen.length - 1].getCodepinnen().length + 1 + i] = -2;           //-2 = ""    in deze lijn wordt de evaluatie weggedaan bij de laatste rij (te raden code).   +1 omdat Evaluatie: ook een plek heeft.
             if (!Arrays.toString(huidig).replaceAll("\\s", "").equals(Arrays.toString(willekeurigeCode).replaceAll("\\s", "")) && aantalPogingen != 12) {
                 overzicht[rijen.length - 1][i] = -3;      //-3 = #                           //INDIEN DE CODE NIET GEKRAAKT IS, IS DEZE GEMASKEERD (#)
             }

@@ -38,7 +38,7 @@ public class UitdagingMapper {
             query.setString(1, spelersnaam1);
             query.setString(2, spelersnaam2);
             query.setString(3, spel.getClass().getSimpleName());
-            query.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
+            query.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replaceAll("[^0-9]", ""));//.replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             query.executeUpdate();
         } catch (SQLException ex) {
 
