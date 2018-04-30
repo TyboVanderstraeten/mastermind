@@ -31,18 +31,18 @@ import javafx.stage.Stage;
 
 //EXCEPTIONS NOG NIET DONE
 public class SpelbordScherm extends GridPane {
-
+    
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
-
+    
     public SpelbordScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         this.keuzeScherm = keuzeScherm;
         buildGui();
     }
-
+    
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
         toonSpelbord(spelbord);
@@ -51,7 +51,7 @@ public class SpelbordScherm extends GridPane {
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
-
+        
         Label groen = new Label(resourceBundle.getString("0"));
         Label blauw = new Label(resourceBundle.getString("1"));
         Label rood = new Label(resourceBundle.getString("2"));
@@ -60,7 +60,7 @@ public class SpelbordScherm extends GridPane {
         Label oranje = new Label(resourceBundle.getString("5"));
         Label grijs = new Label(resourceBundle.getString("6"));
         Label bruin = new Label(resourceBundle.getString("7"));
-
+        
         groen.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_0.png"), 45, 45, false, false)));
         //dragDropEvent(groen);  
         blauw.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pin_1.png"), 45, 45, false, false)));
@@ -88,21 +88,21 @@ public class SpelbordScherm extends GridPane {
         this.add(oranje, 16, 2);
         this.add(grijs, 17, 1);
         this.add(bruin, 17, 2);
-
+        
         Label lblKleurenIngeven = new Label(resourceBundle.getString("uwPogingGui"));
         this.add(lblKleurenIngeven, 14, 3);
-
+        
         Button btnVoegToe = new Button(resourceBundle.getString("voegToeGui"));
         this.add(btnVoegToe, 14, 5);
-
+        
         Label lblFout = new Label();
         this.add(lblFout, 15, 5);
-
+        
         Button btnOpslaan = new Button(resourceBundle.getString("OpslaanGui"));
         this.add(btnOpslaan, 14, 8);
-
+        
         btnVoegToe.setOnAction(new EventHandler<ActionEvent>() {
-
+            
             @Override
             public void handle(ActionEvent event) {
                 try {
@@ -113,7 +113,7 @@ public class SpelbordScherm extends GridPane {
                     String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                     int teller = 0;
                     for (Node node : SpelbordScherm.this.getChildren()) {
-
+                        
                         if (node instanceof TextField) {
                             String kleur = ((TextField) node).getText().toLowerCase().trim();
                             if (!Arrays.asList(alleKleuren).contains(kleur)) {
@@ -134,13 +134,13 @@ public class SpelbordScherm extends GridPane {
                     dc.geefPoging(poging);
                     update(dc.geefSpelbord());
                     if (Arrays.equals(dc.geefCode(), poging)) {
-
+                        
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
                         alert.setHeaderText("Je hebt gewonnen!");
                         alert.setContentText(geefEindoverzicht());
                         alert.showAndWait();
-
+                        
                         Stage stage = (Stage) (getScene().getWindow());
                         KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                         stage.setScene(new Scene(keuzeScherm, 1280, 720));
@@ -151,7 +151,7 @@ public class SpelbordScherm extends GridPane {
                         alert.setHeaderText("Je hebt verloren!");
                         alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
                         alert.showAndWait();
-
+                        
                         Stage stage = (Stage) (getScene().getWindow());
                         KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                         stage.setScene(new Scene(keuzeScherm, 1280, 720));
@@ -160,9 +160,9 @@ public class SpelbordScherm extends GridPane {
 //
                 } catch (IllegalArgumentException e) {
                     lblFout.setText(resourceBundle.getString(e.getMessage()));
-
+                    
                 }
-
+                
             }
         });
 
@@ -189,23 +189,27 @@ public class SpelbordScherm extends GridPane {
             }
         }
         );
-
+        
         btnSlaOp.setOnAction(
                 new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event
             ) {
-                dc.registreerSpel(txfSpelnaam.getText().trim());
-                Stage stage = (Stage) (getScene().getWindow());
-                stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
-                stage.setTitle("Mastermind");
-
+                try {
+                    dc.registreerSpel(txfSpelnaam.getText().trim());
+                    Stage stage = (Stage) (getScene().getWindow());
+                    stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
+                    stage.setTitle("Mastermind");
+                } catch (RuntimeException e) {
+                    lblFout.setText(resourceBundle.getString(e.getMessage()));
+                }
+                
             }
-
+            
         }
         );
     }
-
+    
     private void toonSpelbord(int[][] spelbord) {
         for (int i = 0; i < spelbord.length; i++) {
             for (int j = 0; j < spelbord[i].length; j++) {
@@ -258,18 +262,18 @@ public class SpelbordScherm extends GridPane {
 //                });    
                 this.add(label, j, i);
             }
-
+            
             if (i < spelbord[0].length / 2) {
                 TextField txf = new TextField();
                 txf.setPrefWidth(110);
                 this.add(txf, 14 + i, 4);
-
+                
             }
         }
     }
-
+    
     private void update(int[][] spelbord) {
-
+        
         for (int i = 0; i < spelbord.length + 1; i++) {
             if (i >= spelbord.length - 1 || Arrays.toString(spelbord[i]).equals(spelbord[i].length / 2 == 5 ? "[-1, -1, -1, -1, -1, -4, -1, -1, -1, -1, -1]" : "[-1, -1, -1, -1, -4, -1, -1, -1, -1]")) {          //OVERLOOPT ELKE RIJ TOT DEZE EEN LEGE RIJ TEGENKOMT EN NEEMT DAN DE VORIGE RIJ OM TE UPDATEN.
                 for (Node node : this.getChildren()) {
@@ -282,29 +286,29 @@ public class SpelbordScherm extends GridPane {
                     break;
                 }
             }
-
+            
         }
-
+        
     }
-
+    
     private String geefEindoverzicht() {
         String uitvoer = "";
-
+        
         String[] overzicht = dc.geefOverzicht();
-
+        
         String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
-
+        
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
             codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
         }
-
+        
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
         return uitvoer;
-
+        
     }
 
     //OOK VOOR DRAG AND DROP
