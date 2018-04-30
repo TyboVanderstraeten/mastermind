@@ -42,13 +42,13 @@ public class UitdagingRepository {
         return mapper.laadUitdaging(spelersnaam);
     }
     
-    public void updateIsHuidigeSpeler1(String spelersnaam){
-        mapper.updateIsHuidigeSpeler1(spelersnaam);
-    }
-    
-    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig){
-        mapper.updateIsHuidigeSpeler2(spelersnaam, huidig);
-    }
+//    public void updateIsHuidigeSpeler1(String spelersnaam){
+//        mapper.updateIsHuidigeSpeler1(spelersnaam);
+//    }
+//    
+//    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig){
+//        mapper.updateIsHuidigeSpeler2(spelersnaam, huidig);
+//    }
     
     public int geefAantalPogingen(int nummer){
         return mapper.geefAantalPogingen(nummer);

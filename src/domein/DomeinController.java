@@ -331,9 +331,9 @@ public class DomeinController {
         deSpeler.setSpel(spel);
     }
 
-    public void aanvaardUitdaging(String spelersnaam) {
-        uitdagingRepository.updateIsHuidigeSpeler2(spelersnaam, true);
-    }
+//    public void aanvaardUitdaging(String spelersnaam) {
+//        uitdagingRepository.updateIsHuidigeSpeler2(spelersnaam, true);
+//    }
 
 //    public void berekenScore()
 //    {
@@ -402,11 +402,11 @@ public class DomeinController {
             } else {
                 uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
             }
-            if(uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())){
-                uitdagingRepository.updateIsHuidigeSpeler2(deSpeler.getSpelersnaam(), false);
-            }
-            else
-                uitdagingRepository.updateIsHuidigeSpeler1(deSpeler.getSpelersnaam());
+//            if(uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())){
+//                uitdagingRepository.updateIsHuidigeSpeler2(deSpeler.getSpelersnaam(), false);
+//            }
+//            else
+//                uitdagingRepository.updateIsHuidigeSpeler1(deSpeler.getSpelersnaam());
         }
     }
 
