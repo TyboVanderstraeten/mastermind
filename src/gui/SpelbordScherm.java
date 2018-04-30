@@ -124,6 +124,7 @@ public class SpelbordScherm extends GridPane {
                     }
                 }
                 dc.geefPoging(poging);
+                update(dc.geefSpelbord());
                 if (dc.geefCode().equals(poging)) {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
@@ -131,7 +132,6 @@ public class SpelbordScherm extends GridPane {
                     alert.setContentText("Je hebt de code kunnen kraken!");
                     alert.showAndWait();
                 }
-                update(dc.geefSpelbord());
 //
             }
 
