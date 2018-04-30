@@ -22,35 +22,35 @@ import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
 public class LaadSpelScherm extends GridPane {
-    
+
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
     private static final ObservableList dataSpellen = FXCollections.observableArrayList();
-    
+
     public LaadSpelScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         this.keuzeScherm = keuzeScherm;
         buildGui();
     }
-    
+
     private void buildGui() {
-        
+
         Label lblKiesSpel = new Label(resourceBundle.getString("selecteerSpel"));
         this.add(lblKiesSpel, 0, 0);
-        
+
         dataSpellen.addAll(Arrays.asList(dc.geefSpellen()));
-        
+
         ListView<String> lvSpellen = new ListView<>();
         lvSpellen.setPrefSize(400, 600);
         lvSpellen.setItems(dataSpellen);
         this.add(lvSpellen, 0, 1);
-        
+
         Button btnTerug = new Button(resourceBundle.getString("terug"));
         this.add(btnTerug, 0, 2);
         setHalignment(btnTerug, HPos.LEFT);
-        
+
         Button btnLaad = new Button(resourceBundle.getString("laad"));
         this.add(btnLaad, 0, 2);
         setHalignment(btnLaad, HPos.RIGHT);
@@ -70,18 +70,18 @@ public class LaadSpelScherm extends GridPane {
                 dataSpellen.clear();
             }
         });
-        
+
         btnLaad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 dc.laadSpel(lvSpellen.getSelectionModel().getSelectedItem());
                 dc.verwijderSpel(lvSpellen.getSelectionModel().getSelectedItem());
                 Stage stage = (Stage) (getScene().getWindow());
-                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
+                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
                 stage.setScene(new Scene(spelbordScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
         });
     }
-    
+
 }

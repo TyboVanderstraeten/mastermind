@@ -16,10 +16,12 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
+    private final KeuzeScherm keuzeScherm;
 
-    public MoeilijkheidsgraadKeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
+    public MoeilijkheidsgraadKeuzeScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
+        this.keuzeScherm = keuzeScherm;
         buildGui();
     }
 
@@ -48,7 +50,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
             public void handle(ActionEvent event) {
                 dc.kiesMoeilijkheidsgraad(1);
                 Stage stage = (Stage) (getScene().getWindow());
-                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
+                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
                 stage.setScene(new Scene(spelbordScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -60,7 +62,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
                 try {
                     dc.kiesMoeilijkheidsgraad(2);
                     Stage stage = (Stage) (getScene().getWindow());
-                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
+                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
                     stage.setScene(new Scene(spelbordScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
@@ -75,7 +77,7 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
                 try {
                     dc.kiesMoeilijkheidsgraad(3);
                     Stage stage = (Stage) (getScene().getWindow());
-                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle);
+                    SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
                     stage.setScene(new Scene(spelbordScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {

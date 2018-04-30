@@ -50,7 +50,7 @@ public class KeuzeScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) (getScene().getWindow());
-                MoeilijkheidsgraadKeuzeScherm moeilijkheidsgraadKeuzeScherm = new MoeilijkheidsgraadKeuzeScherm(dc, resourceBundle);
+                MoeilijkheidsgraadKeuzeScherm moeilijkheidsgraadKeuzeScherm = new MoeilijkheidsgraadKeuzeScherm(dc, resourceBundle, KeuzeScherm.this);
                 stage.setScene(new Scene(moeilijkheidsgraadKeuzeScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }

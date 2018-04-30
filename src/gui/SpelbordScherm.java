@@ -33,10 +33,12 @@ public class SpelbordScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
+    private final KeuzeScherm keuzeScherm;
 
-    public SpelbordScherm(DomeinController dc, ResourceBundle resourceBundle) {
+    public SpelbordScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
+        this.keuzeScherm = keuzeScherm;
         buildGui();
     }
 
@@ -100,6 +102,8 @@ public class SpelbordScherm extends GridPane {
             public void handle(ActionEvent event) {
 //
                 int[] poging = new int[spelbord[0].length / 2];
+                int aantalPogingen = 0;
+                aantalPogingen++;
 
                 String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                 int teller = 0;
@@ -129,7 +133,13 @@ public class SpelbordScherm extends GridPane {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt gewonnen!");
-                    alert.setContentText("Je hebt de code kunnen kraken!");
+                    alert.setContentText("Je hebt de code kunnen kraken.");
+                    alert.showAndWait();
+                } else if (aantalPogingen > 12 && !Arrays.equals(dc.geefCode(), poging)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Mastermind");
+                    alert.setHeaderText("Je hebt verloren!");
+                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
                     alert.showAndWait();
                 }
 //
