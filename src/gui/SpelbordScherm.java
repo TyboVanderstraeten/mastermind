@@ -126,10 +126,9 @@ public class SpelbordScherm extends GridPane {
                 dc.geefPoging(poging);
                 if (dc.geefCode().equals(poging)) {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
-                    alert.setHeaderText("Look, an Information Dialog");
-                    alert.setContentText("I have a great message for you!");
-
+                    alert.setTitle("Mastermind");
+                    alert.setHeaderText("Je hebt gewonnen!");
+                    alert.setContentText("Je hebt de code kunnen kraken!");
                     alert.showAndWait();
                 }
                 update(dc.geefSpelbord());
