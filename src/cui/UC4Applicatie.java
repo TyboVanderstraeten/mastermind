@@ -1,6 +1,7 @@
 package cui;
 
 import domein.DomeinController;
+import exceptions.SpelnaamBestaatNietException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -27,12 +28,16 @@ public class UC4Applicatie {
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[] spelnamen = domeinController.geefSpellen();
         for (int teller = 0; teller < spelnamen.length; teller++) {
-            System.out.printf("%d) %s%n", teller+1, spelnamen[teller]);
+            System.out.printf("%d) %s%n", teller + 1, spelnamen[teller]);
         }
         try {
             String spelnaam = input.next();
-            domeinController.laadSpel(spelnaam); 
-            domeinController.verwijderSpel(spelnaam);
+            if (Arrays.asList(spelnamen).contains(spelnaam)) {
+                domeinController.laadSpel(spelnaam);
+                domeinController.verwijderSpel(spelnaam);
+            } else {
+                throw new SpelnaamBestaatNietException();
+            }
         } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
             input.nextLine();

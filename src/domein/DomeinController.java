@@ -186,13 +186,13 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (uitdaging != null) {                
-                deSpeler.verhoogAantalGespeeldeUitdagingen();                
+            if (uitdaging != null) {
+                deSpeler.verhoogAantalGespeeldeUitdagingen();
             } else {
                 deSpeler.verhoogAantalGewonnen();
             }
-        } else if (spel.getSpelbord().getAantalPogingen() == 12 && uitdaging!= null) {
-            deSpeler.verhoogAantalGespeeldeUitdagingen();            
+        } else if (spel.getSpelbord().getAantalPogingen() == 12 && uitdaging != null) {
+            deSpeler.verhoogAantalGespeeldeUitdagingen();
         }
     }
 
@@ -259,15 +259,9 @@ public class DomeinController {
     }
 
     public void laadSpel(String spelnaam) {
-        try {
-            spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
-            if (spel != null) {
-                deSpeler.setSpel(spel);
-            } else {
-                throw new SpelnaamBestaatNietException();
-            }
-        } catch (NullPointerException e) {
-            throw new SpelnaamBestaatNietException();
+        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+        if (spel != null) {
+            deSpeler.setSpel(spel);
         }
     }
 
@@ -329,12 +323,10 @@ public class DomeinController {
         uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
         spel = uitdaging.getSpel();
         deSpeler.setSpel(spel);
-        if(!deSpeler.getSpelersnaam().equals(uitdaging.getUitdager())){
+        if (!deSpeler.getSpelersnaam().equals(uitdaging.getUitdager())) {
             uitdagingRepository.aanvaardUitdaging(uitdaging.getId());
         }
     }
-
-
 
 //---------------------//
 //---------UC7---------//
@@ -375,7 +367,6 @@ public class DomeinController {
 //            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
 //        }
 //    }
-
     //KLASSEMENT
     public List<List<String[]>> geefKlassement() {
         List<List<String[]>> klassementen = new ArrayList<>();
