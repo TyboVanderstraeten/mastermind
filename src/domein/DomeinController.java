@@ -35,7 +35,7 @@ public class DomeinController {
     public DomeinController() {
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
-        uitdagingRepository = new UitdagingRepository();
+        uitdagingRepository = new UitdagingRepository();        
     }
 
     //UC1   
@@ -53,7 +53,7 @@ public class DomeinController {
             if (gevondenSpeler != null) {
                 setDeSpeler(gevondenSpeler);
             } else {
-                throw new SpelersnaamWachtwoordCombinatieException();
+                throw new SpelersnaamWachtwoordCombinatieException();              
             }
         } catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();
@@ -277,6 +277,8 @@ public class DomeinController {
     //-------------------///
     //-------UC5---------///
     //-------------------///
+    
+    //uitdaging laden bij aanmaken van speler?
     public int[][] startUitdaging() {
         int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
 

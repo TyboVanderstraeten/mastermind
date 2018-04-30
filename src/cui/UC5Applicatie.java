@@ -20,7 +20,7 @@ public class UC5Applicatie {
         this.resourceBundle = resourceBundle;
     }
     
-    public void start() {
+    public void start() {        
         registreerSpel(kiesTegenspeler());
         toonSpelbord();
         UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
@@ -28,7 +28,7 @@ public class UC5Applicatie {
     }
 
     public String kiesTegenspeler() {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);        
         String[] tegenspelerNamen = {};
         String tegenspelerNaam = "";
         switch (kiesMoeilijkheidsgraad()) {
@@ -85,10 +85,9 @@ public class UC5Applicatie {
     }
     
     
-    private void registreerSpel(String tegenSpeler){        
-          
+    private void registreerSpel(String tegenSpeler){                
         domeinController.registreerUitdaging(tegenSpeler);        
-        domeinController.laadUitdaging(domeinController.geefSpelersnaam());
+        domeinController.laadUitdaging(domeinController.geefSpelersnaam());        
         
     }
     
