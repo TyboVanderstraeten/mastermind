@@ -129,15 +129,11 @@ public class SpelbordScherm extends GridPane {
                 dc.geefPoging(poging);
                 update(dc.geefSpelbord());
                 if (Arrays.equals(dc.geefCode(), poging)) {
-                    String contentText = "";
-                    contentText += String.format(resourceBundle.getString("codeWas%s%n")); // code weergeven
-                    contentText += String.format(resourceBundle.getString("gekraaktInPogingenD1%d "), aantalpogingen);
-                    contentText += String.format(resourceBundle.getString("gekraaktInPogingenD2%n"));
-                    contentText += String.format(resourceBundle.getString("aantalSpellenTotVolgendeSterD1")); //
+                    
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt gewonnen!");
-                    alert.setContentText(contentText);
+                    alert.setContentText(geefEindoverzicht());
                     alert.showAndWait();
 
                     Stage stage = (Stage) (getScene().getWindow());
@@ -281,6 +277,26 @@ public class SpelbordScherm extends GridPane {
             }
 
         }
+
+    }
+    
+     private String geefEindoverzicht() {
+        String uitvoer = "";
+
+        String[] overzicht = dc.geefOverzicht();
+
+        String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
+
+        String codeString = "";
+        for (int i = 0; i < code.length; i++) {
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
+        }
+
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
+        uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
+        return uitvoer;
 
     }
 

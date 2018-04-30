@@ -86,8 +86,8 @@ public class UC3Applicatie {
 
             for (int i = rij.length - 1; i >= 0; i--) {         //ik begin vanachter omdat groen als nummer 1 heeft en wit als nummer 10. 
                 if (rij[i] >= 0) {                              //Als ik dit niet zou doen zou bij de replace van groen (1) ook de 1 van 10 nemen en dan print hij dus "groen" bij de evaluatiepinnen. replaceFirst is met regex en ik heb de waarde van het nummer nodig in de resbundle.
-                                                                //Andere oplossing zou zijn om wit en zwart in resourcebundle in 1 en 2 te veranderen maar dit werkt ook.
-                    x = x.replace((Integer.toString(rij[i])), String.format("%-7s", resourceBundle.getString(Integer.toString(rij[i]))));                                                                  
+                    //Andere oplossing zou zijn om wit en zwart in resourcebundle in 1 en 2 te veranderen maar dit werkt ook.
+                    x = x.replace((Integer.toString(rij[i])), String.format("%-7s", resourceBundle.getString(Integer.toString(rij[i]))));
                 }
             }
             System.out.println(x);
@@ -110,8 +110,8 @@ public class UC3Applicatie {
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
-        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);       System.out.println(uitvoer);
-        
-                
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
+        System.out.println(uitvoer);
+
     }
 }
