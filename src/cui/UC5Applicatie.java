@@ -2,6 +2,7 @@ package cui;
 
 import domein.DomeinController;
 import exceptions.MoeilijkheidsgraadKeuzeException;
+import exceptions.TegenspelerNaamBestaatNietException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -10,27 +11,32 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//EXCEPTIONS DONE
 public class UC5Applicatie {
-
+    
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
-
+    
     public UC5Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
-
+    
     public void start() {
-        if (domeinController.geefOpenUitdagingen() != null) {
-            System.out.println("Werk uw openstaande uitdaging eerst af!");
-        } else {
-            registreerSpel(kiesTegenspeler());
-            toonSpelbord();
-            UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-            uc3.start();
+        try {
+            if (domeinController.geefOpenUitdagingen() != null) {
+                System.out.println("Werk uw openstaande uitdaging eerst af!");
+            } else {
+                registreerSpel(kiesTegenspeler());
+                toonSpelbord();
+                UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+                uc3.start();
+            }
+        } catch (NullPointerException e) {
+            System.out.println(resourceBundle.getString(e.getMessage()));
         }
     }
-
+    
     public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
@@ -46,21 +52,20 @@ public class UC5Applicatie {
                 tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenNormaal", 20);
                 break;
         }
-
+        
         System.out.println(resourceBundle.getString("maakKeuzeTegenspeler"));
         for (int teller = 0; teller < tegenspelerNamen.length; teller++) {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
         }
-        try {
-            tegenspelerNaam = input.next();
-        } catch (NullPointerException e) {
-            System.out.println(resourceBundle.getString(e.getMessage()));
-            input.nextLine();
+        tegenspelerNaam = input.next();
+        if (Arrays.asList(tegenspelerNaam).contains(tegenspelerNaam)) {
+            throw new TegenspelerNaamBestaatNietException();
         }
+        
         return tegenspelerNaam;
-
+        
     }
-
+    
     private int kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
@@ -87,13 +92,13 @@ public class UC5Applicatie {
         } while (!geldig);
         return keuze;
     }
-
+    
     private void registreerSpel(String tegenSpeler) {
         domeinController.registreerUitdaging(tegenSpeler);
         domeinController.laadUitdaging(domeinController.geefSpelersnaam());
-
+        
     }
-
+    
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();

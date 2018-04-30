@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+//EXCEPTIONS DONE
 public class UC4Applicatie {
 
     private final DomeinController domeinController;
@@ -17,10 +18,14 @@ public class UC4Applicatie {
     }
 
     public void start() {
-        laadSpel();
-        toonSpelbord();
-        UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-        uc3.start();
+        try {
+            laadSpel();
+            toonSpelbord();
+            UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+            uc3.start();
+        } catch (NullPointerException e) {
+            System.out.println(resourceBundle.getString(e.getMessage()));
+        }
     }
 
     public void laadSpel() {
@@ -30,18 +35,14 @@ public class UC4Applicatie {
         for (int teller = 0; teller < spelnamen.length; teller++) {
             System.out.printf("%d) %s%n", teller + 1, spelnamen[teller]);
         }
-        try {
-            String spelnaam = input.next();
-            if (Arrays.asList(spelnamen).contains(spelnaam)) {
-                domeinController.laadSpel(spelnaam);
-                domeinController.verwijderSpel(spelnaam);
-            } else {
-                throw new SpelnaamBestaatNietException();
-            }
-        } catch (NullPointerException e) {
-            System.out.println(resourceBundle.getString(e.getMessage()));
-            input.nextLine();
+        String spelnaam = input.next();
+        if (Arrays.asList(spelnamen).contains(spelnaam)) {
+            domeinController.laadSpel(spelnaam);
+            domeinController.verwijderSpel(spelnaam);
+        } else {
+            throw new SpelnaamBestaatNietException();
         }
+
     }
 
     private void toonSpelbord() {
