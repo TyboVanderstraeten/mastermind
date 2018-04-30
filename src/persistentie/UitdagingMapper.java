@@ -34,8 +34,7 @@ public class UitdagingMapper {
 
     //NEW
     private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE (speler1 = ? AND aantalPogingenS1 = 0) OR (speler2 =? AND isAanvaard = 1 AND aantalPogingenS2 = 0)";
-    private static final String AANVAARD_UITDAGING = "UPDATE ID222177_g68.Uitdaging set isAanvaard = 1 where id = ?";
-    private static final String VERWIJDER_UITDAGING = "DELETE FROM ID222177_g68.Uitdaging where id = ?";
+    private static final String AANVAARD_UITDAGING = "UPDATE ID222177_g68.Uitdaging set isAanvaard = 1 where id = ?";    
 
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
@@ -204,14 +203,4 @@ public class UitdagingMapper {
         }
     }
     
-    public void verwijderUitdaging(int id){
-        try (
-                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(VERWIJDER_UITDAGING)) {
-            query.setInt(1, id);
-            query.executeUpdate();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
 }

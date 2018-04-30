@@ -186,13 +186,9 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (uitdaging != null) {
-                deSpeler.verhoogAantalGespeeldeUitdagingen();
-            } else {
+            if (uitdaging == null) {
                 deSpeler.verhoogAantalGewonnen();
             }
-        } else if (spel.getSpelbord().getAantalPogingen() == 12 && uitdaging != null) {
-            deSpeler.verhoogAantalGespeeldeUitdagingen();
         }
     }
 
@@ -259,9 +255,15 @@ public class DomeinController {
     }
 
     public void laadSpel(String spelnaam) {
-        spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
-        if (spel != null) {
-            deSpeler.setSpel(spel);
+        try {
+            spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
+            if (spel != null) {
+                deSpeler.setSpel(spel);
+            } else {
+                throw new SpelnaamBestaatNietException();
+            }
+        } catch (NullPointerException e) {
+            throw new SpelnaamBestaatNietException();
         }
     }
 
@@ -324,7 +326,7 @@ public class DomeinController {
         spel = uitdaging.getSpel();
         deSpeler.setSpel(spel);
         if (!deSpeler.getSpelersnaam().equals(uitdaging.getUitdager())) {
-            uitdagingRepository.aanvaardUitdaging(uitdaging.getId());
+            uitdagingRepository.aanvaardUitdaging(uitdaging.getId());       //isAanvaard op 1 zetten in de db
         }
     }
 
@@ -346,8 +348,7 @@ public class DomeinController {
                         spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
                     }
                 }
-                //nog voorwaarde nodig + hoe verhogen bij andere speler?
-                uitdagingRepository.verwijderUitdaging(uitdaging.getId());
+                //nog voorwaarde nodig + hoe verhogen bij andere speler?                
                 spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             } else {
                 if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
@@ -356,6 +357,12 @@ public class DomeinController {
                     uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
                 }
             }
+            deSpeler.verhoogAantalGespeeldeUitdagingen();
+            spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
+
+        } else {
+            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
         }
     }
 
