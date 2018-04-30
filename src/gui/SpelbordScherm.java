@@ -44,7 +44,6 @@ public class SpelbordScherm extends GridPane {
 
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
-        int aantalpogingen = 0;
         toonSpelbord(spelbord);
 
         //Positionering
@@ -103,7 +102,8 @@ public class SpelbordScherm extends GridPane {
             public void handle(ActionEvent event) {
 //
                 int[] poging = new int[spelbord[0].length / 2];
-                //aantalpogingen++;
+                int aantalpogingen = 0;
+                aantalpogingen++;
                 String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                 int teller = 0;
                 for (Node node : SpelbordScherm.this.getChildren()) {
@@ -129,7 +129,7 @@ public class SpelbordScherm extends GridPane {
                 dc.geefPoging(poging);
                 update(dc.geefSpelbord());
                 if (Arrays.equals(dc.geefCode(), poging)) {
-                    
+
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt gewonnen!");
@@ -140,19 +140,18 @@ public class SpelbordScherm extends GridPane {
                     KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                     stage.setScene(new Scene(keuzeScherm, 1280, 720));
                     stage.setTitle("Mastermind");
+                } else if (aantalpogingen > 12) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Mastermind");
+                    alert.setHeaderText("Je hebt verloren!");
+                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle("Mastermind");
                 }
-//                } else if (aantalPogingen > 6) {
-//                    Alert alert = new Alert(AlertType.INFORMATION);
-//                    alert.setTitle("Mastermind");
-//                    alert.setHeaderText("Je hebt verloren!");
-//                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
-//                    alert.showAndWait();
-//
-//                    Stage stage = (Stage) (getScene().getWindow());
-//                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-//                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
-//                    stage.setTitle("Mastermind");
-//                }
 //
             }
 
@@ -279,8 +278,8 @@ public class SpelbordScherm extends GridPane {
         }
 
     }
-    
-     private String geefEindoverzicht() {
+
+    private String geefEindoverzicht() {
         String uitvoer = "";
 
         String[] overzicht = dc.geefOverzicht();
