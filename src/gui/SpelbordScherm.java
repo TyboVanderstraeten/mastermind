@@ -135,12 +135,22 @@ public class SpelbordScherm extends GridPane {
                     alert.setHeaderText("Je hebt gewonnen!");
                     alert.setContentText("Je hebt de code kunnen kraken.");
                     alert.showAndWait();
-                } else if (aantalPogingen > 12 && !Arrays.equals(dc.geefCode(), poging)) {
+
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle("Mastermind");
+                } else if (aantalPogingen > 12) {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt verloren!");
                     alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
                     alert.showAndWait();
+
+                    Stage stage = (Stage) (getScene().getWindow());
+                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                    stage.setTitle("Mastermind");
                 }
 //
             }
