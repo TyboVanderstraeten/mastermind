@@ -140,7 +140,7 @@ public class SpelbordScherm extends GridPane {
                     KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                     stage.setScene(new Scene(keuzeScherm, 1280, 720));
                     stage.setTitle("Mastermind");
-                } else if (aantalpogingen > 12) {
+                } else if (aantalpogingen > 12) { //werkt nog niet?
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt verloren!");

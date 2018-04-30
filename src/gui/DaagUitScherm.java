@@ -94,16 +94,16 @@ public class DaagUitScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 dc.registreerUitdaging(lvTegenspelers.getSelectionModel().getSelectedItem());
-                
+
                 Alert alertUitgedaagd = new Alert(Alert.AlertType.INFORMATION);
                 alertUitgedaagd.setTitle(resourceBundle.getString("uitdagen"));
                 alertUitgedaagd.setHeaderText(resourceBundle.getString("uitdagenSuccesvol"));
                 alertUitgedaagd.setContentText(resourceBundle.getString("uitdagenGelukt"));
                 alertUitgedaagd.showAndWait();
-                
+
                 Stage stage = (Stage) (getScene().getWindow());
-                KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
+                stage.setScene(new Scene(spelbordScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
         });
