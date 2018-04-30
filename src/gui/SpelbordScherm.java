@@ -144,6 +144,7 @@ public class SpelbordScherm extends GridPane {
                     KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                     stage.setScene(new Scene(keuzeScherm, 1280, 720));
                     stage.setTitle("Mastermind");
+                }
 //                } else if (aantalPogingen > 6) {
 //                    Alert alert = new Alert(AlertType.INFORMATION);
 //                    alert.setTitle("Mastermind");
@@ -157,55 +158,48 @@ public class SpelbordScherm extends GridPane {
 //                    stage.setTitle("Mastermind");
 //                }
 //
-                }
-
             }
-            );
+
+        }
+        );
 
         //!!!!
         //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
         //+ nodes nodig in btnSlaOp om daar te verwijderen
         Label lblSpelnaam = new Label(resourceBundle.getString("SpelnaamGui"));
-            TextField txfSpelnaam = new TextField();
-            Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
-            //!!!!
+        TextField txfSpelnaam = new TextField();
+        Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
+        //!!!!
 
-            btnOpslaan.setOnAction (
-                     
+        btnOpslaan.setOnAction(
                 new EventHandler<ActionEvent>() {
             @Override
-                public void handle
-                (ActionEvent event
-                
-                    ) {
+            public void handle(ActionEvent event
+            ) {
                 if (SpelbordScherm.this.getChildren().contains(lblSpelnaam)) {
-                        SpelbordScherm.this.getChildren().removeAll(lblSpelnaam, txfSpelnaam, btnSlaOp);
-                    } else {
-                        SpelbordScherm.this.add(lblSpelnaam, 14, 9);
-                        SpelbordScherm.this.add(txfSpelnaam, 14, 10, 3, 1);
-                        SpelbordScherm.this.add(btnSlaOp, 17, 10);
-                    }
+                    SpelbordScherm.this.getChildren().removeAll(lblSpelnaam, txfSpelnaam, btnSlaOp);
+                } else {
+                    SpelbordScherm.this.add(lblSpelnaam, 14, 9);
+                    SpelbordScherm.this.add(txfSpelnaam, 14, 10, 3, 1);
+                    SpelbordScherm.this.add(btnSlaOp, 17, 10);
                 }
             }
+        }
+        );
 
-            );
-
-            btnSlaOp.setOnAction (
-                     
+        btnSlaOp.setOnAction(
                 new EventHandler<ActionEvent>() {
             @Override
-                public void handle
-                (ActionEvent event
-                
-                    ) {
+            public void handle(ActionEvent event
+            ) {
                 dc.registreerSpel(txfSpelnaam.getText().trim());
-                    Stage stage = (Stage) (getScene().getWindow());
-                    stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
-                    stage.setTitle("Mastermind");
-
-                }
+                Stage stage = (Stage) (getScene().getWindow());
+                stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
+                stage.setTitle("Mastermind");
 
             }
+
+        }
         );
     }
 
