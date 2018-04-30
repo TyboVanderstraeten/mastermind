@@ -35,7 +35,7 @@ public class DomeinController {
     public DomeinController() {
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
-        uitdagingRepository = new UitdagingRepository();        
+        uitdagingRepository = new UitdagingRepository();
     }
 
     //UC1   
@@ -53,7 +53,7 @@ public class DomeinController {
             if (gevondenSpeler != null) {
                 setDeSpeler(gevondenSpeler);
             } else {
-                throw new SpelersnaamWachtwoordCombinatieException();              
+                throw new SpelersnaamWachtwoordCombinatieException();
             }
         } catch (NullPointerException e) {
             throw new SpelersnaamWachtwoordCombinatieException();
@@ -116,6 +116,7 @@ public class DomeinController {
                 break;
         }
         deSpeler.setSpel(spel);
+        uitdaging = null;                       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!????
     }
 
     public void kiesMoeilijkheidsgraadUitdagingen(int moeilijkheidsgraad) {
@@ -185,12 +186,13 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (uitdaging.getId() != 0) {
-                deSpeler.verhoogAantalGewonnenUitdagingen();
-                deSpeler.verhoogAantalGespeeldeUitdagingen();
+            if (uitdaging != null) {                
+                deSpeler.verhoogAantalGespeeldeUitdagingen();                
             } else {
                 deSpeler.verhoogAantalGewonnen();
             }
+        } else if (spel.getSpelbord().getAantalPogingen() == 12 && uitdaging.getId() != 0) {
+            deSpeler.verhoogAantalGespeeldeUitdagingen();            
         }
     }
 
@@ -241,7 +243,6 @@ public class DomeinController {
     public void registreerSpel(String spelnaam) {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
-    
 
     public String[] geefSpellen() {
         String[] spellenString;
@@ -277,7 +278,10 @@ public class DomeinController {
     //-------------------///
     //-------UC5---------///
     //-------------------///
-    
+    public String geefOpenUitdagingen() {
+        return uitdagingRepository.geefOpenUitdaging(deSpeler.getSpelersnaam());
+    }
+
     //uitdaging laden bij aanmaken van speler?
     public int[][] startUitdaging() {
         int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
@@ -303,11 +307,10 @@ public class DomeinController {
 //    public Speler kiesTegenspeler(String tegenspeler) {
 //        return spelerRepository.kiesTegenspeler(tegenspeler);
 //    }
-
     public String[] geefTegenSpelers(String naamUitdagingenCategorie, int aantalGewonnenCategorie) {
         return spelerRepository.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenCategorie, naamUitdagingenCategorie);
     }
-    
+
     public void registreerUitdaging(String tegenspeler) {                    //VOOR EEN UITDAGING
         uitdagingRepository.registreerUitdaging(deSpeler.getSpelersnaam(), tegenspeler, spel);
     }
@@ -315,7 +318,6 @@ public class DomeinController {
 //---------------------//
 //---------UC6---------//
 //---------------------//
-    
 //    public void spelIsUitdaging() {
 //        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
 //    }
@@ -327,6 +329,10 @@ public class DomeinController {
         uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
         spel = uitdaging.getSpel();
         deSpeler.setSpel(spel);
+    }
+
+    public void aanvaardUitdaging(String spelersnaam) {
+        uitdagingRepository.updateIsHuidigeSpeler2(spelersnaam, true);
     }
 
 //    public void berekenScore()
@@ -372,15 +378,12 @@ public class DomeinController {
 //            }
 //        }
 //    }
-    
-    
-    
 //---------------------//
 //---------UC7---------//
 //---------------------//
     public void berekenScore() {
 
-        if (uitdaging.getId() != 0) {    //controleert of het spel een uitdaging is
+        if (uitdaging!=null) {    //controleert of het spel een uitdaging is
             int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId());         //aantalP is aantal pogingen van tegenspeler
             if (aantalP != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
                 if (aantalP > spel.getSpelbord().getAantalPogingen()) {
@@ -399,12 +402,17 @@ public class DomeinController {
             } else {
                 uitdagingRepository.voegAantalPogingenToe(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
             }
+            if(uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())){
+                uitdagingRepository.updateIsHuidigeSpeler2(deSpeler.getSpelersnaam(), false);
+            }
+            else
+                uitdagingRepository.updateIsHuidigeSpeler1(deSpeler.getSpelersnaam());
         }
     }
 
     //KIESUITDAGING = LAADSPEL
     public void updateSpeler() {
-        if (uitdaging.getId() != 0) {
+        if (uitdaging != null) {
             spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
         } else {
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
@@ -412,14 +420,14 @@ public class DomeinController {
     }
 
     //KLASSEMENT
-    public List<List<String[]>> geefKlassement(){
+    public List<List<String[]>> geefKlassement() {
         List<List<String[]>> klassementen = new ArrayList<>();
         klassementen.add(spelerRepository.geefKlassementMakkelijk());
         klassementen.add(spelerRepository.geefKlassementNormaal());
         klassementen.add(spelerRepository.geefKlassementMoeilijk());
         return klassementen;
     }
-    
+
 //    public List<String[]> geefKlassementMakkelijk() {
 //        return spelerRepository.geefKlassementMakkelijk();
 //    }
@@ -431,7 +439,6 @@ public class DomeinController {
 //    public List<String[]> geefKlassementMoeilijk() {
 //        return spelerRepository.geefKlassementMoeilijk();
 //    }
-
     //setters
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
