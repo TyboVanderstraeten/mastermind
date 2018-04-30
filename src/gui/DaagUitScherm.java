@@ -94,6 +94,7 @@ public class DaagUitScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 dc.registreerUitdaging(lvTegenspelers.getSelectionModel().getSelectedItem());
+                dc.laadUitdaging(dc.geefSpelersnaam());
 
                 Alert alertUitgedaagd = new Alert(Alert.AlertType.INFORMATION);
                 alertUitgedaagd.setTitle(resourceBundle.getString("uitdagen"));
