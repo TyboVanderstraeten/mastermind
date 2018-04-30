@@ -58,22 +58,30 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
         btnNormaal.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.kiesMoeilijkheidsgraadUitdagingen(2);
-                Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20, keuzeScherm);
-                stage.setScene(new Scene(daagUitScherm, 1280, 720));
-                stage.setTitle("Mastermind");
+                try {
+                    dc.kiesMoeilijkheidsgraadUitdagingen(2);
+                    Stage stage = (Stage) (getScene().getWindow());
+                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20, keuzeScherm);
+                    stage.setScene(new Scene(daagUitScherm, 1280, 720));
+                    stage.setTitle("Mastermind");
+                } catch (IllegalArgumentException e) {
+                    lblError.setText(resourceBundle.getString("normaalUitdagingToegangException"));
+                }
             }
         });
 
         btnMoeilijk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.kiesMoeilijkheidsgraadUitdagingen(3);
-                Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20, keuzeScherm);
-                stage.setScene(new Scene(daagUitScherm, 1280, 720));
-                stage.setTitle("Mastermind");
+                try {
+                    dc.kiesMoeilijkheidsgraadUitdagingen(3);
+                    Stage stage = (Stage) (getScene().getWindow());
+                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20, keuzeScherm);
+                    stage.setScene(new Scene(daagUitScherm, 1280, 720));
+                    stage.setTitle("Mastermind");
+                } catch (IllegalArgumentException e) {
+                    lblError.setText(resourceBundle.getString("moeilijkUitdagingToegangException"));
+                }
 
             }
         });
