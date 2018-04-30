@@ -33,10 +33,22 @@ public class UitdagingRepository {
         return uitdagingen;
 
     }
+    
+    public String geefOpenUitdaging(String spelersnaam){
+        return mapper.geefOpenUitdaging(spelersnaam);
+    }
 
     public Uitdaging laadUitdaging(String spelersnaam) {
         return mapper.laadUitdaging(spelersnaam);
     }
+    
+//    public void updateIsHuidigeSpeler1(String spelersnaam){
+//        mapper.updateIsHuidigeSpeler1(spelersnaam);
+//    }
+//    
+//    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig){
+//        mapper.updateIsHuidigeSpeler2(spelersnaam, huidig);
+//    }
     
     public int geefAantalPogingen(int nummer){
         return mapper.geefAantalPogingen(nummer);

@@ -19,16 +19,20 @@ public class UC5Applicatie {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
-    
-    public void start() {        
-        registreerSpel(kiesTegenspeler());
-        toonSpelbord();
-        UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-        uc3.start();
+
+    public void start() {
+        if (domeinController.geefOpenUitdagingen() != null) {
+            System.out.println("Werk uw openstaande uitdaging eerst af!");
+        } else {
+            registreerSpel(kiesTegenspeler());
+            toonSpelbord();
+            UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+            uc3.start();
+        }
     }
 
     public String kiesTegenspeler() {
-        Scanner input = new Scanner(System.in);        
+        Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
         String tegenspelerNaam = "";
         switch (kiesMoeilijkheidsgraad()) {
@@ -42,7 +46,7 @@ public class UC5Applicatie {
                 tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenNormaal", 20);
                 break;
         }
-        
+
         System.out.println(resourceBundle.getString("maakKeuzeTegenspeler"));
         for (int teller = 0; teller < tegenspelerNamen.length; teller++) {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
@@ -83,14 +87,13 @@ public class UC5Applicatie {
         } while (!geldig);
         return keuze;
     }
-    
-    
-    private void registreerSpel(String tegenSpeler){                
-        domeinController.registreerUitdaging(tegenSpeler);        
-        domeinController.laadUitdaging(domeinController.geefSpelersnaam());        
-        
+
+    private void registreerSpel(String tegenSpeler) {
+        domeinController.registreerUitdaging(tegenSpeler);
+        domeinController.laadUitdaging(domeinController.geefSpelersnaam());
+
     }
-    
+
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();

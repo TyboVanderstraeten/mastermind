@@ -32,7 +32,8 @@ public class UitdagingMapper {
     private static final String UPDATE_AANTALPOGINGEN = "UPDATE ID222177_g68.Uitdaging SET aantalPogingen = ? WHERE id = ?";
 
     //NEW
-    private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isHuidig = 1 OR speler2 =? AND isAanvaard = 1";
+    private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE (speler1 = ? AND aantalPogingenS1 = 0) OR (speler2 =? AND isAanvaard = 1 AND aantalPogingenS2 = 0)";
+    
 
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
@@ -142,7 +143,7 @@ public class UitdagingMapper {
     }
 
     public String geefOpenUitdaging(String spelersnaam) {
-        String naam = "";
+        String naam = null;
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_AANVAARDE_UITDAGINGEN)) {
@@ -159,4 +160,27 @@ public class UitdagingMapper {
         }
         return naam;
     }
+
+//    public void updateIsHuidigeSpeler1(String spelersnaam){
+//        try (
+//                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+//                PreparedStatement query = conn.prepareStatement(UPDATE_ISHUIDIGESPELER1)) {            
+//            query.setString(1, spelersnaam);
+//            query.executeUpdate();
+//        } catch (SQLException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
+//    
+//    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig) {
+//        try (
+//                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+//                PreparedStatement query = conn.prepareStatement(UPDATE_ISHUIDIGESPELER2)) {
+//            query.setInt(1, huidig == true ? 1 : 0);
+//            query.setString(2, spelersnaam);
+//            query.executeUpdate();
+//        } catch (SQLException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
 }

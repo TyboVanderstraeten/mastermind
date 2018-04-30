@@ -46,6 +46,8 @@ public class UC3Applicatie {
         }
         if (!geldig) {
             geefEindoverzicht();
+            domeinController.updateSpeler();
+            domeinController.berekenScore();
         }
     }
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #     Evaluatie   leeg
@@ -108,9 +110,8 @@ public class UC3Applicatie {
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
-        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
-        System.out.println(uitvoer);
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);       System.out.println(uitvoer);
         
-        domeinController.updateSpeler();        
+                
     }
 }
