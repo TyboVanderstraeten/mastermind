@@ -106,6 +106,7 @@ public class SpelbordScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    lblFout.setText(null);
                     int[] poging = new int[spelbord[0].length / 2];
                     int aantalpogingen = 0;
                     aantalpogingen++;
@@ -123,8 +124,6 @@ public class SpelbordScherm extends GridPane {
                                     poging[teller] = j;
                                     teller++;
                                     break;
-                                } else {
-                                    lblFout.setText(resourceBundle.getString("ongeldigeKleur"));
                                 }
                             }
                             if (teller == spelbord[0].length / 2) {
