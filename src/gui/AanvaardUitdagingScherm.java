@@ -13,6 +13,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
@@ -35,8 +37,9 @@ public class AanvaardUitdagingScherm extends GridPane {
         Label lblKiesUitdaging = new Label(resourceBundle.getString("selecteerUitdaging"));
         this.add(lblKiesUitdaging, 0, 0);
 
-        dataUitdagingen.addAll(Arrays.asList(dc.geefUitdaging()));
-        
+        for (int teller = 0; teller < dc.geefUitdaging().length; teller++) {
+            dataUitdagingen.add(dc.geefUitdaging()[teller][0]);
+        }
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);
