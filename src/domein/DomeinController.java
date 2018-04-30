@@ -186,7 +186,7 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (uitdaging == null) {
+            if (spel.getId() == 0) {
                 deSpeler.verhoogAantalGewonnen();
             }
         }
@@ -334,7 +334,7 @@ public class DomeinController {
 //---------UC7---------//
 //---------------------//
     public void berekenScore() {
-        if (uitdaging != null) {    //controleert of het spel een uitdaging is
+        if (spel.getId() != 0) {    //controleert of het spel een uitdaging is
             int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId(), uitdaging.getUitdager(), deSpeler.getSpelersnaam());         //aantalP is aantal pogingen van tegenspeler
             if (aantalP != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
                 if (aantalP > spel.getSpelbord().getAantalPogingen()) {
