@@ -42,8 +42,8 @@ public class UitdagingRepository {
         return mapper.laadUitdaging(spelersnaam);
     }
       
-    public void aanvaardUitdaging(String spelersnaam){
-        mapper.aanvaardUitdaging(spelersnaam);
+    public void aanvaardUitdaging(int id){
+        mapper.aanvaardUitdaging(id);
     }
     
     public int geefAantalPogingen(int nummer, String uitdager, String spelersnaam){
@@ -56,5 +56,9 @@ public class UitdagingRepository {
     
     public void voegAantalPogingenToeS2(int aantalPogingen, int id){
         mapper.voegAantalPogingenToeS2(aantalPogingen, id);
+    }
+    
+    public void verwijderUitdaging(int id){
+        mapper.verwijderUitdaging(id);
     }
 }

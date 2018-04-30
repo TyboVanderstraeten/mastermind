@@ -46,7 +46,7 @@ public class UC3Applicatie {
         }
         if (!geldig) {
             geefEindoverzicht();
-            domeinController.updateSpeler();
+//            domeinController.updateSpeler();
             domeinController.berekenScore();
         }
     }

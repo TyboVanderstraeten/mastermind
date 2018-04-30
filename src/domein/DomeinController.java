@@ -329,55 +329,13 @@ public class DomeinController {
         uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
         spel = uitdaging.getSpel();
         deSpeler.setSpel(spel);
+        if(!deSpeler.getSpelersnaam().equals(uitdaging.getUitdager())){
+            uitdagingRepository.aanvaardUitdaging(uitdaging.getId());
+        }
     }
 
-public void aanvaardUitdaging(String spelersnaam) {
-        uitdagingRepository.aanvaardUitdaging(spelersnaam);
-    }
 
-//    public void berekenScore()
-//    {
-//        int aantalPogingenSpeler;
-//        int aantalPogingenTegenspeler;
-//        
-//        aantalPogingenSpeler = spel.getSpelbord().getAantalPogingen();
-//        aantalPogingenTegenspeler = spel.getSpelbord().getAantalPogingen();
-//        
-//        if (aantalPogingenSpeler >= aantalPogingenTegenspeler)
-//        {
-//            switch (spel.getClass().getSimpleName()) {
-//            case "MakkelijkSpel":
-//                deSpeler.setScore(3, 0, 0);
-//                tegenspeler.setScore(-1, 0, 0);
-//                break;
-//            case "NormaalSpel":
-//                deSpeler.setScore(0, 3, 0);
-//                tegenspeler.setScore(0, -1, 0);
-//                break;
-//            case "MoeilijkSpel":
-//                deSpeler.setScore(0, 0, 3);
-//                tegenspeler.setScore(0, 0, -1);
-//                break;
-//            }
-//        }
-//        else
-//        {
-//            switch (spel.getClass().getSimpleName()) {
-//            case "MakkelijkSpel":
-//                deSpeler.setScore(-1, 0, 0);
-//                tegenspeler.setScore(3, 0, 0);
-//                break;
-//            case "NormaalSpel":
-//                deSpeler.setScore(0, -1, 0);
-//                tegenspeler.setScore(0, 3, 0);
-//                break;
-//            case "MoeilijkSpel":
-//                deSpeler.setScore(0, 0, -1);
-//                tegenspeler.setScore(0, 0, 3);
-//                break;
-//            }
-//        }
-//    }
+
 //---------------------//
 //---------UC7---------//
 //---------------------//
@@ -397,30 +355,26 @@ public void aanvaardUitdaging(String spelersnaam) {
                     }
                 }
                 //nog voorwaarde nodig + hoe verhogen bij andere speler?
+                uitdagingRepository.verwijderUitdaging(uitdaging.getId());
                 spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             } else {
                 if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
                     uitdagingRepository.voegAantalPogingenToeS1(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
                 } else {
-                    uitdagingRepository.voegAantalPogingenToeS2(aantalP, aantalP);
+                    uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
                 }
             }
-//            if(uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())){
-//                uitdagingRepository.updateIsHuidigeSpeler2(deSpeler.getSpelersnaam(), false);
-//            }
-//            else
-//                uitdagingRepository.updateIsHuidigeSpeler1(deSpeler.getSpelersnaam());
         }
     }
 
     //KIESUITDAGING = LAADSPEL
-    public void updateSpeler() {
-        if (uitdaging != null) {
-            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
-        } else {
-            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
-        }
-    }
+//    public void updateSpeler() {
+//        if (uitdaging != null) {
+//            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
+//        } else {
+//            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
+//        }
+//    }
 
     //KLASSEMENT
     public List<List<String[]>> geefKlassement() {
