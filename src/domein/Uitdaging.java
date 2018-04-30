@@ -14,11 +14,13 @@ public class Uitdaging {
     private int id;
     private Spel spel;
     private String uitdager;
+    private String speler2;
 
-    public Uitdaging(Spel spel, int id, String uitdager) {
+    public Uitdaging(Spel spel, int id, String speler1, String speler2) {
         setId(id);
         setSpel(spel);
-        setUitdager(uitdager);
+        setUitdager(speler1);
+        setSpeler2(speler2);
     }
 
     public Spel getSpel() {
@@ -32,6 +34,11 @@ public class Uitdaging {
     public int getId(){
         return id;
     }
+
+    public String getSpeler2() {
+        return speler2;
+    }
+    
     
     
     private void setId(int id) {
@@ -45,5 +52,11 @@ public class Uitdaging {
     private void setUitdager(String uitdager) {
         this.uitdager = uitdager;
     }
+
+    private void setSpeler2(String speler2) {
+        this.speler2 = speler2;
+    }
+    
+    
     
 }

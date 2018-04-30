@@ -81,8 +81,8 @@ public class SpelerRepository {
         mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
     }
 
-    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String spelersnaam) {
-        mapper.updateTegenSpelerAantalGewonnen(spelersnaam, nummer, moeilijkheidsgraad);
+    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String speler2) {
+        mapper.updateTegenSpelerAantalGewonnen(speler2, nummer, moeilijkheidsgraad);
     }
 
     //KLASSEMENT

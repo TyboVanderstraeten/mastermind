@@ -28,9 +28,9 @@ public class Speler {
      * @see #setWachtwoord(java.lang.String)
      */
     public Speler(String spelersnaam, String wachtwoord) {
-
-        setSpelersnaam(spelersnaam);
-        setWachtwoord(wachtwoord);
+        this(spelersnaam, wachtwoord, new int[3], new int[3], new int[3]);
+//        setSpelersnaam(spelersnaam);
+//        setWachtwoord(wachtwoord);
     }
 
     public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalGespeeldUitdagingen) {
@@ -41,10 +41,7 @@ public class Speler {
         //setAantalPunten(aantalPunten);
         setAantalGespeeldeUitdagingen(aantalGespeeldUitdagingen);
     }
-
-    public Speler selectSpeler(String tegenspeler) {
-        return null;
-    }
+   
 
     //Methode om het aantal gewonnen (spellen geen uitdagingen) spellen te verhogen
     public void verhoogAantalGewonnen() {

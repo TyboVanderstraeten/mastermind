@@ -27,7 +27,7 @@ public class UitdagingMapper {
 
     private static final String INSERT_UITDAGING = "INSERT INTO ID222177_g68.Uitdaging (speler1, speler2, moeilijkheidsgraad, code) VALUES (?,?,?,?)";
     private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ? AND isAanvaard = 0";
-    private static final String GEEF_UITDAGING = "SELECT speler1, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isAanvaard = 0 AND aantalPogingenS2 = 0";
+    private static final String GEEF_UITDAGING = "SELECT speler1, speler2, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isAanvaard = 0 AND aantalPogingenS2 = 0";
     private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingenS1, aantalPogingenS2 FROM ID222177_g68.Uitdaging WHERE id = ?";
     private static final String UPDATE_AANTALPOGINGENS1 = "UPDATE ID222177_g68.Uitdaging SET aantalPogingenS1 = ? WHERE id = ?";
     private static final String UPDATE_AANTALPOGINGENS2 = "UPDATE ID222177_g68.Uitdaging SET aantalPogingenS2 = ? WHERE id = ?";
@@ -86,7 +86,8 @@ public class UitdagingMapper {
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
                     String[] codeString = rs.getString("code").split("");
                     int id = rs.getInt("id");
-                    String uitdager = rs.getString("speler1");
+                    String speler1 = rs.getString("speler1");
+                    String speler2 = rs.getString("speler2");
                     int[] code = new int[codeString.length];
                     for (int i = 0; i < codeString.length; i++) {
                         code[i] = Integer.parseInt(codeString[i]);
@@ -101,7 +102,7 @@ public class UitdagingMapper {
                         case "MoeilijkSpel":
                             spel = new MoeilijkSpel(code, id);
                     }
-                    uitdaging = new Uitdaging(spel, id, uitdager);
+                    uitdaging = new Uitdaging(spel, id, speler1, speler2);
                 }
             }
 
@@ -120,8 +121,8 @@ public class UitdagingMapper {
             query.setInt(1, id);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    aantalPogingenS1 = rs.getInt("aantalPogingenS2");
-                    aantalPogingenS2 = rs.getInt("aantalPogingenS1");
+                    aantalPogingenS1 = rs.getInt("aantalPogingenS1");
+                    aantalPogingenS2 = rs.getInt("aantalPogingenS2");
                     if (uitdager.equals(spelersnaam)) {
                         uitvoer = aantalPogingenS2;
                     } else {

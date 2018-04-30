@@ -334,24 +334,27 @@ public class DomeinController {
 //---------UC7---------//
 //---------------------//
     public void berekenScore() {
+        System.out.println(spel.getId());
         if (spel.getId() != 0) {    //controleert of het spel een uitdaging is
-            int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId(), uitdaging.getUitdager(), deSpeler.getSpelersnaam());         //aantalP is aantal pogingen van tegenspeler
+            String speler1 = uitdaging.getUitdager();
+            String speler2 = uitdaging.getSpeler2();
+            int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId(), speler1, deSpeler.getSpelersnaam());         //aantalP is aantal pogingen van tegenspeler
             if (aantalP != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
                 if (aantalP > spel.getSpelbord().getAantalPogingen()) {
                     deSpeler.verhoogAantalGewonnenUitdagingen();
                 } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {
-                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), uitdaging.getUitdager());
+                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), speler1);
                 } else {
-                    if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
+                    if (speler1.equals(deSpeler.getSpelersnaam())) {
                         deSpeler.verhoogAantalGewonnenUitdagingen();
                     } else {
-                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), deSpeler.getSpelersnaam());
+                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), speler2);
                     }
                 }
                 //nog voorwaarde nodig + hoe verhogen bij andere speler?                
                 spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             } else {
-                if (uitdaging.getUitdager().equals(deSpeler.getSpelersnaam())) {
+                if (speler1.equals(deSpeler.getSpelersnaam())) {
                     uitdagingRepository.voegAantalPogingenToeS1(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
                 } else {
                     uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
