@@ -34,7 +34,7 @@ public class UitdagingMapper {
 
     //NEW
     private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE (speler1 = ? AND aantalPogingenS1 = 0) OR (speler2 =? AND isAanvaard = 1 AND aantalPogingenS2 = 0)";
-    private static final String AANVAARD_UITDAGING = "UPDATE isAanvaard FROM ID222177_g68.Uitdaging where speler2 = ? AND isAanvaard = 0 ORDER BY id DESC LIMIT 1";
+    private static final String AANVAARD_UITDAGING = "UPDATE ID222177_g68.Uitdaging set isAanvaard = 1 where speler2 = ? AND isAanvaard = 0 ORDER BY id DESC LIMIT 1";
 
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
