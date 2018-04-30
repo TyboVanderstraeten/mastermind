@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
@@ -122,6 +124,14 @@ public class SpelbordScherm extends GridPane {
                     }
                 }
                 dc.geefPoging(poging);
+                if (dc.geefCode().equals(poging)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText("Look, an Information Dialog");
+                    alert.setContentText("I have a great message for you!");
+
+                    alert.showAndWait();
+                }
                 update(dc.geefSpelbord());
 //
             }
@@ -219,7 +229,7 @@ public class SpelbordScherm extends GridPane {
                 TextField txf = new TextField();
                 txf.setPrefWidth(110);
                 this.add(txf, 14 + i, 4);
-                
+
             }
         }
     }

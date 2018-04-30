@@ -196,7 +196,7 @@ public class DomeinController {
         }
     }
 
-    public int[] geefCode(String[] poging) {
+    public int[] geefCode() {
         return spel.getSpelbord().getWillekeurigeCode();
     }
 
