@@ -8,6 +8,7 @@ package gui;
 import domein.DomeinController;
 import exceptions.FoutKleurException;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 
-//EXCEPTIONS NOG NIET DONE
+//EXCEPTIONS DONE
 public class SpelbordScherm extends GridPane {
 
     private final DomeinController dc;
@@ -106,6 +107,7 @@ public class SpelbordScherm extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    lblFout.setText(null);
                     int[] poging = new int[spelbord[0].length / 2];
                     int aantalpogingen = 0;
                     aantalpogingen++;
@@ -123,8 +125,6 @@ public class SpelbordScherm extends GridPane {
                                     poging[teller] = j;
                                     teller++;
                                     break;
-                                } else {
-                                    lblFout.setText(resourceBundle.getString("ongeldigeKleur"));
                                 }
                             }
                             if (teller == spelbord[0].length / 2) {
@@ -159,6 +159,8 @@ public class SpelbordScherm extends GridPane {
                         stage.setTitle("Mastermind");
                     }
 //
+                } catch (InputMismatchException e) {
+                    lblFout.setText(resourceBundle.getString(e.getMessage()));
                 } catch (IllegalArgumentException e) {
                     lblFout.setText(resourceBundle.getString(e.getMessage()));
 
@@ -196,10 +198,14 @@ public class SpelbordScherm extends GridPane {
             @Override
             public void handle(ActionEvent event
             ) {
-                dc.registreerSpel(txfSpelnaam.getText().trim());
-                Stage stage = (Stage) (getScene().getWindow());
-                stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
-                stage.setTitle("Mastermind");
+                try {
+                    dc.registreerSpel(txfSpelnaam.getText().trim());
+                    Stage stage = (Stage) (getScene().getWindow());
+                    stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
+                    stage.setTitle("Mastermind");
+                } catch (RuntimeException e) {
+                    lblFout.setText(resourceBundle.getString(e.getMessage()));
+                }
 
             }
 
