@@ -104,7 +104,6 @@ public class SpelbordScherm extends GridPane {
 
             @Override
             public void handle(ActionEvent event) {
-//
                 int[] poging = new int[spelbord[0].length / 2];
                 int aantalpogingen = 0;
                 aantalpogingen++;
@@ -123,6 +122,8 @@ public class SpelbordScherm extends GridPane {
                                 poging[teller] = j;
                                 teller++;
                                 break;
+                            } else {
+                                lblFout.setText(resourceBundle.getString("ongeldigeKleur"));
                             }
                         }
                         if (teller == spelbord[0].length / 2) {
@@ -158,9 +159,7 @@ public class SpelbordScherm extends GridPane {
                 }
 //
             }
-
-        }
-        );
+        });
 
         //!!!!
         //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
