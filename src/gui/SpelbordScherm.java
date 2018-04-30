@@ -93,6 +93,10 @@ public class SpelbordScherm extends GridPane {
 
         Button btnVoegToe = new Button(resourceBundle.getString("voegToeGui"));
         this.add(btnVoegToe, 14, 5);
+
+        Label lblFout = new Label();
+        this.add(lblFout, 15, 5);
+
         Button btnOpslaan = new Button(resourceBundle.getString("OpslaanGui"));
         this.add(btnOpslaan, 14, 8);
 
