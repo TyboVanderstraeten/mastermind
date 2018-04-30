@@ -19,38 +19,39 @@ import javafx.scene.control.TableView;
 import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
+//EXCEPTIONS DONE
 public class AanvaardUitdagingScherm extends GridPane {
-    
+
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
     private static final ObservableList dataUitdagingen = FXCollections.observableArrayList();
-    
+
     public AanvaardUitdagingScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         this.keuzeScherm = keuzeScherm;
         buildGui();
     }
-    
+
     private void buildGui() {
-        
+
         Label lblKiesUitdaging = new Label(resourceBundle.getString("selecteerUitdaging"));
         this.add(lblKiesUitdaging, 0, 0);
-        
+
         for (int teller = 0; teller < dc.geefUitdaging().length; teller++) {
             dataUitdagingen.add(dc.geefUitdaging()[teller][0]);
         }
-        
+
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);
         lvTegenspelers.setItems(dataUitdagingen);
         this.add(lvTegenspelers, 0, 1);
-        
+
         Button btnTerug = new Button(resourceBundle.getString("terug"));
         this.add(btnTerug, 0, 2);
         setHalignment(btnTerug, HPos.LEFT);
-        
+
         Button btnAanvaard = new Button(resourceBundle.getString("aanvaard"));
         this.add(btnAanvaard, 0, 2);
         setHalignment(btnAanvaard, HPos.RIGHT);
@@ -70,12 +71,12 @@ public class AanvaardUitdagingScherm extends GridPane {
                 dataUitdagingen.clear();
             }
         });
-        
+
         btnAanvaard.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 dc.laadUitdaging(lvTegenspelers.getSelectionModel().getSelectedItem());
-                
+
                 Stage stage = (Stage) (getScene().getWindow());
                 SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
                 stage.setScene(new Scene(spelbordScherm, 1280, 720));
