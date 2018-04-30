@@ -93,13 +93,13 @@ public class UitdagingMapper {
                     }
                     switch (moeilijkheidsgraad) {
                         case "MakkelijkSpel":
-                            spel = new MakkelijkSpel(code);
+                            spel = new MakkelijkSpel(code, id);
                             break;
                         case "NormaalSpel":
-                            spel = new NormaalSpel(code);
+                            spel = new NormaalSpel(code, id);
                             break;
                         case "MoeilijkSpel":
-                            spel = new MoeilijkSpel(code);
+                            spel = new MoeilijkSpel(code, id);
                     }
                     uitdaging = new Uitdaging(spel, id, uitdager);
                 }
