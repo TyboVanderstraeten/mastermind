@@ -6,6 +6,7 @@
 package gui;
 
 import domein.DomeinController;
+import exceptions.FoutKleurException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -104,60 +105,65 @@ public class SpelbordScherm extends GridPane {
 
             @Override
             public void handle(ActionEvent event) {
-                int[] poging = new int[spelbord[0].length / 2];
-                int aantalpogingen = 0;
-                aantalpogingen++;
-                String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
-                int teller = 0;
-                for (Node node : SpelbordScherm.this.getChildren()) {
+                try {
+                    int[] poging = new int[spelbord[0].length / 2];
+                    int aantalpogingen = 0;
+                    aantalpogingen++;
+                    String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
+                    int teller = 0;
+                    for (Node node : SpelbordScherm.this.getChildren()) {
 
-                    if (node instanceof TextField) {
-                        String kleur = ((TextField) node).getText().toLowerCase().trim();
-                        if (!Arrays.asList(alleKleuren).contains(kleur)) {
-                            //nog foutlabel                                
-                            continue;
-                        }
-                        for (int j = 0; j < (poging.length == 5 ? alleKleuren.length : alleKleuren.length - 1); j++) {
-                            if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
-                                poging[teller] = j;
-                                teller++;
+                        if (node instanceof TextField) {
+                            String kleur = ((TextField) node).getText().toLowerCase().trim();
+                            if (!Arrays.asList(alleKleuren).contains(kleur)) {
+                                throw new FoutKleurException();
+                            }
+                            for (int j = 0; j < (poging.length == 5 ? alleKleuren.length : alleKleuren.length - 1); j++) {
+                                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
+                                    poging[teller] = j;
+                                    teller++;
+                                    break;
+                                } else {
+                                    lblFout.setText(resourceBundle.getString("ongeldigeKleur"));
+                                }
+                            }
+                            if (teller == spelbord[0].length / 2) {
                                 break;
-                            } else {
-                                lblFout.setText(resourceBundle.getString("ongeldigeKleur"));
                             }
                         }
-                        if (teller == spelbord[0].length / 2) {
-                            break;
-                        }
                     }
-                }
-                dc.geefPoging(poging);
-                update(dc.geefSpelbord());
-                if (Arrays.equals(dc.geefCode(), poging)) {
+                    dc.geefPoging(poging);
+                    update(dc.geefSpelbord());
+                    if (Arrays.equals(dc.geefCode(), poging)) {
 
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Mastermind");
-                    alert.setHeaderText("Je hebt gewonnen!");
-                    alert.setContentText(geefEindoverzicht());
-                    alert.showAndWait();
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Mastermind");
+                        alert.setHeaderText("Je hebt gewonnen!");
+                        alert.setContentText(geefEindoverzicht());
+                        alert.showAndWait();
 
-                    Stage stage = (Stage) (getScene().getWindow());
-                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
-                    stage.setTitle("Mastermind");
-                } else if (aantalpogingen > 12) { //werkt nog niet?
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Mastermind");
-                    alert.setHeaderText("Je hebt verloren!");
-                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
-                    alert.showAndWait();
+                        Stage stage = (Stage) (getScene().getWindow());
+                        KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                        stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                        stage.setTitle("Mastermind");
+                    } else if (aantalpogingen > 12) { //werkt nog niet?
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Mastermind");
+                        alert.setHeaderText("Je hebt verloren!");
+                        alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
+                        alert.showAndWait();
 
-                    Stage stage = (Stage) (getScene().getWindow());
-                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
-                    stage.setTitle("Mastermind");
-                }
+                        Stage stage = (Stage) (getScene().getWindow());
+                        KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+                        stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                        stage.setTitle("Mastermind");
+                    }
 //
+                } catch (IllegalArgumentException e) {
+                    lblFout.setText(resourceBundle.getString(e.getMessage()));
+
+                }
+
             }
         });
 
