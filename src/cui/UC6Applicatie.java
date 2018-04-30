@@ -33,7 +33,7 @@ public class UC6Applicatie {
                 System.out.printf("%d) %s%n", teller+1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
             }
             String spelnaam = input.nextLine();
-//            domeinController.aanvaardUitdaging(spelnaam);
+            domeinController.aanvaardUitdaging(spelnaam);
             domeinController.laadUitdaging(spelnaam);
             toonSpelbord();
             UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
