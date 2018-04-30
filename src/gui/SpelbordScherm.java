@@ -44,6 +44,7 @@ public class SpelbordScherm extends GridPane {
 
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
+        int aantalpogingen = 0;
         toonSpelbord(spelbord);
 
         //Positionering
@@ -102,9 +103,7 @@ public class SpelbordScherm extends GridPane {
             public void handle(ActionEvent event) {
 //
                 int[] poging = new int[spelbord[0].length / 2];
-                int aantalPogingen = 0;
-                aantalPogingen++;
-
+                //aantalpogingen++;
                 String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                 int teller = 0;
                 for (Node node : SpelbordScherm.this.getChildren()) {
@@ -130,21 +129,11 @@ public class SpelbordScherm extends GridPane {
                 dc.geefPoging(poging);
                 update(dc.geefSpelbord());
                 if (Arrays.equals(dc.geefCode(), poging)) {
+                    
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt gewonnen!");
-                    alert.setContentText("Je hebt de code kunnen kraken.");
-                    alert.showAndWait();
-
-                    Stage stage = (Stage) (getScene().getWindow());
-                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
-                    stage.setTitle("Mastermind");
-                } else if (aantalPogingen > 12) {
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Mastermind");
-                    alert.setHeaderText("Je hebt verloren!");
-                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
+                    alert.setContentText(geefEindoverzicht());
                     alert.showAndWait();
 
                     Stage stage = (Stage) (getScene().getWindow());
@@ -152,10 +141,23 @@ public class SpelbordScherm extends GridPane {
                     stage.setScene(new Scene(keuzeScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 }
+//                } else if (aantalPogingen > 6) {
+//                    Alert alert = new Alert(AlertType.INFORMATION);
+//                    alert.setTitle("Mastermind");
+//                    alert.setHeaderText("Je hebt verloren!");
+//                    alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
+//                    alert.showAndWait();
+//
+//                    Stage stage = (Stage) (getScene().getWindow());
+//                    KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
+//                    stage.setScene(new Scene(keuzeScherm, 1280, 720));
+//                    stage.setTitle("Mastermind");
+//                }
 //
             }
 
-        });
+        }
+        );
 
         //!!!!
         //HIER NODIG WANT ANDERS MAAKT HIJ TELKENS EEN NIEUW OBJECTJE HIERVAN IN DE EVENT HANDLER VAN BTNOPSLAAN EN ZAL HIJ HET OBJECT DAT ER AL STOND GEWOON OVERSCHRIJVEN MET EEN NIEUW OBJECT IPV HET TE VERWIJDEREN.
@@ -165,9 +167,11 @@ public class SpelbordScherm extends GridPane {
         Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
         //!!!!
 
-        btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
+        btnOpslaan.setOnAction(
+                new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event
+            ) {
                 if (SpelbordScherm.this.getChildren().contains(lblSpelnaam)) {
                     SpelbordScherm.this.getChildren().removeAll(lblSpelnaam, txfSpelnaam, btnSlaOp);
                 } else {
@@ -176,11 +180,14 @@ public class SpelbordScherm extends GridPane {
                     SpelbordScherm.this.add(btnSlaOp, 17, 10);
                 }
             }
-        });
+        }
+        );
 
-        btnSlaOp.setOnAction(new EventHandler<ActionEvent>() {
+        btnSlaOp.setOnAction(
+                new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event
+            ) {
                 dc.registreerSpel(txfSpelnaam.getText().trim());
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
@@ -188,7 +195,8 @@ public class SpelbordScherm extends GridPane {
 
             }
 
-        });
+        }
+        );
     }
 
     private void toonSpelbord(int[][] spelbord) {
@@ -269,6 +277,26 @@ public class SpelbordScherm extends GridPane {
             }
 
         }
+
+    }
+    
+     private String geefEindoverzicht() {
+        String uitvoer = "";
+
+        String[] overzicht = dc.geefOverzicht();
+
+        String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
+
+        String codeString = "";
+        for (int i = 0; i < code.length; i++) {
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
+        }
+
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
+        uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
+        return uitvoer;
 
     }
 
