@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -67,6 +68,18 @@ public class AanvaardUitdagingScherm extends GridPane {
                 stage.setScene(keuzeScherm.getScene());
                 stage.setTitle("Mastermind");
                 dataUitdagingen.clear();
+            }
+        });
+        
+        btnAanvaard.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dc.laadUitdaging(lvTegenspelers.getSelectionModel().getSelectedItem());
+                
+                Stage stage = (Stage) (getScene().getWindow());
+                SpelbordScherm spelbordScherm = new SpelbordScherm(dc, resourceBundle, keuzeScherm);
+                stage.setScene(new Scene(spelbordScherm, 1280, 720));
+                stage.setTitle("Mastermind");
             }
         });
     }
