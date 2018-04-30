@@ -125,7 +125,7 @@ public class SpelbordScherm extends GridPane {
                 }
                 dc.geefPoging(poging);
                 update(dc.geefSpelbord());
-                if (dc.geefCode().equals(poging)) {
+                if (Arrays.equals(dc.geefCode(), poging)) {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Mastermind");
                     alert.setHeaderText("Je hebt gewonnen!");
