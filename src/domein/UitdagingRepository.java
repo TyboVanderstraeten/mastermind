@@ -41,20 +41,20 @@ public class UitdagingRepository {
     public Uitdaging laadUitdaging(String spelersnaam) {
         return mapper.laadUitdaging(spelersnaam);
     }
+      
+    public void aanvaardUitdaging(String spelersnaam){
+        mapper.aanvaardUitdaging(spelersnaam);
+    }
     
-//    public void updateIsHuidigeSpeler1(String spelersnaam){
-//        mapper.updateIsHuidigeSpeler1(spelersnaam);
-//    }
-//    
-//    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig){
-//        mapper.updateIsHuidigeSpeler2(spelersnaam, huidig);
-//    }
-    
-    public int geefAantalPogingen(int nummer){
-        return mapper.geefAantalPogingen(nummer);
+    public int geefAantalPogingen(int nummer, String uitdager, String spelersnaam){
+        return mapper.geefAantalPogingen(nummer, uitdager, spelersnaam);
     }
 
-    public void voegAantalPogingenToe(int aantalPogingen, int nummer){
-        mapper.voegAantalPogingenToe(aantalPogingen, nummer);
+    public void voegAantalPogingenToeS1(int aantalPogingen, int id){
+        mapper.voegAantalPogingenToeS1(aantalPogingen, id);
+    }
+    
+    public void voegAantalPogingenToeS2(int aantalPogingen, int id){
+        mapper.voegAantalPogingenToeS2(aantalPogingen, id);
     }
 }

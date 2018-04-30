@@ -26,14 +26,15 @@ import java.util.List;
 public class UitdagingMapper {
 
     private static final String INSERT_UITDAGING = "INSERT INTO ID222177_g68.Uitdaging (speler1, speler2, moeilijkheidsgraad, code) VALUES (?,?,?,?)";
-    private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ?";
-    private static final String GEEF_UITDAGING = "SELECT speler1, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ?";
-    private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingen FROM ID222177_g68.Uitdaging WHERE id = ?";
-    private static final String UPDATE_AANTALPOGINGEN = "UPDATE ID222177_g68.Uitdaging SET aantalPogingen = ? WHERE id = ?";
+    private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ? AND isAanvaard = 0";
+    private static final String GEEF_UITDAGING = "SELECT speler1, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isAanvaard = 0 AND aantalPogingenS2 = 0";
+    private static final String GEEF_AANTALPOGINGEN = "SELECT aantalPogingenS1, aantalPogingenS2 FROM ID222177_g68.Uitdaging WHERE id = ?";
+    private static final String UPDATE_AANTALPOGINGENS1 = "UPDATE ID222177_g68.Uitdaging SET aantalPogingenS1 = ? WHERE id = ?";
+    private static final String UPDATE_AANTALPOGINGENS2 = "UPDATE ID222177_g68.Uitdaging SET aantalPogingenS2 = ? WHERE id = ?";
 
     //NEW
     private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE (speler1 = ? AND aantalPogingenS1 = 0) OR (speler2 =? AND isAanvaard = 1 AND aantalPogingenS2 = 0)";
-    
+    private static final String AANVAARD_UITDAGING = "UPDATE isAanvaard FROM ID222177_g68.Uitdaging where speler2 = ? AND isAanvaard = 0 ORDER BY id DESC LIMIT 1";
 
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
@@ -112,28 +113,47 @@ public class UitdagingMapper {
 
     }
 
-    public int geefAantalPogingen(int id) {
-        int aantalPogingen = 0;
+    public int geefAantalPogingen(int id, String uitdager, String spelersnaam) {
+        int aantalPogingenS1, aantalPogingenS2, uitvoer = 0;
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_AANTALPOGINGEN)) {
             query.setInt(1, id);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    aantalPogingen = rs.getInt("aantalPogingen");
+                    aantalPogingenS1 = rs.getInt("aantalPogingenS2");
+                    aantalPogingenS2 = rs.getInt("aantalPogingenS1");
+                    if (uitdager.equals(spelersnaam)) {
+                        uitvoer = aantalPogingenS2;
+                    } else {
+                        uitvoer = aantalPogingenS1;
+                    }
 
                 }
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        return aantalPogingen;
+        return uitvoer;
 
     }
 
-    public void voegAantalPogingenToe(int aantalPogingen, int id) {
+    public void voegAantalPogingenToeS1(int aantalPogingen, int id) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPOGINGEN)) {
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPOGINGENS1)) {
+                       
+            query.setInt(1, aantalPogingen);
+            query.setInt(2, id);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public void voegAantalPogingenToeS2(int aantalPogingen, int id){
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPOGINGENS2)) {                      
             query.setInt(1, aantalPogingen);
             query.setInt(2, id);
             query.executeUpdate();
@@ -172,15 +192,14 @@ public class UitdagingMapper {
 //        }
 //    }
 //    
-//    public void updateIsHuidigeSpeler2(String spelersnaam, boolean huidig) {
-//        try (
-//                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-//                PreparedStatement query = conn.prepareStatement(UPDATE_ISHUIDIGESPELER2)) {
-//            query.setInt(1, huidig == true ? 1 : 0);
-//            query.setString(2, spelersnaam);
-//            query.executeUpdate();
-//        } catch (SQLException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//    }
+    public void aanvaardUitdaging(String spelersnaam) {
+        try (
+                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(AANVAARD_UITDAGING)) {
+            query.setString(1, spelersnaam);
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
