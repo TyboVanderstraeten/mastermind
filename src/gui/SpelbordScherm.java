@@ -161,11 +161,8 @@ public class SpelbordScherm extends GridPane {
                         stage.setTitle("Mastermind");
                     }
 //
-                } catch (InputMismatchException e) {
+                } catch (InputMismatchException | IllegalArgumentException e) {
                     lblFout.setText(resourceBundle.getString(e.getMessage()));
-                } catch (IllegalArgumentException e) {
-                    lblFout.setText(resourceBundle.getString(e.getMessage()));
-
                 }
 
             }

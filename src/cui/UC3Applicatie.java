@@ -1,6 +1,7 @@
 package cui;
 
 import domein.DomeinController;
+import exceptions.FoutKleurException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.ResourceBundle;
@@ -46,7 +47,6 @@ public class UC3Applicatie {
         }
         if (!geldig) {
             geefEindoverzicht();
-//            domeinController.updateSpeler();
             domeinController.berekenScore();
         }
     }
@@ -54,27 +54,29 @@ public class UC3Applicatie {
 //                     0          1           2       3       4       5       6       7           10          9         -2      -1      -3       -4         8
 
     private void doePoging() {
-        Scanner input = new Scanner(System.in);
-        int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
-        String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
-        System.out.printf("%n%s%n%s%n%s", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), poging.length == 5 ? resourceBundle.getString("kleurIngevenD3") + "\n" : "");
+        try {
+            Scanner input = new Scanner(System.in);
+            int[] poging = new int[domeinController.geefSpelbord()[0].length / 2];
+            String[] kleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
+            System.out.printf("%n%s%n%s%n%s", resourceBundle.getString("kleurIngevenD1"), resourceBundle.getString("kleurIngevenD2"), poging.length == 5 ? resourceBundle.getString("kleurIngevenD3") + "\n" : "");
 
-        for (int i = 0; i < poging.length; i++) {
-            String kleur = input.next();
-            if (!Arrays.asList(kleuren).contains(kleur)) {
-                System.out.println(resourceBundle.getString("ongeldigeKleur"));
-                i--;
-                continue;
-            }
-            for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length - 1); j++) {
-                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {  
-                    poging[i] = j;
-                    break;
+            for (int i = 0; i < poging.length; i++) {
+                String kleur = input.next();
+                if (!Arrays.asList(kleuren).contains(kleur)) {
+                    throw new FoutKleurException();
+                }
+                for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length - 1); j++) {
+                    if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
+                        poging[i] = j;
+                        break;
+                    }
                 }
             }
-        }
 
-        domeinController.geefPoging(poging);
+            domeinController.geefPoging(poging);
+        } catch (InputMismatchException | IllegalArgumentException e) {
+            System.out.println(resourceBundle.getString(e.getMessage()));
+        }
     }
 
     private void toonSpelbord() {
@@ -104,13 +106,30 @@ public class UC3Applicatie {
 
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
-            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
 
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
+        System.out.println(uitvoer);
+
+    }
+
+    private void geefEindoverzichtVerloren() {
+        String uitvoer = "";
+
+        String[] overzicht = domeinController.geefOverzicht();
+
+        String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
+
+        String codeString = "";
+        for (int i = 0; i < code.length; i++) {
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
+        }
+
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         System.out.println(uitvoer);
 
     }
