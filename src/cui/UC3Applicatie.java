@@ -67,7 +67,7 @@ public class UC3Applicatie {
                 continue;
             }
             for (int j = 0; j < (poging.length == 5 ? kleuren.length : kleuren.length - 1); j++) {
-                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {   //nodig omdat ik vreemde bug kreeg als ik 10 ofzo gebruikte. Kreeg waarde van 1 en 0 uit resourcebundle ipv 10. //waarde van lege pin op -5 zetten fixt dit maar maakt code iets moeilijker
+                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {  
                     poging[i] = j;
                     break;
                 }
@@ -104,7 +104,7 @@ public class UC3Applicatie {
 
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
-            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         
         }
 
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);

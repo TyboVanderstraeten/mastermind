@@ -57,8 +57,5 @@ public class UitdagingRepository {
     public void voegAantalPogingenToeS2(int aantalPogingen, int id){
         mapper.voegAantalPogingenToeS2(aantalPogingen, id);
     }
-    
-    public void verwijderUitdaging(int id){
-        mapper.verwijderUitdaging(id);
-    }
+        
 }

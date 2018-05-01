@@ -23,7 +23,7 @@ public class UC5Applicatie {
     }
     
     public void start() {
-        try {
+//        try {
             if (domeinController.geefOpenUitdagingen() != null) {
                 System.out.println("Werk uw openstaande uitdaging eerst af!");
             } else {
@@ -32,15 +32,15 @@ public class UC5Applicatie {
                 UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
                 uc3.start();
             }
-        } catch (NullPointerException e) {
-            System.out.println(resourceBundle.getString(e.getMessage()));
-        }
+//        } catch (NullPointerException e) {
+//            System.out.println(resourceBundle.getString(e.getMessage()));
+//        }
     }
     
     public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
-        String tegenspelerNaam = "";
+        String tegenspelerNaam;
         switch (kiesMoeilijkheidsgraad()) {
             case 1:
                 tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 0);
@@ -58,7 +58,7 @@ public class UC5Applicatie {
             System.out.printf("%d) %s%n", teller + 1, tegenspelerNamen[teller]);
         }
         tegenspelerNaam = input.next();
-        if (Arrays.asList(tegenspelerNaam).contains(tegenspelerNaam)) {
+        if (!Arrays.asList(tegenspelerNamen).contains(tegenspelerNaam)) {
             throw new TegenspelerNaamBestaatNietException();
         }
         

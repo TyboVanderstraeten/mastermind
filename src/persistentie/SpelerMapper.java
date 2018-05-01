@@ -26,11 +26,11 @@ public class SpelerMapper {
     private static final String GEEF_SPELERSKLASSEMENTMOEILIJK = "SELECT spelersnaam, aantalGespeeldUitdagingenMoeilijk, aantalGewonnenUitdagingenMoeilijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMoeilijk > 0 ORDER BY aantalGewonnenUitdagingenMoeilijk DESC";
     //uitdagingen SQL query's
     private static final String UPDATE_AANTALGEWONNENUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenUitdagingenMakkelijk = ?, aantalGewonnenUitdagingenNormaal = ?, aantalGewonnenUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
-    private static final String UPDATE_AANTALPUNTEN = "UPDATE ID222177_g68.Speler SET aantalPuntenMakkelijk = ?, aantalPuntenNormaal = ?, aantalPuntenMoeilijk = ? WHERE spelersnaam = ?";
+    
     private static final String UPDATE_AANTALGESPEELDUITDAGINGEN = "UPDATE ID222177_g68.Speler SET aantalGespeeldeUitdagingenMakkelijk = ?, aantalGespeeldeUitdagingenNormaal = ?, aantalGespeeldeUitdagingenMoeilijk = ? WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGEWONNENUITDAGINGEN = "SELECT AantalGewonnenUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";
     private static final String GEEF_AANTALGESPEELDUITDAGINGEN = "SELECT AantalGespeeldeUitdagingen FROM ID222177_g68.Speler WHERE spelersnaam = ?";    
-    private static final String UPDATE_AANTALGEWONNENTEGENSPELER = "update Speler as s join Uitdaging as u on s.spelersnaam = u.speler2 set ? = ? +1 where u.id = ? and s.spelersnaam != ?";
+    private static final String UPDATE_AANTALGEWONNENTEGENSPELER = "UPDATE ID222177_g68.Speler SET ? = ? + 1 where spelersnaam = ?";
 
     /**
      * voegt het spelerobject dat meegegeven is als parameter toe aan de
@@ -148,7 +148,7 @@ public class SpelerMapper {
         }
     }
 
-    public void updateTegenSpelerAantalGewonnen(String spelersnaam, int nummer, String moeilijkheidsgraad) {
+    public void updateTegenSpelerAantalGewonnen(String speler2, int nummer, String moeilijkheidsgraad) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(UPDATE_AANTALGEWONNENTEGENSPELER)) {
@@ -165,9 +165,8 @@ public class SpelerMapper {
                     query.setString(1, "aantalGewonnenUitdagingenMoeilijk");
                     query.setString(2, "aantalGewonnenUitdagingenMoeilijk");
                     break;
-            }
-            query.setInt(3, nummer);
-            query.setString(4, spelersnaam);
+            }            
+            query.setString(3, speler2);
             query.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -202,19 +201,7 @@ public class SpelerMapper {
         }
     }
 
-    public void updateAantalPunten(String spelersnaam, int aantalPuntenMakkelijk, int aantalPuntenNormaal, int aantalPuntenMoeilijk) {
-        try (
-                Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(UPDATE_AANTALPUNTEN)) {
-            query.setInt(1, aantalPuntenMakkelijk);
-            query.setInt(2, aantalPuntenNormaal);
-            query.setInt(3, aantalPuntenMoeilijk);
-            query.setString(4, spelersnaam);
-            query.executeUpdate();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+    
 
     public List<String> geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
         List<String> tegenspelers = new ArrayList<>();
