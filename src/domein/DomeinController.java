@@ -19,8 +19,7 @@ public class DomeinController {
 
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
-    private final UitdagingRepository uitdagingRepository;
-    private Uitdaging uitdaging;
+    private final UitdagingRepository uitdagingRepository;    
     private Speler deSpeler;
     private Spel spel;
 
@@ -115,8 +114,7 @@ public class DomeinController {
                 spel = new MoeilijkSpel();
                 break;
         }
-        deSpeler.setSpel(spel);
-        uitdaging = null;                       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!????
+        deSpeler.setSpel(spel);        
     }
 
     public void kiesMoeilijkheidsgraadUitdagingen(int moeilijkheidsgraad) {

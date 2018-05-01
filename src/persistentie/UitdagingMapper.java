@@ -9,7 +9,6 @@ import domein.MakkelijkSpel;
 import domein.MoeilijkSpel;
 import domein.NormaalSpel;
 import domein.Spel;
-import domein.Uitdaging;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

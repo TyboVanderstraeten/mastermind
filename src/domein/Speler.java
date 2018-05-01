@@ -15,8 +15,7 @@ public class Speler {
     private int[] aantalGewonnenUitdagingen; //= {0, 0, 0};
     //private int[] aantalPunten; //= {0, 0, 0};
     private int[] aantalGespeeldeUitdagingen; // = {0, 0, 0};
-    private Spel spel;
-    private Uitdaging uitdaging;
+    private Spel spel;    
 
     //constructors
     /**
