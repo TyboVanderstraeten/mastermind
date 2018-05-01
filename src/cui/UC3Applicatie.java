@@ -34,7 +34,6 @@ public class UC3Applicatie {
                     break;
                 } else {
                     doePoging();
-                    toonSpelbord();
                 }
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
@@ -74,6 +73,8 @@ public class UC3Applicatie {
                 domeinController.berekenScore();
             } else if (aantalPogingen > 11) {
                 geefEindoverzichtVerloren();
+            }else{
+                toonSpelbord();
             }
         } catch (InputMismatchException | IllegalArgumentException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
@@ -131,7 +132,7 @@ public class UC3Applicatie {
             codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
 
-        uitvoer += String.format("%s%n%s %s%n", resourceBundle.getString("verloren"), resourceBundle.getString("codeWas"), codeString);
+        uitvoer += String.format("%n%s%n%s %s%n", resourceBundle.getString("verloren"), resourceBundle.getString("codeWas"), codeString);
         System.out.println(uitvoer);
 
     }
