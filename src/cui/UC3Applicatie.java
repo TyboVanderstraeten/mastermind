@@ -38,10 +38,10 @@ public class UC3Applicatie {
             } catch (InputMismatchException e) {
                 System.out.println(resourceBundle.getString("ongeldig"));
                 input.nextLine();
-            } //catch (RuntimeException e) {
-//                System.out.println(resourceBundle.getString(e.getMessage()));
-//                input.nextLine();
-//            }
+            } catch (RuntimeException e) {
+                System.out.println(resourceBundle.getString(e.getMessage()));
+                input.nextLine();
+            }
         }
     }
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #     Evaluatie   leeg
@@ -73,7 +73,7 @@ public class UC3Applicatie {
                 domeinController.berekenScore();
             } else if (aantalPogingen > 11) {
                 geefEindoverzichtVerloren();
-            }else{
+            } else {
                 toonSpelbord();
             }
         } catch (InputMismatchException | IllegalArgumentException e) {
