@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class SpelMapper {
 
-    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
+    private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad, uitdagingsId) VALUES (?,?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
     private static final String GEEF_SPELLEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ?";
@@ -45,6 +45,7 @@ public class SpelMapper {
             querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
+            querySpel.setInt(5, spel.getId());
             querySpel.executeUpdate();
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
@@ -134,15 +135,16 @@ public class SpelMapper {
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
                     String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+                    int id = rs.getInt("uitdagingsId");
                     switch (moeilijkheidsgraad) {
                         case "MakkelijkSpel":
-                            spel = new MakkelijkSpel(rijen.get(rijen.size() - 1));
+                            spel = new MakkelijkSpel(rijen.get(rijen.size() - 1), id);
                             break;
                         case "NormaalSpel":
-                            spel = new NormaalSpel(rijen.get(rijen.size() - 1));
+                            spel = new NormaalSpel(rijen.get(rijen.size() - 1), id);
                             break;
                         case "MoeilijkSpel":
-                            spel = new MoeilijkSpel(rijen.get(rijen.size() - 1));
+                            spel = new MoeilijkSpel(rijen.get(rijen.size() - 1), id);
                     }
                     for (int i = 0; i < rijen.size() - 1; i++) {
                         spel.getSpelbord().geefPoging(rijen.get(i));

@@ -24,9 +24,9 @@ public abstract class Spel {
     public Spel(int[] code) {
         this(code, 0);
     }
-    
-    public Spel(int[] code, int id){
-        this.id=id;
+
+    public Spel(int[] code, int id) {
+        this.id = id;        
         if (code == null) {
             this.spelbord = new Spelbord(genereerWillekeurigeCode());
         } else {
@@ -64,8 +64,8 @@ public abstract class Spel {
     public String getSpelnaam() {
         return spelnaam;
     }
-    
-    public int getId(){
+
+    public int getId() {
         return id;
     }
 

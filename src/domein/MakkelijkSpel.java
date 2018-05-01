@@ -1,6 +1,7 @@
 package domein;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 /**
  * Subklasse van Spel waarbij de moeilijkheidsgraad makkelijk is.
@@ -15,7 +16,7 @@ public class MakkelijkSpel extends Spel {
      * @see Spel
      */
     public MakkelijkSpel() {
-        this(null);
+        this(null, 0);
     }
     
     public MakkelijkSpel(int[] willekeurigeCode) {
@@ -39,7 +40,7 @@ public class MakkelijkSpel extends Spel {
         //RANDOMCODE GENERATOR        
         SecureRandom random = new SecureRandom();
 //        String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs"};      //willekeurige kleuren? of staat dit ergens??
-        int[] kleuren = {0,1, 2, 3, 4, 5, 6, 7};
+        int[] kleuren = {0, 1, 2, 3, 4, 5, 6, 7};
 
         int keuze = 8;
         for (int i = 0; i < willekeurigeCode.length; i++) {            
@@ -47,7 +48,7 @@ public class MakkelijkSpel extends Spel {
             willekeurigeCode[i] = kleuren[getal];
             kleuren[getal] = kleuren[keuze - 1];
             keuze--;
-        }
+        }        
         return willekeurigeCode;
     }
 }

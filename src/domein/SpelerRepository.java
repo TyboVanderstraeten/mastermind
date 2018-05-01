@@ -36,6 +36,10 @@ public class SpelerRepository {
         }
         return null;
     }
+    
+    public Speler geefTegenSpeler(String spelersnaam){
+        return mapper.geefSpeler(spelersnaam);
+    }
     //aanpassingen in mapperklasse nodig voor geefSpeler(..) en voegSpelerToe(..)
 
     /**
@@ -78,13 +82,10 @@ public class SpelerRepository {
     }
 
     public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
-        mapper.updateSpelerAantalGewonnen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
+        mapper.updateAantalGespeeldeUitdagingen(spelersnaam, aantalGespeeldeUitdagingenMakkelijk, aantalGespeeldeUitdagingenNormaal, aantalGespeeldeUitdagingenMoeilijk);
     }
-
-    public void updateAantalGewonnenUitdagingenTegenspeler(int nummer, String moeilijkheidsgraad, String speler2) {
-        mapper.updateTegenSpelerAantalGewonnen(speler2, nummer, moeilijkheidsgraad);
-    }
-
+    
+    
     //KLASSEMENT
     public List<String[]> geefKlassementMakkelijk() {
         return mapper.geefKlassementMakkelijk();

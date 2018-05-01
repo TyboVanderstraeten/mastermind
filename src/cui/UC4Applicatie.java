@@ -51,9 +51,9 @@ public class UC4Applicatie {
         //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "wit", "zwart"};
         for (int[] rij : spelbord) {
             String x = Arrays.toString(rij).replace(",", " ").replace("[", "| ").replace("]", " |").replace("-3", String.format("%-7s", "#")).replace("-2", String.format("%-7s", " ")).replace("-1", String.format("%-7s", "o")).replace("-4", rij == spelbord[spelbord.length - 1] ? String.format("\t\t%10s", " ") : "\t\t" + resourceBundle.getString("evaluatie"));
-            for (int pin : rij) {
-                if (pin >= 0) {
-                    x = x.replace(Integer.toString(pin), String.format("%-7s", resourceBundle.getString(Integer.toString(pin))));
+            for (int i = rij.length - 1; i >= 0; i--) {
+                if (rij[i] >= 0) {
+                    x = x.replace(Integer.toString(rij[i]), String.format("%-7s", resourceBundle.getString(Integer.toString(rij[i]))));
                 }
             }
             System.out.println(x);

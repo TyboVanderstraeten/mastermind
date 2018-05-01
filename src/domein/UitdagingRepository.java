@@ -38,16 +38,20 @@ public class UitdagingRepository {
         return mapper.geefOpenUitdaging(spelersnaam);
     }
 
-    public Uitdaging laadUitdaging(String spelersnaam) {
-        return mapper.laadUitdaging(spelersnaam);
+    public Spel laadUitdaging(String uitdager, String spelersnaam) {
+        return mapper.laadUitdaging(uitdager, spelersnaam);
     }
       
     public void aanvaardUitdaging(int id){
         mapper.aanvaardUitdaging(id);
     }
     
-    public int geefAantalPogingen(int nummer, String uitdager, String spelersnaam){
-        return mapper.geefAantalPogingen(nummer, uitdager, spelersnaam);
+//    public int geefAantalPogingen(int nummer, String spelersnaam){
+//        return mapper.geefAantalPogingen(nummer, spelersnaam);
+//    }
+    
+    public String[] geefUitdagingInfo(int id, String spelersnaam){
+        return mapper.geefUitdagingInfo(id, spelersnaam);
     }
 
     public void voegAantalPogingenToeS1(int aantalPogingen, int id){

@@ -311,63 +311,74 @@ public class DomeinController {
         return uitdagingRepository.geefUitdagingen(deSpeler.getSpelersnaam());
     }
 
-    public void laadUitdaging(String spelersnaam) {
-        uitdaging = uitdagingRepository.laadUitdaging(spelersnaam);
-        spel = uitdaging.getSpel();
+     public void laadUitdaging(String uitdager) {
+        spel = uitdagingRepository.laadUitdaging(uitdager, deSpeler.getSpelersnaam());
+        //spel = uitdaging.getSpel();
         deSpeler.setSpel(spel);
-        if (!deSpeler.getSpelersnaam().equals(uitdaging.getUitdager())) {
-            uitdagingRepository.aanvaardUitdaging(uitdaging.getId());       //isAanvaard op 1 zetten in de db
+        if (!deSpeler.getSpelersnaam().equals(uitdager)) {
+            uitdagingRepository.aanvaardUitdaging(spel.getId());       //isAanvaard op 1 zetten in de db
         }
     }
 
 //---------------------//
 //---------UC7---------//
-//---------------------//
+//---------------------// 
     public void berekenScore() {
         System.out.println(spel.getId());
-        if (spel.getId() != 0) {    //controleert of het spel een uitdaging is
-            String speler1 = uitdaging.getUitdager();
-            String speler2 = uitdaging.getSpeler2();
-            int aantalP = uitdagingRepository.geefAantalPogingen(uitdaging.getId(), speler1, deSpeler.getSpelersnaam());         //aantalP is aantal pogingen van tegenspeler
-            if (aantalP != 0) {        //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
+        if (spel.getId() != 0) {    //controleert of het spel een uitdaging is                 
+            String[] uitdagingInfo = uitdagingRepository.geefUitdagingInfo(spel.getId(), deSpeler.getSpelersnaam());    // { speler1, speler2, aantalP } 
+
+            Speler tegenspeler;
+            int aantalP = Integer.parseInt(uitdagingInfo[2]);
+            if (deSpeler.getSpelersnaam().equals(uitdagingInfo[0])) {
+                tegenspeler = spelerRepository.geefTegenSpeler(uitdagingInfo[1]);
+            } else {
+                tegenspeler = spelerRepository.geefTegenSpeler(uitdagingInfo[0]);
+            }
+            tegenspeler.setSpel(spel);
+
+            if (aantalP != 0) {     //ALS AANTAL POGINGEN 0 IS IN DE DB WIL DIT ZEGGEN DAT DE ANDERE SPELER ZIJN SPEL NOG NIET HEEFT AFGEROND, DE SCORE ZAL BEREKEND WORDEN ZODRA DEZE DIT WEL GDN HEEFT.
                 if (aantalP > spel.getSpelbord().getAantalPogingen()) {
                     deSpeler.verhoogAantalGewonnenUitdagingen();
+                    spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
                 } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {
-                    spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), speler1);
+                    tegenspeler.verhoogAantalGewonnenUitdagingen();
+                    spelerRepository.updateAantalGewonnenUitdagingen(tegenspeler.getSpelersnaam(), tegenspeler.getAantalGewonnenUitdagingen()[0], tegenspeler.getAantalGewonnenUitdagingen()[1], tegenspeler.getAantalGewonnenUitdagingen()[2]);
                 } else {
-                    if (speler1.equals(deSpeler.getSpelersnaam())) {
+                    if (uitdagingInfo[0].equals(deSpeler.getSpelersnaam())) {
                         deSpeler.verhoogAantalGewonnenUitdagingen();
+                        spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
                     } else {
-                        spelerRepository.updateAantalGewonnenUitdagingenTegenspeler(uitdaging.getId(), spel.getClass().getSimpleName(), speler2);
+                        tegenspeler.verhoogAantalGewonnenUitdagingen();
+                        spelerRepository.updateAantalGewonnenUitdagingen(tegenspeler.getSpelersnaam(), tegenspeler.getAantalGewonnenUitdagingen()[0], tegenspeler.getAantalGewonnenUitdagingen()[1], tegenspeler.getAantalGewonnenUitdagingen()[2]);
                     }
                 }
-                //nog voorwaarde nodig + hoe verhogen bij andere speler?                
-                spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+            }// else {      //OF MEN VOEGT DIT SWS TOE OF MEN VERWIJDERT HET SPEL ALS HET AFGELOPEN IS. BEIDEN ZIJN BEWERKING NR DB.
+            if (uitdagingInfo[0].equals(deSpeler.getSpelersnaam())) {
+                uitdagingRepository.voegAantalPogingenToeS1(spel.getSpelbord().getAantalPogingen(), spel.getId());
             } else {
-                if (speler1.equals(deSpeler.getSpelersnaam())) {
-                    uitdagingRepository.voegAantalPogingenToeS1(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
-                } else {
-                    uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), uitdaging.getId());
-                }
+                uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), spel.getId());
             }
+            //}
             deSpeler.verhoogAantalGespeeldeUitdagingen();
-            spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
+            //spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
             spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
 
         } else {
+            //bij een gewoon spel
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
         }
     }
-
     //KIESUITDAGING = LAADSPEL
-//    public void updateSpeler() {
-//        if (uitdaging != null) {
-//            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
-//        } else {
-//            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
-//        }
-//    }
+    //    public void updateSpeler() {
+    //        if (uitdaging != null) {
+    //            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
+    //        } else {
+    //            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
+    //        }
+    //    }
     //KLASSEMENT
+
     public List<List<String[]>> geefKlassement() {
         List<List<String[]>> klassementen = new ArrayList<>();
         klassementen.add(spelerRepository.geefKlassementMakkelijk());
