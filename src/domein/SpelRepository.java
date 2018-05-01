@@ -31,16 +31,13 @@ public class SpelRepository {
         mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
 
-    public String[] geefSpellen(String spelersnaam) {
-        String[] spelnamen = new String[mapper.geefSpelnamen(spelersnaam).size()];
-        int teller = 0;
-
-        for (String spelnaam : mapper.geefSpelnamen(spelersnaam)) {
-            spelnamen[teller] = spelnaam;
-            teller++;
+    public String[][] geefSpellen(String spelersnaam) {
+        List<String[]> spelInfo = mapper.geefSpelnamen(spelersnaam);
+        String[][] spellen = new String[spelInfo.size()][];
+        for (int i = 0; i < spellen.length; i++) {
+            spellen[i] = spelInfo.get(i);
         }
-
-        return spelnamen;
+        return spellen;
     }
 
     public Spel geefSpel(String spelersnaam, String spelnaam) {
@@ -51,20 +48,18 @@ public class SpelRepository {
         mapper.verwijderSpel(spelnaam, spelersnaam);
     }
 
-                        //    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
-                        //        mapper.spelIsUitdaging(spelnaam, spelersnaam);
-                        //    }
-
-                        //   public String[][] geefUitdagingen(String spelersnaam) {
-                        //        
-                        //        List<String[]> uitdagingInfo = mapper.geefLijstUitdagingen(spelersnaam);
-                        //        String[][] uitdagingen = new String[uitdagingInfo.size()][];
-                        //        for(int i = 0; i<uitdagingen.length; i++){
-                        //            uitdagingen[i]= uitdagingInfo.get(i);
-                        //        }        
-                        //        return uitdagingen;
-                        //    }
- 
+    //    public void spelIsUitdaging(String spelnaam, String spelersnaam) {
+    //        mapper.spelIsUitdaging(spelnaam, spelersnaam);
+    //    }
+    //   public String[][] geefUitdagingen(String spelersnaam) {
+    //        
+    //        List<String[]> uitdagingInfo = mapper.geefLijstUitdagingen(spelersnaam);
+    //        String[][] uitdagingen = new String[uitdagingInfo.size()][];
+    //        for(int i = 0; i<uitdagingen.length; i++){
+    //            uitdagingen[i]= uitdagingInfo.get(i);
+    //        }        
+    //        return uitdagingen;
+    //    }
 //    public Spel laadSpel(int spelnaam, String spelersnaam){
 //        mapper.laadSpel(geefSpellen(spelersnaam)[spelnaam], spelersnaam);
 //    }

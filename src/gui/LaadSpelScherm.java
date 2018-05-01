@@ -40,7 +40,9 @@ public class LaadSpelScherm extends GridPane {
         Label lblKiesSpel = new Label(resourceBundle.getString("selecteerSpel"));
         this.add(lblKiesSpel, 0, 0);
 
-        dataSpellen.addAll(Arrays.asList(dc.geefSpellen()));
+        for (int teller = 0; teller < dc.geefSpellen().length; teller++) {
+            dataSpellen.add(dc.geefSpellen()[teller][0]);
+        }
 
         ListView<String> lvSpellen = new ListView<>();
         lvSpellen.setPrefSize(400, 600);

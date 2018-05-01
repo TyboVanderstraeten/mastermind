@@ -186,7 +186,7 @@ public class DomeinController {
     public void geefPoging(int[] poging) {
         spel.getSpelbord().geefPoging(poging);
         if (Arrays.toString(spel.getSpelbord().getWillekeurigeCode()).equals(Arrays.toString(poging))) {
-            if (spel.getId() == 0) {                
+            if (spel.getId() == 0) {
                 deSpeler.verhoogAantalGewonnen();
             }
         }
@@ -240,18 +240,8 @@ public class DomeinController {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
 
-    public String[] geefSpellen() {
-        String[] spellenString;
-        int teller = 0;
-
-        spellenString = new String[spelRepository.geefSpellen(deSpeler.getSpelersnaam()).length];
-
-        for (String spelnaam : spelRepository.geefSpellen(deSpeler.getSpelersnaam())) {
-            spellenString[teller] = spelnaam;
-            teller++;
-        }
-
-        return spellenString;
+    public String[][] geefSpellen() {
+        return spelRepository.geefSpellen(deSpeler.getSpelersnaam());
     }
 
     public void laadSpel(String spelnaam) {

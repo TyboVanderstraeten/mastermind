@@ -31,9 +31,9 @@ public class UC4Applicatie {
     public void laadSpel() {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
-        String[] spelnamen = domeinController.geefSpellen();
+        String[][] spelnamen = domeinController.geefSpellen();
         for (int teller = 0; teller < spelnamen.length; teller++) {
-            System.out.printf("%d) %s%n", teller + 1, spelnamen[teller]);
+            System.out.printf("%d) %s | %s%n", teller + 1, spelnamen[teller][0], spelnamen[teller][1]);
         }
         String spelnaam = input.next();
         if (Arrays.asList(spelnamen).contains(spelnaam)) {

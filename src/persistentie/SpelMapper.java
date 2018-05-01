@@ -25,7 +25,7 @@ public class SpelMapper {
 
     private static final String INSERT_SPEL = "INSERT INTO ID222177_g68.Spel (spelnaam, spelersnaam, aantalPogingen, moeilijkheidsgraad) VALUES (?,?,?,?)";
     private static final String INSERT_RIJ = "INSERT INTO ID222177_g68.Rij (rijNummer, spelnaam, spelersnaam, combinatie) VALUES (?,?,?,?)";
-    private static final String GEEF_SPELLEN = "SELECT spelnaam FROM ID222177_g68.Spel where spelersnaam = ?";
+    private static final String GEEF_SPELLEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel where spelersnaam = ?";
     private static final String GEEF_SPEL = "SELECT * FROM ID222177_g68.Spel WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String GEEF_RIJEN = "SELECT * FROM ID222177_g68.Rij WHERE spelersnaam = ? AND spelnaam = ?";
     private static final String VERWIJDER_SPEL = "DELETE FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
@@ -74,16 +74,20 @@ public class SpelMapper {
 //            throw new RuntimeException(ex);
 //        }
 //    }
-    public List<String> geefSpelnamen(String spelersnaam) {
-        List<String> spelnamen = new ArrayList<>();
+    public List<String[]> geefSpelnamen(String spelersnaam) {
+        List<String[]> spelnamen = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement query = conn.prepareStatement(GEEF_SPELLEN)) {
             query.setString(1, spelersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
+                    String[] spelInfo = new String[2];
                     String spelnaam = rs.getString("spelnaam");
-                    spelnamen.add(spelnaam);
+                    spelInfo[0] = spelnaam;
+                    String moeilijkheidsgraad = rs.getString("moeilijkheidsgraad");
+                    spelInfo[1] = moeilijkheidsgraad;
+                    spelnamen.add(spelInfo);
                 }
             }
         } catch (SQLException ex) {
