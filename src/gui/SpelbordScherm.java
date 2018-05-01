@@ -36,6 +36,7 @@ public class SpelbordScherm extends GridPane {
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
+    private int aantalPogingen = 0;
 
     public SpelbordScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
@@ -109,8 +110,6 @@ public class SpelbordScherm extends GridPane {
                 try {
                     lblFout.setText(null);
                     int[] poging = new int[spelbord[0].length / 2];
-                    int aantalpogingen = 0;
-                    aantalpogingen++;
                     String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                     int teller = 0;
                     for (Node node : SpelbordScherm.this.getChildren()) {
@@ -132,9 +131,11 @@ public class SpelbordScherm extends GridPane {
                             }
                         }
                     }
+                    aantalPogingen++;
                     dc.geefPoging(poging);
                     update(dc.geefSpelbord());
                     if (Arrays.equals(dc.geefCode(), poging)) {
+                        dc.berekenScore();
 
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
@@ -146,11 +147,12 @@ public class SpelbordScherm extends GridPane {
                         KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
                         stage.setScene(new Scene(keuzeScherm, 1280, 720));
                         stage.setTitle("Mastermind");
-                    } else if (aantalpogingen > 12) { //werkt nog niet?
+                    } else if (aantalPogingen > 11) {
+
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
                         alert.setHeaderText("Je hebt verloren!");
-                        alert.setContentText("Je bent er niet in geslaagd om de code te kraken.");
+                        alert.setContentText(geefEindoverzichtVerloren());
                         alert.showAndWait();
 
                         Stage stage = (Stage) (getScene().getWindow());
@@ -303,13 +305,30 @@ public class SpelbordScherm extends GridPane {
 
         String codeString = "";
         for (int i = 0; i < code.length; i++) {
-            codeString += String.format("%-7s", resourceBundle.getString(code[i]));         //NOG FOUT ALS ER -5 IN DE CODE ZIT THROWT DIT ERROR
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
         }
 
         uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         uitvoer += String.format("%s %d %s%n", resourceBundle.getString("gekraaktInPogingenD1"), Integer.parseInt(overzicht[1]), resourceBundle.getString("gekraaktInPogingenD2"));
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSterren"), overzicht[2]);
         uitvoer += String.format("%s %s%n", resourceBundle.getString("aantalSpellenTotVolgendeSterD1"), overzicht[3]);
+        return uitvoer;
+
+    }
+
+    private String geefEindoverzichtVerloren() {
+        String uitvoer = "";
+
+        String[] overzicht = dc.geefOverzicht();
+
+        String[] code = overzicht[0].replace(",", " ").replace("[", "").replace("]", "").replaceAll("\\s+", "").split("");
+
+        String codeString = "";
+        for (int i = 0; i < code.length; i++) {
+            codeString += String.format("%-7s", resourceBundle.getString(code[i]));
+        }
+
+        uitvoer += String.format("%s %s%n", resourceBundle.getString("codeWas"), codeString);
         return uitvoer;
 
     }
