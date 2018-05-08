@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SpelMapper {
     private static final String GEEF_TEGENSPELER_UITDAGING = "SELECT tegenspeler FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String GEEF_AANTALPOGINGEN_TEGENSPELER_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
 
-    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE
+    public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE        
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
                 PreparedStatement querySpel = conn.prepareStatement(INSERT_SPEL);
@@ -45,7 +46,11 @@ public class SpelMapper {
             querySpel.setString(2, spelersnaam);
             querySpel.setInt(3, spel.getSpelbord().getAantalPogingen());
             querySpel.setString(4, spel.getClass().getSimpleName());
-            querySpel.setInt(5, spel.getId());
+            if (spel.getId() == 0) {
+                querySpel.setNull(5, Types.INTEGER);
+            } else {
+                querySpel.setInt(5, spel.getId());
+            }            
             querySpel.executeUpdate();
             for (int i = 0; i < spel.getSpelbord().getAantalPogingen(); i++) {
                 queryRij.setInt(1, i);
@@ -61,7 +66,8 @@ public class SpelMapper {
             queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             queryRij.executeUpdate();
         } catch (SQLException ex) {
-            throw new SpelnaamNietUniekException();
+            throw new RuntimeException(ex);
+            //throw new SpelnaamNietUniekException();
         }
     }
 

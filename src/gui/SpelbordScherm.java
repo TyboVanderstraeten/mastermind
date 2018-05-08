@@ -176,8 +176,7 @@ public class SpelbordScherm extends GridPane {
         Button btnSlaOp = new Button(resourceBundle.getString("SlaOpGui"));
         //!!!!
 
-        btnOpslaan.setOnAction(
-                new EventHandler<ActionEvent>() {
+        btnOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event
             ) {
@@ -192,12 +191,12 @@ public class SpelbordScherm extends GridPane {
         }
         );
 
-        btnSlaOp.setOnAction(
-                new EventHandler<ActionEvent>() {
+        btnSlaOp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event
             ) {
                 try {
+                    System.out.println(txfSpelnaam.getText().trim());
                     dc.registreerSpel(txfSpelnaam.getText().trim());
                     Stage stage = (Stage) (getScene().getWindow());
                     stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
