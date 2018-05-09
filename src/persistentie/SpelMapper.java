@@ -66,8 +66,8 @@ public class SpelMapper {
             queryRij.setString(4, Arrays.toString(Arrays.copyOfRange(spel.getSpelbord().getRijen()[spel.getSpelbord().getRijen().length - 1].geefPinkleuren(), 0, spel.getClass().getSimpleName().equals("MoeilijkSpel") ? 5 : 4)).replace("[", "").replace("]", "").replace(",", "").replaceAll("\\s", ""));
             queryRij.executeUpdate();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-            //throw new SpelnaamNietUniekException();
+            //throw new RuntimeException(ex);
+            throw new SpelnaamNietUniekException();
         }
     }
 
