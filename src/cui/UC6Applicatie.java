@@ -1,10 +1,12 @@
 package cui;
 
 import domein.DomeinController;
+import exceptions.TegenspelerNaamBestaatNietException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+//EXCEPTIONS DONE
 public class UC6Applicatie {
 
     private final DomeinController domeinController;
@@ -16,10 +18,14 @@ public class UC6Applicatie {
     }
 
     public void start() {
-        if(domeinController.geefOpenUitdagingen()!=null){
-            System.out.println("Werk eerst uw openstaande uitdaging af!");
+        try {
+            if (domeinController.geefOpenUitdagingen() != null) {
+                System.out.println("Werk eerst uw openstaande uitdaging af!");
+            }
+            aanvaardUitdaging();
+        } catch (NullPointerException e) {
+            System.out.println(resourceBundle.getString(e.getMessage()));
         }
-        aanvaardUitdaging();
     }
 
     private void aanvaardUitdaging() {
@@ -30,13 +36,17 @@ public class UC6Applicatie {
         if (uitdagingen.length != 0) {
             System.out.println("Kies een uitdaging. (geef volledige naam)");
             for (int teller = 0; teller < uitdagingen.length; teller++) {
-                System.out.printf("%d) %s%n", teller+1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
+                System.out.printf("%d) %s%n", teller + 1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
             }
             String spelnaam = input.nextLine();
-            domeinController.laadUitdaging(spelnaam);            
-            toonSpelbord();
-            UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
-            uc3.start();
+            if (!Arrays.asList(uitdagingen).contains(spelnaam)) {
+                throw new TegenspelerNaamBestaatNietException();
+            } else {
+                domeinController.laadUitdaging(spelnaam);
+                toonSpelbord();
+                UC3Applicatie uc3 = new UC3Applicatie(resourceBundle, domeinController);
+                uc3.start();
+            }
         } else {
             System.out.println("U geeft geen uitdagingen!");
         }
