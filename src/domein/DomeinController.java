@@ -407,8 +407,7 @@ public class DomeinController {
       * Indien dit niet zo is wordt het aantalPogingen meegegeven aan de databank en het aantal gespeelde uitdagingen aangepast
       * Als het spel geen uitdaging is wordt het aantalGewonnen aangepast indien hij gewonnen is.
       */
-    public void berekenScore() {
-        System.out.println(spel.getId());
+    public void berekenScore() {        
         if (spel.getId() != 0) {    //controleert of het spel een uitdaging is                 
             String[] uitdagingInfo = uitdagingRepository.geefUitdagingInfo(spel.getId(), deSpeler.getSpelersnaam());    // { speler1, speler2, aantalP } 
 

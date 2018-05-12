@@ -85,13 +85,12 @@ public class UC3Applicatie {
             }
             aantalPogingen++;
             domeinController.geefPoging(poging);
+            toonSpelbord();
             if (Arrays.equals(domeinController.geefCode(), poging)) {
                 geefEindoverzicht();
                 domeinController.berekenScore();
             } else if (aantalPogingen > 11) {
                 geefEindoverzichtVerloren();
-            } else {
-                toonSpelbord();
             }
         } catch (InputMismatchException | IllegalArgumentException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
