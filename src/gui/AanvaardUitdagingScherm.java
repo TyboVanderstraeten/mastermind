@@ -3,7 +3,6 @@ package gui;
 import java.util.ResourceBundle;
 import javafx.scene.layout.GridPane;
 import domein.DomeinController;
-import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,8 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 

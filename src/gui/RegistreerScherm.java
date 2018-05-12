@@ -14,7 +14,6 @@ import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 import domein.DomeinController;
 import javafx.scene.control.Alert;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE

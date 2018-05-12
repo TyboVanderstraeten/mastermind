@@ -26,7 +26,7 @@ public class UitdagingMapper {
 
     private static final String INSERT_UITDAGING = "INSERT INTO ID222177_g68.Uitdaging (speler1, speler2, moeilijkheidsgraad, code) VALUES (?,?,?,?)";
     private static final String GEEF_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE speler2 = ? AND isAanvaard = 0";
-    private static final String GEEF_UITDAGING = "SELECT speler1, speler2, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isAanvaard = 0 AND aantalPogingenS2 = 0";
+    private static final String GEEF_UITDAGING = "SELECT speler1, speler2, moeilijkheidsgraad, code, id FROM ID222177_g68.Uitdaging WHERE speler1 = ? AND isAanvaard = 0 AND aantalPogingenS2 = 0 ORDER BY id DESC";
     private static final String GEEF_UITDAGINGINFO = "SELECT speler1, speler2, aantalPogingenS1, aantalPogingenS2 FROM ID222177_g68.Uitdaging WHERE id = ?";
 //    private static final String GEEF_AANTALPOGINGEN = "SELECT speler1, aantalPogingenS1, aantalPogingenS2 FROM ID222177_g68.Uitdaging WHERE id = ?";
     private static final String UPDATE_AANTALPOGINGENS1 = "UPDATE ID222177_g68.Uitdaging SET aantalPogingenS1 = ? WHERE id = ?";

@@ -1,11 +1,8 @@
 package persistentie;
 
 import domein.MakkelijkSpel;
-import domein.MakkelijkeRij;
 import domein.MoeilijkSpel;
 import domein.NormaalSpel;
-import domein.Pin;
-import domein.Rij;
 import domein.Spel;
 import exceptions.SpelnaamNietUniekException;
 import java.sql.Connection;
@@ -32,10 +29,7 @@ public class SpelMapper {
     private static final String VERWIJDER_SPEL = "DELETE FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     //private static final String UPDATE_SPEL = "UPDATE ID222177_g68.Spel SET isUitdaging = 1 WHERE spelnaam = ? AND spelersnaam = ?";
     //private static final String GEEF_UITDAGINGEN = "SELECT spelnaam, moeilijkheidsgraad FROM ID222177_g68.Spel WHERE spelersnaam = ? AND tegenspeler is not null";
-    //SQL statement opvragen aantalPogingen per speler per uitdaging (zal gebruikt worden om score te berekenen)
-    private static final String GEEF_AANTALPOGINGEN_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String GEEF_TEGENSPELER_UITDAGING = "SELECT tegenspeler FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
-    private static final String GEEF_AANTALPOGINGEN_TEGENSPELER_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
+    //SQL statement opvragen aantalPogingen per speler per uitdaging (zal gebruikt worden om score te berekenen)    
 
     /**
      * Methode die een spel zal toevoegen aan de database met de juiste spelnaam bij de juiste speler.
