@@ -8,16 +8,30 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
+/**
+ * Bevat het volledige verloop van UC2.
+ *
+ */
 public class UC2Applicatie {
 
     private final ResourceBundle resourceBundle;
     private final DomeinController domeinController;
 
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourceBundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC2Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.resourceBundle = resourceBundle;
         this.domeinController = domeinController;
     }
 
+    /**
+     * bevat het volledige verloop van UC2.
+     */
     public void start() {
         geefOverzicht();
         kiesMoeilijkheidsgraad();
@@ -26,6 +40,9 @@ public class UC2Applicatie {
         uc3.start();
     }
 
+    /**
+     * Bevat he verloop om het overzicht op het scherm weer te geven.
+     */
     private void geefOverzicht() {
         String[][] overzicht = domeinController.startMasterMind();
 
@@ -40,6 +57,9 @@ public class UC2Applicatie {
 
     }
 
+    /**
+     * Bevat het verloop om de moeilijkheidsgraad te kiezen.
+     */
     private void kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
@@ -65,6 +85,9 @@ public class UC2Applicatie {
         } while (!geldig);
     }
 
+    /**
+     * Bevat het verloop om het spelbord op het scherm te brengen.
+     */
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();

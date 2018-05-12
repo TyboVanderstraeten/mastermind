@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cui;
 
 import domein.DomeinController;
@@ -13,16 +8,32 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
+/**
+ *  Bevat het verloop van UC1.
+ *
+ */
 public class UC1Applicatie {
 
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourcebundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC1Applicatie(ResourceBundle resourcebundle, DomeinController domeinController) {
         this.resourceBundle = resourcebundle;
         this.domeinController = domeinController;
     }
 
+    /**
+     * Bevat het volledige verloop van UC1.
+     * (aanmelden / keuze menu)
+     * 
+     */
     public final void start() {
         meldAanRegistreer();
         System.out.println("\n" + domeinController.geefSpelersnaam() + "\n");
@@ -63,6 +74,9 @@ public class UC1Applicatie {
 
     }
 
+    /**
+     * Bevat het verloop van handelingen om de speler aan te melden of te registreren.
+     */
     private void meldAanRegistreer() {
         boolean geldig = false;
         Scanner input = new Scanner(System.in);
@@ -105,6 +119,11 @@ public class UC1Applicatie {
         System.out.printf("%n%s %s%n", resourceBundle.getString("welkom"), domeinController.geefSpelersnaam());
     }
 
+    /**
+     * Bevat het verloop van handelingen om het keuzemenu weer te geven en de keuze op te vragen.
+     * 
+     * @return de keuze van de speler.
+     */
     private int maakKeuze() {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuze"));

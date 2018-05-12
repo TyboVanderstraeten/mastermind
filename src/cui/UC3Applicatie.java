@@ -8,18 +8,32 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
+/**
+ * Bevat het volledige verloop van UC3.
+ * 
+ */
 public class UC3Applicatie {
 
     private final ResourceBundle resourceBundle;
     private final DomeinController domeinController;
     private int aantalPogingen = 0;
 
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourceBundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC3Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.resourceBundle = resourceBundle;
         this.domeinController = domeinController;
 
     }
 
+    /**
+     * Bevat het volledige verloop van UC3.
+     */
     public void start() {
         Scanner input = new Scanner(System.in);
         while (domeinController.geefSpelbord()[domeinController.geefSpelbord().length - 1][0] == -3) {
@@ -47,6 +61,9 @@ public class UC3Applicatie {
 //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs",  ///"wit", "zwart"};       ""      o       #     Evaluatie   leeg
 //                     0          1           2       3       4       5       6       7           10          9         -2      -1      -3       -4         8
 
+    /**
+     * Bevat het volledige verloop om een poging te doen en door te geven aan de domeinController.
+     */
     private void doePoging() {
         try {
             Scanner input = new Scanner(System.in);
@@ -82,6 +99,9 @@ public class UC3Applicatie {
 
     }
 
+    /**
+     * Bevat het volledige verloop om het spelbord op het scherm weer te geven.
+     */
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();
@@ -100,6 +120,9 @@ public class UC3Applicatie {
         System.out.println("\n\n");
     }
 
+    /**
+     * Bevat het volledige verloop om het eind overzicht op het scherm te brengen.
+     */
     private void geefEindoverzicht() {
         String uitvoer = "";
 
@@ -120,6 +143,9 @@ public class UC3Applicatie {
 
     }
 
+    /**
+     * Bevat het volledige verloop om het eindoverzicht bij een verloren spel op het scherm te brengen.
+     */
     private void geefEindoverzichtVerloren() {
         String uitvoer = "";
 

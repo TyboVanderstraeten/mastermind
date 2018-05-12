@@ -7,16 +7,30 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 //EXCEPTIONS DONE
+/**
+ * Bevat het volledige verloop van UC6.
+ *
+ */
 public class UC6Applicatie {
 
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourceBundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC6Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
 
+    /**
+     * Bevat het volledige verloop van UC6.
+     */
     public void start() {
         try {
             if (domeinController.geefOpenUitdagingen() != null) {
@@ -28,6 +42,9 @@ public class UC6Applicatie {
         }
     }
 
+    /**
+     * Bevat het volledige verloop om een uitdaging te aanvaarden.
+     */
     private void aanvaardUitdaging() {
         Scanner input = new Scanner(System.in);
 
@@ -53,6 +70,9 @@ public class UC6Applicatie {
 
     }
 
+    /**
+     * Bevat het volledige verloop om een spelbord op het scherm weer te geven.
+     */
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();

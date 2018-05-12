@@ -7,20 +7,38 @@ import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE
 //Nog schrijven van gelijke punten 
+/**
+ * Bevat het volledige verloop van UC7.
+ *
+ */
 public class UC7Applicatie {
 
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
-
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourceBundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC7Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
 
+    /**
+     * Bevat het volledige verloop van UC7.
+     */
     public void start() {
         System.out.printf("%s", geefKlassement());
     }
 
+    /**
+     * Bevat hat volledige verloop om het klassement op te vragen en op het scherm weer te geven.
+     * 
+     * @return een String die het gehele klassement voorstelt.
+     */
     public String geefKlassement() {
         List<List<String[]>> klassementen = domeinController.geefKlassement();
         String uitvoer = "";

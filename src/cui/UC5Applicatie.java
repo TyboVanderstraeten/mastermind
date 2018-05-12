@@ -12,16 +12,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //EXCEPTIONS DONE
+/**
+ * Bevat het volledige verloop van UC5.
+ * @author bramd
+ */
 public class UC5Applicatie {
 
     private final DomeinController domeinController;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Class constructor.
+     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
+     * 
+     * @param resourceBundle het Object van de ResourceBundle.
+     * @param domeinController het Object van de DomeinController.
+     */
     public UC5Applicatie(ResourceBundle resourceBundle, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.resourceBundle = resourceBundle;
     }
 
+    /**
+     * Bevat het volledige verloop van UC5.
+     */
     public void start() {
         try {
             if (domeinController.geefOpenUitdagingen() != null) {
@@ -37,6 +51,10 @@ public class UC5Applicatie {
         }
     }
 
+    /**
+     * Bevat het volledige verloop om een tegenspeler te kiezen.
+     * @return 
+     */
     public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
@@ -66,6 +84,14 @@ public class UC5Applicatie {
 
     }
 
+    /**
+     * Bevat het volledige verloop om een moeilijkheidsgraad te kiezen.
+     * 
+     * @return een int die de moeilijkheidsgraad representeert.
+     * 1: makkelijk
+     * 2: normaal
+     * 3: moeilijk
+     */
     private int kiesMoeilijkheidsgraad() {
         Scanner input = new Scanner(System.in);
         boolean geldig = false;
@@ -93,12 +119,20 @@ public class UC5Applicatie {
         return keuze;
     }
 
+    /**
+     * Bevat het volledige verloop om een uitdaging te registreren.
+     * 
+     * @param tegenSpeler de naam van de tegenspeler.
+     */
     private void registreerSpel(String tegenSpeler) {
         domeinController.registreerUitdaging(tegenSpeler);
         domeinController.laadUitdaging(domeinController.geefSpelersnaam());
 
     }
 
+    /**
+     * Bevat het volledige verloop om een spelbord op het scherm te tonen.
+     */
     private void toonSpelbord() {
         System.out.println("\n\n");
         int[][] spelbord = domeinController.geefSpelbord();
