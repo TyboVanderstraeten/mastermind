@@ -27,10 +27,24 @@ public class SpelRepository {
 //        }
 //        return spelletjes;
 //    }
+    
+    /**
+     * Zorgt ervoor dat de mapper het spel met de juiste spelnaam zal registreren voor de speler met de juiste spelersnaam.
+     * 
+     * @param spelnaam de naam van het spel.
+     * @param spelersnaam de naam van de huidige speler.
+     * @param spel heb spel object.
+     */
     public void registreerSpel(String spelnaam, String spelersnaam, Spel spel) {
         mapper.voegSpelToe(spelnaam, spelersnaam, spel);
     }
 
+    /**
+     * Zorgt ervoor dat de mapper alle opgeslagen spellen zal teruggeven van de huidige speler.
+     * 
+     * @param spelersnaam de naam van de huidige speler.
+     * @return een String[][] met de spelnamen en moeilijkheidsgraden
+     */
     public String[][] geefSpellen(String spelersnaam) {
         List<String[]> spelInfo = mapper.geefSpelnamen(spelersnaam);
         String[][] spellen = new String[spelInfo.size()][];
@@ -40,10 +54,23 @@ public class SpelRepository {
         return spellen;
     }
 
+    /**
+     * Zorgt ervoor dat de mapper het spel van de huidige speler met de meegegeven spelnaam geladen wordt.
+     * 
+     * @param spelersnaam de naam van de huidige speler.
+     * @param spelnaam de 
+     * @return 
+     */
     public Spel geefSpel(String spelersnaam, String spelnaam) {
         return mapper.laadSpel(spelnaam, spelersnaam);
     }
 
+    /**
+     * Zorgt ervoor dat de mapper het spel van de meegegeven speler met de juiste spelnaam verwijdert wordt.
+     * 
+     * @param spelnaam de naam van het te verwijderen spel.
+     * @param spelersnaam de naam van de speler.
+     */
     public void verwijderSpel(String spelnaam, String spelersnaam) {
         mapper.verwijderSpel(spelnaam, spelersnaam);
     }

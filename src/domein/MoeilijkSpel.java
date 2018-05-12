@@ -9,8 +9,10 @@ import java.security.SecureRandom;
 public class MoeilijkSpel extends Spel {
 
     /**
-     * Class constructor. Roept de default constructor van de superklasse Spel
-     * aan.
+     * Class constructor.
+     * Wordt aangeroepen als er een nieuw spel met moeilijkheidsgraad moeilijk wordt aangemaakt. 
+     * De constructor zal een default waarde meegeven om de constructor
+     * met willekeurigeCode en uitdagingNummer aan te roepen.
      *
      * @see Spel
      */
@@ -18,12 +20,24 @@ public class MoeilijkSpel extends Spel {
         this(null, 0);        
     }
     
+    /**
+     * Class constructor.
+     * Zal default waarde meegeven om de constructor met willekeurigeCode en uitdagingNummer aan te roepen.
+     * 
+     * @param willekeurigeCode de te kraken code.
+     */
     public MoeilijkSpel(int[] willekeurigeCode) {
         this(willekeurigeCode, 0);
         
     }
     
     //voor uitdaging
+    /**
+     * Class constructor.
+     * Zal de constructor van spel aanroepen en de correcte rijen genereren aan de hand van de moeilijkheidsgraad (hier moeilijk).
+     * @param willekeurigeCode
+     * @param uitdagingNummer 
+     */
     public MoeilijkSpel(int[] willekeurigeCode, int uitdagingNummer){
         super(willekeurigeCode, uitdagingNummer);
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
@@ -35,6 +49,11 @@ public class MoeilijkSpel extends Spel {
         
     }
 
+    /**
+     * Deze methode zal de willekeurige code voor de moeilijke moeilijkheidsgraad genereren.
+     * 
+     * @return de te kraken code.
+     */
     @Override
     protected final int[] genereerWillekeurigeCode() {
         //String[] kleuren = {"groen", "blauw", "rood", "paars", "geel", "bruin", "oranje", "grijs", "X"};

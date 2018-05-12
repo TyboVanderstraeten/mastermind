@@ -10,8 +10,10 @@ import java.util.Arrays;
 public class MakkelijkSpel extends Spel {
 
     /**
-     * Class constructor. roept de default constructor van de superklasse Spel
-     * aan.
+     * Class constructor.
+     * Wordt aangeroepen als er een nieuw spel wordt aangemaakt. 
+     * De constructor zal een default waarde meegeven om de constructor
+     * met willekeurigeCode en uitdagingNummer aan te roepen.
      *
      * @see Spel
      */
@@ -19,11 +21,24 @@ public class MakkelijkSpel extends Spel {
         this(null, 0);
     }
     
+    /** 
+     * Class constructor. 
+     * Geeft een default waarde aan uitdagingNummer om constructor met uitdagingNummer aan te roepen.
+     * 
+     * @param willekeurigeCode De code die gekraakt moet worden.
+     */
     public MakkelijkSpel(int[] willekeurigeCode) {
            this(willekeurigeCode, 0);
     }
     
     //voor uitdaging
+    /**
+     * Class constructor.
+     * Zal de constructor van spel aanroepen en de correcte rijen genereren aan de hand van de moeilijkheidsgraad (hier makkelijk).
+     * 
+     * @param willekeurigeCode de code die gekraakt moet worden.
+     * @param uitdagingNummer het id van de uitdaging. (0 indien het geen uitdaging is)
+     */
     public MakkelijkSpel(int[] willekeurigeCode, int uitdagingNummer){
         super(willekeurigeCode, uitdagingNummer);                        
         for (int i = 0; i < super.getSpelbord().getRijen().length; i++) {
@@ -34,6 +49,12 @@ public class MakkelijkSpel extends Spel {
         }     
     }
 
+    
+    /**
+     * Methode die de willekeurige code voor de makkelijke moeilijkheidsgraad zal genereren.
+     * 
+     * @return een int[] die de te kraken code bevat.
+     */
     @Override
     protected final int[] genereerWillekeurigeCode() {
         int[] willekeurigeCode = new int[4];

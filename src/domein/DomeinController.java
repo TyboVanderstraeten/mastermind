@@ -94,7 +94,7 @@ public class DomeinController {
      * Maakt een object van Spel aan afhankelijk van de gekozen
      * moeilijkheidsgraad.
      *
-     * @param moeilijkheidsgraad
+     * @param moeilijkheidsgraad moeilijkheidsgraad van het spel
      */
     public void kiesMoeilijkheidsgraad(int moeilijkheidsgraad) {
         switch (moeilijkheidsgraad) {
@@ -117,6 +117,12 @@ public class DomeinController {
         deSpeler.setSpel(spel);        
     }
 
+    /**
+     * Maakt een nieuwe uitdaging aan met de uitdaging als parameter indien
+     * de speler genoeg uitdagingen van een bepaalde moeilijkheidsgraad heeft gewonnen.
+     * 
+     * @param moeilijkheidsgraad moeilijkheidsgraad van de uitdaging
+     */
     public void kiesMoeilijkheidsgraadUitdagingen(int moeilijkheidsgraad) {
         switch (moeilijkheidsgraad) {
             case 1:
@@ -190,10 +196,24 @@ public class DomeinController {
         }
     }
 
+    
+    /**
+     * Geeft de code van het spel terug
+     * .
+     * @return      een int array die de willekeurige code bevat.
+     */
     public int[] geefCode() {
         return spel.getSpelbord().getWillekeurigeCode();
     }
 
+    
+    /**
+     * Deze methode retourneert een overzicht met de juiste code, het aantal pogingen,
+     * het aantal spellen dat de speler al gewonnen heeft en het aantal sterren van de speler.
+     * Het aantal sterren wordt berekent aan de hand van het aantal gewonnen spellen per moeilijkheidsgraad.
+     * 
+     * @return  een String array die de verschillende componenten van het overzicht bevat.
+     */
     public String[] geefOverzicht() {
         String[] overzicht = new String[4];
         overzicht[0] = Arrays.toString(spel.getSpelbord().getWillekeurigeCode());
@@ -234,14 +254,35 @@ public class DomeinController {
         return overzicht;
     }
 
+    
+    /**
+     * Deze methode zorgt ervoor dat de spelRepository het spel zal opslaan onder de naam
+     * die hij meekrijgt als parameter.
+     * 
+     * @param spelnaam naam van het spel.
+     */
     public void registreerSpel(String spelnaam) {
         spelRepository.registreerSpel(spelnaam, deSpeler.getSpelersnaam(), spel);
     }
 
+    
+    /**
+     * Roept de spelRepository aan en krijgt een lijst met alle spelnamen + moeilijkheidsgraad van de
+     * opgeslagen spellen van de huidige speler weer.
+     * 
+     * @return  String[][] die de spelnaam en moeilijkheidsgraad van elk opgeslagen spel bevat. 
+     */
     public String[][] geefSpellen() {
         return spelRepository.geefSpellen(deSpeler.getSpelersnaam());
     }
 
+    
+    /**
+     * Roept de spelRepository aan die ervoor zal zorgen dat het spel met de juiste spelnaam geladen
+     * wordt. Het spelerObject krijgt het juiste spel mee.
+     * 
+     * @param spelnaam naam van het spel.
+     */
     public void laadSpel(String spelnaam) {
         try {
             spel = spelRepository.geefSpel(deSpeler.getSpelersnaam(), spelnaam);
@@ -255,6 +296,12 @@ public class DomeinController {
         }
     }
 
+    /**
+     * Roept de spelRepository die ervoor zal zorgen dat het spel van de huidige speler met
+     * de juiste spelnaam verwijdert wordt uit de databank.
+     *
+     * @param spelnaam naam van het spel.
+     */
     public void verwijderSpel(String spelnaam) {
         spelRepository.verwijderSpel(spelnaam, deSpeler.getSpelersnaam());
     }
@@ -262,11 +309,22 @@ public class DomeinController {
     //-------------------///
     //-------UC5---------///
     //-------------------///
+    /**
+     * Geeft de onafgewerkte uitdaging van de huidige speler terug.
+     * 
+     * 
+     * @return String naam van de onafgewerkte uitdaging.
+     */
     public String geefOpenUitdagingen() {
         return uitdagingRepository.geefOpenUitdaging(deSpeler.getSpelersnaam());
     }
 
-    //uitdaging laden bij aanmaken van speler?
+    
+    /**
+     * Geeft een overzicht met het aantal gewonnen spellen per moeilijkheidsgraad terug.
+     * 
+     * @return een int[][] met het aantal gewonne spellen per moeilijkheidsgraad.
+     */
     public int[][] startUitdaging() {
         int[][] aantalGewonnenPerMoeilijkheid = new int[3][3];
 
@@ -288,27 +346,48 @@ public class DomeinController {
         return aantalGewonnenPerMoeilijkheid;
     }
 
-//    public Speler kiesTegenspeler(String tegenspeler) {
-//        return spelerRepository.kiesTegenspeler(tegenspeler);
-//    }
+    
+    /**
+     * Geeft de namen van de tegenspelers terug die de gekozen moeilijkheidsgraad kunnen spelen.
+     * 
+     * @param naamUitdagingenCategorie moeilijkheidsgraad van het spel
+     * @param aantalGewonnenCategorie aantal spellen die de tegenspeler moet gewonnen hebben.
+     * 
+     * @return De mogelijke tegenspelers.
+     */
     public String[] geefTegenSpelers(String naamUitdagingenCategorie, int aantalGewonnenCategorie) {
         return spelerRepository.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenCategorie, naamUitdagingenCategorie);
     }
 
-    public void registreerUitdaging(String tegenspeler) {                    //VOOR EEN UITDAGING
+    /**
+     * Roept de uitdagingRepository aan die ervoor zal zorgen dat de uitdaging geregistreerd wordt in de databank.
+     * 
+     * @param tegenspeler naam van de tegenspeler.
+     */
+    public void registreerUitdaging(String tegenspeler) {                  
         uitdagingRepository.registreerUitdaging(deSpeler.getSpelersnaam(), tegenspeler, spel);
     }
 
 //---------------------//
 //---------UC6---------//
 //---------------------//
-//    public void spelIsUitdaging() {
-//        spelRepository.spelIsUitdaging(spel.getSpelnaam(), deSpeler.getSpelersnaam());
-//    }
+    
+    /**
+     * Roept de uitdagingRepository aan die alle nog niet aanvaarde uitdagingen van de huidige speler zal teruggeven.
+     * 
+     * @return  String[][] die de spelersnaam en moeilijkheidsgraad zal bevatten van elke uitdaging.
+     */
     public String[][] geefUitdaging() {
         return uitdagingRepository.geefUitdagingen(deSpeler.getSpelersnaam());
     }
 
+    
+    /**
+     * Roept de uitdagingRepository aan die ervoor zal zorgen dat de juiste uitdaging geladen wordt.
+     * Dit aan de hand van de naam van de uitdager en de huidige spelersnaam.
+     * 
+     * @param uitdager naam van de uitdager.
+     */
      public void laadUitdaging(String uitdager) {
         spel = uitdagingRepository.laadUitdaging(uitdager, deSpeler.getSpelersnaam());
         //spel = uitdaging.getSpel();
@@ -321,6 +400,14 @@ public class DomeinController {
 //---------------------//
 //---------UC7---------//
 //---------------------// 
+     
+     /**
+      * Deze methode kijkt eerst of het afgeronde spel een uitdaging is.
+      * Indien dit zo is wordt er gekeken of de tegenspeler de uitdaging al afgerond had.
+      * Indien de andere speler de uitdaging al had afgerond zal het aantal gewonnen uitdagingen / aantal gespeelde uitdagingen correct aangepast worden.
+      * Indien dit niet zo is wordt het aantalPogingen meegegeven aan de databank en het aantal gespeelde uitdagingen aangepast
+      * Als het spel geen uitdaging is wordt het aantalGewonnen aangepast indien hij gewonnen is.
+      */
     public void berekenScore() {
         System.out.println(spel.getId());
         if (spel.getId() != 0) {    //controleert of het spel een uitdaging is                 
@@ -367,16 +454,18 @@ public class DomeinController {
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
         }
     }
-    //KIESUITDAGING = LAADSPEL
-    //    public void updateSpeler() {
-    //        if (uitdaging != null) {
-    //            spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
-    //        } else {
-    //            spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
-    //        }
-    //    }
+    
+   
     //KLASSEMENT
 
+    /**
+     * Deze methode creëert een lijst die het klassement voorstelt per moeilijkheidsgraad.
+     * De spelersnaam en het aantal punten per speler die al een uitdaging gespeeld heeft wordt getoond.
+     * Dit gerankschikt per aantal gewonnen, indien er meerdere spelers een gelijk aantal spellen heeft gewonnen komt de persoon
+     * met het beste percentage aantal gewonnen/aantal gespeeld bovenaan.
+     * 
+     * @return  een List (voor elke moeilijkheidsgraad) van een list met String arrays die de spelersnaam een bevat.
+     */
     public List<List<String[]>> geefKlassement() {
         List<List<String[]>> klassementen = new ArrayList<>();
         klassementen.add(spelerRepository.geefKlassementMakkelijk());
@@ -385,18 +474,9 @@ public class DomeinController {
         return klassementen;
     }
 
-//    public List<String[]> geefKlassementMakkelijk() {
-//        return spelerRepository.geefKlassementMakkelijk();
-//    }
-//
-//    public List<String[]> geefKlassementNormaal() {
-//        return spelerRepository.geefKlassementNormaal();
-//    }
-//
-//    public List<String[]> geefKlassementMoeilijk() {
-//        return spelerRepository.geefKlassementMoeilijk();
-//    }
+
     //setters
+    
     /**
      * Setter. Zorgt ervoor dat het attribuut deSpeler de waarde krijgt van de
      * parameter.

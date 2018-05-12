@@ -17,6 +17,12 @@ public class MoeilijkeRij extends Rij {
         super(new CodePin[5]);
     }
 
+    /**
+     * Zorgt ervoor dat de codepinnen en evaluatiepinnen de juiste kleur krijgen voor de moeilijke moeilijkheidsgraad.
+     * 
+     * @param poging de poging die de speler ingeeft.
+     * @param willekeurigeCode de te kraken code.
+     */
     @Override
     public void geefPoging(int[] poging, int[] willekeurigeCode) {
         int zwart = 0;

@@ -80,12 +80,18 @@ public abstract class Rij {
     /**
      * Getter geeft het attribuut codepinnen terug.
      *
-     * @return
+     * @return een array met de pin objecten van het type codepinnen.
      */
     public Pin[] getCodepinnen() {
         return codepinnen;
     }
 
+    /**
+     * Getter.
+     * Geeft het attribuut evaluatiepinnen terug.
+     * 
+     * @return een array met de pin objecten van het type evaluatiepinnen.
+     */
     public Pin[] getEvaluatiepinnen() {
         return evaluatiepinnen;
     }

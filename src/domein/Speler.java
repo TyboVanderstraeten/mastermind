@@ -15,11 +15,13 @@ public class Speler {
     private int[] aantalGewonnenUitdagingen; //= {0, 0, 0};
     //private int[] aantalPunten; //= {0, 0, 0};
     private int[] aantalGespeeldeUitdagingen; // = {0, 0, 0};
-    private Spel spel;    
+    private Spel spel;
 
     //constructors
     /**
-     * Class constructor. roept de setters aan van spelersnaam en wachtwoord.
+     * Class constructor. Wordt aangeroepen als er een nieuwe speler wordt
+     * geregistreerd. Roept de andere constructor aan met default waarden 3 lege
+     * arrays.
      *
      * @param spelersnaam de spelersnaam van de speler
      * @param wachtwoord het wachtwoord van de speler
@@ -32,6 +34,19 @@ public class Speler {
 //        setWachtwoord(wachtwoord);
     }
 
+    /**
+     * Class constructor. Wordt aangeroepen als er een speler aangemeld wordt.
+     * Zal de setters van de attributen aanroepen zodat deze de juiste waarde
+     * krijgen.
+     *
+     * @param spelersnaam de naam van de speler.
+     * @param wachtwoord het wachtwoord van de speler.
+     * @param aantalGewonnen het aantal gewonnen spellen van de speler.
+     * @param aantalGewonnenUitdagingen het aantal gewonnen uitdagingen van de
+     * speler.
+     * @param aantalGespeeldUitdagingen het aantal gespeelde uitdagingen van de
+     * speler.
+     */
     public Speler(String spelersnaam, String wachtwoord, int[] aantalGewonnen, int[] aantalGewonnenUitdagingen, int[] aantalGespeeldUitdagingen) {
         setSpelersnaam(spelersnaam);
         setWachtwoord(wachtwoord);
@@ -40,9 +55,12 @@ public class Speler {
         //setAantalPunten(aantalPunten);
         setAantalGespeeldeUitdagingen(aantalGespeeldUitdagingen);
     }
-   
 
     //Methode om het aantal gewonnen (spellen geen uitdagingen) spellen te verhogen
+    /**
+     * Methode die het aantal gewonnen spellen zal verhogen van de juiste
+     * moeilijkheidsgraad.
+     */
     public void verhoogAantalGewonnen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
@@ -57,6 +75,10 @@ public class Speler {
         }
     }
 
+    /**
+     * Methode die het aantal gewonnen uitdagingen zal verhogen voor de juiste
+     * moeilijkheidsgraad.
+     */
     public void verhoogAantalGewonnenUitdagingen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
@@ -71,6 +93,10 @@ public class Speler {
         }
     }
 
+    /**
+     * Methode die het aantal gespeelde uitdagingen zal verhogen voor de juiste
+     * moeilijkheidsgraad.
+     */
     public void verhoogAantalGespeeldeUitdagingen() {
         switch (spel.getClass().getSimpleName()) {
             case "MakkelijkSpel":
@@ -89,7 +115,7 @@ public class Speler {
     /**
      * Getter geeft het attribuut spelersnaam terug.
      *
-     * @return
+     * @return de naam van de speler.
      */
     public String getSpelersnaam() {
         return spelersnaam;
@@ -98,7 +124,7 @@ public class Speler {
     /**
      * Getter geeft het attribuut wachtwoord terug.
      *
-     * @return
+     * @return het wachtwoord van de speler.
      */
     public String getWachtwoord() {
         return wachtwoord;
@@ -107,20 +133,26 @@ public class Speler {
     /**
      * Getter geeft het attribuut aantalGewonnen terug.
      *
-     * @return
+     * @return het aantal gewonnen spellen.
      */
     public int[] getAantalGewonnen() {
         return aantalGewonnen;
     }
 
+    /**
+     * Getter. Geeft het aantal gewonnen uitdagingen terug.
+     *
+     * @return aantal gewonnen uitdagingen.
+     */
     public int[] getAantalGewonnenUitdagingen() {
         return aantalGewonnenUitdagingen;
     }
 
-//    public int[] getAantalPunten() {
-//        return aantalPunten;
-//    }
-
+    /**
+     * Getter. Geeft het aantal gespeelde uitdagingen terug.
+     *
+     * @return aantal gespeelde uitdagingen.
+     */
     public int[] getAantalGespeeldUitdagingen() {
         return aantalGespeeldeUitdagingen;
     }
@@ -154,22 +186,44 @@ public class Speler {
         this.wachtwoord = wachtwoord;
     }
 
+    /**
+     * Setter. Zorgt ervoor dat het attribuut spel de waarde krijgt van de
+     * paramter spel.
+     *
+     * @param spel het spel object dat de speler aan het spelen is.
+     */
     public void setSpel(Spel spel) {
         this.spel = spel;
     }
 
+    /**
+     * Setter. Zorgt ervoor dat het attribuut aantalGewonnen de waarde krijgt
+     * van de parameter aantalGewonnen.
+     *
+     * @param aantalGewonnen het aantal gewonnen spellen van de speler.
+     */
     private void setAantalGewonnen(int[] aantalGewonnen) {
         this.aantalGewonnen = aantalGewonnen;
     }
 
+    /**
+     * Setter. Zorgt ervoor dat het attribuut aantalGewonnenUitdagingen de
+     * waarde krijgt van de parameter aantalGewonnenUitdagingen.
+     *
+     * @param aantalGewonnenUitdagingen het aantal gewonnen uitdagingen van de
+     * speler.
+     */
     private void setAantalGewonnenUitdagingen(int[] aantalGewonnenUitdagingen) {
         this.aantalGewonnenUitdagingen = aantalGewonnenUitdagingen;
     }
 
-//    private void setAantalPunten(int[] aantalPunten) {
-//        this.aantalPunten = aantalPunten;
-//    }
-
+    /**
+     * Setter. Zorgt ervoor dat het attribuut aantalGespeelde uitdagingen de
+     * waarde krijgt van de parameter aantalGespeeldeUitdagingen.
+     *
+     * @param aantalGespeeldeUitdagingen het aantal gespeelde uitdagingen van de
+     * speler.
+     */
     private void setAantalGespeeldeUitdagingen(int[] aantalGespeeldeUitdagingen) {
         this.aantalGespeeldeUitdagingen = aantalGespeeldeUitdagingen;
     }

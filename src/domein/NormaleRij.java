@@ -1,20 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package domein;
 
 /**
- *
- * @author bramd
+ * Subklasse van Rij voor een normale moeilijkheidsgraad.
+ * 
  */
 public class NormaleRij extends Rij {
 
+    /**
+     * Class constructor.
+     * Roept constructor van Rij aan.
+     */
     public NormaleRij() {
         super(new CodePin[4]);
     }
 
+    /**
+     * Zorgt ervoor de de codepinnen en evaluatiepinnen de juiste kleuren krijgen
+     * voor de normale moeilijkheidsgraad.
+     * 
+     * @param poging de poging ingegegeven door de speler.
+     * @param willekeurigeCode de te kraken code.
+     */
     @Override
     public void geefPoging(int[] poging, int[] willekeurigeCode) {
         int zwart = 0;

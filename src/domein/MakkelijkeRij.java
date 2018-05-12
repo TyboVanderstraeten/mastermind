@@ -16,6 +16,12 @@ public class MakkelijkeRij extends Rij {
         super(new CodePin[4]);
     }
 
+    /**
+     * Zorgt ervoor dat de codepinnen en evaluatiepinnen de juiste kleuren krijgen.
+     * 
+     * @param poging de poging die de speler heeft ingegeven.
+     * @param willekeurigeCode de te kraken code.
+     */
     @Override
     public void geefPoging(int[] poging, int[] willekeurigeCode) {
         int[] code = new int[willekeurigeCode.length];

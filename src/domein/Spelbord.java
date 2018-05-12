@@ -71,14 +71,32 @@ public class Spelbord {
     }
 
     //GETTERS
+    /**
+     * Getter.
+     * Geeft het attribuut willekeurigeCode terug.
+     * 
+     * @return de te kraken code.
+     */
     public int[] getWillekeurigeCode() {
         return willekeurigeCode;
     }
 
+    /**
+     * Getter.
+     * Geeft het attribuut aantal pogingen terug.
+     * 
+     * @return het aantal pogingen.
+     */
     public int getAantalPogingen() {
         return aantalPogingen;
     }
 
+    /**
+     * Getter.
+     * Geeft een array met de rijen terug.
+     * 
+     * @return een array met rij Objecten (verschillend per moeilijkheidsgraad).
+     */
     public Rij[] getRijen() {
         return rijen;
     }
