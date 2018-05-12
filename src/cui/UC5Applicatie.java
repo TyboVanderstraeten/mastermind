@@ -5,11 +5,8 @@ import exceptions.MoeilijkheidsgraadKeuzeException;
 import exceptions.TegenspelerNaamBestaatNietException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 //EXCEPTIONS DONE
 /**
@@ -39,7 +36,7 @@ public class UC5Applicatie {
     public void start() {
         try {
             if (domeinController.geefOpenUitdagingen() != null) {
-                System.out.println("Werk uw openstaande uitdaging eerst af!");
+                System.out.println(resourceBundle.getString("onafgewerkteUitdagingen"));
             } else {
                 registreerSpel(kiesTegenspeler());
                 toonSpelbord();

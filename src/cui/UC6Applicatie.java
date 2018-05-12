@@ -34,7 +34,7 @@ public class UC6Applicatie {
     public void start() {
         try {
             if (domeinController.geefOpenUitdagingen() != null) {
-                System.out.println("Werk eerst uw openstaande uitdaging af!");
+                System.out.println(resourceBundle.getString("onafgewerkteUitdagingen"));
             }
             aanvaardUitdaging();
         } catch (NullPointerException e) {
@@ -51,7 +51,7 @@ public class UC6Applicatie {
         String[][] uitdagingen = domeinController.geefUitdaging();
 
         if (uitdagingen.length != 0) {
-            System.out.println("Kies een uitdaging. (geef volledige naam)");
+            System.out.println(resourceBundle.getString("kiesUitdaging"));
             for (int teller = 0; teller < uitdagingen.length; teller++) {
                 System.out.printf("%d) %s%n", teller + 1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
             }
@@ -65,7 +65,7 @@ public class UC6Applicatie {
                 uc3.start();
             }
         } else {
-            System.out.println("U geeft geen uitdagingen!");
+            System.out.println(resourceBundle.getString("geenUitdagingen"));
         }
 
     }

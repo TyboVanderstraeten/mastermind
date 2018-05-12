@@ -1,7 +1,6 @@
 package cui;
 
 import domein.DomeinController;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

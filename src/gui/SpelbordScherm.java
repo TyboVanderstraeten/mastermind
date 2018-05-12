@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.DomeinController;
@@ -14,12 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -119,27 +114,37 @@ public class SpelbordScherm extends GridPane {
                 try {
                     lblFout.setText(null);
                     int[] poging = new int[spelbord[0].length / 2];
-                    String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
+                    //OOK VOOR TEXTFIELD (CONTROLE)
+                    //String[] alleKleuren = {resourceBundle.getString("0"), resourceBundle.getString("1"), resourceBundle.getString("2"), resourceBundle.getString("3"), resourceBundle.getString("4"), resourceBundle.getString("5"), resourceBundle.getString("6"), resourceBundle.getString("7"), resourceBundle.getString("8")};
                     int teller = 0;
                     for (Node node : SpelbordScherm.this.getChildren()) {
 
-                        if (node instanceof TextField) {
-                            String kleur = ((TextField) node).getText().toLowerCase().trim();
-                            if (!Arrays.asList(alleKleuren).contains(kleur)) {
+                        if (node instanceof ComboBox) {
+                            //VOOR TEXTFIELDS
+//                            String kleur = ((ComboBox) node).getText().toLowerCase().trim();
+//                            if (!Arrays.asList(alleKleuren).contains(kleur)) {
+//                                throw new FoutKleurException();
+//                            }
+//                            for (int j = 0; j < (poging.length == 5 ? alleKleuren.length : alleKleuren.length - 1); j++) {
+//                                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
+//                                    poging[teller] = j;
+//                                    teller++;
+//                                    break;
+//                                }
+//                            }
+//                            if (teller == spelbord[0].length / 2) {
+//                                break;
+//                            }
+
+                            //VOOR COMBOBOX
+                            int kleur = ((ComboBox) node).getSelectionModel().getSelectedIndex();
+                            if(kleur == -1){
                                 throw new FoutKleurException();
                             }
-                            for (int j = 0; j < (poging.length == 5 ? alleKleuren.length : alleKleuren.length - 1); j++) {
-                                if (kleur.equals(resourceBundle.getString(Integer.toString(j)))) {
-                                    poging[teller] = j;
-                                    teller++;
-                                    break;
-                                }
-                            }
-                            if (teller == spelbord[0].length / 2) {
-                                break;
-                            }
+                            poging[teller] = kleur;
+                            teller++;
                         }
-                    }
+                    }                    
                     aantalPogingen++;
                     dc.geefPoging(poging);
                     update(dc.geefSpelbord());
@@ -148,25 +153,23 @@ public class SpelbordScherm extends GridPane {
 
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
-                        alert.setHeaderText("Je hebt gewonnen!");
+                        alert.setHeaderText(resourceBundle.getString("gewonnen"));
                         alert.setContentText(geefEindoverzicht());
                         alert.showAndWait();
 
-                        Stage stage = (Stage) (getScene().getWindow());
-                        KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                        stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                        Stage stage = (Stage) (getScene().getWindow());                        
+                        stage.setScene(keuzeScherm.getScene());
                         stage.setTitle("Mastermind");
                     } else if (aantalPogingen > 11) {
 
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
-                        alert.setHeaderText("Je hebt verloren!");
+                        alert.setHeaderText(resourceBundle.getString("verloren"));
                         alert.setContentText(geefEindoverzichtVerloren());
                         alert.showAndWait();
 
-                        Stage stage = (Stage) (getScene().getWindow());
-                        KeuzeScherm keuzeScherm = new KeuzeScherm(dc, resourceBundle);
-                        stage.setScene(new Scene(keuzeScherm, 1280, 720));
+                        Stage stage = (Stage) (getScene().getWindow());                        
+                        stage.setScene(keuzeScherm.getScene());
                         stage.setTitle("Mastermind");
                     }
 //
@@ -208,12 +211,10 @@ public class SpelbordScherm extends GridPane {
                     System.out.println(txfSpelnaam.getText().trim());
                     dc.registreerSpel(txfSpelnaam.getText().trim());
                     Stage stage = (Stage) (getScene().getWindow());
-                    stage.setScene(new Scene(new KeuzeScherm(dc, resourceBundle), 1280, 720));
-                    stage.setTitle("Mastermind");
+                    stage.setScene(keuzeScherm.getScene());                    
                 } catch (RuntimeException e) {
                     lblFout.setText(resourceBundle.getString(e.getMessage()));
                 }
-
             }
 
         }
@@ -279,10 +280,18 @@ public class SpelbordScherm extends GridPane {
             }
 
             if (i < spelbord[0].length / 2) {
-                TextField txf = new TextField();
-                txf.setPrefWidth(110);
-                this.add(txf, 14 + i, 4);
-
+//                TextField txf = new TextField();
+//                txf.setPrefWidth(110);
+//                this.add(txf, 14 + i, 4);
+                  ComboBox cB = new ComboBox();
+                  cB.setPromptText(resourceBundle.getString("kleur")+ (i+1));
+                  cB.setPrefWidth(110);
+                  cB.getItems().addAll(resourceBundle.getString("0"),resourceBundle.getString("1"),resourceBundle.getString("2"),resourceBundle.getString("3"),resourceBundle.getString("4"),resourceBundle.getString("5"),resourceBundle.getString("6"),resourceBundle.getString("7"));
+                  if(spelbord[0].length/2==5){
+                      cB.getItems().add(resourceBundle.getString("8"));
+                  }
+                  
+                  this.add(cB, 14+i, 4);
             }
         }
     }
