@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Exception die gethrowt wordt als men een verkeerd nummer heeft ingevoerd (>3) om een taal te kiezen.
+ * Exception die gethrowt wordt als men een verkeerd nummer heeft ingevoerd (groter dan 3) om een taal te kiezen.
  * 
  */
 public class TaalKeuzeException extends IllegalArgumentException{
