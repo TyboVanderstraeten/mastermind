@@ -93,6 +93,13 @@ public class SpelerMapper {
         return speler;
     }
 
+    /**
+     * Deze methode geeft het aantalGewonnenUitdagingen per moeilijkheidsgraad van een bepaalde speler terug.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * 
+     * @return een int[] met het aantal gewonnen uitdagingen per moeilijkheidsgraad.
+     */
     public int[] geefAantalGewonnenUitdagingen(String spelersnaam) {
         int[] aantalGewonnenUitdagingen = new int[3];
         try (
@@ -113,6 +120,14 @@ public class SpelerMapper {
         return aantalGewonnenUitdagingen;
     }
 
+    /**
+     * Deze methode geeft het aantal gespeeld uitdagingen per moeilijkheidsgraad van een 
+     * bepaalde speler terug.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * 
+     * @return het aantal gespeelde uitdagingen per moeilijkheidsgraad.
+     */
     public int[] geefAantalGespeeldeUitdagingen(String spelersnaam) {
         int[] aantalGespeeldeUitdagingen = new int[3];
         try (
@@ -134,6 +149,14 @@ public class SpelerMapper {
     }
 
     //Onderstaande methode is voor singleplayer spellen
+    /**
+     * Deze methode update het aantal gewonnen spellen van een bepaalde speler.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * @param aantalGewonnenMakkelijk het aantal gewonnen makkelijke spellen.
+     * @param aantalGewonnenNormaal het aantal gewonnen normale spellen.
+     * @param aantalGewonnenMoeilijk het aantal gewonnen moeilijke spellen.
+     */
     public void updateSpelerAantalGewonnen(String spelersnaam, int aantalGewonnenMakkelijk, int aantalGewonnenNormaal, int aantalGewonnenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -149,7 +172,14 @@ public class SpelerMapper {
     }
 
     
-
+/**
+ * Deze methode update het aantal gewonnen uitdagingen van een bepaalde speler.
+ * 
+ * @param spelersnaam de naam van de speler.
+ * @param aantalGewonnenUitdagingenMakkelijk het aantal gewonnen makkelijke uitdagingen.
+ * @param aantalGewonnenUitdagingenNormaal het aantal gewonnen normale uitdagingen.
+ * @param aantalGewonnenUitdagingenMoeilijk het aantal gewonnen moeilijke uitdagingen.
+ */
     public void updateAantalGewonnenUitdagingen(String spelersnaam, int aantalGewonnenUitdagingenMakkelijk, int aantalGewonnenUitdagingenNormaal, int aantalGewonnenUitdagingenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -164,6 +194,14 @@ public class SpelerMapper {
         }
     }
 
+    /**
+     * Deze methode update het aantal gespeelde uitdagingen.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * @param aantalGespeeldeUitdagingenMakkelijk het aantal gespeelde makkelijke uitdagingen.
+     * @param aantalGespeeldeUitdagingenNormaal het aantal gespeelde normale uitdagingen.
+     * @param aantalGespeeldeUitdagingenMoeilijk het aantal gespeelde moeilijke uitdagingen.
+     */
     public void updateAantalGespeeldeUitdagingen(String spelersnaam, int aantalGespeeldeUitdagingenMakkelijk, int aantalGespeeldeUitdagingenNormaal, int aantalGespeeldeUitdagingenMoeilijk) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -179,7 +217,15 @@ public class SpelerMapper {
     }
 
     
-
+/**
+ * Deze methode geeft de mogelijke tegenspelers terug voor de meegegeven moeilijkheidsgraad.
+ * 
+ * @param naamUitdagingenCategorie de moeilijkheidsgraad
+ * @param aantalGewonnenUitdagingen het aantal gewonnen uitdagingen.
+ * @param spelersnaam de naam van de huidige speler.
+ * 
+ * @return een List van Strings die de spelersnamen van de mogelijke tegenspelers bevat.
+ */
     public List<String> geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
         List<String> tegenspelers = new ArrayList<>();
 
@@ -203,6 +249,11 @@ public class SpelerMapper {
     }
 
     //KLASSEMENT
+    /**
+     * Deze methode zal het makkelijke klassement teruggeven.
+     * 
+     * @return een list van String[] die de spelnaam en het aantal punten bevat.
+     */
     public List<String[]> geefKlassementMakkelijk() {
         List<String[]> klassementMakkelijk = new ArrayList<>();
 
@@ -226,6 +277,11 @@ public class SpelerMapper {
         return klassementMakkelijk;
     }
 
+    /**
+     * Deze methode zal het normale klassement teruggeven.
+     * 
+     * @return een list van String[] die de spelnaam en het aantal punten bevat.
+     */
     public List<String[]> geefKlassementNormaal() {
         List<String[]> klassementNormaal = new ArrayList<>();
 
@@ -249,6 +305,11 @@ public class SpelerMapper {
         return klassementNormaal;
     }
 
+    /**
+     * Deze methode zal het moeilijke klassement teruggeven.
+     * 
+     * @return een list van String[] die de spelnaam en het aantal punten bevat.
+     */
     public List<String[]> geefKlassementMoeilijk() {
         List<String[]> klassementMoeilijk = new ArrayList<>();
 

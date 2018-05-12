@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
- * @author bramd
+ *  Zorgt voor de connectie met de UitdagingObjecten uit de databank.
+ * 
  */
 public class UitdagingMapper {
 
@@ -36,6 +36,13 @@ public class UitdagingMapper {
     private static final String GEEF_AANVAARDE_UITDAGINGEN = "SELECT speler1, moeilijkheidsgraad FROM ID222177_g68.Uitdaging WHERE (speler1 = ? AND aantalPogingenS1 = 0) OR (speler2 =? AND isAanvaard = 1 AND aantalPogingenS2 = 0)";
     private static final String AANVAARD_UITDAGING = "UPDATE ID222177_g68.Uitdaging set isAanvaard = 1 where id = ?";
 
+    /**
+     * Zorgt ervoor dat er uitdaging in de de databank komt.
+     * 
+     * @param spelersnaam1 de naam van de uitdager.
+     * @param spelersnaam2 de naam van de uitgedaagde.
+     * @param spel het spelObject.
+     */
     public void registreerUitdaging(String spelersnaam1, String spelersnaam2, Spel spel) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -50,6 +57,12 @@ public class UitdagingMapper {
         }
     }
 
+    /**
+     * Deze methode zal een lijst van nog niet aanvaarde uitdagingen van een bepaalde speler teruggeven.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * @return een List met String[] die de spelersnamen en moeilijkheidsgraad bevatten.
+     */
     public List<String[]> geefLijstUitdagingen(String spelersnaam) {
         List<String[]> uitdagingen = new ArrayList<>();
 
@@ -73,6 +86,15 @@ public class UitdagingMapper {
         return uitdagingen;
     }
 
+    /**
+     * Deze methode zal de juiste uitdaging uit de databank halen aan de hand van
+     * de uitdager en de huidige spelersnaam.
+     * 
+     * @param uitdager naam van de uitdager.
+     * @param spelersnaam naam van de huidige speler.
+     * 
+     * @return het SpelObject van de uitdaging.
+     */
     public Spel laadUitdaging(String uitdager, String spelersnaam) {
 
         Spel spel = null;
@@ -137,6 +159,13 @@ public class UitdagingMapper {
 //
 //    }
     
+    /**
+     * Deze methode zorgt ervoor dat de uitdager, de uitgedaagde en het aantalPogingen van de tegenspeler van een bepaald uitdaging teruggeven worden.
+     * 
+     * @param id het id van de uitdaging.
+     * @param spelersnaam de naam van de speler.
+     * @return een String[] met naam uitdager, naam uitgedaagde en het aantal pogingen van de tegenspeler.
+     */
     public String[] geefUitdagingInfo(int id, String spelersnaam) {
         int aantalPogingenS1, aantalPogingenS2;
         String[] uitdagingInfo = new String[3];                     // { speler1, speler2, aantalPogingenTegenspeler }
@@ -169,7 +198,13 @@ public class UitdagingMapper {
     
     
     
-
+/**
+ * Deze methode zal het aantalPogingen van de uitdager toevoegen aan de juiste uitdaging adh het id.
+ * 
+ * @param aantalPogingen het aantal benodigde uitdagingen.
+ * 
+ * @param id het id van de uitdaging.
+ */
     public void voegAantalPogingenToeS1(int aantalPogingen, int id) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -183,6 +218,12 @@ public class UitdagingMapper {
         }
     }
 
+    /**
+     * Deze methode zal het aantalPogingen van de uitgedaagde toevoegen aan de juiste uitdaging adh het id.
+     * 
+     * @param aantalPogingen het aantal benodige uitdagingen.
+     * @param id het id van de uitdaging.
+     */
     public void voegAantalPogingenToeS2(int aantalPogingen, int id) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -195,6 +236,13 @@ public class UitdagingMapper {
         }
     }
 
+    /**
+     * Deze methode zal de naam van de nog niet afgewerkte uitdaging van een bepaalde speler teruggeven.
+     * 
+     * @param spelersnaam de naam van de speler.
+     * 
+     * @return de naam van de nog niet afgewerkte uitdaging.
+     */
     public String geefOpenUitdaging(String spelersnaam) {
         String naam = null;
         try (
@@ -225,6 +273,11 @@ public class UitdagingMapper {
 //        }
 //    }
 //    
+    /**
+     * Deze methode zorgt ervoor dat isAanvaardt op true (1) wordt gezet bij de juiste uitdaging in de databank.
+     * 
+     * @param id het id van de uitdaging.
+     */
     public void aanvaardUitdaging(int id) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);

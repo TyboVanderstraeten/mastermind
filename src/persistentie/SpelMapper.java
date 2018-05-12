@@ -37,6 +37,13 @@ public class SpelMapper {
     private static final String GEEF_TEGENSPELER_UITDAGING = "SELECT tegenspeler FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
     private static final String GEEF_AANTALPOGINGEN_TEGENSPELER_UITDAGING = "SELECT aantalPogingen FROM ID222177_g68.Spel WHERE spelnaam = ? AND spelersnaam = ?";
 
+    /**
+     * Methode die een spel zal toevoegen aan de database met de juiste spelnaam bij de juiste speler.
+     * 
+     * @param spelnaam de naam van het spel.
+     * @param spelersnaam de naam van de speler.
+     * @param spel het spel object.
+     */
     public void voegSpelToe(String spelnaam, String spelersnaam, Spel spel) {               //moet nog aangepast worden//EDIT: DONE        
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -81,6 +88,13 @@ public class SpelMapper {
 //            throw new RuntimeException(ex);
 //        }
 //    }
+    /**
+     * Methode die de alle spelnamen en moeilijkheidsgraden van de opgeslagen spellen van een bepaalde
+     * speler zal weergeven.
+     * 
+     * @param spelersnaam naam van de speler.
+     * @return een list met String[] die de spelnamen en moeilijkheidsgraden van de spellen bevat.
+     */
     public List<String[]> geefSpelnamen(String spelersnaam) {
         List<String[]> spelnamen = new ArrayList<>();
 
@@ -104,6 +118,13 @@ public class SpelMapper {
         return spelnamen;
     }
 
+    /**
+     * Methode die het spel met een bepaalde spelnaam van een bepaalde speler
+     * zal verwijderen.
+     * 
+     * @param spelnaam de naam van het spel.
+     * @param spelersnaam de naam van de speler.
+     */
     public void verwijderSpel(String spelnaam, String spelersnaam) {
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
@@ -116,6 +137,14 @@ public class SpelMapper {
         }
     }
 
+    /**
+     * Methode die het het spel met een bepaalde spelnaam van een bepaalde speler zal laden.
+     * 
+     * @param spelnaam de naam van het spel.
+     * @param spelersnaam de naam van de speler.
+     * 
+     * @return het opgevraagde Spel object.
+     */
     public Spel laadSpel(String spelnaam, String spelersnaam) {
         Spel spel = null;
         List<int[]> rijen = new ArrayList<>();
