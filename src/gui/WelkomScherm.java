@@ -14,17 +14,31 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE
+/**
+ * Het welkomscherm waar men kan aanmelden / registreren + het verloop hiervoor.
+ * 
+ */
 public class WelkomScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Class constructor.
+     * Initialiseert dc en resourceBundle.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     */
     public WelkomScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor het "WelkomScherm".
+     */
     private void buildGui() {
 
         Button btnMeldAan = new Button(resourceBundle.getString("meldAan"));

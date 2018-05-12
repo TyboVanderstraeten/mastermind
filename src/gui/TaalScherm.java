@@ -19,15 +19,28 @@ import domein.DomeinController;
 import javafx.scene.Scene;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm waar de taal gekozen worden.
+ * Aangezien we de taal van de speler niet kennen gebruiken we vlaggen.
+ */
 public class TaalScherm extends GridPane {
 
     private final DomeinController dc;
 
+    /**
+     * Class constructor.
+     * Initialiseert het attribuut dc.
+     * 
+     * @param dc instantie van DomeinController.
+     */
     public TaalScherm(DomeinController dc) {
         this.dc = dc;
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor het "TaalScherm"
+     */
     private void buildGui() {
 
         //IMAGES

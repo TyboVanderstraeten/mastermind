@@ -18,12 +18,24 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE
+/**
+ * 
+ * Het scherm waar men een speler registreert + het verloop hiervoor.
+ */
 public class RegistreerScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final WelkomScherm welkomScherm;
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle en welkomScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param welkomScherm instantie van WelkomScherm (vorig scherm)
+     */
     public RegistreerScherm(DomeinController dc, ResourceBundle resourceBundle, WelkomScherm welkomScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -31,6 +43,9 @@ public class RegistreerScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor "RegistreerScherm"
+     */
     private void buildGui() {
 
         Label lblRegistreer = new Label(resourceBundle.getString("registreer"));

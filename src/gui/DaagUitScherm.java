@@ -26,6 +26,10 @@ import javafx.scene.control.ListView;
 import static javafx.scene.layout.GridPane.setHalignment;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm om een speler uit te dagen met het volledige verloop hiervoor.
+ *
+ */
 public class DaagUitScherm extends GridPane {
 
     private final DomeinController dc;
@@ -33,8 +37,18 @@ public class DaagUitScherm extends GridPane {
     private final String naamUitdagingenCategorie;
     private final int aantalGewonnenCategorie;
     private final KeuzeScherm keuzeScherm;
-    private static final ObservableList dataTegenspelers = FXCollections.observableArrayList();
-
+    private static final ObservableList DATA_TEGENSPELERS = FXCollections.observableArrayList();
+    
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle, naamUitdagingenCategorie, aantalGewonnenCategorie en keuzeScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param naamUitdagingenCategorie moeilijkheidsgraad.
+     * @param aantalGewonnenCategorie aantalGewonnen van deze moeilijkheidsgraad.
+     * @param keuzeScherm instantie van KeuzeScherm (vorige scherm)
+     */
     public DaagUitScherm(DomeinController dc, ResourceBundle resourceBundle, String naamUitdagingenCategorie, int aantalGewonnenCategorie, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -44,6 +58,9 @@ public class DaagUitScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor het "DaagUitScherm"
+     */
     private void buildGui() {
 
         Label lblKiesTegenspeler = new Label(resourceBundle.getString("selecteerTegenspeler"));
@@ -58,11 +75,11 @@ public class DaagUitScherm extends GridPane {
         dataTegenspelers.add(geefTegenSpeler);
         }*/
         //Collection manier
-        dataTegenspelers.addAll(Arrays.asList(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)));
+        DATA_TEGENSPELERS.addAll(Arrays.asList(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)));
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);
-        lvTegenspelers.setItems(dataTegenspelers);
+        lvTegenspelers.setItems(DATA_TEGENSPELERS);
         this.add(lvTegenspelers, 0, 1);
 
         Button btnTerug = new Button(resourceBundle.getString("terug"));
@@ -85,7 +102,7 @@ public class DaagUitScherm extends GridPane {
                 Stage stage = (Stage) (getScene().getWindow());
                 stage.setScene(keuzeScherm.getScene());
                 stage.setTitle("Mastermind");
-                dataTegenspelers.clear();
+                DATA_TEGENSPELERS.clear();
             }
         });
 

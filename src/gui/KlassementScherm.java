@@ -17,6 +17,11 @@ import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het KlassementScherm met de klassementen per moeilijkheidsgraad met het verloop hiervoor.
+ * 
+ * 
+ */
 public class KlassementScherm extends GridPane {
 
     private final DomeinController dc;
@@ -26,6 +31,14 @@ public class KlassementScherm extends GridPane {
 //    private static final ObservableList dataNormaal = FXCollections.observableArrayList();
 //    private static final ObservableList dataMoeilijk = FXCollections.observableArrayList();
 
+    /**
+     * Class constructor.
+     * initialiseert de attributen dc, resourceBundle en keuzeScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param keuzeScherm instantie van KeuzeScherm. (vorig scherm)
+     */
     public KlassementScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -33,6 +46,9 @@ public class KlassementScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van het "KlassementScherm"
+     */
     private void buildGui() {
         //Makkelijk
         Label lblMakkelijk = new Label(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));

@@ -20,6 +20,10 @@ import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm om een uitdaging te aanvaarden met het verloop hiervoor.
+ * 
+ */
 public class AanvaardUitdagingScherm extends GridPane {
 
     private final DomeinController dc;
@@ -27,6 +31,13 @@ public class AanvaardUitdagingScherm extends GridPane {
     private final KeuzeScherm keuzeScherm;
     private static final ObservableList dataUitdagingen = FXCollections.observableArrayList();
 
+    /**
+     * Class constructor.
+     * Initialiseert de domeinController, resourcebundle en het vorige scherm (keuzeScherm).
+     * @param dc instantie van de DomeinController.
+     * @param resourceBundle instantie van de ResourceBundle.
+     * @param keuzeScherm instantie van het KeuzeScherm.
+     */
     public AanvaardUitdagingScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -34,6 +45,9 @@ public class AanvaardUitdagingScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van het aanvaardScherm.
+     */
     private void buildGui() {
 
         Label lblKiesUitdaging = new Label(resourceBundle.getString("selecteerUitdaging"));

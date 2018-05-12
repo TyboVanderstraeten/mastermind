@@ -12,12 +12,25 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm om de moeilijkheidsgraad te kiezen om een speler uit te dagen met het volledige verloop hiervoor.
+ * 
+ * 
+ */
 public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle en keuzeScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param keuzeScherm instantie van KeuzeScherm (vorig scherm)
+     */
     public DaagUitMoeilijkheidsgraadScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -25,6 +38,9 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor het "DaagUitMoeilijkheidsgraadScherm"
+     */
     private void buildGui() {
         Button btnMakkelijk = new Button(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));
         this.add(btnMakkelijk, 0, 0);

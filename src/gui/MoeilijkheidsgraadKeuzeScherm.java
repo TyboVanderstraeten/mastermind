@@ -12,12 +12,25 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm waar men de moeilijkheidsgraad kiest van een gewoon spel + het verloop hiervoor.
+ * 
+ *
+ */
 public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final KeuzeScherm keuzeScherm;
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle en keuzeScherm.
+     * 
+     * @param dc Instantie van DomeinController
+     * @param resourceBundle Instantie van ResourceBundle
+     * @param keuzeScherm Instantie van KeuzeScherm.
+     */
     public MoeilijkheidsgraadKeuzeScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -25,6 +38,9 @@ public class MoeilijkheidsgraadKeuzeScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van het "MoeilijkheidsgraadKeuzeScherm"
+     */
     private void buildGui() {
 
         Button btnMakkelijk = new Button(resourceBundle.getString("makkelijkeMoeilijkheidsgraad"));

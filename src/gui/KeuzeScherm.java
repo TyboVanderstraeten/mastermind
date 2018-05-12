@@ -12,17 +12,31 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm met het overzicht van alle mogelijkheden met het verloop hiervoor.
+ *
+ */
 public class KeuzeScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc en resourceBundle.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     */
     public KeuzeScherm(DomeinController dc, ResourceBundle resourceBundle) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop voor het "KeuzeScherm"
+     */
     private void buildGui() {
 
         Button btnStartMastermind = new Button(resourceBundle.getString("start"));

@@ -31,6 +31,10 @@ import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het SpelbordScherm + het verloop hiervoor.
+ *
+ */
 public class SpelbordScherm extends GridPane {
 
     private final DomeinController dc;
@@ -38,6 +42,13 @@ public class SpelbordScherm extends GridPane {
     private final KeuzeScherm keuzeScherm;
     private int aantalPogingen = 0;
 
+    /**
+     * Class constructor. Initialiseert dc, resourceBundle en keuzeScherm.
+     *
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param keuzeScherm instantie van KeuzeScherm.
+     */
     public SpelbordScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -45,6 +56,9 @@ public class SpelbordScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van "SpelbordScherm"
+     */
     private void buildGui() {
         int[][] spelbord = dc.geefSpelbord();
         toonSpelbord(spelbord);
@@ -211,6 +225,11 @@ public class SpelbordScherm extends GridPane {
         );
     }
 
+    /**
+     * Deze methode overloopt het spelbord en zet de cijfers om om naar pinnen op het scherm (images)
+     * 
+     * @param spelbord een int[][] die het spelbord representeert.
+     */
     private void toonSpelbord(int[][] spelbord) {
         for (int i = 0; i < spelbord.length; i++) {
             for (int j = 0; j < spelbord[i].length; j++) {
@@ -273,6 +292,12 @@ public class SpelbordScherm extends GridPane {
         }
     }
 
+    /**
+     * Deze methode zal de pinnen op het scherm updaten.
+     * Hij zal de juiste rij nemen en deze updaten ipv het hele scherm te resetten.
+     * 
+     * @param spelbord int[][] die het spelbord moet representeren.
+     */
     private void update(int[][] spelbord) {
 
         for (int i = 0; i < spelbord.length + 1; i++) {
@@ -292,6 +317,11 @@ public class SpelbordScherm extends GridPane {
 
     }
 
+    /**
+     * Deze methode geeft een String terug die het eind overzicht bevat indien de speler gewonnen is.
+     * 
+     * @return String met het eindoverzicht.
+     */
     private String geefEindoverzicht() {
         String uitvoer = "";
 
@@ -312,6 +342,11 @@ public class SpelbordScherm extends GridPane {
 
     }
 
+    /**
+     * Deze methode geeft het eind overzicht terug indien de speler verloren is.
+     * 
+     * @return String met het eind overzicht.
+     */
     private String geefEindoverzichtVerloren() {
         String uitvoer = "";
 

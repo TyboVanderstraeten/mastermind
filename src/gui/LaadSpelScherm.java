@@ -21,6 +21,10 @@ import static javafx.scene.layout.GridPane.setHalignment;
 import javafx.stage.Stage;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm waar men een spel laad met het verloop hiervoor.
+ * 
+ */
 public class LaadSpelScherm extends GridPane {
 
     private final DomeinController dc;
@@ -28,6 +32,14 @@ public class LaadSpelScherm extends GridPane {
     private final KeuzeScherm keuzeScherm;
     private static final ObservableList dataSpellen = FXCollections.observableArrayList();
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle en keuzeScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle
+     * @param keuzeScherm instantie van KeuzeScherm. (vorig scherm)
+     */
     public LaadSpelScherm(DomeinController dc, ResourceBundle resourceBundle, KeuzeScherm keuzeScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -35,6 +47,9 @@ public class LaadSpelScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van het "LaadSpelScherm"
+     */
     private void buildGui() {
 
         Label lblKiesSpel = new Label(resourceBundle.getString("selecteerSpel"));

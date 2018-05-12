@@ -18,12 +18,24 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 //EXCEPTIONS DONE
+/**
+ * Het scherm waar men inlog met het verloop hiervoor.
+ *
+ */
 public class LoginScherm extends GridPane {
 
     private final DomeinController dc;
     private final ResourceBundle resourceBundle;
     private final WelkomScherm welkomScherm;
 
+    /**
+     * Class constructor.
+     * Initialiseert de attributen dc, resourceBundle en welkomScherm.
+     * 
+     * @param dc instantie van DomeinController.
+     * @param resourceBundle instantie van ResourceBundle.
+     * @param welkomScherm instantie van WelkomScherm.
+     */
     public LoginScherm(DomeinController dc, ResourceBundle resourceBundle, WelkomScherm welkomScherm) {
         this.dc = dc;
         this.resourceBundle = resourceBundle;
@@ -31,6 +43,9 @@ public class LoginScherm extends GridPane {
         buildGui();
     }
 
+    /**
+     * Bevat het volledige verloop van "LoginScherm"
+     */
     private void buildGui() {
         Label lblMeldAan = new Label(resourceBundle.getString("meldAan"));
         this.add(lblMeldAan, 0, 0, 2, 1);
