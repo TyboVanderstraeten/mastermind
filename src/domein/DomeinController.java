@@ -25,11 +25,10 @@ public class DomeinController {
 
     //constructors
     /**
-     * Class constructor. Creërt een object van SpelerRepository en een object
-     * van SpelRepository.
+     * Class constructor. Creërt een object van SpelerRepository, een object
+     * van SpelRepository en een object van uitdagingRepository.
      *
-     *
-     * @param resourceBundle
+     * 
      */
     public DomeinController() {
         spelerRepository = new SpelerRepository();
@@ -83,7 +82,7 @@ public class DomeinController {
     /**
      * Geeft de spelersnaam van de aangemelde speler terug.
      *
-     * @return
+     * @return het attribuut spelersnaam van Speler
      */
     public String geefSpelersnaam() {
         return deSpeler.getSpelersnaam();
@@ -148,7 +147,7 @@ public class DomeinController {
      * Geeft een overzicht van alle mogelijke moeilijkheidsgraden en het aantal
      * overwinningen per moeilijkheidsgraad.
      *
-     * @return
+     * @return een String[][] die de mogelijke moeilijkheidsgraden bevat met het aantal gewonnen spellen per moeilijkheidsgraad.
      */
     public String[][] startMasterMind() {
         String[][] overzicht;
@@ -175,7 +174,7 @@ public class DomeinController {
     /**
      * Geeft een overzicht van het spelbord terug.
      *
-     * @return
+     * @return een int[][] die het spelbord representeert.
      */
     public int[][] geefSpelbord() {
         return spel.getSpelbord().geefOverzichtMetPinnen();

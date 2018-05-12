@@ -58,8 +58,8 @@ public class SpelRepository {
      * Zorgt ervoor dat de mapper het spel van de huidige speler met de meegegeven spelnaam geladen wordt.
      * 
      * @param spelersnaam de naam van de huidige speler.
-     * @param spelnaam de 
-     * @return 
+     * @param spelnaam de naam van het spel.
+     * @return het SpelObject van het opgevraagde spel.
      */
     public Spel geefSpel(String spelersnaam, String spelnaam) {
         return mapper.laadSpel(spelnaam, spelersnaam);

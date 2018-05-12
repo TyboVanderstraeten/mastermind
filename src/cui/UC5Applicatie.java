@@ -53,7 +53,7 @@ public class UC5Applicatie {
 
     /**
      * Bevat het volledige verloop om een tegenspeler te kiezen.
-     * @return 
+     * @return  een String die de naam van de tegenspeler bevat.
      */
     public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);

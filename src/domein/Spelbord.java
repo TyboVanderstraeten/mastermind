@@ -40,7 +40,7 @@ public class Spelbord {
      * Roept de methode geefPinkleuren aan voor elke Rij en geeft een
      * multidimensionele array terug die de kleuren per rij bevat.
      *
-     * @return
+     * @return een int[][] die de pinwaarden per rij bevat.
      */
     public int[][] geefOverzichtMetPinnen() {
         int[][] overzicht = new int[rijen.length][];

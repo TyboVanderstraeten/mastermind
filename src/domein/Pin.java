@@ -20,7 +20,7 @@ public abstract class Pin {
     /**
      * Getter. geeft het attribuut kleur terug.
      *
-     * @return
+     * @return int met de waarde van kleur.
      */
     public int getKleur() {
         return kleur;

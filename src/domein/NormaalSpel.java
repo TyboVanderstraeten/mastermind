@@ -34,8 +34,8 @@ public class NormaalSpel extends Spel {
     /**
      * Class constructor.
      * Zal de constructor van spel aanroepen en de correcte rijen genereren aan de hand van de moeilijkheidsgraad (hier normaal).
-     * @param willekeurigeCode
-     * @param uitdagingNummer 
+     * @param willekeurigeCode de te kraken code.
+     * @param uitdagingNummer het id van de uitdaging.
      */
     public NormaalSpel(int[] willekeurigeCode, int uitdagingNummer){
         super(willekeurigeCode, uitdagingNummer);

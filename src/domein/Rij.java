@@ -13,7 +13,7 @@ public abstract class Rij {
      * Class constructor. Geeft de arrays codepinnen en evaluatiepinnen de
      * juiste lengte afhankelijk van de moeilijkheidsgraad.
      *
-     * @param codepinnen
+     * @param codepinnen de PinObjecten van het type codepinnen. (volgens de correcte moeilijkheidsgraad)
      */
     public Rij(Pin[] codepinnen) {
         this.codepinnen = codepinnen;
@@ -23,7 +23,7 @@ public abstract class Rij {
     /**
      * Geeft de pinkleuren van deze rij terug in de vorm van een array.
      *
-     * @return
+     * @return een int[] met de pinwaarden van de huidige rij.
      */
     public int[] geefPinkleuren() {
         int[] pinkleuren = new int[codepinnen.length + evaluatiepinnen.length + 1];     //+1 omdat ik een plek per rij bijhoudt voor "Evaluatie'

@@ -55,7 +55,7 @@ public class SpelerMapper {
      * geeft een spelerobject terug dat overeenkomt met de spelernaam.
      *
      * @param spelersnaam de spelersnaam van de gebruiker
-     * @return
+     * @return een SpelObject met de juiste spelersnaam.
      */
     public Speler geefSpeler(String spelersnaam) {
         Speler speler = null;
