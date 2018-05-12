@@ -68,6 +68,7 @@ public class DaagUitScherm extends GridPane {
         dataTegenspelers.add(geefTegenSpeler);
         }*/
         //Collection manier
+        DATA_TEGENSPELERS.clear();
         DATA_TEGENSPELERS.addAll(Arrays.asList(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)));
 
         ListView<String> lvTegenspelers = new ListView<>();
