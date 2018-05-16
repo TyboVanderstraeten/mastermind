@@ -357,7 +357,7 @@ public class DomeinController {
      * @return De mogelijke tegenspelers.
      */
     public String[] geefTegenSpelers(String naamUitdagingenCategorie, int aantalGewonnenCategorie) {
-        return spelerRepository.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenCategorie, naamUitdagingenCategorie);
+        return spelerRepository.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenCategorie, deSpeler.getSpelersnaam());
     }
 
     /**

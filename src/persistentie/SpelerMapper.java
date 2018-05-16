@@ -234,10 +234,10 @@ public class SpelerMapper {
                 PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {
             query.setString(1, naamUitdagingenCategorie);
             query.setInt(2, aantalGewonnenUitdagingen);
-            query.setString(3, spelersnaam);
+            query.setString(3, spelersnaam);            
             try (ResultSet rs = query.executeQuery()) {
-                while (rs.next()) {
-                    String spelersnaamForAdd = rs.getString("spelersnaam");
+                while (rs.next()) {                   
+                    String spelersnaamForAdd = rs.getString("spelersnaam");                    
                     tegenspelers.add(spelersnaamForAdd);
                 }
             }
