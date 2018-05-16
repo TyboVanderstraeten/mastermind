@@ -337,7 +337,7 @@ public class DomeinController {
             teller++;
         }
 
-        for (int score : deSpeler.getAantalGewonnen()) {
+        for (int score : deSpeler.getAantalGewonnenUitdagingen()) {
             aantalGewonnenPerMoeilijkheid[3][teller2] = score;
 
             teller2++;
