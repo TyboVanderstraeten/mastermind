@@ -18,7 +18,7 @@ public class SpelerMapper {
 
     private static final String INSERT_SPELER = "INSERT INTO ID222177_g68.Speler (spelersnaam, wachtwoord) VALUES (?,?)";
     private static final String GEEF_SPELER = "SELECT * FROM ID222177_g68.Speler WHERE spelersnaam = ?";
-    private static final String GEEF_TEGENSPELERS = "SELECT spelersnaam FROM ID222177_g68.Speler WHERE ? >= ? AND spelersnaam <> ?";
+    private static final String GEEF_TEGENSPELERS = "SELECT spelersnaam FROM ID222177_g68.Speler WHERE (aantalGewonnenUitdagingenMakkelijk >= ? AND aantalGewonnenUitdagingenNormaal >= ?) AND spelersnaam <> ?";
     private static final String UPDATE_AANTALGEWONNEN = "UPDATE ID222177_g68.Speler SET aantalGewonnenMakkelijk = ?, aantalGewonnenNormaal = ?, aantalGewonnenMoeilijk = ? WHERE spelersnaam = ?";
     //Klassement SQL query's
     private static final String GEEF_SPELERSKLASSEMENTMAKKELIJK = "SELECT spelersnaam, aantalGespeeldUitdagingenMakkelijk, aantalGewonnenUitdagingenMakkelijk FROM ID222177_g68.Speler WHERE aantalGespeeldUitdagingenMakkelijk > 0 ORDER BY aantalGewonnenUitdagingenMakkelijk DESC";
@@ -220,20 +220,19 @@ public class SpelerMapper {
 /**
  * Deze methode geeft de mogelijke tegenspelers terug voor de meegegeven moeilijkheidsgraad.
  * 
- * @param naamUitdagingenCategorie de moeilijkheidsgraad
  * @param aantalGewonnenUitdagingen het aantal gewonnen uitdagingen.
  * @param spelersnaam de naam van de huidige speler.
  * 
  * @return een List van Strings die de spelersnamen van de mogelijke tegenspelers bevat.
  */
-    public List<String> geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
+    public List<String> geefTegenspelers(int[] aantalGewonnenUitdagingen, String spelersnaam) {
         List<String> tegenspelers = new ArrayList<>();
 
         try (
                 Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-                PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {
-            query.setString(1, naamUitdagingenCategorie);
-            query.setInt(2, aantalGewonnenUitdagingen);
+                PreparedStatement query = conn.prepareStatement(GEEF_TEGENSPELERS)) {                    
+            query.setInt(1, aantalGewonnenUitdagingen[0]); 
+            query.setInt(2, aantalGewonnenUitdagingen[1]);
             query.setString(3, spelersnaam);            
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {                   

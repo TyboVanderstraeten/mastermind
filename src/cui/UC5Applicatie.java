@@ -55,16 +55,19 @@ public class UC5Applicatie {
     public String kiesTegenspeler() {
         Scanner input = new Scanner(System.in);
         String[] tegenspelerNamen = {};
-        String tegenspelerNaam;
+        String tegenspelerNaam;       
         switch (kiesMoeilijkheidsgraad()) {
-            case 1:
-                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 0);
+            case 1:                
+                int[] a = {0,0};
+                tegenspelerNamen = domeinController.geefTegenSpelers(a);
                 break;
-            case 2:
-                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenMakkelijk", 20);
+            case 2:                     
+                int[] b = {20, 0};
+                tegenspelerNamen = domeinController.geefTegenSpelers(b);
                 break;
-            case 3:
-                tegenspelerNamen = domeinController.geefTegenSpelers("aantalGewonnenUitdagingenNormaal", 20);
+            case 3:               
+                int[] c = {20, 20};                
+                tegenspelerNamen = domeinController.geefTegenSpelers(c);
                 break;
         }
 

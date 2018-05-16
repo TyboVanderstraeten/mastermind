@@ -73,8 +73,8 @@ public class SpelerRepository {
      *
      * @return een String[] die de namen van de tegenspelers bevat.
      */
-    public String[] geefTegenspelers(String naamUitdagingenCategorie, int aantalGewonnenUitdagingen, String spelersnaam) {
-        List<String> tegenSpelers = mapper.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenUitdagingen, spelersnaam);
+    public String[] geefTegenspelers(int[] aantalGewonnenUitdagingen, String spelersnaam) {
+        List<String> tegenSpelers = mapper.geefTegenspelers(aantalGewonnenUitdagingen, spelersnaam);
         String[] tegenspelerNamen = new String[tegenSpelers.size()];
         int teller = 0;
 

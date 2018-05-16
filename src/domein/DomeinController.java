@@ -350,14 +350,13 @@ public class DomeinController {
      * Geeft de namen van de tegenspelers terug die de gekozen
      * moeilijkheidsgraad kunnen spelen.
      *
-     * @param naamUitdagingenCategorie moeilijkheidsgraad van het spel
      * @param aantalGewonnenCategorie aantal spellen die de tegenspeler moet
      * gewonnen hebben.
      *
      * @return De mogelijke tegenspelers.
      */
-    public String[] geefTegenSpelers(String naamUitdagingenCategorie, int aantalGewonnenCategorie) {
-        return spelerRepository.geefTegenspelers(naamUitdagingenCategorie, aantalGewonnenCategorie, deSpeler.getSpelersnaam());
+    public String[] geefTegenSpelers(int[] aantalGewonnenCategorie) {
+        return spelerRepository.geefTegenspelers(aantalGewonnenCategorie, deSpeler.getSpelersnaam());
     }
 
     /**

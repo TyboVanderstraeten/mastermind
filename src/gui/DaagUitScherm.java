@@ -26,9 +26,8 @@ import static javafx.scene.layout.GridPane.setHalignment;
 public class DaagUitScherm extends GridPane {
 
     private final DomeinController dc;
-    private final ResourceBundle resourceBundle;
-    private final String naamUitdagingenCategorie;
-    private final int aantalGewonnenCategorie;
+    private final ResourceBundle resourceBundle;    
+    private final int[] aantalGewonnenCategorie;
     private final KeuzeScherm keuzeScherm;
     private static final ObservableList DATA_TEGENSPELERS = FXCollections.observableArrayList();
     
@@ -42,10 +41,9 @@ public class DaagUitScherm extends GridPane {
      * @param aantalGewonnenCategorie aantalGewonnen van deze moeilijkheidsgraad.
      * @param keuzeScherm instantie van KeuzeScherm (vorige scherm)
      */
-    public DaagUitScherm(DomeinController dc, ResourceBundle resourceBundle, String naamUitdagingenCategorie, int aantalGewonnenCategorie, KeuzeScherm keuzeScherm) {
+    public DaagUitScherm(DomeinController dc, ResourceBundle resourceBundle, int[] aantalGewonnenCategorie, KeuzeScherm keuzeScherm) {
         this.dc = dc;
-        this.resourceBundle = resourceBundle;
-        this.naamUitdagingenCategorie = naamUitdagingenCategorie;
+        this.resourceBundle = resourceBundle;        
         this.aantalGewonnenCategorie = aantalGewonnenCategorie;
         this.keuzeScherm = keuzeScherm;
         buildGui();
@@ -69,7 +67,7 @@ public class DaagUitScherm extends GridPane {
         }*/
         //Collection manier
         DATA_TEGENSPELERS.clear();
-        DATA_TEGENSPELERS.addAll(Arrays.asList(dc.geefTegenSpelers(naamUitdagingenCategorie, aantalGewonnenCategorie)));
+        DATA_TEGENSPELERS.addAll(Arrays.asList(dc.geefTegenSpelers(aantalGewonnenCategorie)));
 
         ListView<String> lvTegenspelers = new ListView<>();
         lvTegenspelers.setPrefSize(400, 600);

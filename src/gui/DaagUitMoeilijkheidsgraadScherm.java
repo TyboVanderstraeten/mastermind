@@ -65,7 +65,8 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
             public void handle(ActionEvent event) {
                 dc.kiesMoeilijkheidsgraadUitdagingen(1);
                 Stage stage = (Stage) (getScene().getWindow());
-                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 0, keuzeScherm);
+                int[] aantalGewonnen = {0,0};
+                DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, aantalGewonnen, keuzeScherm);
                 stage.setScene(new Scene(daagUitScherm, 1280, 720));
                 stage.setTitle("Mastermind");
             }
@@ -77,7 +78,8 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
                 try {
                     dc.kiesMoeilijkheidsgraadUitdagingen(2);
                     Stage stage = (Stage) (getScene().getWindow());
-                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenMakkelijk", 20, keuzeScherm);
+                    int[] aantalGewonnen = {20,0};
+                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, aantalGewonnen, keuzeScherm);
                     stage.setScene(new Scene(daagUitScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
@@ -92,7 +94,8 @@ public class DaagUitMoeilijkheidsgraadScherm extends GridPane {
                 try {
                     dc.kiesMoeilijkheidsgraadUitdagingen(3);
                     Stage stage = (Stage) (getScene().getWindow());
-                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, "aantalGewonnenUitdagingenNormaal", 20, keuzeScherm);
+                    int[] aantalGewonnen = {20,20};
+                    DaagUitScherm daagUitScherm = new DaagUitScherm(dc, resourceBundle, aantalGewonnen, keuzeScherm);
                     stage.setScene(new Scene(daagUitScherm, 1280, 720));
                     stage.setTitle("Mastermind");
                 } catch (IllegalArgumentException e) {
