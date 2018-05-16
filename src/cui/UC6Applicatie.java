@@ -17,9 +17,9 @@ public class UC6Applicatie {
     private final ResourceBundle resourceBundle;
 
     /**
-     * Class constructor.
-     * Zorgt ervoor dat de domeinController en resourceBundle geïnitialiseert worden.
-     * 
+     * Class constructor. Zorgt ervoor dat de domeinController en resourceBundle
+     * geïnitialiseert worden.
+     *
      * @param resourceBundle het Object van de ResourceBundle.
      * @param domeinController het Object van de DomeinController.
      */
@@ -34,9 +34,10 @@ public class UC6Applicatie {
     public void start() {
         try {
             if (domeinController.geefOpenUitdagingen() != null) {
-                System.out.println(resourceBundle.getString("onafgewerkteUitdagingen"));
+                System.out.println(resourceBundle.getString("onafgewerkteUitdagingen"));                
+            } else {
+                aanvaardUitdaging();
             }
-            aanvaardUitdaging();
         } catch (NullPointerException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
         }
@@ -49,14 +50,15 @@ public class UC6Applicatie {
         Scanner input = new Scanner(System.in);
 
         String[][] uitdagingen = domeinController.geefUitdaging();
-
+        String[] spelernamen = new String[uitdagingen.length];
         if (uitdagingen.length != 0) {
             System.out.println(resourceBundle.getString("kiesUitdaging"));
             for (int teller = 0; teller < uitdagingen.length; teller++) {
                 System.out.printf("%d) %s%n", teller + 1, Arrays.toString(uitdagingen[teller]).replace("[", "").replace("]", "").replace(",", " | "));
+                spelernamen[teller] = uitdagingen[teller][0];
             }
             String spelnaam = input.nextLine();
-            if (!Arrays.asList(uitdagingen).contains(spelnaam)) {
+            if (!Arrays.asList(spelernamen).contains(spelnaam)) {
                 throw new TegenspelerNaamBestaatNietException();
             } else {
                 domeinController.laadUitdaging(spelnaam);

@@ -88,10 +88,12 @@ public class UC3Applicatie {
             toonSpelbord();
             if (Arrays.equals(domeinController.geefCode(), poging)) {
                 geefEindoverzicht();
-                domeinController.berekenScore();
+                domeinController.berekenScore(true);
             } else if (aantalPogingen > 11) {
                 geefEindoverzichtVerloren();
+                domeinController.berekenScore(false);
             }
+            
         } catch (InputMismatchException | IllegalArgumentException e) {
             System.out.println(resourceBundle.getString(e.getMessage()));
         }

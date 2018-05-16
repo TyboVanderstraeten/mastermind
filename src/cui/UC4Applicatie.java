@@ -49,11 +49,13 @@ public class UC4Applicatie {
         Scanner input = new Scanner(System.in);
         System.out.println(resourceBundle.getString("maakKeuzeSpel"));
         String[][] spelnamen = domeinController.geefSpellen();
+        String[] namen = new String[spelnamen.length];
         for (int teller = 0; teller < spelnamen.length; teller++) {
             System.out.printf("%d) %s | %s%n", teller + 1, spelnamen[teller][0], spelnamen[teller][1]);
+            namen[teller]=spelnamen[teller][0];
         }
         String spelnaam = input.next();
-        if (Arrays.asList(spelnamen).contains(spelnaam)) {
+        if (Arrays.asList(namen).contains(spelnaam)) {
             domeinController.laadSpel(spelnaam);
             domeinController.verwijderSpel(spelnaam);
         } else {

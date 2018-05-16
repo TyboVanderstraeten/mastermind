@@ -149,7 +149,7 @@ public class SpelbordScherm extends GridPane {
                     dc.geefPoging(poging);
                     update(dc.geefSpelbord());
                     if (Arrays.equals(dc.geefCode(), poging)) {
-                        dc.berekenScore();
+                        dc.berekenScore(true);
 
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
@@ -161,7 +161,7 @@ public class SpelbordScherm extends GridPane {
                         stage.setScene(keuzeScherm.getScene());
                         stage.setTitle("Mastermind");
                     } else if (aantalPogingen > 11) {
-
+                        dc.berekenScore(false);
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Mastermind");
                         alert.setHeaderText(resourceBundle.getString("verloren"));

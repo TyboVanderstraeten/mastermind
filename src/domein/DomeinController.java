@@ -411,11 +411,13 @@ public class DomeinController {
      * worden. Indien dit niet zo is wordt het aantalPogingen meegegeven aan de
      * databank en het aantal gespeelde uitdagingen aangepast Als het spel geen
      * uitdaging is wordt het aantalGewonnen aangepast indien hij gewonnen is.
+     * @param isGekraakt parameter die meegeeft of de code gekraakt is of niet.
      */
-    public void berekenScore() {
+    public void berekenScore(boolean isGekraakt) {        
+       
         if (spel.getId() != 0) {    //controleert of het spel een uitdaging is                 
             String[] uitdagingInfo = uitdagingRepository.geefUitdagingInfo(spel.getId(), deSpeler.getSpelersnaam());    // { speler1, speler2, aantalP } 
-
+            int aantalPogingenHuidig = isGekraakt ? spel.getSpelbord().getAantalPogingen() : spel.getSpelbord().getAantalPogingen()+1;
             Speler tegenspeler;
             int aantalP = Integer.parseInt(uitdagingInfo[2]);
             if (deSpeler.getSpelersnaam().equals(uitdagingInfo[0])) {
@@ -432,10 +434,10 @@ public class DomeinController {
                 spelerRepository.updateAantalGespeeldeUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGespeeldUitdagingen()[0], deSpeler.getAantalGespeeldUitdagingen()[1], deSpeler.getAantalGespeeldUitdagingen()[2]);
                 spelerRepository.updateAantalGespeeldeUitdagingen(tegenspeler.getSpelersnaam(), tegenspeler.getAantalGespeeldUitdagingen()[0], tegenspeler.getAantalGespeeldUitdagingen()[1], tegenspeler.getAantalGespeeldUitdagingen()[2]);
                 
-                if (aantalP > spel.getSpelbord().getAantalPogingen()) {
+                if (aantalP > aantalPogingenHuidig) {
                     deSpeler.verhoogAantalGewonnenUitdagingen();
                     spelerRepository.updateAantalGewonnenUitdagingen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnenUitdagingen()[0], deSpeler.getAantalGewonnenUitdagingen()[1], deSpeler.getAantalGewonnenUitdagingen()[2]);
-                } else if (aantalP < spel.getSpelbord().getAantalPogingen()) {
+                } else if (aantalP < aantalPogingenHuidig) {
                     tegenspeler.verhoogAantalGewonnenUitdagingen();
                     spelerRepository.updateAantalGewonnenUitdagingen(tegenspeler.getSpelersnaam(), tegenspeler.getAantalGewonnenUitdagingen()[0], tegenspeler.getAantalGewonnenUitdagingen()[1], tegenspeler.getAantalGewonnenUitdagingen()[2]);
                 } else {
@@ -449,13 +451,13 @@ public class DomeinController {
                 }
             }// else {      //OF MEN VOEGT DIT SWS TOE OF MEN VERWIJDERT HET SPEL ALS HET AFGELOPEN IS. BEIDEN ZIJN BEWERKING NR DB.
             if (uitdagingInfo[0].equals(deSpeler.getSpelersnaam())) {
-                uitdagingRepository.voegAantalPogingenToeS1(spel.getSpelbord().getAantalPogingen(), spel.getId());
+                uitdagingRepository.voegAantalPogingenToeS1(aantalPogingenHuidig, spel.getId());
             } else {
-                uitdagingRepository.voegAantalPogingenToeS2(spel.getSpelbord().getAantalPogingen(), spel.getId());
+                uitdagingRepository.voegAantalPogingenToeS2(aantalPogingenHuidig, spel.getId());
             }
             //}
 
-        } else {
+        } else if(isGekraakt){
             //bij een gewoon spel
             spelerRepository.updateSpelerAantalGewonnen(deSpeler.getSpelersnaam(), deSpeler.getAantalGewonnen()[0], deSpeler.getAantalGewonnen()[1], deSpeler.getAantalGewonnen()[2]);
         }
