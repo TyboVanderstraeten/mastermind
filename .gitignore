@@ -30,3 +30,6 @@ hs_err_pid*
 /mastermind-g68d/build/
 /mastermind-g68d/dist/
 /mastermind-g68d/nbproject/private/
+/MastermindG68/nbproject/private/
+/test/nbproject/private/
+/test/build/
